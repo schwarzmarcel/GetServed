@@ -14,23 +14,13 @@ import entities.Box;
 
 public class MyGdxGame extends ApplicationAdapter {
 	private SpriteBatch batch;
-	private Texture img;
 	private World world;
-	private Sprite sprite;
 	private Box box;
-	private TextureAtlas textureAtlas;
-	private TextureRegion textureRegion;
 	
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		textureAtlas = new TextureAtlas(Gdx.files.internal("spritesheets/avatarsprites.atlas"));
-		textureRegion = textureAtlas.findRegion("6_ATTACK");
-		sprite = new Sprite(textureRegion);
-		sprite.setPosition(Gdx.graphics.getWidth() / 2 - sprite.getWidth() / 2,
-				Gdx.graphics.getHeight() / 2);
 		world = new World(new Vector2(0, 0), true);
-		box = new Box(true,sprite.getX(), sprite.getY(), sprite.getWidth()/2,sprite.getHeight()/2,world);
 	}
 
 	@Override
