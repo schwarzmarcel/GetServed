@@ -6,6 +6,8 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import entities.Box;
@@ -16,12 +18,15 @@ public class MyGdxGame extends ApplicationAdapter {
 	private World world;
 	private Sprite sprite;
 	private Box box;
+	private TextureAtlas textureAtlas;
+	private TextureRegion textureRegion;
 	
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		img = new Texture("badlogic.jpg");
-		sprite = new Sprite(img);
+		textureAtlas = new TextureAtlas(Gdx.files.internal("spritesheets/avatarsprites.atlas"));
+		textureRegion = textureAtlas.findRegion("6_ATTACK");
+		sprite = new Sprite(textureRegion);
 		sprite.setPosition(Gdx.graphics.getWidth() / 2 - sprite.getWidth() / 2,
 				Gdx.graphics.getHeight() / 2);
 		world = new World(new Vector2(0, 0), true);
@@ -35,13 +40,12 @@ public class MyGdxGame extends ApplicationAdapter {
 		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
-		batch.draw(sprite, sprite.getX(), sprite.getY());
+		batch.draw(sprite, sprite.getX(), sprite.getY(),sprite.getWidth()/2,sprite.getHeight()/2);
 		batch.end();
 	}
 	
 	@Override
 	public void dispose () {
 		batch.dispose();
-		img.dispose();
 	}
 }
