@@ -13,7 +13,7 @@ repeat: none
 6_ATTACK
   rotate: false
   xy: 2, 2
-  size: 966, 472
+  size: 450, 472
   orig: 966, 472
   offset: 0, 0
   index: 0
