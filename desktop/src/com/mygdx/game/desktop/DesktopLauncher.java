@@ -11,6 +11,7 @@ public class DesktopLauncher {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.width = LwjglApplicationConfiguration.getDesktopDisplayMode().width; 
 		config.height = LwjglApplicationConfiguration.getDesktopDisplayMode().height;
+		config.title = "Get Served";
 		new LwjglApplication(new MyGdxGame(), config);
 	}
 }
