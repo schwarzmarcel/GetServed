@@ -2,10 +2,12 @@ package entities;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.*;
+
 
 import static com.mygdx.game.MyGdxGame.PIXELS_TO_METERS;
 
@@ -16,9 +18,11 @@ public class Waiter {
     private Sprite sprite;
     private Body body;
     public Waiter(World world, float positionX, float positionY) {
-        textureAtlas = new TextureAtlas(Gdx.files.internal("spritesheets/avatarsprites.atlas"));
-        textureRegion = textureAtlas.findRegion("6_ATTACK");
-        sprite = new Sprite(textureRegion);
+       // textureAtlas = new TextureAtlas(Gdx.files.internal("spritesheets/avatarsprites.atlas"));
+       // textureRegion = textureAtlas.findRegion("6_ATTACK");
+       // sprite = new Sprite(textureRegion);
+    	Texture texture = new Texture("Chef.png");
+    	sprite = new Sprite(texture);
         sprite.setPosition(positionX,positionY);
 
         BodyDef bodyDef = new BodyDef();
