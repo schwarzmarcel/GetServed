@@ -11,26 +11,29 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import entities.Box;
+import entities.Waiter;
 
 public class MyGdxGame extends ApplicationAdapter {
 	private SpriteBatch batch;
 	private World world;
-	private Box box;
+	private Waiter waiter;
 	
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
 		world = new World(new Vector2(0, 0), true);
+		waiter = new Waiter(world);
+		
 	}
 
 	@Override
 	public void render () {
 		world.step(Gdx.graphics.getDeltaTime(), 6, 2);
-		sprite.setPosition(box.getBody().getPosition().x,box.getBody().getPosition().y);
+		waiter.getSprite().setPosition(waiter.getBox().getBody().getPosition().x,waiter.getBox().getBody().getPosition().y);
 		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
-		batch.draw(sprite, sprite.getX(), sprite.getY(),Gdx.graphics.getWidth() / 6, Gdx.graphics.getHeight() / 5);
+		batch.draw(waiter.getSprite(), waiter.getSprite().getX(), waiter.getSprite().getY(),Gdx.graphics.getWidth() / 6, Gdx.graphics.getHeight() / 5);
 		batch.end();
 	}
 	
