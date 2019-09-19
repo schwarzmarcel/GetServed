@@ -60,11 +60,15 @@ public class MyGdxGame extends ApplicationAdapter {
         batch.begin();
         batch.draw(waiter.getSprite(),
                 waiter.getSprite().getX(),
-                waiter.getSprite().getY()
+                waiter.getSprite().getY(),
+                waiter.getSprite().getWidth(),
+                waiter.getSprite().getHeight()
         );
         batch.draw(waiter2.getSprite(),
                 waiter2.getSprite().getX(),
-                waiter2.getSprite().getY()
+                waiter2.getSprite().getY(),
+                waiter.getSprite().getWidth(),
+                waiter.getSprite().getHeight()
         );
         batch.end();
         if(true) debugRenderer.render(world, debugMatrix);

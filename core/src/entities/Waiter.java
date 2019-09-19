@@ -23,6 +23,7 @@ public class Waiter {
        // sprite = new Sprite(textureRegion);
     	Texture texture = new Texture("Chef.png");
     	sprite = new Sprite(texture);
+    	sprite.setSize(texture.getWidth() * 2, texture.getHeight() * 2);
         sprite.setPosition(positionX,positionY);
 
         BodyDef bodyDef = new BodyDef();
