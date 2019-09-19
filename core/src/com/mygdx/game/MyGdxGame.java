@@ -40,7 +40,7 @@ public class MyGdxGame extends ApplicationAdapter {
 		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
-		batch.draw(sprite, sprite.getX(), sprite.getY(),sprite.getWidth()/2,sprite.getHeight()/2);
+		batch.draw(sprite, sprite.getX(), sprite.getY(),Gdx.graphics.getWidth() / 6, Gdx.graphics.getHeight() / 5);
 		batch.end();
 	}
 	
