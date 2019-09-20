@@ -10,6 +10,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import entities.Table;
 import entities.Waiter;
+import entities.Walls;
 
 public class MyGdxGame extends ApplicationAdapter {
 
@@ -19,6 +20,7 @@ public class MyGdxGame extends ApplicationAdapter {
     private OrthographicCamera camera;
     private Waiter waiter;
     private Table table;
+    private Walls walls;
     public static final float PIXELS_TO_METERS = 50f;
     public static final float WORLD_WIDTH = 160;
     public static final float WORLD_HEIGHT = 90;
@@ -28,7 +30,8 @@ public class MyGdxGame extends ApplicationAdapter {
         batch = new SpriteBatch();
         world = new World(new Vector2(0, 0), true);
         waiter = new Waiter(world, WORLD_WIDTH / 2, WORLD_HEIGHT / 2);
-	table = new Table(world,WORLD_WIDTH / 4, WORLD_HEIGHT / 2);
+	    table = new Table(world,WORLD_WIDTH / 4, WORLD_HEIGHT / 2);
+	    walls = new Walls(world);
         debugRenderer = new Box2DDebugRenderer();
         camera = new OrthographicCamera(160, 90);
         camera.position.set(WORLD_WIDTH/2,WORLD_HEIGHT/2,0);
