@@ -9,8 +9,8 @@ import com.mygdx.game.MyGdxGame;
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		config.width = LwjglApplicationConfiguration.getDesktopDisplayMode().width; 
-		config.height = LwjglApplicationConfiguration.getDesktopDisplayMode().height;
+		config.width = (int) (LwjglApplicationConfiguration.getDesktopDisplayMode().width * 0.8); 
+		config.height = (int) (LwjglApplicationConfiguration.getDesktopDisplayMode().height * 0.8);
 		config.title = "Get Served";
 		new LwjglApplication(new MyGdxGame(), config);
 	}

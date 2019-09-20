@@ -28,12 +28,14 @@ public class MyGdxGame extends ApplicationAdapter {
     public void create() {
         batch = new SpriteBatch();
         world = new World(new Vector2(0, 0), true);
-        waiter = new Waiter(world, -700,-100);
-        waiter2 = new Waiter(world,200,-300);
+        waiter = new Waiter(world, Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
+        waiter2 = new Waiter(world, Gdx.graphics. getWidth() / 4, Gdx.graphics.getHeight() / 2) ;
 
         debugRenderer = new Box2DDebugRenderer();
         camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.
                 getHeight());
+        camera.translate(camera.viewportWidth / 2, camera.viewportHeight / 2);
+       
     }
     @Override
     public void render() {
