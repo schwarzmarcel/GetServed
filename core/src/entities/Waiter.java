@@ -1,3 +1,4 @@
+
 package entities;
 
 import com.badlogic.gdx.Gdx;
@@ -10,6 +11,8 @@ import com.badlogic.gdx.physics.box2d.*;
 
 
 import static com.mygdx.game.MyGdxGame.PIXELS_TO_METERS;
+import static com.mygdx.game.MyGdxGame.WORLD_WIDTH;
+import static com.mygdx.game.MyGdxGame.WORLD_HEIGHT;;
 
 
 public class Waiter {
@@ -23,7 +26,7 @@ public class Waiter {
        // sprite = new Sprite(textureRegion);
     	Texture texture = new Texture("Chef.png");
     	sprite = new Sprite(texture);
-    	sprite.setSize(texture.getWidth() * 2, texture.getHeight() * 2);
+    	sprite.setSize(WORLD_WIDTH / 16, WORLD_HEIGHT / 9);
         sprite.setPosition(positionX,positionY);
 
         BodyDef bodyDef = new BodyDef();
@@ -34,7 +37,6 @@ public class Waiter {
         body.setUserData(sprite);
         PolygonShape shape = new PolygonShape();
         shape.setAsBox((sprite.getWidth()/2) / PIXELS_TO_METERS,(sprite.getHeight()/2) / PIXELS_TO_METERS);
-        System.out.println(sprite.getWidth());
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = shape;
         body.createFixture(fixtureDef);
@@ -44,6 +46,7 @@ public class Waiter {
     public void move() {
         float velX = 0, velY = 0;
         if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
+        	System.out.println(body.getPosition().x * PIXELS_TO_METERS + "," + body.getPosition().y * PIXELS_TO_METERS);
             velY = 2.0f;
         } else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
             velX = 2.0f;

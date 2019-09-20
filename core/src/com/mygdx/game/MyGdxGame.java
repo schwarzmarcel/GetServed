@@ -22,19 +22,24 @@ public class MyGdxGame extends ApplicationAdapter {
     private OrthographicCamera camera;
     private Waiter waiter;
     private Waiter waiter2;
-    public static final float PIXELS_TO_METERS = 100f;
+    public static final float PIXELS_TO_METERS = 50f;
+    public static final float WORLD_WIDTH = 160;
+    public static final float WORLD_HEIGHT = 90;
+  
+    
+    
 
     @Override
     public void create() {
         batch = new SpriteBatch();
         world = new World(new Vector2(0, 0), true);
-        waiter = new Waiter(world, Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
-        waiter2 = new Waiter(world, Gdx.graphics. getWidth() / 4, Gdx.graphics.getHeight() / 2) ;
+        waiter = new Waiter(world, WORLD_WIDTH / 2, WORLD_HEIGHT / 2);
+        waiter2 = new Waiter(world, WORLD_WIDTH / 4, WORLD_HEIGHT / 2) ;
 
         debugRenderer = new Box2DDebugRenderer();
-        camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.
-                getHeight());
-        camera.translate(camera.viewportWidth / 2, camera.viewportHeight / 2);
+        camera = new OrthographicCamera(160, 90);
+        camera.position.set(WORLD_WIDTH/2,WORLD_HEIGHT/2,0);
+        //camera.translate(camera.viewportWidth / 2, camera.viewportHeight / 2);
        
     }
     @Override
