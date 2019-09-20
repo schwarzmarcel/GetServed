@@ -12,7 +12,7 @@ import com.badlogic.gdx.physics.box2d.*;
 
 import static com.mygdx.game.MyGdxGame.PIXELS_TO_METERS;
 import static com.mygdx.game.MyGdxGame.WORLD_WIDTH;
-import static com.mygdx.game.MyGdxGame.WORLD_HEIGHT;;
+import static com.mygdx.game.MyGdxGame.WORLD_HEIGHT;
 
 
 public class Waiter {
@@ -46,7 +46,6 @@ public class Waiter {
     public void move() {
         float velX = 0, velY = 0;
         if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
-        	System.out.println(body.getPosition().x * PIXELS_TO_METERS + "," + body.getPosition().y * PIXELS_TO_METERS);
             velY = 2.0f;
         } else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
             velX = 2.0f;

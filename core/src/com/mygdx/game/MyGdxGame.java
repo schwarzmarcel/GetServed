@@ -13,6 +13,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import entities.Box;
 import entities.Waiter;
+import entities.Walls;
 
 public class MyGdxGame extends ApplicationAdapter {
 
@@ -22,6 +23,7 @@ public class MyGdxGame extends ApplicationAdapter {
     private OrthographicCamera camera;
     private Waiter waiter;
     private Waiter waiter2;
+    private Walls walls;
     public static final float PIXELS_TO_METERS = 50f;
     public static final float WORLD_WIDTH = 160;
     public static final float WORLD_HEIGHT = 90;
@@ -33,13 +35,15 @@ public class MyGdxGame extends ApplicationAdapter {
     public void create() {
         batch = new SpriteBatch();
         world = new World(new Vector2(0, 0), true);
+        walls = new Walls(world);
         waiter = new Waiter(world, WORLD_WIDTH / 2, WORLD_HEIGHT / 2);
-        waiter2 = new Waiter(world, WORLD_WIDTH / 4, WORLD_HEIGHT / 2) ;
+        waiter2 = new Waiter(world, WORLD_WIDTH / 4, WORLD_HEIGHT / 2);
 
         debugRenderer = new Box2DDebugRenderer();
         camera = new OrthographicCamera(160, 90);
         camera.position.set(WORLD_WIDTH/2,WORLD_HEIGHT/2,0);
         //camera.translate(camera.viewportWidth / 2, camera.viewportHeight / 2);
+        
        
     }
     @Override
