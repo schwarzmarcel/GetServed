@@ -18,7 +18,6 @@ public class Walls {
 		BodyDef bdef = new BodyDef();
 		bdef.type = BodyDef.BodyType.StaticBody;
 		body = world.createBody(bdef);
-		
 		ChainShape shape = new ChainShape();
 		Vector2[] verts = new Vector2[5];
 		verts[0] = new Vector2((-1) / PIXELS_TO_METERS, (-1) / PIXELS_TO_METERS);

@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
+import entities.Level;
 import entities.Table;
 import entities.Waiter;
 import entities.Walls;
@@ -15,12 +16,11 @@ import entities.Walls;
 public class MyGdxGame extends ApplicationAdapter {
 
     private SpriteBatch batch;
-    private World world;
     private Box2DDebugRenderer debugRenderer;
     private OrthographicCamera camera;
-    private Waiter waiter;
-    private Table table;
     private Walls walls;
+    private Level level;
+
     public static final float PIXELS_TO_METERS = 50f;
     public static final float WORLD_WIDTH = 160;
     public static final float WORLD_HEIGHT = 90;
@@ -28,10 +28,9 @@ public class MyGdxGame extends ApplicationAdapter {
     @Override
     public void create() {
         batch = new SpriteBatch();
-        world = new World(new Vector2(0, 0), true);
-        waiter = new Waiter(world, WORLD_WIDTH / 2, WORLD_HEIGHT / 2);
-	    table = new Table(world,WORLD_WIDTH / 4, WORLD_HEIGHT / 2);
-	    walls = new Walls(world);
+        level = new Level(1,0,1);
+        level.initializeLevel();
+
         debugRenderer = new Box2DDebugRenderer();
         camera = new OrthographicCamera(160, 90);
         camera.position.set(WORLD_WIDTH/2,WORLD_HEIGHT/2,0);
@@ -40,7 +39,7 @@ public class MyGdxGame extends ApplicationAdapter {
     @Override
     public void render() {
         camera.update();
-        world.step(1f / 60f, 6, 2);
+        level.getWorld().step(1f / 60f, 6, 2);
 
         adjustWaiterSprite();
 
@@ -50,41 +49,44 @@ public class MyGdxGame extends ApplicationAdapter {
         batch.setProjectionMatrix(camera.combined);
         Matrix4 debugMatrix = batch.getProjectionMatrix().cpy().scale(PIXELS_TO_METERS,
                 PIXELS_TO_METERS, 0);
-        waiter.move(2.0f);
+        level.getWaiter().move(2.0f);
         batch.begin();
             drawWaiter();
             drawTables();
         batch.end();
-        if(true) debugRenderer.render(world, debugMatrix);
+        if(true) debugRenderer.render(level.getWorld(), debugMatrix);
     }
 
     private void adjustWaiterSprite(){
-        ((Sprite)waiter.getBody().getUserData()).setPosition(
-                (waiter.getBody().getPosition().x * PIXELS_TO_METERS) - waiter.getSprite().getWidth() / 2,
-                (waiter.getBody().getPosition().y * PIXELS_TO_METERS) - waiter.getSprite().getHeight() / 2
+        ((Sprite)level.getWaiter().getBody().getUserData()).setPosition(
+                (level.getWaiter().getBody().getPosition().x * PIXELS_TO_METERS) - level.getWaiter().getSprite().getWidth() / 2,
+                (level.getWaiter().getBody().getPosition().y * PIXELS_TO_METERS) - level.getWaiter().getSprite().getHeight() / 2
         );
     }
 
     private void drawWaiter(){
-        batch.draw(waiter.getSprite(),
-                waiter.getSprite().getX(),
-                waiter.getSprite().getY(),
-                waiter.getSprite().getWidth(),
-                waiter.getSprite().getHeight()
+        batch.draw(level.getWaiter().getSprite(),
+                level.getWaiter().getSprite().getX(),
+                level.getWaiter().getSprite().getY(),
+                level.getWaiter().getSprite().getWidth(),
+                level.getWaiter().getSprite().getHeight()
         );
     }
 
     private void drawTables(){
-        batch.draw(table.getSprite(),
-                table.getSprite().getX(),
-                table.getSprite().getY(),
-                table.getSprite().getWidth(),
-                table.getSprite().getHeight()
-        );
+        for (Table t: level.getTables()
+             ) {
+            batch.draw(t.getSprite(),
+                    t.getSprite().getX(),
+                    t.getSprite().getY(),
+                    t.getSprite().getWidth(),
+                    t.getSprite().getHeight()
+            );
+        }
     }
 
     @Override
     public void dispose() {
-        world.dispose();
+        level.getWorld().dispose();
     }
 }
