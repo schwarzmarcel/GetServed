@@ -8,6 +8,8 @@ import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.utils.Timer;
+import com.badlogic.gdx.utils.Timer.Task;
 
 import entities.Guest;
 import entities.Table;
@@ -24,17 +26,19 @@ public class MyGdxGame extends ApplicationAdapter {
     private Table table;
     private Guest guest;
     private Walls walls;
+    private float time;
     public static final float PIXELS_TO_METERS = 50f;
     public static final float WORLD_WIDTH = 160;
     public static final float WORLD_HEIGHT = 90;
 
     @Override
     public void create() {
+    	startTimer();
         batch = new SpriteBatch();
         world = new World(new Vector2(0, 0), true);
         waiter = new Waiter(world, WORLD_WIDTH / 2, WORLD_HEIGHT / 2);
 	    table = new Table(world, WORLD_WIDTH / 4, WORLD_HEIGHT / 2);
-	    guest = new Guest(world, WORLD_WIDTH / 4, (WORLD_HEIGHT / 2) + 10, 0);
+	    guest = new Guest(world, WORLD_WIDTH / 4, (WORLD_HEIGHT / 2) + 10, time);
 	    walls = new Walls(world);
         debugRenderer = new Box2DDebugRenderer();
         camera = new OrthographicCamera(160, 90);
@@ -45,9 +49,9 @@ public class MyGdxGame extends ApplicationAdapter {
     public void render() {
         camera.update();
         world.step(1f / 60f, 6, 2);
-
+      
         adjustWaiterSprite();
-
+        guest.update(time);
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
@@ -80,6 +84,16 @@ public class MyGdxGame extends ApplicationAdapter {
     
     private void drawGuests(){
     	guest.getSprite().draw(batch);
+    }
+    
+    private void startTimer() {
+    	time = 0;
+    	Timer.schedule(new Task(){
+            @Override
+            public void run() {
+            	  time++;
+            }
+        }, 0, 1);
     }
 
     @Override

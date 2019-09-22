@@ -16,7 +16,7 @@ public class Guest {
     private Dish order;
     private float spawnTime;
     private float timeElapsed;
-    private int hapiness = 3;
+    private int happiness;
     private int patience;
     private int wealth;
 
@@ -30,8 +30,9 @@ public class Guest {
         sprite.setColor(0, 1, 0 , 1);
         box = new Box(world,sprite,false);
         spawnTime = time;
-        patience = 60;
+        patience = 30;
         wealth = 40;
+        happiness = 3;
     }
 
     public Sprite getSprite() {
@@ -43,15 +44,15 @@ public class Guest {
     }
     
     public void update(float time) {
-    	timeElapsed += time;
-    	if(timeElapsed <= (patience * (1/3))){
-    		hapiness = 2;
-    		sprite.setColor(Color.YELLOW);
-    	}else if(timeElapsed <= (patience * (2/3))){
-    		hapiness = 1;
+    	timeElapsed = time - spawnTime;
+    	if(timeElapsed >= patience) {
+    		//TODO: despawn with guest handler
+    	}else if(timeElapsed >= (patience / 1.5)){
+    		happiness = 1;
     		sprite.setColor(Color.RED);
-    	}else {
-    		//remove guest
+    	}else if(timeElapsed >= (patience / 3)){
+    		happiness = 2;
+    		sprite.setColor(Color.YELLOW);
     	}
     }
 }
