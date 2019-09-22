@@ -2,25 +2,25 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
-import entities.Table;
-import entities.Waiter;
-import entities.Walls;
+import com.badlogic.gdx.utils.Timer;
+import entities.*;
+import handlers.GsContactListener;
 
 public class MyGdxGame extends ApplicationAdapter {
 
     private SpriteBatch batch;
-    private World world;
     private Box2DDebugRenderer debugRenderer;
     private OrthographicCamera camera;
-    private Waiter waiter;
-    private Table table;
-    private Walls walls;
+    private GsContactListener contactListener;
+    private float time;
+    private Level level;
     public static final float PIXELS_TO_METERS = 50f;
     public static final float WORLD_WIDTH = 160;
     public static final float WORLD_HEIGHT = 90;
@@ -28,9 +28,8 @@ public class MyGdxGame extends ApplicationAdapter {
     @Override
     public void create() {
         batch = new SpriteBatch();
-        level = new Level(1,0,1);
+        level = new Level(1,1,1);
         level.initializeLevel();
-
         debugRenderer = new Box2DDebugRenderer();
         camera = new OrthographicCamera(160, 90);
         camera.position.set(WORLD_WIDTH/2,WORLD_HEIGHT/2,0);
@@ -40,9 +39,11 @@ public class MyGdxGame extends ApplicationAdapter {
     public void render() {
         camera.update();
         level.getWorld().step(1f / 60f, 6, 2);
-
         adjustWaiterSprite();
-
+        for (Guest g: level.getGuests()
+        ) {
+            g.update(level.getTime());
+        }
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
@@ -53,6 +54,7 @@ public class MyGdxGame extends ApplicationAdapter {
         batch.begin();
             drawWaiter();
             drawTables();
+            drawGuests();
         batch.end();
         if(true) debugRenderer.render(level.getWorld(), debugMatrix);
     }
@@ -84,22 +86,11 @@ public class MyGdxGame extends ApplicationAdapter {
             );
         }
     }
-	private void drawTables() {
-		table.getSprite().draw(batch);
-	}
-
 	private void drawGuests() {
-		guest.getSprite().draw(batch);
-	}
-
-	private void startTimer() {
-		time = 0;
-		Timer.schedule(new Task() {
-			@Override
-			public void run() {
-				time++;
-			}
-		}, 0, 1);
+        for (Guest g:level.getGuests()
+             ) {
+            g.getSprite().draw(batch);
+        }
 	}
 
 	/*
