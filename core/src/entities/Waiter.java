@@ -37,6 +37,8 @@ public class Waiter implements Moveable {
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
         box = new Box(world,sprite,true);
+        
+        box.getBody().getFixtureList().first().setUserData(this);
     }
 
     public void move(float speed) {

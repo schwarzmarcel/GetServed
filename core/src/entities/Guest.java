@@ -29,6 +29,8 @@ public class Guest {
         sprite.setPosition(positionX,positionY);
         sprite.setColor(0, 1, 0 , 1);
         box = new Box(world,sprite,false);
+        box.getBody().getFixtureList().first().setUserData(this);
+        
         spawnTime = time;
         patience = 30;
         wealth = 40;
@@ -55,4 +57,8 @@ public class Guest {
     		sprite.setColor(Color.YELLOW);
     	}
     }
+
+	public int getHappiness() {
+		return happiness;
+	}
 }

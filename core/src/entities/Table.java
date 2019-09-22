@@ -17,6 +17,7 @@ public class Table{
         sprite.setSize(WORLD_WIDTH / 16, WORLD_HEIGHT / 9);
         sprite.setPosition(positionX,positionY);
         box = new Box(world,sprite,false);
+        box.getBody().getFixtureList().first().setUserData(this);
     }
 
     public Sprite getSprite() {
