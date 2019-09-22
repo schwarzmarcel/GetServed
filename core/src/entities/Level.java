@@ -4,8 +4,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Timer;
 
-import static com.mygdx.game.MyGdxGame.WORLD_HEIGHT;
-import static com.mygdx.game.MyGdxGame.WORLD_WIDTH;
+import static com.mygdx.game.MyGdxGame.*;
 
 public class Level {
     private int numberOfTables;
@@ -45,8 +44,11 @@ public class Level {
         }
     }
     private void intializeTables(){
+        float positionX = WORLD_WIDTH/2 + (WORLD_WIDTH/4);
+        float positionY = 0;
         for(int i = 0; i < numberOfTables; i++){
-            tables[0] = new Table(world,WORLD_WIDTH / 4, WORLD_HEIGHT / 2);
+            positionY = (float) (positionY + (0.2*WORLD_HEIGHT));
+            tables[i] = new Table(world, positionX, positionY);
         }
     }
 

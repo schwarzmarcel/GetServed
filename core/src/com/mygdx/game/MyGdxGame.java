@@ -28,7 +28,7 @@ public class MyGdxGame extends ApplicationAdapter {
     @Override
     public void create() {
         batch = new SpriteBatch();
-        level = new Level(1,1,1);
+        level = new Level(5,1,1);
         level.initializeLevel();
         debugRenderer = new Box2DDebugRenderer();
         camera = new OrthographicCamera(160, 90);

@@ -51,7 +51,6 @@ public class Guest {
     		//TODO: despawn with guest handler
     	}else if(timeElapsed >= (patience / 1.5)){
     		happiness = 1;
-            System.out.println("fuck");
     		sprite.setColor(Color.RED);
     	}else if(timeElapsed >= (patience / 3)){
     		happiness = 2;
