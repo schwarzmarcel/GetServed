@@ -5,7 +5,7 @@ import com.badlogic.gdx.physics.box2d.*;
 
 import static com.mygdx.game.MyGdxGame.PIXELS_TO_METERS;
 
-class Box {
+public class Box {
     private Body body;
 
     Box(World world, Sprite sprite, boolean isDynamicBody) {

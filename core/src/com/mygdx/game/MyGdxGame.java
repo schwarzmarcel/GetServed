@@ -8,7 +8,6 @@ import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
-import entities.Level;
 import entities.Table;
 import entities.Waiter;
 import entities.Walls;
@@ -16,11 +15,12 @@ import entities.Walls;
 public class MyGdxGame extends ApplicationAdapter {
 
     private SpriteBatch batch;
+    private World world;
     private Box2DDebugRenderer debugRenderer;
     private OrthographicCamera camera;
+    private Waiter waiter;
+    private Table table;
     private Walls walls;
-    private Level level;
-
     public static final float PIXELS_TO_METERS = 50f;
     public static final float WORLD_WIDTH = 160;
     public static final float WORLD_HEIGHT = 90;
@@ -84,6 +84,50 @@ public class MyGdxGame extends ApplicationAdapter {
             );
         }
     }
+	private void drawTables() {
+		table.getSprite().draw(batch);
+	}
+
+	private void drawGuests() {
+		guest.getSprite().draw(batch);
+	}
+
+	private void startTimer() {
+		time = 0;
+		Timer.schedule(new Task() {
+			@Override
+			public void run() {
+				time++;
+			}
+		}, 0, 1);
+	}
+
+	/*
+	 * tests if the player currently has contact with a guest, if yes then x can be
+	 * clicked to get the guests current happiness
+	 */
+	private void testContacts() {
+		if(contactListener.getContact() != null) {
+			Contact contact = contactListener.getContact();
+			Fixture fixtureA = contact.getFixtureA();
+			Fixture fixtureB = contact.getFixtureB();
+			Guest contactGuest;
+
+			if ((fixtureA.getUserData() instanceof Guest) || (fixtureB.getUserData() instanceof Guest)) {
+				if ((fixtureA.getUserData() instanceof Waiter) || (fixtureB.getUserData() instanceof Waiter)) {
+
+					if (fixtureA.getUserData() instanceof Guest)
+						contactGuest = (Guest) fixtureA.getUserData();
+					else
+						contactGuest = (Guest) fixtureB.getUserData();
+
+					if (Gdx.input.isKeyJustPressed(Input.Keys.X))
+						System.out.println(contactGuest.getHappiness());
+
+				}
+			}
+		}
+	}
 
     @Override
     public void dispose() {
