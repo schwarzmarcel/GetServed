@@ -28,11 +28,13 @@ public class MyGdxGame extends ApplicationAdapter {
     @Override
     public void create() {
         batch = new SpriteBatch();
-        level = new Level(5,1,1);
+        level = new Level(5,5,1);
         level.initializeLevel();
         debugRenderer = new Box2DDebugRenderer();
         camera = new OrthographicCamera(160, 90);
         camera.position.set(WORLD_WIDTH/2,WORLD_HEIGHT/2,0);
+        contactListener = new GsContactListener();
+        level.getWorld().setContactListener(contactListener);
     }
 
     @Override
@@ -57,6 +59,7 @@ public class MyGdxGame extends ApplicationAdapter {
             drawGuests();
         batch.end();
         if(true) debugRenderer.render(level.getWorld(), debugMatrix);
+        testContacts();
     }
 
     private void adjustWaiterSprite(){
@@ -76,7 +79,7 @@ public class MyGdxGame extends ApplicationAdapter {
     }
 
     private void drawTables(){
-        for (Table t: level.getTables()
+       /* for (Table t: level.getTables()
              ) {
             batch.draw(t.getSprite(),
                     t.getSprite().getX(),
@@ -85,6 +88,8 @@ public class MyGdxGame extends ApplicationAdapter {
                     t.getSprite().getHeight()
             );
         }
+        */
+
     }
 	private void drawGuests() {
         for (Guest g:level.getGuests()
@@ -114,7 +119,10 @@ public class MyGdxGame extends ApplicationAdapter {
 
 					if (Gdx.input.isKeyJustPressed(Input.Keys.X))
 						System.out.println(contactGuest.getHappiness());
-
+                    if(Gdx.input.isKeyJustPressed(Input.Keys.F)){
+                        contactGuest.serve();
+                        contactGuest.changeColor("green");
+                    }
 				}
 			}
 		}

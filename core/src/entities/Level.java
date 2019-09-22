@@ -28,8 +28,8 @@ public class Level {
     public void initializeLevel(){
         tables = new Table[numberOfTables];
         guests = new Guest[numberOfGuests];
-        intializeGuests();
         intializeTables();
+        intializeGuests();
         intializeWaiter();
         startTimer();
     }
@@ -39,8 +39,18 @@ public class Level {
     }
 
     private void intializeGuests(){
+        float[] positions = new float[2];
+        int currentTable = 0;
         for(int i = 0; i < numberOfGuests; i++){
-            guests[i] = new Guest(world, WORLD_WIDTH / 4, (WORLD_HEIGHT / 2) + 30, time);
+            if(currentTable < tables.length){
+                positions = tables[currentTable].getPosition();
+                positions[0] = positions[0] + (WORLD_WIDTH/10);
+            }else{
+                currentTable = 0;
+            }
+            guests[i] = new Guest(world, positions[0], positions[1], time);
+            guests[i].setTable(tables[currentTable]);
+            currentTable++;
         }
     }
     private void intializeTables(){
@@ -48,6 +58,7 @@ public class Level {
         float positionY = 0;
         for(int i = 0; i < numberOfTables; i++){
             positionY = (float) (positionY + (0.2*WORLD_HEIGHT));
+            positionX = (float) (positionX - (10));
             tables[i] = new Table(world, positionX, positionY);
         }
     }

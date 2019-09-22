@@ -13,12 +13,13 @@ public class Guest {
     private Sprite sprite;
     private Box box;
     private Table table;
-    private Dish order;
+    private Dish order = new Dish();
     private float spawnTime;
     private float timeElapsed;
     private int happiness;
     private int patience;
     private int wealth;
+    private boolean hasBeenServed = false;
 
 
     public Guest (World world, float positionX, float positionY, float time){
@@ -30,7 +31,6 @@ public class Guest {
         sprite.setColor(0, 1, 0 , 1);
         box = new Box(world,sprite,false);
         box.getBody().getFixtureList().first().setUserData(this);
-        
         spawnTime = time;
         patience = 30;
         wealth = 40;
@@ -46,19 +46,58 @@ public class Guest {
     }
     
     public void update(float time) {
+        if(!hasBeenServed){
+            changeColor("black");
+        }
     	timeElapsed = time - spawnTime;
     	if(timeElapsed >= patience) {
     		//TODO: despawn with guest handler
     	}else if(timeElapsed >= (patience / 1.5)){
     		happiness = 1;
-    		sprite.setColor(Color.RED);
+    		changeColor("");
     	}else if(timeElapsed >= (patience / 3)){
     		happiness = 2;
-    		sprite.setColor(Color.YELLOW);
+    		changeColor("");
     	}
+    }
+
+    public void speak(){
+
     }
 
 	public int getHappiness() {
 		return happiness;
 	}
+
+    public Table getTable() {
+        return table;
+    }
+
+    public void setTable(Table table) {
+        this.table = table;
+    }
+
+    public void setSpawnTime(float spawnTime) {
+        this.spawnTime = spawnTime;
+    }
+
+    public void changeColor(String color){
+        switch (color) {
+            case "black":
+                this.sprite.setColor(Color.BLACK);
+                break;
+            case "red":
+                this.sprite.setColor(Color.RED);
+                break;
+            case "yellow":
+                this.sprite.setColor(Color.YELLOW);
+                break;
+            case "green":
+                this.sprite.setColor(Color.GREEN);
+                break;
+        }
+    }
+    public void serve(){
+        this.hasBeenServed = true;
+    }
 }
