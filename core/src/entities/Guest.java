@@ -58,6 +58,11 @@ public class Guest {
         }
     }
 
+    public int getTip() {
+    	double tip = wealth * ((patience - timeElapsed) / patience);
+    	return (int) Math.ceil(tip);
+    }
+
     public int getHappiness() {
         return happiness;
     }

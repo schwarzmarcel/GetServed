@@ -19,6 +19,9 @@ public class MyGdxGame extends ApplicationAdapter {
     private Box2DDebugRenderer debugRenderer;
     private OrthographicCamera camera;
     private GsContactListener contactListener;
+    private BitmapFont moneyFont;
+    private String money;
+    private GlyphLayout layout;
     private Level level;
     public static final float PIXELS_TO_METERS = 50f;
     public static final float WORLD_WIDTH = 160;
@@ -28,7 +31,11 @@ public class MyGdxGame extends ApplicationAdapter {
     public void create() {
         batch = new SpriteBatch();
         level = new Level(5, 5, 1, 1);
+        moneyFont = new BitmapFont(Gdx.files.internal("moneyfont2.fnt"));
+        level = new Level(5,5,1,1);
         level.initializeLevel();
+        moneyFont.getData().setScale(0.1f);
+        layout = new GlyphLayout();
         debugRenderer = new Box2DDebugRenderer();
         camera = new OrthographicCamera(160, 90);
         camera.position.set(WORLD_WIDTH / 2, WORLD_HEIGHT / 2, 0);
@@ -109,6 +116,12 @@ public class MyGdxGame extends ApplicationAdapter {
         }
     }
 
+	private void showMoney() {
+		money = "" + level.getMoney() + " $";
+		layout.setText(moneyFont, money);
+		moneyFont.draw(batch, layout, WORLD_WIDTH - layout.width - 1, WORLD_HEIGHT - 1);
+	}
+
     private void drawDishes() {
         if (level.getDishes()[0] != null) {
             for (Dish d : level.getDishes()
@@ -135,7 +148,8 @@ public class MyGdxGame extends ApplicationAdapter {
                         contactGuest = (Guest) fixtureB.getUserData();
 
                     if (Gdx.input.isKeyJustPressed(Input.Keys.X))
-                        System.out.println(contactGuest.getHappiness());
+                        level.setMoney(level.getMoney() + contactGuest.getTip());
+                    System.out.println(contactGuest.getTip());
                     if (Gdx.input.isKeyJustPressed(Input.Keys.F)) {
                         if (level.getWaiter().getDish() != null) {
                             if (contactGuest.getiWant() == (level.getWaiter().getDish().type)) {
