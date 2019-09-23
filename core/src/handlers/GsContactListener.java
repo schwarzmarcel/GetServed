@@ -46,7 +46,7 @@ public class GsContactListener implements ContactListener{
 		}
 		if ((fixtureA.getUserData() instanceof Counter) || (fixtureB.getUserData() instanceof Counter)) {
 			if ((fixtureA.getUserData() instanceof Waiter) || (fixtureB.getUserData() instanceof Waiter)) {
-				currentContact = contact;
+				currentContact = null;
 			}
 		}
 	}
