@@ -10,6 +10,7 @@ import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
 
+import entities.Counter;
 import entities.Guest;
 import entities.Waiter;
 
@@ -26,6 +27,11 @@ public class GsContactListener implements ContactListener{
 				currentContact = contact;
 			}
 		}
+		if ((fixtureA.getUserData() instanceof Counter) || (fixtureB.getUserData() instanceof Counter)) {
+			if ((fixtureA.getUserData() instanceof Waiter) || (fixtureB.getUserData() instanceof Waiter)) {
+				currentContact = contact;
+			}
+		}
 	}
 
 	@Override
@@ -36,6 +42,11 @@ public class GsContactListener implements ContactListener{
 		if ((fixtureA.getUserData() instanceof Guest) || (fixtureB.getUserData() instanceof Guest)) {
 			if ((fixtureA.getUserData() instanceof Waiter) || (fixtureB.getUserData() instanceof Waiter)) {
 				currentContact = null;
+			}
+		}
+		if ((fixtureA.getUserData() instanceof Counter) || (fixtureB.getUserData() instanceof Counter)) {
+			if ((fixtureA.getUserData() instanceof Waiter) || (fixtureB.getUserData() instanceof Waiter)) {
+				currentContact = contact;
 			}
 		}
 	}

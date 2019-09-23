@@ -1,5 +1,6 @@
 package entities;
 
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Timer;
@@ -17,8 +18,8 @@ public class Level {
     private Counter[] counters;
     private Dish[] dishes;
     private World world;
-    private Walls walls;
     private Waiter waiter;
+    private boolean checkIfInstanceAlreadyCreated;
 
     public Level(int numberOfTables, int numberOfGuests, int numberOfCounters, int numberOfDishes) {
         this.numberOfTables = numberOfTables;
@@ -26,7 +27,7 @@ public class Level {
         this.numberOfCounters = numberOfCounters;
         this.numberOfDishes = numberOfDishes;
         world = new World(new Vector2(0, 0), true);
-        walls = new Walls(world);
+        Walls walls = new Walls(world);
         walls = new Walls(world);
     }
 
@@ -56,17 +57,22 @@ public class Level {
     }
 
     private void intializeGuests() {
-        float[] positions = new float[2];
+        float positionX = 0;
+        float positionY = 0;
         int currentTable = 0;
         for (int i = 0; i < numberOfGuests; i++) {
             if (currentTable < tables.length) {
-                positions = tables[currentTable].getPosition();
-                positions[0] = positions[0] + (WORLD_WIDTH / 30);
+                positionX = tables[currentTable].getPosition()[0];
+                positionY = tables[currentTable].getPosition()[1];
+                positionX = positionX + (WORLD_WIDTH / 30);
+                guests[i] = new Guest(world, positionX, positionY, time);
+                guests[i].setTable(tables[currentTable]);
+                System.out.println(positionX);
+                System.out.println(tables[currentTable].getPosition()[0]);
+
             } else {
                 currentTable = 0;
             }
-            guests[i] = new Guest(world, positions[0], positions[1], time);
-            guests[i].setTable(tables[currentTable]);
             currentTable++;
         }
     }
@@ -117,8 +123,18 @@ public class Level {
 
     public void updateLevel() {
         if ((time % 10) == 0) {
-            dishes[0] = new Dish(world);
+            if(!checkIfInstanceAlreadyCreated) {
+                checkIfInstanceAlreadyCreated = true;
+                dishes[0] = new Dish();
+            }
             dishes[0].setPosition(counters[0].getPosition());
+            counters[0].setDish(dishes[0]);
+        }
+        if (waiter.isHasDish()) {
+            waiter.getDish().getSprite().setPosition(
+                    (waiter.getBody().getPosition().x * PIXELS_TO_METERS) - waiter.getSprite().getWidth() / 2,
+                    (waiter.getBody().getPosition().y * PIXELS_TO_METERS) - waiter.getSprite().getHeight() / 2
+            );
         }
         for (Guest g : guests
         ) {

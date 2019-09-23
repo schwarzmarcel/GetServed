@@ -19,7 +19,6 @@ public class MyGdxGame extends ApplicationAdapter {
     private Box2DDebugRenderer debugRenderer;
     private OrthographicCamera camera;
     private GsContactListener contactListener;
-    private float time;
     private Level level;
     public static final float PIXELS_TO_METERS = 50f;
     public static final float WORLD_WIDTH = 160;
@@ -28,11 +27,11 @@ public class MyGdxGame extends ApplicationAdapter {
     @Override
     public void create() {
         batch = new SpriteBatch();
-        level = new Level(5,5,1,1);
+        level = new Level(5, 5, 1, 1);
         level.initializeLevel();
         debugRenderer = new Box2DDebugRenderer();
         camera = new OrthographicCamera(160, 90);
-        camera.position.set(WORLD_WIDTH/2,WORLD_HEIGHT/2,0);
+        camera.position.set(WORLD_WIDTH / 2, WORLD_HEIGHT / 2, 0);
         contactListener = new GsContactListener();
         level.getWorld().setContactListener(contactListener);
     }
@@ -41,33 +40,34 @@ public class MyGdxGame extends ApplicationAdapter {
     public void render() {
         camera.update();
         level.getWorld().step(1f / 60f, 6, 2);
-        adjustWaiterSprite();
         level.updateLevel();
+        level.getWaiter().move(2.0f);
+
+        adjustWaiterSprite();
+
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
         batch.setProjectionMatrix(camera.combined);
         Matrix4 debugMatrix = batch.getProjectionMatrix().cpy().scale(PIXELS_TO_METERS,
                 PIXELS_TO_METERS, 0);
-        level.getWaiter().move(2.0f);
         batch.begin();
-            drawWaiter();
-            drawGuests();
-            drawDishes();
-            drawCounters();
+        drawWaiter();
+        drawGuests();
+        drawDishes();
+        drawCounters();
         batch.end();
-        if(true) debugRenderer.render(level.getWorld(), debugMatrix);
+        if (true) debugRenderer.render(level.getWorld(), debugMatrix);
         testContacts();
     }
 
-    private void adjustWaiterSprite(){
-        ((Sprite)level.getWaiter().getBody().getUserData()).setPosition(
+    private void adjustWaiterSprite() {
+        ((Sprite) level.getWaiter().getBody().getUserData()).setPosition(
                 (level.getWaiter().getBody().getPosition().x * PIXELS_TO_METERS) - level.getWaiter().getSprite().getWidth() / 2,
                 (level.getWaiter().getBody().getPosition().y * PIXELS_TO_METERS) - level.getWaiter().getSprite().getHeight() / 2
         );
     }
 
-    private void drawWaiter(){
+    private void drawWaiter() {
         batch.draw(level.getWaiter().getSprite(),
                 level.getWaiter().getSprite().getX(),
                 level.getWaiter().getSprite().getY(),
@@ -76,9 +76,9 @@ public class MyGdxGame extends ApplicationAdapter {
         );
     }
 
-    private void drawTables(){
-       for (Table t: level.getTables()
-             ) {
+    private void drawTables() {
+        for (Table t : level.getTables()
+        ) {
             batch.draw(t.getSprite(),
                     t.getSprite().getX(),
                     t.getSprite().getY(),
@@ -88,9 +88,10 @@ public class MyGdxGame extends ApplicationAdapter {
         }
 
     }
-    private void drawCounters(){
-       for (Counter c: level.getCounters()
-             ) {
+
+    private void drawCounters() {
+        for (Counter c : level.getCounters()
+        ) {
             batch.draw(c.getSprite(),
                     c.getSprite().getX(),
                     c.getSprite().getY(),
@@ -100,50 +101,67 @@ public class MyGdxGame extends ApplicationAdapter {
         }
 
     }
-	private void drawGuests() {
-        for (Guest g:level.getGuests()
-             ) {
+
+    private void drawGuests() {
+        for (Guest g : level.getGuests()
+        ) {
             g.getSprite().draw(batch);
         }
-	}
-	private void drawDishes(){
-        if(level.getDishes()[0] != null){
-            for (Dish d:level.getDishes()
+    }
+
+    private void drawDishes() {
+        if (level.getDishes()[0] != null) {
+            for (Dish d : level.getDishes()
             ) {
                 d.getSprite().draw(batch);
             }
         }
     }
 
-	/*
-	 * tests if the player currently has contact with a guest, if yes then x can be
-	 * clicked to get the guests current happiness
-	 */
-	private void testContacts() {
-		if(contactListener.getContact() != null) {
-			Contact contact = contactListener.getContact();
-			Fixture fixtureA = contact.getFixtureA();
-			Fixture fixtureB = contact.getFixtureB();
-			Guest contactGuest;
+    private void testContacts() {
+        if (contactListener.getContact() != null) {
+            Contact contact = contactListener.getContact();
+            Fixture fixtureA = contact.getFixtureA();
+            Fixture fixtureB = contact.getFixtureB();
+            Guest contactGuest;
+            Counter contactCounter;
 
-			if ((fixtureA.getUserData() instanceof Guest) || (fixtureB.getUserData() instanceof Guest)) {
-				if ((fixtureA.getUserData() instanceof Waiter) || (fixtureB.getUserData() instanceof Waiter)) {
+            if ((fixtureA.getUserData() instanceof Guest) || (fixtureB.getUserData() instanceof Guest)) {
+                if ((fixtureA.getUserData() instanceof Waiter) || (fixtureB.getUserData() instanceof Waiter)) {
 
-					if (fixtureA.getUserData() instanceof Guest)
-						contactGuest = (Guest) fixtureA.getUserData();
-					else
-						contactGuest = (Guest) fixtureB.getUserData();
+                    if (fixtureA.getUserData() instanceof Guest)
+                        contactGuest = (Guest) fixtureA.getUserData();
+                    else
+                        contactGuest = (Guest) fixtureB.getUserData();
 
-					if (Gdx.input.isKeyJustPressed(Input.Keys.X))
-						System.out.println(contactGuest.getHappiness());
-                    if(Gdx.input.isKeyJustPressed(Input.Keys.F)){
-                        contactGuest.serve();
+                    if (Gdx.input.isKeyJustPressed(Input.Keys.X))
+                        System.out.println(contactGuest.getHappiness());
+                    if (Gdx.input.isKeyJustPressed(Input.Keys.F)) {
+                        if (level.getWaiter().getDish() != null) {
+                            if (contactGuest.getiWant() == (level.getWaiter().getDish().type)) {
+                                level.getWaiter().getDish().setPosition(contactGuest.getTable().getPosition());
+                                contactGuest.serve();
+                                level.getWaiter().setHasDish(false);
+                            }
+                        }
                     }
-				}
-			}
-		}
-	}
+                }
+            }
+            if ((fixtureA.getUserData() instanceof Counter) || (fixtureB.getUserData() instanceof Counter)) {
+                if ((fixtureA.getUserData() instanceof Waiter) || (fixtureB.getUserData() instanceof Waiter)) {
+                    if (fixtureA.getUserData() instanceof Guest)
+                        contactCounter = (Counter) fixtureA.getUserData();
+                    else
+                        contactCounter = (Counter) fixtureB.getUserData();
+                    if (level.getDishes()[0] != null) {
+                        level.getWaiter().setHasDish(true);
+                        level.getWaiter().setDish(contactCounter.getDish());
+                    }
 
+                }
+            }
+        }
+    }
     @Override
     public void dispose() {
         level.getWorld().dispose();

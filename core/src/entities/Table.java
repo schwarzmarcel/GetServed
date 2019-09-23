@@ -7,23 +7,23 @@ import com.badlogic.gdx.physics.box2d.*;
 
 import static com.mygdx.game.MyGdxGame.*;
 
-public class Table{
+public class Table {
     private Sprite sprite;
     private Box box;
     private float[] positions = new float[2];
 
-    public Table (World world, float positionX, float positionY){
-        //TODO: add proper texture
+    public Table(World world, float positionX, float positionY) {
         this.positions[0] = positionX;
         this.positions[1] = positionY;
         Texture texture = new Texture("Chef.png");
         sprite = new Sprite(texture);
         sprite.setSize(WORLD_WIDTH / 32, WORLD_HEIGHT / 18);
-        sprite.setPosition(positionX,positionY);
-        sprite.setColor(0, 1, 0 , 1);
-        box = new Box(world,sprite,false);
+        sprite.setPosition(positionX, positionY);
+        sprite.setColor(0, 1, 0, 1);
+        box = new Box(world, sprite, false);
         box.getBody().getFixtureList().first().setUserData(this);
     }
+
     public Sprite getSprite() {
         return sprite;
     }
@@ -32,7 +32,7 @@ public class Table{
         return box.getBody();
     }
 
-    public float[] getPosition(){
+    public float[] getPosition() {
         return positions;
     }
 

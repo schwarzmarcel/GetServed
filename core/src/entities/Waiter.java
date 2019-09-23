@@ -21,6 +21,9 @@ public class Waiter implements Moveable {
     private TextureRegion textureRegion;
     private Sprite sprite;
     private Box box;
+    private boolean hasDish = false;
+    private Dish dish;
+
     public Waiter(World world, float positionX, float positionY) {
         //TODO: Use a proper Texture!
         /*
@@ -29,15 +32,15 @@ public class Waiter implements Moveable {
         sprite = new Sprite(textureRegion);
         */
 
-    	Texture texture = new Texture("Chef.png");
-    	sprite = new Sprite(texture);
-    	sprite.setSize(WORLD_WIDTH / 32, WORLD_HEIGHT / 18);
-        sprite.setPosition(positionX,positionY);
+        Texture texture = new Texture("Chef.png");
+        sprite = new Sprite(texture);
+        sprite.setSize(WORLD_WIDTH / 32, WORLD_HEIGHT / 18);
+        sprite.setPosition(positionX, positionY);
 
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
-        box = new Box(world,sprite,true);
-        
+        box = new Box(world, sprite, true);
+
         box.getBody().getFixtureList().first().setUserData(this);
     }
 
@@ -61,5 +64,21 @@ public class Waiter implements Moveable {
 
     public Body getBody() {
         return box.getBody();
+    }
+
+    public void setHasDish(boolean hasDish) {
+        this.hasDish = hasDish;
+    }
+
+    public boolean isHasDish() {
+        return hasDish;
+    }
+
+    public Dish getDish() {
+        return dish;
+    }
+
+    public void setDish(Dish dish) {
+        this.dish = dish;
     }
 }
