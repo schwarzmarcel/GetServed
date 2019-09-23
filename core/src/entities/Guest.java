@@ -13,7 +13,6 @@ public class Guest {
     private Sprite sprite;
     private Box box;
     private Table table;
-    private Dish order = new Dish();
     private float spawnTime;
     private float timeElapsed;
     private int happiness;
@@ -61,24 +60,12 @@ public class Guest {
     	}
     }
 
-    public void speak(){
-
-    }
-
 	public int getHappiness() {
 		return happiness;
 	}
 
-    public Table getTable() {
-        return table;
-    }
-
     public void setTable(Table table) {
         this.table = table;
-    }
-
-    public void setSpawnTime(float spawnTime) {
-        this.spawnTime = spawnTime;
     }
 
     public void changeColor(String color){

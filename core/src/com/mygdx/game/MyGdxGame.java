@@ -42,10 +42,7 @@ public class MyGdxGame extends ApplicationAdapter {
         camera.update();
         level.getWorld().step(1f / 60f, 6, 2);
         adjustWaiterSprite();
-        for (Guest g: level.getGuests()
-        ) {
-            g.update(level.getTime());
-        }
+        level.updateLevel();
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
@@ -56,6 +53,8 @@ public class MyGdxGame extends ApplicationAdapter {
         batch.begin();
             drawWaiter();
             drawGuests();
+            drawDishes();
+            drawCounters();
         batch.end();
         if(true) debugRenderer.render(level.getWorld(), debugMatrix);
         testContacts();
@@ -107,6 +106,14 @@ public class MyGdxGame extends ApplicationAdapter {
             g.getSprite().draw(batch);
         }
 	}
+	private void drawDishes(){
+        if(level.getDishes()[0] != null){
+            for (Dish d:level.getDishes()
+            ) {
+                d.getSprite().draw(batch);
+            }
+        }
+    }
 
 	/*
 	 * tests if the player currently has contact with a guest, if yes then x can be
@@ -131,7 +138,6 @@ public class MyGdxGame extends ApplicationAdapter {
 						System.out.println(contactGuest.getHappiness());
                     if(Gdx.input.isKeyJustPressed(Input.Keys.F)){
                         contactGuest.serve();
-                        contactGuest.changeColor("green");
                     }
 				}
 			}
