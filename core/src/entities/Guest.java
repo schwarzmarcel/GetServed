@@ -15,6 +15,7 @@ public class Guest {
     private int happiness;
     private int patience;
     private int wealth;
+    private float timeElapsed;
     private boolean hasBeenServed = false;
     private Foodtype iWant;
     private float[] position = new float[2];

@@ -62,6 +62,7 @@ public class MyGdxGame extends ApplicationAdapter {
         drawGuests();
         drawDishes();
         drawCounters();
+        showMoney();
         batch.end();
         if (true) debugRenderer.render(level.getWorld(), debugMatrix);
         testContacts();
@@ -151,7 +152,7 @@ public class MyGdxGame extends ApplicationAdapter {
                         level.setMoney(level.getMoney() + contactGuest.getTip());
                     System.out.println(contactGuest.getTip());
                     if (Gdx.input.isKeyJustPressed(Input.Keys.F)) {
-                        if (level.getWaiter().getDish() != null) {
+                        if (level.getWaiter().getDish() != null && level.getWaiter().isHasDish()) {
                             if (contactGuest.getiWant() == (level.getWaiter().getDish().type)) {
                                 level.getWaiter().getDish().setPosition(contactGuest.getTable().getPosition());
                                 contactGuest.serve();
