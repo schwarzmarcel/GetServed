@@ -28,7 +28,7 @@ public class MyGdxGame extends ApplicationAdapter {
     @Override
     public void create() {
         batch = new SpriteBatch();
-        level = new Level(5,5,1);
+        level = new Level(5,5,1,1);
         level.initializeLevel();
         debugRenderer = new Box2DDebugRenderer();
         camera = new OrthographicCamera(160, 90);
@@ -55,7 +55,6 @@ public class MyGdxGame extends ApplicationAdapter {
         level.getWaiter().move(2.0f);
         batch.begin();
             drawWaiter();
-            drawTables();
             drawGuests();
         batch.end();
         if(true) debugRenderer.render(level.getWorld(), debugMatrix);
@@ -79,7 +78,7 @@ public class MyGdxGame extends ApplicationAdapter {
     }
 
     private void drawTables(){
-       /* for (Table t: level.getTables()
+       for (Table t: level.getTables()
              ) {
             batch.draw(t.getSprite(),
                     t.getSprite().getX(),
@@ -88,7 +87,18 @@ public class MyGdxGame extends ApplicationAdapter {
                     t.getSprite().getHeight()
             );
         }
-        */
+
+    }
+    private void drawCounters(){
+       for (Counter c: level.getCounters()
+             ) {
+            batch.draw(c.getSprite(),
+                    c.getSprite().getX(),
+                    c.getSprite().getY(),
+                    c.getSprite().getWidth(),
+                    c.getSprite().getHeight()
+            );
+        }
 
     }
 	private void drawGuests() {

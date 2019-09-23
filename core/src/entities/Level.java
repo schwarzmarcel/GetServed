@@ -9,17 +9,20 @@ import static com.mygdx.game.MyGdxGame.*;
 public class Level {
     private int numberOfTables;
     private int numberOfGuests;
+    private int numberOfCounters;
     private double difficulty;
     private float time;
     private Table[] tables;
     private Guest[] guests;
+    private Counter[] counters;
     private World world;
     private Walls walls;
     private Waiter waiter;
 
-    public Level(int numberOfTables, int numberOfGuests, double difficulty) {
+    public Level(int numberOfTables, int numberOfGuests, int numberOfCounters, double difficulty) {
         this.numberOfTables = numberOfTables;
         this.numberOfGuests = numberOfGuests;
+        this.numberOfCounters = numberOfCounters;
         this.difficulty = difficulty;
         world = new World(new Vector2(0, 0), true);
         walls = new Walls(world);
@@ -29,10 +32,20 @@ public class Level {
     public void initializeLevel(){
         tables = new Table[numberOfTables];
         guests = new Guest[numberOfGuests];
+        counters = new Counter[numberOfCounters];
         intializeTables();
         intializeGuests();
         intializeWaiter();
+        intializeCounters();
         startTimer();
+    }
+    private void intializeCounters(){
+        float positionX = WORLD_WIDTH/7;
+        float positionY = WORLD_HEIGHT/2;
+        for(int i = 0; i < numberOfCounters; i++){
+            //positionY = (float) (positionY + (0.2*WORLD_HEIGHT));
+            counters[i] = new Counter(world, positionX, positionY);
+        }
     }
 
     private void intializeWaiter(){
@@ -55,11 +68,11 @@ public class Level {
         }
     }
     private void intializeTables(){
-        float positionX = WORLD_WIDTH/2 + (WORLD_WIDTH/4);
-        float positionY = 0;
+        float positionX = (float) (WORLD_WIDTH/1.5 + (WORLD_WIDTH/4));
+        float positionY = WORLD_WIDTH/10;
         for(int i = 0; i < numberOfTables; i++){
-            positionY = (float) (positionY + (0.2*WORLD_HEIGHT));
-            positionX = (float) (positionX - (10));
+            positionY = (float) (positionY + (0.15*WORLD_HEIGHT));
+            positionX = positionX - (10);
             tables[i] = new Table(world, positionX, positionY);
         }
     }
@@ -80,7 +93,7 @@ public class Level {
     public Table[] getTables(){
         return tables;
     }
-
+    public Counter[] getCounters(){return counters;}
     public World getWorld() {
         return world;
     }
