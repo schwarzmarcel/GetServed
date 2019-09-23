@@ -21,7 +21,8 @@ public class Level {
         this.numberOfTables = numberOfTables;
         this.numberOfGuests = numberOfGuests;
         this.difficulty = difficulty;
-        world = new World(new Vector2(0, 0), true);	    walls = new Walls(world);
+        world = new World(new Vector2(0, 0), true);
+        walls = new Walls(world);
         walls = new Walls(world);
     }
 
@@ -44,7 +45,7 @@ public class Level {
         for(int i = 0; i < numberOfGuests; i++){
             if(currentTable < tables.length){
                 positions = tables[currentTable].getPosition();
-                positions[0] = positions[0] + (WORLD_WIDTH/10);
+                positions[0] = positions[0] + (WORLD_WIDTH/30);
             }else{
                 currentTable = 0;
             }

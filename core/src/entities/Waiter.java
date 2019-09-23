@@ -31,7 +31,7 @@ public class Waiter implements Moveable {
 
     	Texture texture = new Texture("Chef.png");
     	sprite = new Sprite(texture);
-    	sprite.setSize(WORLD_WIDTH / 16, WORLD_HEIGHT / 9);
+    	sprite.setSize(WORLD_WIDTH / 32, WORLD_HEIGHT / 18);
         sprite.setPosition(positionX,positionY);
 
         BodyDef bodyDef = new BodyDef();

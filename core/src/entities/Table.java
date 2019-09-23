@@ -18,13 +18,12 @@ public class Table{
         this.positions[1] = positionY;
         Texture texture = new Texture("Chef.png");
         sprite = new Sprite(texture);
-        sprite.setSize(WORLD_WIDTH / 16, WORLD_HEIGHT / 9);
+        sprite.setSize(WORLD_WIDTH / 32, WORLD_HEIGHT / 18);
         sprite.setPosition(positionX,positionY);
         sprite.setColor(0, 1, 0 , 1);
         box = new Box(world,sprite,false);
         box.getBody().getFixtureList().first().setUserData(this);
     }
-
     public Sprite getSprite() {
         return sprite;
     }
