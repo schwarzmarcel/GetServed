@@ -30,10 +30,10 @@ public class MyGdxGame extends ApplicationAdapter {
     @Override
     public void create() {
         batch = new SpriteBatch();
-        moneyFont = new BitmapFont(Gdx.files.internal("moneyfont.fnt"));
+        moneyFont = new BitmapFont(Gdx.files.internal("moneyfont2.fnt"));
         level = new Level(5,5,1);
         level.initializeLevel();
-        moneyFont.getData().setScale(0.2f);
+        moneyFont.getData().setScale(0.1f);
         layout = new GlyphLayout();
         debugRenderer = new Box2DDebugRenderer();
         camera = new OrthographicCamera(160, 90);
@@ -107,7 +107,7 @@ public class MyGdxGame extends ApplicationAdapter {
 	private void showMoney() {
 		money = "" + level.getMoney() + " $";
 		layout.setText(moneyFont, money);
-		moneyFont.draw(batch, layout, WORLD_WIDTH - layout.width, WORLD_HEIGHT);
+		moneyFont.draw(batch, layout, WORLD_WIDTH - layout.width - 1, WORLD_HEIGHT - 1);
 	}
 
 	/*
