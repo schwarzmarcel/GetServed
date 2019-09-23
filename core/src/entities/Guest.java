@@ -60,6 +60,11 @@ public class Guest {
     		changeColor("");
     	}
     }
+    
+    public int getTip() {
+    	double tip = wealth * ((patience - timeElapsed) / patience);
+    	return (int) Math.ceil(tip);
+    }
 
     public void speak(){
 
@@ -97,6 +102,7 @@ public class Guest {
                 break;
         }
     }
+    
     public void serve(){
         this.hasBeenServed = true;
     }

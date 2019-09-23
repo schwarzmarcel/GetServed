@@ -11,6 +11,7 @@ public class Level {
     private int numberOfGuests;
     private double difficulty;
     private float time;
+    private int money;
     private Table[] tables;
     private Guest[] guests;
     private World world;
@@ -23,7 +24,8 @@ public class Level {
         this.difficulty = difficulty;
         world = new World(new Vector2(0, 0), true);
         walls = new Walls(world);
-        walls = new Walls(world);
+        money = 60;
+        
     }
 
     public void initializeLevel(){
@@ -70,6 +72,8 @@ public class Level {
             @Override
             public void run() {
                 time++;
+                if(money > 0)
+                money--;
             }
         }, 0, 1);
     }
@@ -90,4 +94,12 @@ public class Level {
     public float getTime(){
         return time;
     }
+
+	public int getMoney() {
+		return money;
+	}
+	
+	public void setMoney(int money) {
+		this.money = money;
+	}
 }
