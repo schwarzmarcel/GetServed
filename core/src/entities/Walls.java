@@ -26,7 +26,6 @@ public class Walls {
 		verts[3] = new Vector2((-1) / PIXELS_TO_METERS, (WORLD_HEIGHT + 1) / PIXELS_TO_METERS);
 		verts[4] = new Vector2((-1) / PIXELS_TO_METERS, (-1) / PIXELS_TO_METERS);
 		shape.createChain(verts);
-		
 		body.createFixture(shape, 1.0f);
 		shape.dispose();
 	}

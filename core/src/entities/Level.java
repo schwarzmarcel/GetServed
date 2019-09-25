@@ -30,7 +30,6 @@ public class Level {
         world = new World(new Vector2(0, 0), true);
         Walls walls = new Walls(world);
         money = 60;
-
     }
 
     public void initializeLevel() {
@@ -49,7 +48,6 @@ public class Level {
         float positionX = WORLD_WIDTH / 7;
         float positionY = WORLD_HEIGHT / 2;
         for (int i = 0; i < numberOfCounters; i++) {
-            //positionY = (float) (positionY + (0.2*WORLD_HEIGHT));
             counters[i] = new Counter(world, positionX, positionY);
         }
     }
@@ -59,8 +57,8 @@ public class Level {
     }
 
     private void intializeGuests() {
-        float positionX = 0;
-        float positionY = 0;
+        float positionX;
+        float positionY;
         int currentTable = 0;
         for (int i = 0; i < numberOfGuests; i++) {
             if (currentTable < tables.length) {
@@ -69,9 +67,6 @@ public class Level {
                 positionX = positionX + (WORLD_WIDTH / 30);
                 guests[i] = new Guest(world, positionX, positionY, time);
                 guests[i].setTable(tables[currentTable]);
-                System.out.println(positionX);
-                System.out.println(tables[currentTable].getPosition()[0]);
-
             } else {
                 currentTable = 0;
             }

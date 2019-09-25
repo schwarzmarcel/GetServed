@@ -24,7 +24,6 @@ public class Counter {
         Box box = new Box(world, sprite, false);
         box.getBody().getFixtureList().first().setUserData(this);
     }
-
     public Sprite getSprite() {
         return sprite;
     }
