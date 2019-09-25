@@ -30,15 +30,17 @@ public class MyGdxGame extends ApplicationAdapter {
     @Override
     public void create() {
         batch = new SpriteBatch();
-        level = new Level(5, 5, 1, 1);
         moneyFont = new BitmapFont(Gdx.files.internal("moneyfont2.fnt"));
-        level = new Level(5,5,1,1);
-        level.initializeLevel();
         moneyFont.getData().setScale(0.1f);
         layout = new GlyphLayout();
+        
+        level = new Level(5,5,1,1);
+        level.initializeLevel();
+       
         debugRenderer = new Box2DDebugRenderer();
         camera = new OrthographicCamera(160, 90);
         camera.position.set(WORLD_WIDTH / 2, WORLD_HEIGHT / 2, 0);
+        
         contactListener = new GsContactListener();
         level.getWorld().setContactListener(contactListener);
     }
@@ -150,10 +152,10 @@ public class MyGdxGame extends ApplicationAdapter {
 
                     if (Gdx.input.isKeyJustPressed(Input.Keys.X))
                         level.setMoney(level.getMoney() + contactGuest.getTip());
-                    System.out.println(contactGuest.getTip());
+                  
                     if (Gdx.input.isKeyJustPressed(Input.Keys.F)) {
                         if (level.getWaiter().getDish() != null && level.getWaiter().isHasDish()) {
-                            if (contactGuest.getiWant() == (level.getWaiter().getDish().type)) {
+                            if (contactGuest.getOrder() == (level.getWaiter().getDish().type)) {
                                 level.getWaiter().getDish().setPosition(contactGuest.getTable().getPosition());
                                 contactGuest.serve();
                                 level.getWaiter().setHasDish(false);

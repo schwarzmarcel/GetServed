@@ -17,7 +17,7 @@ public class Guest {
     private int wealth;
     private float timeElapsed;
     private boolean hasBeenServed = false;
-    private Foodtype iWant;
+    private Foodtype order;
     private float[] position = new float[2];
 
 
@@ -28,7 +28,7 @@ public class Guest {
         patience = 30;
         wealth = 40;
         happiness = 3;
-        iWant = Foodtype.getRandomFoodType();
+        order = Foodtype.getRandomFoodType();
         Texture texture = new Texture("Chef.png");
         sprite = new Sprite(texture);
         sprite.setSize(WORLD_WIDTH / 32, WORLD_HEIGHT / 18);
@@ -93,8 +93,8 @@ public class Guest {
         this.hasBeenServed = true;
     }
 
-    public Foodtype getiWant() {
-        return iWant;
+    public Foodtype getOrder() {
+        return order;
     }
 
     public Table getTable() {
