@@ -23,6 +23,7 @@ public class Counter {
         sprite.setColor(0, 1, 0, 1);
         Box box = new Box(world, sprite, false);
         box.getBody().getFixtureList().first().setUserData(this);
+        dish = null;
     }
 
     public Sprite getSprite() {
@@ -39,5 +40,9 @@ public class Counter {
 
     public void setDish(Dish dish) {
         this.dish = dish;
+    }
+    
+    public void removeDish() {
+    	dish = null;
     }
 }

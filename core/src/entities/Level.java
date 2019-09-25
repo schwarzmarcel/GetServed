@@ -134,7 +134,7 @@ public class Level {
             dishes[0].setPosition(counters[0].getPosition());
             counters[0].setDish(dishes[0]);
         }
-        if (waiter.isHasDish()) {
+        if (waiter.getDish() != null) {
             waiter.getDish().getSprite().setPosition(
                     (waiter.getBody().getPosition().x * PIXELS_TO_METERS) - waiter.getSprite().getWidth() / 2,
                     (waiter.getBody().getPosition().y * PIXELS_TO_METERS) - waiter.getSprite().getHeight() / 2
