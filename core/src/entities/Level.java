@@ -81,6 +81,7 @@ public class Level {
             positionY = (float) (positionY + (0.15 * WORLD_HEIGHT));
             positionX = positionX - (10);
             tables[i] = new Table(world, positionX, positionY);
+            System.out.println("TableX:" + positionX + " TableY:" + positionY);
         }
     }
 
