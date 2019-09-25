@@ -12,6 +12,7 @@ import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Timer;
 import entities.*;
 import handlers.GsContactListener;
+import handlers.LevelHandler;
 
 public class MyGdxGame extends ApplicationAdapter {
 
@@ -22,7 +23,7 @@ public class MyGdxGame extends ApplicationAdapter {
     private BitmapFont moneyFont;
     private String money;
     private GlyphLayout layout;
-    private Level level;
+    private LevelHandler level;
     public static final float PIXELS_TO_METERS = 50f;
     public static final float WORLD_WIDTH = 160;
     public static final float WORLD_HEIGHT = 90;
@@ -34,7 +35,7 @@ public class MyGdxGame extends ApplicationAdapter {
         moneyFont.getData().setScale(0.1f);
         layout = new GlyphLayout();
         
-        level = new Level(5,5,1,1);
+        level = new LevelHandler(5,5,1,1);
         level.initializeLevel();
        
         debugRenderer = new Box2DDebugRenderer();

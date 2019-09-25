@@ -1,13 +1,20 @@
-package entities;
+package handlers;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Timer;
 
+import entities.Counter;
+import entities.Dish;
+import entities.Guest;
+import entities.Table;
+import entities.Waiter;
+import entities.Walls;
+
 import static com.mygdx.game.MyGdxGame.*;
 
-public class Level {
+public class LevelHandler {
     private int numberOfTables;
     private int numberOfGuests;
     private int numberOfCounters;
@@ -22,7 +29,7 @@ public class Level {
     private Waiter waiter;
     private boolean checkIfInstanceAlreadyCreated;
 
-    public Level(int numberOfTables, int numberOfGuests, int numberOfCounters, int numberOfDishes) {
+    public LevelHandler(int numberOfTables, int numberOfGuests, int numberOfCounters, int numberOfDishes) {
         this.numberOfTables = numberOfTables;
         this.numberOfGuests = numberOfGuests;
         this.numberOfCounters = numberOfCounters;
