@@ -13,7 +13,7 @@ public class Counter {
     private float[] positions = new float[2];
     private Dish dish;
 
-    Counter(World world, float positionX, float positionY) {
+    public Counter(World world, float positionX, float positionY) {
         this.positions[0] = positionX;
         this.positions[1] = positionY;
         Texture texture = new Texture("Chef.png");
@@ -23,6 +23,7 @@ public class Counter {
         sprite.setColor(0, 1, 0, 1);
         Box box = new Box(world, sprite, false);
         box.getBody().getFixtureList().first().setUserData(this);
+        dish = null;
     }
     public Sprite getSprite() {
         return sprite;
@@ -38,5 +39,9 @@ public class Counter {
 
     public void setDish(Dish dish) {
         this.dish = dish;
+    }
+    
+    public void removeDish() {
+    	dish = null;
     }
 }

@@ -21,7 +21,6 @@ public class Waiter implements Moveable {
     private TextureRegion textureRegion;
     private Sprite sprite;
     private Box box;
-    private boolean hasDish = false;
     private Dish dish;
 
     public Waiter(World world, float positionX, float positionY) {
@@ -42,6 +41,7 @@ public class Waiter implements Moveable {
         box = new Box(world, sprite, true);
 
         box.getBody().getFixtureList().first().setUserData(this);
+        dish = null;
     }
 
     public void move(float speed) {
@@ -66,19 +66,15 @@ public class Waiter implements Moveable {
         return box.getBody();
     }
 
-    public void setHasDish(boolean hasDish) {
-        this.hasDish = hasDish;
-    }
-
-    public boolean isHasDish() {
-        return hasDish;
-    }
-
     public Dish getDish() {
         return dish;
     }
 
     public void setDish(Dish dish) {
         this.dish = dish;
+    }
+    
+    public void removeDish() {
+    	dish = null;
     }
 }
