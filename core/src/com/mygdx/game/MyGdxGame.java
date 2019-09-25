@@ -34,14 +34,12 @@ public class MyGdxGame extends ApplicationAdapter {
         moneyFont = new BitmapFont(Gdx.files.internal("moneyfont2.fnt"));
         moneyFont.getData().setScale(0.1f);
         layout = new GlyphLayout();
-        
-        level = new LevelHandler(5,5,1,1);
+        level = new LevelHandler(1);
         level.initializeLevel();
-       
         debugRenderer = new Box2DDebugRenderer();
         camera = new OrthographicCamera(160, 90);
         camera.position.set(WORLD_WIDTH / 2, WORLD_HEIGHT / 2, 0);
-        
+
         contactListener = new GsContactListener();
         level.getWorld().setContactListener(contactListener);
     }
@@ -87,30 +85,14 @@ public class MyGdxGame extends ApplicationAdapter {
         );
     }
 
-    private void drawTables() {
-        for (Table t : level.getTables()
-        ) {
-            batch.draw(t.getSprite(),
-                    t.getSprite().getX(),
-                    t.getSprite().getY(),
-                    t.getSprite().getWidth(),
-                    t.getSprite().getHeight()
-            );
-        }
-
-    }
-
     private void drawCounters() {
-        for (Counter c : level.getCounters()
-        ) {
-            batch.draw(c.getSprite(),
-                    c.getSprite().getX(),
-                    c.getSprite().getY(),
-                    c.getSprite().getWidth(),
-                    c.getSprite().getHeight()
-            );
-        }
-
+        Counter c = level.getCounter();
+        batch.draw(c.getSprite(),
+                c.getSprite().getX(),
+                c.getSprite().getY(),
+                c.getSprite().getWidth(),
+                c.getSprite().getHeight()
+        );
     }
 
     private void drawGuests() {
@@ -120,11 +102,11 @@ public class MyGdxGame extends ApplicationAdapter {
         }
     }
 
-	private void showMoney() {
-		money = "" + level.getMoney() + " $";
-		layout.setText(moneyFont, money);
-		moneyFont.draw(batch, layout, WORLD_WIDTH - layout.width - 1, WORLD_HEIGHT - 1);
-	}
+    private void showMoney() {
+        money = "" + level.getMoney() + " $";
+        layout.setText(moneyFont, money);
+        moneyFont.draw(batch, layout, WORLD_WIDTH - layout.width - 1, WORLD_HEIGHT - 1);
+    }
 
     private void drawDishes() {
         if (level.getDishes()[0] != null) {
@@ -140,25 +122,24 @@ public class MyGdxGame extends ApplicationAdapter {
             Contact contact = contactListener.getContact();
             Fixture fixtureA = contact.getFixtureA();
             Fixture fixtureB = contact.getFixtureB();
-            Guest contactGuest;
+            Table contactTable;
             Counter contactCounter;
 
-            if ((fixtureA.getUserData() instanceof Guest) || (fixtureB.getUserData() instanceof Guest)) {
+            if ((fixtureA.getUserData() instanceof Table) || (fixtureB.getUserData() instanceof Table)) {
                 if ((fixtureA.getUserData() instanceof Waiter) || (fixtureB.getUserData() instanceof Waiter)) {
 
-                    if (fixtureA.getUserData() instanceof Guest)
-                        contactGuest = (Guest) fixtureA.getUserData();
+                    if (fixtureA.getUserData() instanceof Table)
+                        contactTable = (Table) fixtureA.getUserData();
                     else
-                        contactGuest = (Guest) fixtureB.getUserData();
+                        contactTable = (Table) fixtureB.getUserData();
 
                     if (Gdx.input.isKeyJustPressed(Input.Keys.X))
-                        level.setMoney(level.getMoney() + contactGuest.getTip());
-                  
+                        level.setMoney(level.getMoney() + contactTable.getGuest().getTip());
+
                     if (Gdx.input.isKeyJustPressed(Input.Keys.F)) {
                         if (level.getWaiter().getDish() != null) {
-                            if (contactGuest.getOrder() == (level.getWaiter().getDish().type)) {
-                                level.getWaiter().getDish().setPosition(contactGuest.getTable().getPosition());
-                                contactGuest.serve();
+                            if (contactTable.getGuest().getOrder() == (level.getWaiter().getDish().type)) {
+                                level.getWaiter().getDish().setPosition(contactTable.getPosition());
                                 level.getWaiter().removeDish();
                             }
                         }
@@ -167,7 +148,7 @@ public class MyGdxGame extends ApplicationAdapter {
             }
             if ((fixtureA.getUserData() instanceof Counter) || (fixtureB.getUserData() instanceof Counter)) {
                 if ((fixtureA.getUserData() instanceof Waiter) || (fixtureB.getUserData() instanceof Waiter)) {
-                    if (fixtureA.getUserData() instanceof Guest)
+                    if (fixtureA.getUserData() instanceof Counter)
                         contactCounter = (Counter) fixtureA.getUserData();
                     else
                         contactCounter = (Counter) fixtureB.getUserData();
@@ -180,6 +161,7 @@ public class MyGdxGame extends ApplicationAdapter {
             }
         }
     }
+
     @Override
     public void dispose() {
         level.getWorld().dispose();

@@ -11,6 +11,8 @@ public class Table {
     private Sprite sprite;
     private Box box;
     private float[] positions = new float[2];
+    private boolean isOccupied = false;
+    private Guest guest;
 
     public Table(World world, float positionX, float positionY) {
         this.positions[0] = positionX;
@@ -36,4 +38,18 @@ public class Table {
         return positions;
     }
 
+    public void setOccupied(boolean occupied) {
+        isOccupied = occupied;
+    }
+
+    public boolean isOccupied() {
+        return isOccupied;
+    }
+
+    public Guest getGuest() {
+        return guest;
+    }
+    public void setGuest(Guest guest) {
+        this.guest = guest;
+    }
 }

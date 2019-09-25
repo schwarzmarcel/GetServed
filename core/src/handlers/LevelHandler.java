@@ -1,38 +1,29 @@
 package handlers;
-
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Timer;
 
-import entities.Counter;
-import entities.Dish;
-import entities.Guest;
-import entities.Table;
-import entities.Waiter;
-import entities.Walls;
+import entities.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.mygdx.game.MyGdxGame.*;
 
 public class LevelHandler {
-    private int numberOfTables;
-    private int numberOfGuests;
-    private int numberOfCounters;
     private int numberOfDishes;
     private float time;
     private int money;
-    private Table[] tables;
-    private Guest[] guests;
-    private Counter[] counters;
+    private ArrayList<Guest> guests;
+    private Counter counter;
     private Dish[] dishes;
     private World world;
     private Waiter waiter;
     private boolean checkIfInstanceAlreadyCreated;
+    private Spawnarea spawnarea;
 
-    public LevelHandler(int numberOfTables, int numberOfGuests, int numberOfCounters, int numberOfDishes) {
-        this.numberOfTables = numberOfTables;
-        this.numberOfGuests = numberOfGuests;
-        this.numberOfCounters = numberOfCounters;
+    public LevelHandler(int numberOfDishes) {
+        guests = new ArrayList<Guest>();
         this.numberOfDishes = numberOfDishes;
         world = new World(new Vector2(0, 0), true);
         Walls walls = new Walls(world);
@@ -40,23 +31,18 @@ public class LevelHandler {
     }
 
     public void initializeLevel() {
-        tables = new Table[numberOfTables];
-        guests = new Guest[numberOfGuests];
-        counters = new Counter[numberOfCounters];
         dishes = new Dish[numberOfDishes];
-        intializeTables();
-        intializeGuests();
+        drawField();
         intializeWaiter();
         intializeCounters();
         startTimer();
+        intializeGuests();
     }
 
     private void intializeCounters() {
         float positionX = WORLD_WIDTH / 7;
         float positionY = WORLD_HEIGHT / 2;
-        for (int i = 0; i < numberOfCounters; i++) {
-            counters[i] = new Counter(world, positionX, positionY);
-        }
+        counter = new Counter(world, positionX, positionY);
     }
 
     private void intializeWaiter() {
@@ -64,32 +50,34 @@ public class LevelHandler {
     }
 
     private void intializeGuests() {
-        float positionX;
-        float positionY;
-        int currentTable = 0;
-        for (int i = 0; i < numberOfGuests; i++) {
-            if (currentTable < tables.length) {
-                positionX = tables[currentTable].getPosition()[0];
-                positionY = tables[currentTable].getPosition()[1];
-                positionX = positionX + (WORLD_WIDTH / 30);
-                guests[i] = new Guest(world, positionX, positionY, time);
-                guests[i].setTable(tables[currentTable]);
-            } else {
-                currentTable = 0;
+        for (int i = 0; i < spawnarea.getGrid().length; i++) {
+            for (int k = 0; k < spawnarea.getGrid()[i].length; k++) {
+                if(spawnarea.getGrid()[i][k] != null && !spawnarea.getGrid()[i][k].isOccupied()){
+                    Guest tempGuest = new Guest(spawnarea.getGrid()[i][k].getPosition()[0], spawnarea.getGrid()[i][k].getPosition()[1], time);
+                    tempGuest.setTable(spawnarea.getGrid()[i][k]);
+                    spawnarea.getGrid()[i][k].setGuest(tempGuest);
+                    guests.add(tempGuest);
+                }
             }
-            currentTable++;
         }
+
     }
 
-    private void intializeTables() {
-        float positionX = (float) (WORLD_WIDTH / 1.5 + (WORLD_WIDTH / 4));
-        float positionY = WORLD_WIDTH / 10;
-        for (int i = 0; i < numberOfTables; i++) {
-            positionY = (float) (positionY + (0.15 * WORLD_HEIGHT));
-            positionX = positionX - (10);
-            tables[i] = new Table(world, positionX, positionY);
-            System.out.println("TableX:" + positionX + " TableY:" + positionY);
-        }
+    public void drawField(){
+        spawnarea = new Spawnarea();
+        spawnarea.printGridDimensions();
+        Gridposition pos1 = new Gridposition(3,5);
+        Gridposition pos2 = new Gridposition(6,10);
+        Gridposition pos3 = new Gridposition(9,20);
+        Gridposition pos4 = new Gridposition(12,5);
+        Gridposition pos5 = new Gridposition(15,5);
+        Gridposition[] gridpositions = new Gridposition[5];
+        gridpositions[0] = pos1;
+        gridpositions[1] = pos2;
+        gridpositions[2] = pos3;
+        gridpositions[3] = pos4;
+        gridpositions[4] = pos5;
+        spawnarea.initializeTables(gridpositions,world);
     }
 
     private void startTimer() {
@@ -107,20 +95,15 @@ public class LevelHandler {
     public Waiter getWaiter() {
         return waiter;
     }
-
-    public Table[] getTables() {
-        return tables;
-    }
-
-    public Counter[] getCounters() {
-        return counters;
+    public Counter getCounter() {
+        return counter;
     }
 
     public World getWorld() {
         return world;
     }
 
-    public Guest[] getGuests() {
+    public List<Guest> getGuests() {
         return guests;
     }
 
@@ -134,8 +117,8 @@ public class LevelHandler {
                 checkIfInstanceAlreadyCreated = true;
                 dishes[0] = new Dish();
             }
-            dishes[0].setPosition(counters[0].getPosition());
-            counters[0].setDish(dishes[0]);
+            dishes[0].setPosition(counter.getPosition());
+            counter.setDish(dishes[0]);
         }
         if (waiter.getDish() != null) {
             waiter.getDish().getSprite().setPosition(
@@ -156,4 +139,8 @@ public class LevelHandler {
 	public void setMoney(int money) {
 		this.money = money;
 	}
+
+    public Spawnarea getSpawnarea() {
+        return spawnarea;
+    }
 }

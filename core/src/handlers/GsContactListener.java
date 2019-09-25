@@ -1,9 +1,5 @@
 package handlers;
 
-import java.util.List;
-
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
@@ -11,7 +7,7 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
 
 import entities.Counter;
-import entities.Guest;
+import entities.Table;
 import entities.Waiter;
 
 public class GsContactListener implements ContactListener{
@@ -22,7 +18,7 @@ public class GsContactListener implements ContactListener{
 		Fixture fixtureA = contact.getFixtureA();
 		Fixture fixtureB = contact.getFixtureB();
 
-		if ((fixtureA.getUserData() instanceof Guest) || (fixtureB.getUserData() instanceof Guest)) {
+		if ((fixtureA.getUserData() instanceof Table) || (fixtureB.getUserData() instanceof Table)) {
 			if ((fixtureA.getUserData() instanceof Waiter) || (fixtureB.getUserData() instanceof Waiter)) {
 				currentContact = contact;
 			}
@@ -39,7 +35,7 @@ public class GsContactListener implements ContactListener{
 		Fixture fixtureA = contact.getFixtureA();
 		Fixture fixtureB = contact.getFixtureB();
 
-		if ((fixtureA.getUserData() instanceof Guest) || (fixtureB.getUserData() instanceof Guest)) {
+		if ((fixtureA.getUserData() instanceof Table) || (fixtureB.getUserData() instanceof Table)) {
 			if ((fixtureA.getUserData() instanceof Waiter) || (fixtureB.getUserData() instanceof Waiter)) {
 				currentContact = null;
 			}

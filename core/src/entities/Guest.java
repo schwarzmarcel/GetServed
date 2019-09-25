@@ -21,7 +21,7 @@ public class Guest {
     private float[] position = new float[2];
 
 
-    public Guest(World world, float positionX, float positionY, float time) {
+    public Guest(float positionX, float positionY, float time) {
         position[0] = positionX;
         position[1] = positionY;
         spawnTime = time;
@@ -34,9 +34,6 @@ public class Guest {
         sprite.setSize(WORLD_WIDTH / 32, WORLD_HEIGHT / 18);
         sprite.setPosition(positionX, positionY);
         sprite.setColor(0, 1, 0, 1);
-
-        Box box = new Box(world, sprite, false);
-        box.getBody().getFixtureList().first().setUserData(this);
     }
 
     public Sprite getSprite() {
@@ -71,7 +68,6 @@ public class Guest {
     public void setTable(Table table) {
         this.table = table;
     }
-
     public void changeColor(String color) {
         switch (color) {
             case "black":
@@ -89,18 +85,10 @@ public class Guest {
         }
     }
 
-    public void serve() {
-        this.hasBeenServed = true;
-    }
-
     public Foodtype getOrder() {
         return order;
     }
-
-    public Table getTable() {
-        return table;
-    }
-    public float[] getPosition(){
-        return position;
+    public void setOrder(Foodtype order) {
+        this.order = order;
     }
 }
