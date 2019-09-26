@@ -189,7 +189,7 @@ public class LevelHandler {
         }
         for (Counter c: spawnarea.getCounters()
         ) {
-            if(dishTimer+1 < time){
+            if(dishTimer+2 < time){
                 if(c.getDish() == null && !dishQueue.isEmpty()){
                     Dish tempDish = new Dish(dishQueue.removeFirst(),c.getPosition());
                     c.setDish(tempDish);
