@@ -22,7 +22,6 @@ public class LevelHandler {
     private int money;
     private ArrayList<Guest> guests;
     private ArrayList<Guest> activeGuests;
-    private Counter[] counters;
     private ArrayList<Foodtype> dishQueue;
     private ArrayList<Dish> dishes; 
     private World world;
@@ -40,18 +39,10 @@ public class LevelHandler {
 
     public void initializeLevel() {
         dishes = new ArrayList<Dish>();
-        counters = new Counter[1];
         drawField();
         intializeWaiter();
-        intializeCounters();
         startTimer();
         intializeGuests();
-    }
-
-    private void intializeCounters() {
-        float positionX = WORLD_WIDTH / 7;
-        float positionY = WORLD_HEIGHT / 2;
-        counters[0] = new Counter(world, positionX, positionY);
     }
 
     private void intializeWaiter() {
@@ -73,19 +64,23 @@ public class LevelHandler {
     private void drawField(){
         spawnarea = new Spawnarea();
         spawnarea.printGridDimensions();
-        Gridposition pos1 = new Gridposition(3,5);
-        Gridposition pos2 = new Gridposition(6,10);
-        Gridposition pos3 = new Gridposition(9,20);
-        Gridposition pos4 = new Gridposition(12,5);
-        Gridposition pos5 = new Gridposition(15,5);
-        Gridposition pos6 = new Gridposition(10,31);
-        Gridposition[] gridpositions = new Gridposition[6];
+        Gridposition pos1 = new Gridposition(3,5,"table");
+        Gridposition pos2 = new Gridposition(6,10, "table");
+        Gridposition pos3 = new Gridposition(9,20, "table");
+        Gridposition pos4 = new Gridposition(12,5, "table");
+        Gridposition pos5 = new Gridposition(15,5, "table");
+        Gridposition pos6 = new Gridposition(10,31, "table");
+        Gridposition pos7 = new Gridposition(10,3, "counter");
+        Gridposition pos8 = new Gridposition(5,3, "counter");
+        Gridposition[] gridpositions = new Gridposition[8];
         gridpositions[0] = pos1;
         gridpositions[1] = pos2;
         gridpositions[2] = pos3;
         gridpositions[3] = pos4;
         gridpositions[4] = pos5;
         gridpositions[5] = pos6;
+        gridpositions[6] = pos7;
+        gridpositions[7] = pos8;
         spawnarea.initializeTables(gridpositions,world);
     }
 
@@ -103,9 +98,6 @@ public class LevelHandler {
 
     public Waiter getWaiter() {
         return waiter;
-    }
-    public Counter getCounter() {
-        return counters[0];
     }
 
     public World getWorld() {
@@ -126,8 +118,8 @@ public class LevelHandler {
                 checkIfInstanceAlreadyCreated = true;
                 dishes.add(new Dish());
             }
-            dishes.get(0).setPosition(counters[0].getPosition());
-            counters[0].setDish(dishes.get(0));
+            dishes.get(0).setPosition(spawnarea.getCounters().get(0).getPosition());
+            spawnarea.getCounters().get(0).setDish(dishes.get(0));
         }
         if (waiter.getDish() != null) {
             waiter.getDish().getSprite().setPosition(

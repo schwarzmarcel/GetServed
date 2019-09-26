@@ -62,7 +62,6 @@ public class MyGdxGame extends ApplicationAdapter {
         drawWaiter();
         drawGuests();
         drawDishes();
-        drawCounters();
         showMoney();
         batch.end();
         if (true) debugRenderer.render(level.getWorld(), debugMatrix);
@@ -82,16 +81,6 @@ public class MyGdxGame extends ApplicationAdapter {
                 level.getWaiter().getSprite().getY(),
                 level.getWaiter().getSprite().getWidth(),
                 level.getWaiter().getSprite().getHeight()
-        );
-    }
-
-    private void drawCounters() {
-        Counter c = level.getCounter();
-        batch.draw(c.getSprite(),
-                c.getSprite().getX(),
-                c.getSprite().getY(),
-                c.getSprite().getWidth(),
-                c.getSprite().getHeight()
         );
     }
 

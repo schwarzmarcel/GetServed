@@ -12,6 +12,7 @@ public class Spawnarea {
 
     private final float CELLSIZE = 5;
     private List<Table> tables = new ArrayList<Table>();
+    private List<Counter> counters = new ArrayList<>();
 
     public Spawnarea(){
         initializeGrid();
@@ -23,10 +24,14 @@ public class Spawnarea {
     public void initializeTables(Gridposition[] gridpositions, World world){
         for (Gridposition g: gridpositions
              ) {
-            float tablePositionY = (g.getRow() * CELLSIZE) - CELLSIZE/2;
-            float tablePositionX = (g.getCol() * CELLSIZE) - CELLSIZE/2;
-            System.out.println("X:" + tablePositionX + " Y:" + tablePositionY);
-            tables.add(new Table(world,tablePositionX,tablePositionY));
+            float positionY = (g.getRow() * CELLSIZE) - CELLSIZE/2;
+            float positionX = (g.getCol() * CELLSIZE) - CELLSIZE/2;
+            if(g.getType().equals("counter")){
+                counters.add(new Counter(world,positionX,positionY));
+            }
+            else if(g.getType().equals("table")){
+                tables.add(new Table(world,positionX,positionY));
+            }
         }
     }
     public void printGridDimensions(){
@@ -36,5 +41,8 @@ public class Spawnarea {
 
     public List<Table> getTables() {
         return tables;
+    }
+    public List<Counter> getCounters(){
+        return counters;
     }
 }
