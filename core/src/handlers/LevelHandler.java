@@ -9,7 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.mygdx.game.MyGdxGame.*;
-
+/*
+  TODO: eine Queue für alle Counter
+        eine Queue für alle Gäste
+        wenn mehr als ein Table free choose randomly
+        Counter immer mit richtigen Dishes vollfüllen, wenn nicht möglich leeren Counter mit random Dish füllen
+ */
 public class LevelHandler {
     private int numberOfDishes;
     private float time;
@@ -50,20 +55,18 @@ public class LevelHandler {
     }
 
     private void intializeGuests() {
-        for (int i = 0; i < spawnarea.getGrid().length; i++) {
-            for (int k = 0; k < spawnarea.getGrid()[i].length; k++) {
-                if(spawnarea.getGrid()[i][k] != null && !spawnarea.getGrid()[i][k].isOccupied()){
-                    Guest tempGuest = new Guest(spawnarea.getGrid()[i][k].getPosition()[0], spawnarea.getGrid()[i][k].getPosition()[1], time);
-                    tempGuest.setTable(spawnarea.getGrid()[i][k]);
-                    spawnarea.getGrid()[i][k].setGuest(tempGuest);
-                    guests.add(tempGuest);
-                }
+        for (Table t: spawnarea.getTables()
+             ) {
+            if(!t.isOccupied()){
+                Guest tempGuest = new Guest(t.getPosition()[0],t.getPosition()[1], time);
+                tempGuest.setTable(t);
+                t.setGuest(tempGuest);
+                guests.add(tempGuest);
             }
         }
-
     }
 
-    public void drawField(){
+    private void drawField(){
         spawnarea = new Spawnarea();
         spawnarea.printGridDimensions();
         Gridposition pos1 = new Gridposition(3,5);
@@ -71,12 +74,14 @@ public class LevelHandler {
         Gridposition pos3 = new Gridposition(9,20);
         Gridposition pos4 = new Gridposition(12,5);
         Gridposition pos5 = new Gridposition(15,5);
-        Gridposition[] gridpositions = new Gridposition[5];
+        Gridposition pos6 = new Gridposition(10,31);
+        Gridposition[] gridpositions = new Gridposition[6];
         gridpositions[0] = pos1;
         gridpositions[1] = pos2;
         gridpositions[2] = pos3;
         gridpositions[3] = pos4;
         gridpositions[4] = pos5;
+        gridpositions[5] = pos6;
         spawnarea.initializeTables(gridpositions,world);
     }
 
@@ -139,8 +144,4 @@ public class LevelHandler {
 	public void setMoney(int money) {
 		this.money = money;
 	}
-
-    public Spawnarea getSpawnarea() {
-        return spawnarea;
-    }
 }
