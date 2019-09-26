@@ -190,12 +190,20 @@ public class LevelHandler {
         for (Counter c: spawnarea.getCounters()
         ) {
             if(dishTimer+2 < time){
+                boolean neededDishAvailable = false;
+                for (Dish d:dishes
+                     ) {
+                    for (Guest g: guests
+                         ) {
+                        if (d.type == g.getOrder()) neededDishAvailable = true;
+                    }
+                }
                 if(c.getDish() == null && !dishQueue.isEmpty()){
                     Dish tempDish = new Dish(dishQueue.removeFirst(),c.getPosition());
                     c.setDish(tempDish);
                     dishes.add(tempDish);
                 }
-                if(dishQueue.isEmpty() && c.getDish() == null){
+                if(dishQueue.isEmpty() && c.getDish() == null && neededDishAvailable){
                     Dish tempDish = new Dish(Foodtype.getRandomFoodType(),c.getPosition());
                     c.setDish(tempDish);
                     dishes.add(tempDish);
