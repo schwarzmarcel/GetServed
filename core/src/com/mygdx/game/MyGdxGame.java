@@ -85,8 +85,7 @@ public class MyGdxGame extends ApplicationAdapter {
     }
 
     private void drawGuests() {
-        for (Guest g : level.getGuests()
-        ) {
+        for (Guest g : level.getActiveGuests()) {
             g.getSprite().draw(batch);
         }
     }
@@ -122,14 +121,14 @@ public class MyGdxGame extends ApplicationAdapter {
                     else
                         contactTable = (Table) fixtureB.getUserData();
 
-                    if (Gdx.input.isKeyJustPressed(Input.Keys.X))
-                        level.setMoney(level.getMoney() + contactTable.getGuest().getTip());
-
                     if (Gdx.input.isKeyJustPressed(Input.Keys.F)) {
                         if (level.getWaiter().getDish() != null) {
                             if (contactTable.getGuest().getOrder() == (level.getWaiter().getDish().type)) {
                                 level.getWaiter().getDish().setPosition(contactTable.getPosition());
                                 level.getWaiter().removeDish();
+                                level.setMoney(level.getMoney() + contactTable.getGuest().getTip());
+                                level.removeActiveGuest(contactTable.getGuest());
+           
                             }
                         }
                     }

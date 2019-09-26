@@ -11,7 +11,6 @@ public class Table {
     private Sprite sprite;
     private Box box;
     private float[] positions = new float[2];
-    private boolean isOccupied = false;
     private Guest guest;
 
     public Table(World world, float positionX, float positionY) {
@@ -24,6 +23,7 @@ public class Table {
         sprite.setColor(0, 1, 0, 1);
         box = new Box(world, sprite, false);
         box.getBody().getFixtureList().first().setUserData(this);
+        guest = null;
     }
 
     public Sprite getSprite() {
@@ -38,18 +38,15 @@ public class Table {
         return positions;
     }
 
-    public void setOccupied(boolean occupied) {
-        isOccupied = occupied;
-    }
-
-    public boolean isOccupied() {
-        return isOccupied;
-    }
-
     public Guest getGuest() {
         return guest;
     }
+    
     public void setGuest(Guest guest) {
         this.guest = guest;
+    }
+    
+    public void removeGuest() {
+    	this.guest = null;
     }
 }

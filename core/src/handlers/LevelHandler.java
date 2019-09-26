@@ -2,11 +2,13 @@ package handlers;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.utils.Queue;
 import com.badlogic.gdx.utils.Timer;
 
 import entities.*;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import static com.mygdx.game.MyGdxGame.*;
@@ -18,11 +20,12 @@ import static com.mygdx.game.MyGdxGame.*;
  */
 public class LevelHandler {
     private int numberOfDishes;
-    private float time;
+    private int time;
     private int money;
-    private ArrayList<Guest> guests;
+    private Queue<Guest> guests;
     private ArrayList<Guest> activeGuests;
-    private ArrayList<Foodtype> dishQueue;
+    private ArrayList<Guest> guestsToRemove;
+    private Queue<Foodtype> dishQueue;
     private ArrayList<Dish> dishes; 
     private World world;
     private Waiter waiter;
@@ -30,15 +33,19 @@ public class LevelHandler {
     private Spawnarea spawnarea;
 
     public LevelHandler(int numberOfDishes) {
-        guests = new ArrayList<Guest>();
         this.numberOfDishes = numberOfDishes;
         world = new World(new Vector2(0, 0), true);
         Walls walls = new Walls(world);
         money = 60;
+        guests = new Queue<Guest>();
+    	activeGuests = new ArrayList<Guest>();
+    	guestsToRemove = new ArrayList<Guest>();
+    	dishQueue = new Queue<Foodtype>();
+        dishes = new ArrayList<Dish>();
     }
 
     public void initializeLevel() {
-        dishes = new ArrayList<Dish>();
+    	
         drawField();
         intializeWaiter();
         startTimer();
@@ -50,18 +57,47 @@ public class LevelHandler {
     }
 
     private void intializeGuests() {
-        for (Table t: spawnarea.getTables()
-             ) {
-            if(!t.isOccupied()){
-                Guest tempGuest = new Guest(t.getPosition()[0],t.getPosition()[1], time);
-                tempGuest.setTable(t);
-                t.setGuest(tempGuest);
-                guests.add(tempGuest);
-            }
-        }
+    	// temporary guest list for testing 
+    	guests.addLast(new Guest(1));
+    	guests.addLast(new Guest(6));
+    	guests.addLast(new Guest(11));
+    	guests.addLast(new Guest(16));
+    	guests.addLast(new Guest(21));
+    	
+
+    }
+    
+    private void spawnGuest(Guest guest) {
+    	
+      for (Table t: spawnarea.getTables()
+      ) {
+     if(t.getGuest() == null){
+         guest.setPosition(t.getPosition()[0],t.getPosition()[1]);
+         guest.setTable(t);
+         t.setGuest(guest);
+         dishQueue.addLast(guest.getOrder());
+         activeGuests.add(guest);
+         guests.removeFirst();
+         return;
+     }
+ }
     }
 
-    private void drawField(){
+    private void updateGuest(Guest guest) {
+	    
+	    float timeElapsed = time - guest.getSpawnTime();
+	    if (timeElapsed >= guest.getPatience()) {
+	    	guestsToRemove.add(guest);
+	    } else if (timeElapsed >= (guest.getPatience() / 1.5)) {
+	        guest.setHappiness(1);
+	        guest.setColor(Color.RED);
+	    } else if (timeElapsed >= (guest.getPatience() / 3)) {
+	        guest.setHappiness(2);
+	        guest.setColor(Color.YELLOW);
+	    }
+	}
+
+	private void drawField(){
         spawnarea = new Spawnarea();
         spawnarea.printGridDimensions();
         Gridposition pos1 = new Gridposition(3,5,"table");
@@ -104,8 +140,17 @@ public class LevelHandler {
         return world;
     }
 
-    public List<Guest> getGuests() {
+    public Queue<Guest> getGuests() {
         return guests;
+    }
+    
+    public ArrayList<Guest> getActiveGuests() {
+		return activeGuests;
+	}
+
+	public void removeActiveGuest(Guest guest) {
+    	activeGuests.remove(guest);
+    	guest.getTable().removeGuest();
     }
 
     public ArrayList<Dish> getDishes() {
@@ -127,27 +172,24 @@ public class LevelHandler {
                     (waiter.getBody().getPosition().y * PIXELS_TO_METERS) - waiter.getSprite().getHeight() / 2
             );
         }
-        for (Guest g : guests
-        ) {
+
+        if(!guests.isEmpty()) { 
+        	if(guests.first().getSpawnTime() == time) {
+        		spawnGuest(guests.first());
+        	}
+        }
+        for (Guest g : activeGuests) {
             updateGuest(g);
+        }
+        if(!guestsToRemove.isEmpty()) {
+        	for(Guest g : guestsToRemove) {
+        		activeGuests.remove(g);
+        	}
+        	guestsToRemove.clear();
         }
     }
     
-    public void updateGuest(Guest guest) {
-        
-        float timeElapsed = time - guest.getSpawnTime();
-        if (timeElapsed >= guest.getPatience()) {
-            //TODO: despawn with guest handler
-        } else if (timeElapsed >= (guest.getPatience() / 1.5)) {
-            guest.setHappiness(1);
-            guest.setColor(Color.RED);
-        } else if (timeElapsed >= (guest.getPatience() / 3)) {
-            guest.setHappiness(2);
-            guest.setColor(Color.YELLOW);
-        }
-    }
-
-	public int getMoney() {
+    public int getMoney() {
 		return money;
 	}
 

@@ -11,7 +11,7 @@ import com.badlogic.gdx.physics.box2d.World;
 public class Guest {
     private Sprite sprite;
     private Table table;
-    private float spawnTime;
+    private int spawnTime;
     private int happiness;
     private int patience;
 	private int wealth;
@@ -20,9 +20,8 @@ public class Guest {
     private float[] position = new float[2];
 
 
-    public Guest(float positionX, float positionY, float time) {
-        position[0] = positionX;
-        position[1] = positionY;
+    public Guest(int time) {
+        
         spawnTime = time;
         patience = 30;
         wealth = 40;
@@ -31,7 +30,6 @@ public class Guest {
         Texture texture = new Texture("Chef.png");
         sprite = new Sprite(texture);
         sprite.setSize(WORLD_WIDTH / 32, WORLD_HEIGHT / 18);
-        sprite.setPosition(positionX, positionY);
         sprite.setColor(0, 1, 0, 1);
     }
 
@@ -39,6 +37,11 @@ public class Guest {
         return sprite;
     }
 
+    public void setPosition(float positionX, float positionY) {
+    	position[0] = positionX;
+        position[1] = positionY;
+        sprite.setPosition(positionX, positionY);
+    }
     
     public void setColor(Color color) {
     	sprite.setColor(color);
@@ -69,9 +72,12 @@ public class Guest {
         this.table = table;
     }
    
-
     
-    public float getTimeElapsed() {
+    public Table getTable() {
+		return table;
+	}
+
+	public float getTimeElapsed() {
 		return timeElapsed;
 	}
 
