@@ -3,9 +3,11 @@ package entities;
 public class Gridposition {
     private  int row;
     private  int col;
-    public Gridposition(int row, int col) {
+    private  String type;
+    public Gridposition(int row, int col, String type) {
         this.row = row;
         this.col = col;
+        this.type = type;
     }
     public int getRow() {
         return row;
@@ -13,5 +15,9 @@ public class Gridposition {
 
     public int getCol() {
         return col;
+    }
+
+    public String getType(){
+        return type;
     }
 }
