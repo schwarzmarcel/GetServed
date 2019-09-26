@@ -31,6 +31,7 @@ public class LevelHandler {
     private Waiter waiter;
     private boolean checkIfInstanceAlreadyCreated;
     private Spawnarea spawnarea;
+    private int dishTimer;
 
     public LevelHandler(int numberOfDishes) {
         this.numberOfDishes = numberOfDishes;
@@ -63,8 +64,6 @@ public class LevelHandler {
     	guests.addLast(new Guest(11));
     	guests.addLast(new Guest(16));
     	guests.addLast(new Guest(21));
-    	
-
     }
     
     private void spawnGuest(Guest guest) {
@@ -159,23 +158,18 @@ public class LevelHandler {
         return dishes;
     }
 
+    public void updateDishTimer(){
+        this.dishTimer = time;
+    }
+
     public void updateLevel() {
-        if ((time % 10) == 0) {
-            if(!checkIfInstanceAlreadyCreated) {
-                checkIfInstanceAlreadyCreated = true;
-                dishes.add(new Dish());
-            }
-            dishes.get(0).setPosition(spawnarea.getCounters().get(0).getPosition());
-            spawnarea.getCounters().get(0).setDish(dishes.get(0));
-        }
         if (waiter.getDish() != null) {
             waiter.getDish().getSprite().setPosition(
                     (waiter.getBody().getPosition().x * PIXELS_TO_METERS) - waiter.getSprite().getWidth() / 2,
                     (waiter.getBody().getPosition().y * PIXELS_TO_METERS) - waiter.getSprite().getHeight() / 2
             );
         }
-
-        if(!guests.isEmpty()) { 
+        if(!guests.isEmpty()) {
         	if(guests.first().getSpawnTime() == time) {
         		spawnGuest(guests.first());
         	}
@@ -188,6 +182,21 @@ public class LevelHandler {
         		activeGuests.remove(g);
         	}
         	guestsToRemove.clear();
+        }
+        for (Counter c: spawnarea.getCounters()
+        ) {
+            if(dishTimer+1 < time){
+                if(c.getDish() == null && !dishQueue.isEmpty()){
+                    Dish tempDish = new Dish(dishQueue.removeFirst(),c.getPosition());
+                    c.setDish(tempDish);
+                    dishes.add(tempDish);
+                }
+                if(dishQueue.isEmpty() && c.getDish() == null){
+                    Dish tempDish = new Dish(Foodtype.getRandomFoodType(),c.getPosition());
+                    c.setDish(tempDish);
+                    dishes.add(tempDish);
+                }
+            }
         }
     }
     

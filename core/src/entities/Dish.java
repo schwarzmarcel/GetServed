@@ -9,10 +9,11 @@ import static com.mygdx.game.MyGdxGame.WORLD_WIDTH;
 public class Dish {
     private Sprite sprite;
     public Foodtype type;
-    private float[] position = new float[2];
+    private float[] position;
 
-    public Dish(){
-        this.type = Foodtype.getRandomFoodType();
+    public Dish(Foodtype type, float[] positions){
+        this.type = type;
+        this.position = positions;
         Texture texture;
         switch (type) {
             case PIZZA:
@@ -30,6 +31,7 @@ public class Dish {
             default: break;
         }
         sprite.setSize(WORLD_WIDTH / 32, WORLD_HEIGHT / 18);
+        sprite.setPosition(position[0],position[1]);
     }
     public void setPosition(float[] positions){
         position = positions;

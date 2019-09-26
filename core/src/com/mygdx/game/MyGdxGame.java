@@ -122,10 +122,12 @@ public class MyGdxGame extends ApplicationAdapter {
                         contactTable = (Table) fixtureB.getUserData();
 
                     if (Gdx.input.isKeyJustPressed(Input.Keys.F)) {
-                        if (level.getWaiter().getDish() != null) {
+                        if (level.getWaiter().getDish() != null && contactTable.getGuest() != null) {
+                            Dish dish = level.getWaiter().getDish();
                             if (contactTable.getGuest().getOrder() == (level.getWaiter().getDish().type)) {
                                 level.getWaiter().getDish().setPosition(contactTable.getPosition());
                                 level.getWaiter().removeDish();
+                                level.getDishes().remove(dish);
                                 level.setMoney(level.getMoney() + contactTable.getGuest().getTip());
                                 level.removeActiveGuest(contactTable.getGuest());
                             }
@@ -139,9 +141,10 @@ public class MyGdxGame extends ApplicationAdapter {
                         contactCounter = (Counter) fixtureA.getUserData();
                     else
                         contactCounter = (Counter) fixtureB.getUserData();
-                    if (contactCounter.getDish() != null) {
+                    if (contactCounter.getDish() != null && level.getWaiter().getDish() == null) {
                         level.getWaiter().setDish(contactCounter.getDish());
                         contactCounter.removeDish();
+                        level.updateDishTimer();
                     }
 
                 }
