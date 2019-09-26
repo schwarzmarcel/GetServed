@@ -14,9 +14,8 @@ public class Guest {
     private float spawnTime;
     private int happiness;
     private int patience;
-    private int wealth;
+	private int wealth;
     private float timeElapsed;
-    private boolean hasBeenServed = false;
     private Foodtype order;
     private float[] position = new float[2];
 
@@ -40,22 +39,19 @@ public class Guest {
         return sprite;
     }
 
-    public void update(float time) {
-        if (!hasBeenServed) {
-            changeColor("black");
-        }
-        float timeElapsed = time - spawnTime;
-        if (timeElapsed >= patience) {
-            //TODO: despawn with guest handler
-        } else if (timeElapsed >= (patience / 1.5)) {
-            happiness = 1;
-            changeColor("");
-        } else if (timeElapsed >= (patience / 3)) {
-            happiness = 2;
-            changeColor("");
-        }
+    
+    public void setColor(Color color) {
+    	sprite.setColor(color);
     }
 
+    public float getSpawnTime() {
+		return spawnTime;
+	}
+
+	public int getPatience() {
+		return patience;
+	}
+    
     public int getTip() {
     	double tip = wealth * ((patience - timeElapsed) / patience);
     	return (int) Math.ceil(tip);
@@ -65,27 +61,21 @@ public class Guest {
         return happiness;
     }
 
-    public void setTable(Table table) {
+    public void setHappiness(int happiness) {
+		this.happiness = happiness;
+	}
+
+	public void setTable(Table table) {
         this.table = table;
     }
-    public void changeColor(String color) {
-        switch (color) {
-            case "black":
-                this.sprite.setColor(Color.BLACK);
-                break;
-            case "red":
-                this.sprite.setColor(Color.RED);
-                break;
-            case "yellow":
-                this.sprite.setColor(Color.YELLOW);
-                break;
-            case "green":
-                this.sprite.setColor(Color.GREEN);
-                break;
-        }
-    }
+   
 
-    public Foodtype getOrder() {
+    
+    public float getTimeElapsed() {
+		return timeElapsed;
+	}
+
+	public Foodtype getOrder() {
         return order;
     }
     public void setOrder(Foodtype order) {

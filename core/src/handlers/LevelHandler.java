@@ -1,4 +1,5 @@
 package handlers;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Timer;
@@ -20,8 +21,10 @@ public class LevelHandler {
     private float time;
     private int money;
     private ArrayList<Guest> guests;
-    private Counter counter;
-    private Dish[] dishes;
+    private ArrayList<Guest> activeGuests;
+    private Counter[] counters;
+    private ArrayList<Foodtype> dishQueue;
+    private ArrayList<Dish> dishes; 
     private World world;
     private Waiter waiter;
     private boolean checkIfInstanceAlreadyCreated;
@@ -36,7 +39,8 @@ public class LevelHandler {
     }
 
     public void initializeLevel() {
-        dishes = new Dish[numberOfDishes];
+        dishes = new ArrayList<Dish>();
+        counters = new Counter[1];
         drawField();
         intializeWaiter();
         intializeCounters();
@@ -47,7 +51,7 @@ public class LevelHandler {
     private void intializeCounters() {
         float positionX = WORLD_WIDTH / 7;
         float positionY = WORLD_HEIGHT / 2;
-        counter = new Counter(world, positionX, positionY);
+        counters[0] = new Counter(world, positionX, positionY);
     }
 
     private void intializeWaiter() {
@@ -101,7 +105,7 @@ public class LevelHandler {
         return waiter;
     }
     public Counter getCounter() {
-        return counter;
+        return counters[0];
     }
 
     public World getWorld() {
@@ -112,7 +116,7 @@ public class LevelHandler {
         return guests;
     }
 
-    public Dish[] getDishes() {
+    public ArrayList<Dish> getDishes() {
         return dishes;
     }
 
@@ -120,10 +124,10 @@ public class LevelHandler {
         if ((time % 10) == 0) {
             if(!checkIfInstanceAlreadyCreated) {
                 checkIfInstanceAlreadyCreated = true;
-                dishes[0] = new Dish();
+                dishes.add(new Dish());
             }
-            dishes[0].setPosition(counter.getPosition());
-            counter.setDish(dishes[0]);
+            dishes.get(0).setPosition(counters[0].getPosition());
+            counters[0].setDish(dishes.get(0));
         }
         if (waiter.getDish() != null) {
             waiter.getDish().getSprite().setPosition(
@@ -133,7 +137,21 @@ public class LevelHandler {
         }
         for (Guest g : guests
         ) {
-            g.update(time);
+            updateGuest(g);
+        }
+    }
+    
+    public void updateGuest(Guest guest) {
+        
+        float timeElapsed = time - guest.getSpawnTime();
+        if (timeElapsed >= guest.getPatience()) {
+            //TODO: despawn with guest handler
+        } else if (timeElapsed >= (guest.getPatience() / 1.5)) {
+            guest.setHappiness(1);
+            guest.setColor(Color.RED);
+        } else if (timeElapsed >= (guest.getPatience() / 3)) {
+            guest.setHappiness(2);
+            guest.setColor(Color.YELLOW);
         }
     }
 

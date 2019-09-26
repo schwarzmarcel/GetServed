@@ -109,7 +109,7 @@ public class MyGdxGame extends ApplicationAdapter {
     }
 
     private void drawDishes() {
-        if (level.getDishes()[0] != null) {
+        if (level.getDishes() != null) {
             for (Dish d : level.getDishes()
             ) {
                 d.getSprite().draw(batch);
