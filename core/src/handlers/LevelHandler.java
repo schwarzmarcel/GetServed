@@ -103,15 +103,16 @@ public class LevelHandler {
 	private void drawField(){
         spawnarea = new Spawnarea();
         spawnarea.printGridDimensions();
-        Gridposition pos1 = new Gridposition(3,5,"table");
-        Gridposition pos2 = new Gridposition(6,10, "table");
-        Gridposition pos3 = new Gridposition(9,20, "table");
-        Gridposition pos4 = new Gridposition(12,5, "table");
-        Gridposition pos5 = new Gridposition(15,5, "table");
-        Gridposition pos6 = new Gridposition(10,31, "table");
+        Gridposition pos1 = new Gridposition(6,20,"table");
+        Gridposition pos2 = new Gridposition(8,20, "table");
+        Gridposition pos3 = new Gridposition(10,20, "table");
+        Gridposition pos4 = new Gridposition(12,20, "table");
+        Gridposition pos5 = new Gridposition(14,20, "table");
+        Gridposition pos6 = new Gridposition(16,20, "table");
         Gridposition pos7 = new Gridposition(10,3, "counter");
         Gridposition pos8 = new Gridposition(5,3, "counter");
-        Gridposition[] gridpositions = new Gridposition[8];
+        Gridposition pos9 = new Gridposition(15,3, "counter");
+        Gridposition[] gridpositions = new Gridposition[9];
         gridpositions[0] = pos1;
         gridpositions[1] = pos2;
         gridpositions[2] = pos3;
@@ -120,6 +121,7 @@ public class LevelHandler {
         gridpositions[5] = pos6;
         gridpositions[6] = pos7;
         gridpositions[7] = pos8;
+        gridpositions[8] = pos9;
         spawnarea.initializeTables(gridpositions,world);
     }
 
