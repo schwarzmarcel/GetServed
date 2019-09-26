@@ -1,4 +1,6 @@
 package handlers;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
@@ -197,6 +199,13 @@ public class LevelHandler {
                     dishes.add(tempDish);
                 }
             }
+        }
+        //TEMPORARY TRASH
+        if(Gdx.input.isKeyJustPressed(Input.Keys.X)){
+            if(waiter.getDish() != null){
+                dishes.remove(waiter.getDish());
+            }
+            waiter.setDish(null);
         }
     }
     
