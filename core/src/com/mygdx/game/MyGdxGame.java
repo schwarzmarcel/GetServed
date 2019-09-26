@@ -128,7 +128,6 @@ public class MyGdxGame extends ApplicationAdapter {
                                 level.getWaiter().removeDish();
                                 level.setMoney(level.getMoney() + contactTable.getGuest().getTip());
                                 level.removeActiveGuest(contactTable.getGuest());
-           
                             }
                         }
                     }

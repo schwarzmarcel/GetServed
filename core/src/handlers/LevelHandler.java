@@ -78,6 +78,8 @@ public class LevelHandler {
          dishQueue.addLast(guest.getOrder());
          activeGuests.add(guest);
          guests.removeFirst();
+         // replace with visual cue for order
+         System.out.println("Guest orders " + guest.getOrder());
          return;
      }
  }
