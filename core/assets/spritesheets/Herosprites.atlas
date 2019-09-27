@@ -1,0 +1,62 @@
+
+Herosprites.png
+size: 1024,256
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+hero_run0001
+  rotate: false
+  xy: 2, 2
+  size: 131, 142
+  orig: 131, 142
+  offset: 0, 0
+  index: -1
+hero_run0008
+  rotate: false
+  xy: 2, 2
+  size: 131, 142
+  orig: 131, 142
+  offset: 0, 0
+  index: -1
+hero_run0002
+  rotate: false
+  xy: 135, 2
+  size: 131, 142
+  orig: 131, 142
+  offset: 0, 0
+  index: -1
+hero_run0003
+  rotate: false
+  xy: 135, 2
+  size: 131, 142
+  orig: 131, 142
+  offset: 0, 0
+  index: -1
+hero_run0004
+  rotate: false
+  xy: 268, 2
+  size: 131, 142
+  orig: 131, 142
+  offset: 0, 0
+  index: -1
+hero_run0005
+  rotate: false
+  xy: 268, 2
+  size: 131, 142
+  orig: 131, 142
+  offset: 0, 0
+  index: -1
+hero_run0006
+  rotate: false
+  xy: 401, 2
+  size: 131, 142
+  orig: 131, 142
+  offset: 0, 0
+  index: -1
+hero_run0007
+  rotate: false
+  xy: 401, 2
+  size: 131, 142
+  orig: 131, 142
+  offset: 0, 0
+  index: -1

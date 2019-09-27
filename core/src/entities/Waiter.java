@@ -4,6 +4,7 @@ package entities;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -20,21 +21,21 @@ import static com.mygdx.game.MyGdxGame.WORLD_WIDTH;
 
 public class Waiter implements Moveable {
     private TextureAtlas textureAtlas;
-    private TextureRegion textureRegion;
+    public Animation<TextureRegion> runningAnimation;
     private Sprite sprite;
     private Box box;
     private Dish dish;
 
     public Waiter(World world, float positionX, float positionY) {
-        Texture texture = new Texture("Chef.png");
+        Texture texture = new Texture("hero.png");
         sprite = new Sprite(texture);
-        sprite.setSize(WORLD_WIDTH / 32, WORLD_HEIGHT / 18);
+        sprite.setSize(WORLD_WIDTH / 30, WORLD_HEIGHT / 15);
         sprite.setPosition(positionX, positionY);
-
+        textureAtlas = new TextureAtlas(Gdx.files.internal("Spritesheets/Herosprites.atlas"));
+        runningAnimation = new Animation<TextureRegion>(0.033f, textureAtlas.getRegions(), Animation.PlayMode.LOOP);
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
         box = new Box(world, sprite, true);
-
         box.getBody().getFixtureList().first().setUserData(this);
         dish = null;
     }
@@ -71,5 +72,9 @@ public class Waiter implements Moveable {
     
     public void removeDish() {
     	dish = null;
+    }
+
+    public Animation<TextureRegion> getRunningAnimation() {
+        return runningAnimation;
     }
 }
