@@ -7,13 +7,15 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.World;
 import interfaces.Moveable;
 
-
-import static com.mygdx.game.MyGdxGame.PIXELS_TO_METERS;
+import static com.mygdx.game.MyGdxGame.WORLD_HEIGHT;
 import static com.mygdx.game.MyGdxGame.WORLD_WIDTH;
-import static com.mygdx.game.MyGdxGame.WORLD_HEIGHT;;
+
+;
 
 
 public class Waiter implements Moveable {
@@ -24,13 +26,6 @@ public class Waiter implements Moveable {
     private Dish dish;
 
     public Waiter(World world, float positionX, float positionY) {
-        //TODO: Use a proper Texture!
-        /*
-        textureAtlas = new TextureAtlas(Gdx.files.internal("spritesheets/avatarsprites.atlas"));
-        textureRegion = textureAtlas.findRegion("6_ATTACK");
-        sprite = new Sprite(textureRegion);
-        */
-
         Texture texture = new Texture("Chef.png");
         sprite = new Sprite(texture);
         sprite.setSize(WORLD_WIDTH / 32, WORLD_HEIGHT / 18);

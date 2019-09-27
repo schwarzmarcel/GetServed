@@ -5,11 +5,14 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.*;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Matrix4;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.*;
-import com.badlogic.gdx.utils.Timer;
+import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
+import com.badlogic.gdx.physics.box2d.Contact;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import entities.*;
 import handlers.GsContactListener;
 import handlers.LevelHandler;
@@ -85,7 +88,7 @@ public class MyGdxGame extends ApplicationAdapter {
     }
 
     private void drawGuests() {
-        for (Guest g : level.getActiveGuests()) {
+        for (Guest g : level.getGuesthandler().getActiveGuests()) {
             g.getSprite().draw(batch);
         }
     }
@@ -97,8 +100,8 @@ public class MyGdxGame extends ApplicationAdapter {
     }
 
     private void drawDishes() {
-        if (level.getDishes() != null) {
-            for (Dish d : level.getDishes()
+        if (level.getDishhandler().getDishes() != null) {
+            for (Dish d : level.getDishhandler().getDishes()
             ) {
                 d.getSprite().draw(batch);
             }
@@ -127,9 +130,9 @@ public class MyGdxGame extends ApplicationAdapter {
                             if (contactTable.getGuest().getOrder() == (level.getWaiter().getDish().type)) {
                                 level.getWaiter().getDish().setPosition(contactTable.getPosition());
                                 level.getWaiter().removeDish();
-                                level.getDishes().remove(dish);
+                                level.getDishhandler().removeDish(dish);
                                 level.setMoney(level.getMoney() + contactTable.getGuest().getTip());
-                                level.removeActiveGuest(contactTable.getGuest());
+                                level.getGuesthandler().removeActiveGuest(contactTable.getGuest());
                             }
                         }
                     }
@@ -144,7 +147,7 @@ public class MyGdxGame extends ApplicationAdapter {
                     if (contactCounter.getDish() != null && level.getWaiter().getDish() == null) {
                         level.getWaiter().setDish(contactCounter.getDish());
                         contactCounter.removeDish();
-                        level.updateDishTimer();
+                        level.getDishhandler().updateDishTimer(level.getTime());
                     }
 
                 }

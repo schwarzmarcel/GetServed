@@ -15,12 +15,8 @@ public class Spawnarea {
     private List<Counter> counters = new ArrayList<>();
 
     public Spawnarea(){
-        initializeGrid();
     }
-    private void initializeGrid(){
-        int matrixHeight = (int) (WORLD_HEIGHT / CELLSIZE);
-        int matrixWidth = (int) (WORLD_WIDTH/ CELLSIZE);
-    }
+
     public void initializeTables(Gridposition[] gridpositions, World world){
         for (Gridposition g: gridpositions
              ) {
