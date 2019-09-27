@@ -3,6 +3,8 @@ package entities;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
+import handlers.Assets;
+
 import static com.mygdx.game.MyGdxGame.WORLD_HEIGHT;
 import static com.mygdx.game.MyGdxGame.WORLD_WIDTH;
 
@@ -14,19 +16,15 @@ public class Dish {
     public Dish(Foodtype type, float[] positions){
         this.type = type;
         this.position = positions;
-        Texture texture;
         switch (type) {
             case PIZZA:
-                texture = new Texture("pizza.png");
-                sprite = new Sprite(texture);
+                sprite = new Sprite(Assets.manager.get(Assets.pizza, Texture.class));
                 break;
             case BURGER:
-                texture = new Texture("burger.png");
-                sprite = new Sprite(texture);
+                sprite = new Sprite(Assets.manager.get(Assets.burger, Texture.class));
                 break;
             case PASTA:
-                texture = new Texture("pasta.png");
-                sprite = new Sprite(texture);
+                sprite = new Sprite(Assets.manager.get(Assets.pasta, Texture.class));
                 break;
             default: break;
         }

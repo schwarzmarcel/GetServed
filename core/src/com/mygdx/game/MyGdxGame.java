@@ -16,6 +16,7 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 import entities.*;
 import handlers.GsContactListener;
 import handlers.LevelHandler;
+import handlers.Assets;
 
 public class MyGdxGame extends ApplicationAdapter {
 
@@ -38,8 +39,9 @@ public class MyGdxGame extends ApplicationAdapter {
 
     @Override
     public void create() {
+    	Assets.load();
+    	Assets.manager.finishLoading();
         batch = new SpriteBatch();
-
         initializeFonts();
         level = new LevelHandler(1);
         level.initializeLevel();
@@ -69,6 +71,7 @@ public class MyGdxGame extends ApplicationAdapter {
         drawWaiter();
         drawGuests();
         drawDishes();
+        drawOrders();
         showMoney();
         if((lastTipTime + 2) >= level.getTime())
         showTip();
@@ -80,6 +83,7 @@ public class MyGdxGame extends ApplicationAdapter {
     @Override
 	public void dispose() {
 	    level.getWorld().dispose();
+	    Assets.dispose();
 	}
 
     private void initializeFonts() {
@@ -134,6 +138,14 @@ public class MyGdxGame extends ApplicationAdapter {
                 d.getSprite().draw(batch);
             }
         }
+    }
+    
+    private void drawOrders() {
+    	for (Guest g : level.getGuesthandler().getActiveGuests()) {
+    		if((g.getSpawnTime() + 1) >= level.getTime()) {
+    			//TODO: draw textures for order
+    		}
+    	}
     }
 
     private void testContacts() {

@@ -8,6 +8,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.physics.box2d.World;
 
+import handlers.Assets;
+
 public class Guest {
     private Sprite sprite;
     private Table table;
@@ -28,8 +30,7 @@ public class Guest {
         happiness = 3;
         timeElapsed = 0;
         order = Foodtype.getRandomFoodType();
-        Texture texture = new Texture("Chef.png");
-        sprite = new Sprite(texture);
+        sprite = new Sprite(Assets.manager.get(Assets.guest, Texture.class));
         sprite.setSize(WORLD_WIDTH / 32, WORLD_HEIGHT / 18);
         sprite.setColor(0, 1, 0, 1);
     }
