@@ -8,7 +8,7 @@ public class Assets {
 	public static final AssetManager manager = new AssetManager();
 	
 	public static final String guest = "Chef.png";
-	public static final String waiter = "Chef.png";
+	public static final String waiter = "hero.png";
 	public static final String counter = "Chef.png";
 	public static final String pizza = "pizza.png";
 	public static final String burger = "burger.png";

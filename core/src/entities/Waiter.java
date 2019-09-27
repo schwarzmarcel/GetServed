@@ -11,7 +11,6 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.World;
-
 import handlers.Assets;
 import interfaces.Moveable;
 
@@ -27,8 +26,7 @@ public class Waiter implements Moveable {
     private boolean flipped = false;
 
     public Waiter(World world, float positionX, float positionY) {
-        Texture texture = new Texture("hero.png");
-        sprite = new Sprite(texture);
+        sprite = new Sprite(Assets.manager.get(Assets.waiter, Texture.class));
         sprite.setSize(WORLD_WIDTH / 32, WORLD_HEIGHT / 16);
         sprite.setPosition(positionX, positionY);
         TextureAtlas textureAtlas = new TextureAtlas(Gdx.files.internal("Spritesheets/Herosprites.atlas"));
