@@ -16,22 +16,20 @@ import interfaces.Moveable;
 import static com.mygdx.game.MyGdxGame.WORLD_HEIGHT;
 import static com.mygdx.game.MyGdxGame.WORLD_WIDTH;
 
-;
-
-
 public class Waiter implements Moveable {
-    private TextureAtlas textureAtlas;
-    public Animation<TextureRegion> runningAnimation;
+    private Animation<TextureRegion> runningAnimation;
     private Sprite sprite;
     private Box box;
     private Dish dish;
+    private String orientation = "right";
+    private boolean flipped = false;
 
     public Waiter(World world, float positionX, float positionY) {
         Texture texture = new Texture("hero.png");
         sprite = new Sprite(texture);
-        sprite.setSize(WORLD_WIDTH / 30, WORLD_HEIGHT / 15);
+        sprite.setSize(WORLD_WIDTH / 32, WORLD_HEIGHT / 16);
         sprite.setPosition(positionX, positionY);
-        textureAtlas = new TextureAtlas(Gdx.files.internal("Spritesheets/Herosprites.atlas"));
+        TextureAtlas textureAtlas = new TextureAtlas(Gdx.files.internal("Spritesheets/Herosprites.atlas"));
         runningAnimation = new Animation<TextureRegion>(0.033f, textureAtlas.getRegions(), Animation.PlayMode.LOOP);
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
@@ -45,10 +43,12 @@ public class Waiter implements Moveable {
         if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
             velY = speed;
         } else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+            orientation = "right";
             velX = speed;
         } else if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
             velY = (speed * -1);
         } else if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+            orientation = "left";
             velX = (speed * -1);
         }
         box.getBody().setLinearVelocity(velX, velY);
@@ -76,5 +76,9 @@ public class Waiter implements Moveable {
 
     public Animation<TextureRegion> getRunningAnimation() {
         return runningAnimation;
+    }
+
+    public String getOrientation() {
+        return orientation;
     }
 }

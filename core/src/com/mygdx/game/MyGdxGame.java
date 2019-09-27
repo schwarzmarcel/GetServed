@@ -5,7 +5,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.*;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.Contact;
@@ -50,10 +53,7 @@ public class MyGdxGame extends ApplicationAdapter {
         camera.update();
         level.getWorld().step(1f / 60f, 6, 2);
         level.updateLevel();
-        level.getWaiter().move(2.0f);
-
-        //adjustWaiterSprite();
-
+        level.getWaiter().move(1.5f);
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.setProjectionMatrix(camera.combined);
@@ -62,30 +62,34 @@ public class MyGdxGame extends ApplicationAdapter {
         batch.begin();
         elapsedTime += Gdx.graphics.getDeltaTime();
         TextureRegion currentFrame = level.getWaiter().getRunningAnimation().getKeyFrame(elapsedTime);
-        batch.draw(currentFrame, 0, 0, WORLD_WIDTH / 32, WORLD_HEIGHT / 18);
-        drawWaiter();
+
+        if (!Gdx.input.isKeyPressed(Input.Keys.UP) &&
+                !Gdx.input.isKeyPressed(Input.Keys.DOWN) &&
+                !Gdx.input.isKeyPressed(Input.Keys.LEFT) &&
+                !Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+            currentFrame = level.getWaiter().getSprite();
+        }
+
+        if (level.getWaiter().getOrientation().equals("right")) {
+            if (currentFrame.isFlipX()) {
+                currentFrame.flip(true, false);
+            }
+        }
+        if (level.getWaiter().getOrientation().equals("left")) {
+            if (!currentFrame.isFlipX()) {
+                currentFrame.flip(true, false);
+            }
+        }
+        batch.draw(currentFrame,
+                (level.getWaiter().getBody().getPosition().x * PIXELS_TO_METERS) - level.getWaiter().getSprite().getWidth() / 2,
+                (level.getWaiter().getBody().getPosition().y * PIXELS_TO_METERS) - level.getWaiter().getSprite().getHeight() / 2,
+                WORLD_WIDTH / 32, WORLD_HEIGHT / 16);
         drawGuests();
         drawDishes();
         showMoney();
         batch.end();
         if (true) debugRenderer.render(level.getWorld(), debugMatrix);
         testContacts();
-    }
-
-    private void adjustWaiterSprite() {
-        ((Sprite) level.getWaiter().getBody().getUserData()).setPosition(
-                (level.getWaiter().getBody().getPosition().x * PIXELS_TO_METERS) - level.getWaiter().getSprite().getWidth() / 2,
-                (level.getWaiter().getBody().getPosition().y * PIXELS_TO_METERS) - level.getWaiter().getSprite().getHeight() / 2
-        );
-    }
-
-    private void drawWaiter() {
-        batch.draw(level.getWaiter().getSprite(),
-                level.getWaiter().getSprite().getX(),
-                level.getWaiter().getSprite().getY(),
-                level.getWaiter().getSprite().getWidth(),
-                level.getWaiter().getSprite().getHeight()
-        );
     }
 
     private void drawGuests() {
