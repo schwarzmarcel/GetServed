@@ -27,6 +27,13 @@ public class MyGdxGame extends ApplicationAdapter {
     private float elapsedTime = 0;
     private String money;
     private GlyphLayout layout;
+    private BitmapFont tipFont;
+    private String moneyText;
+    private String tipText;
+    private int tip;
+    private int lastTipTime;
+    private GlyphLayout layoutMoney;
+    private GlyphLayout layoutTip;
     private LevelHandler level;
     public static final float PIXELS_TO_METERS = 50f;
     public static final float WORLD_WIDTH = 160;
@@ -35,9 +42,8 @@ public class MyGdxGame extends ApplicationAdapter {
     @Override
     public void create() {
         batch = new SpriteBatch();
-        moneyFont = new BitmapFont(Gdx.files.internal("moneyfont2.fnt"));
-        moneyFont.getData().setScale(0.1f);
-        layout = new GlyphLayout();
+
+        initializeFonts();
         level = new LevelHandler(1);
         level.initializeLevel();
         debugRenderer = new Box2DDebugRenderer();
@@ -87,9 +93,27 @@ public class MyGdxGame extends ApplicationAdapter {
         drawGuests();
         drawDishes();
         showMoney();
+        if((lastTipTime + 2) >= level.getTime())
+        showTip();
         batch.end();
         if (true) debugRenderer.render(level.getWorld(), debugMatrix);
         testContacts();
+    }
+
+    @Override
+    public void dispose() {
+        level.getWorld().dispose();
+    }
+
+    private void initializeFonts() {
+        moneyFont = new BitmapFont(Gdx.files.internal("moneyfont2.fnt"));
+        moneyFont.getData().setScale(0.1f);
+        layoutMoney = new GlyphLayout();
+        tip = 0;
+        lastTipTime = -3;
+        tipFont = new BitmapFont(Gdx.files.internal("moneyfont2.fnt"));
+        tipFont.getData().setScale(0.08f);
+        layoutTip = new GlyphLayout();
     }
 
     private void drawGuests() {
@@ -99,9 +123,15 @@ public class MyGdxGame extends ApplicationAdapter {
     }
 
     private void showMoney() {
-        money = "" + level.getMoney() + " $";
-        layout.setText(moneyFont, money);
-        moneyFont.draw(batch, layout, WORLD_WIDTH - layout.width - 1, WORLD_HEIGHT - 1);
+        moneyText = "" + level.getMoney() + " $";
+        layoutMoney.setText(moneyFont, moneyText);
+        moneyFont.draw(batch, layoutMoney, WORLD_WIDTH - layoutMoney.width - 1, WORLD_HEIGHT - 1);
+    }
+
+    private void showTip() {
+        tipText = "+ " + tip + " $";
+        layoutTip.setText(tipFont, tipText);
+        tipFont.draw(batch, layoutTip, WORLD_WIDTH - layoutTip.width - 1, WORLD_HEIGHT - layoutMoney.height - 3);
     }
 
     private void drawDishes() {
@@ -136,6 +166,8 @@ public class MyGdxGame extends ApplicationAdapter {
                                 level.getWaiter().getDish().setPosition(contactTable.getPosition());
                                 level.getWaiter().removeDish();
                                 level.getDishhandler().removeDish(dish);
+                                tip = contactTable.getGuest().getTip();
+                                lastTipTime = level.getTime();
                                 level.setMoney(level.getMoney() + contactTable.getGuest().getTip());
                                 level.getGuesthandler().removeActiveGuest(contactTable.getGuest());
                             }
@@ -158,10 +190,5 @@ public class MyGdxGame extends ApplicationAdapter {
                 }
             }
         }
-    }
-
-    @Override
-    public void dispose() {
-        level.getWorld().dispose();
     }
 }

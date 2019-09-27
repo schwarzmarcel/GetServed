@@ -37,7 +37,8 @@ public class Guesthandler {
     }
 
     public void updateGuest(Guest guest, int time) {
-        float timeElapsed = time - guest.getSpawnTime();
+        int timeElapsed = time - guest.getSpawnTime();
+        guest.setTimeElapsed(timeElapsed);
         if (timeElapsed >= guest.getPatience()) {
             guestsToRemove.add(guest);
         } else if (timeElapsed >= (guest.getPatience() / 1.5)) {

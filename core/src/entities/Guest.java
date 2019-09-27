@@ -26,6 +26,7 @@ public class Guest {
         patience = 30;
         wealth = 40;
         happiness = 3;
+        timeElapsed = 0;
         order = Foodtype.getRandomFoodType();
         Texture texture = new Texture("Chef.png");
         sprite = new Sprite(texture);
@@ -47,7 +48,7 @@ public class Guest {
     	sprite.setColor(color);
     }
 
-    public float getSpawnTime() {
+    public int getSpawnTime() {
 		return spawnTime;
 	}
 
@@ -56,7 +57,7 @@ public class Guest {
 	}
     
     public int getTip() {
-    	double tip = wealth * ((patience - timeElapsed) / patience);
+    	double tip = (wealth * ((patience - timeElapsed) / patience));
     	return (int) Math.ceil(tip);
     }
 
@@ -77,6 +78,10 @@ public class Guest {
 		return table;
 	}
 
+    public void setTimeElapsed(float time) {
+    	timeElapsed = time;
+    }
+    
 	public float getTimeElapsed() {
 		return timeElapsed;
 	}
