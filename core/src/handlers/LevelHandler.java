@@ -44,12 +44,12 @@ public class LevelHandler {
 
     private void drawField() {
         spawnarea = new Spawnarea();
-        Gridposition pos1 = new Gridposition(6, 20, "table");
-        Gridposition pos2 = new Gridposition(8, 20, "table");
-        Gridposition pos3 = new Gridposition(10, 20, "table");
-        Gridposition pos4 = new Gridposition(12, 20, "table");
-        Gridposition pos5 = new Gridposition(14, 20, "table");
-        Gridposition pos6 = new Gridposition(16, 20, "table");
+        Gridposition pos1 = new Gridposition(3, 19, "table");
+        Gridposition pos2 = new Gridposition(5, 24, "table");
+        Gridposition pos3 = new Gridposition(9, 20, "table");
+        Gridposition pos4 = new Gridposition(9, 26, "table");
+        Gridposition pos5 = new Gridposition(13, 16, "table");
+        Gridposition pos6 = new Gridposition(16, 22, "table");
         Gridposition pos7 = new Gridposition(10, 3, "counter");
         Gridposition pos8 = new Gridposition(5, 3, "counter");
         Gridposition pos9 = new Gridposition(15, 3, "counter");
