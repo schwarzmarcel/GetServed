@@ -1,11 +1,14 @@
 package entities;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.World;
 
-import static com.mygdx.game.MyGdxGame.*;
+import java.util.Arrays;
+
+import static com.mygdx.game.MyGdxGame.WORLD_HEIGHT;
+import static com.mygdx.game.MyGdxGame.WORLD_WIDTH;
 
 public class Table {
     private Sprite sprite;
@@ -48,5 +51,13 @@ public class Table {
     
     public void removeGuest() {
     	this.guest = null;
+    }
+
+    @Override
+    public String toString() {
+        return "Table{" +
+                "positions=" + Arrays.toString(positions) +
+                ", guest=" + guest +
+                '}';
     }
 }

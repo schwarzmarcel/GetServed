@@ -25,7 +25,6 @@ public class Box {
         body.createFixture(fixtureDef);
         shape.dispose();
     }
-
     Body getBody() {
         return body;
     }

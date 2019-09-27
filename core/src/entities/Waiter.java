@@ -81,4 +81,12 @@ public class Waiter implements Moveable {
     public String getOrientation() {
         return orientation;
     }
+
+    @Override
+    public String toString() {
+        return "Waiter{" +
+                "box=" + box +
+                ", dish=" + dish +
+                '}';
+    }
 }

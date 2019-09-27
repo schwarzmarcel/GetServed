@@ -1,12 +1,13 @@
 package entities;
 
-import static com.mygdx.game.MyGdxGame.WORLD_HEIGHT;
-import static com.mygdx.game.MyGdxGame.WORLD_WIDTH;
-
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.physics.box2d.World;
+
+import java.util.Arrays;
+
+import static com.mygdx.game.MyGdxGame.WORLD_HEIGHT;
+import static com.mygdx.game.MyGdxGame.WORLD_WIDTH;
 
 public class Guest {
     private Sprite sprite;
@@ -91,5 +92,17 @@ public class Guest {
     }
     public void setOrder(Foodtype order) {
         this.order = order;
+    }
+
+    @Override
+    public String toString() {
+        return "Guest{" +
+                ", spawnTime=" + spawnTime +
+                ", happiness=" + happiness +
+                ", patience=" + patience +
+                ", wealth=" + wealth +
+                ", order=" + order +
+                ", position=" + Arrays.toString(position) +
+                '}';
     }
 }

@@ -43,4 +43,11 @@ public class Dish {
     public Sprite getSprite(){
         return sprite;
     }
+
+    @Override
+    public String toString() {
+        return "Dish{" +
+                ", type=" + type +
+                '}';
+    }
 }

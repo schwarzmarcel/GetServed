@@ -1,5 +1,6 @@
 package handlers;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.Queue;
 import entities.Guest;
@@ -59,10 +60,11 @@ public class Guesthandler {
                 guest.setTable(t);
                 t.setGuest(guest);
                 dishhandler.addToDishQueue(guest.getOrder());
+                Gdx.app.log("INFO: ", "Added " + guest.getOrder() + "to dishqueue");
                 activeGuests.add(guest);
+                Gdx.app.log("INFO: ", "Spawned " + guest);
                 guests.removeFirst();
-                // replace with visual cue for order
-                System.out.println("Guest orders " + guest.getOrder());
+                Gdx.app.log("INFO: ", "Removed Guest from guestlist ");
                 return;
             }
         }
@@ -75,11 +77,13 @@ public class Guesthandler {
         guests.addLast(new Guest(11));
         guests.addLast(new Guest(16));
         guests.addLast(new Guest(21));
+        Gdx.app.log("INFO: ", "Guests created");
     }
 
     public void removeActiveGuest(Guest guest) {
         activeGuests.remove(guest);
         guest.getTable().removeGuest();
+        Gdx.app.log("INFO: ", "Guest " + guest + " removed.");
     }
 
     public Queue<Guest> getGuests() {

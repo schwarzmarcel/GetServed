@@ -25,11 +25,7 @@ public class MyGdxGame extends ApplicationAdapter {
     private GsContactListener contactListener;
     private BitmapFont moneyFont;
     private float elapsedTime = 0;
-    private String money;
-    private GlyphLayout layout;
     private BitmapFont tipFont;
-    private String moneyText;
-    private String tipText;
     private int tip;
     private int lastTipTime;
     private GlyphLayout layoutMoney;
@@ -42,14 +38,14 @@ public class MyGdxGame extends ApplicationAdapter {
     @Override
     public void create() {
         batch = new SpriteBatch();
-
-        initializeFonts();
-        level = new LevelHandler(1);
+        level = new LevelHandler();
         level.initializeLevel();
+        Gdx.app.log("INFO:", "level initialized");
+        initializeFonts();
+        Gdx.app.log("INFO:", "fonts initialized");
         debugRenderer = new Box2DDebugRenderer();
         camera = new OrthographicCamera(160, 90);
         camera.position.set(WORLD_WIDTH / 2, WORLD_HEIGHT / 2, 0);
-
         contactListener = new GsContactListener();
         level.getWorld().setContactListener(contactListener);
     }
@@ -123,13 +119,13 @@ public class MyGdxGame extends ApplicationAdapter {
     }
 
     private void showMoney() {
-        moneyText = "" + level.getMoney() + " $";
+        String moneyText = "" + level.getMoney() + " $";
         layoutMoney.setText(moneyFont, moneyText);
         moneyFont.draw(batch, layoutMoney, WORLD_WIDTH - layoutMoney.width - 1, WORLD_HEIGHT - 1);
     }
 
     private void showTip() {
-        tipText = "+ " + tip + " $";
+        String tipText = "+ " + tip + " $";
         layoutTip.setText(tipFont, tipText);
         tipFont.draw(batch, layoutTip, WORLD_WIDTH - layoutTip.width - 1, WORLD_HEIGHT - layoutMoney.height - 3);
     }
@@ -159,7 +155,7 @@ public class MyGdxGame extends ApplicationAdapter {
                     else
                         contactTable = (Table) fixtureB.getUserData();
 
-                    if (Gdx.input.isKeyJustPressed(Input.Keys.F)) {
+                    if (Gdx.input.isKeyJustPressed(Input.Keys.S)) {
                         if (level.getWaiter().getDish() != null && contactTable.getGuest() != null) {
                             Dish dish = level.getWaiter().getDish();
                             if (contactTable.getGuest().getOrder() == (level.getWaiter().getDish().type)) {
@@ -170,6 +166,9 @@ public class MyGdxGame extends ApplicationAdapter {
                                 lastTipTime = level.getTime();
                                 level.setMoney(level.getMoney() + contactTable.getGuest().getTip());
                                 level.getGuesthandler().removeActiveGuest(contactTable.getGuest());
+                                Gdx.app.log("INFO: ", "Delivered correct Dish to Guest");
+                            } else {
+                                Gdx.app.log("INFO: ", "Tried to deliver wrong dish to Guest");
                             }
                         }
                     }

@@ -20,4 +20,13 @@ public class Gridposition {
     public String getType(){
         return type;
     }
+
+    @Override
+    public String toString() {
+        return "Gridposition{" +
+                "row=" + row +
+                ", col=" + col +
+                ", type='" + type + '\'' +
+                '}';
+    }
 }

@@ -1,5 +1,6 @@
 package handlers;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Timer;
@@ -7,6 +8,7 @@ import entities.Gridposition;
 import entities.Spawnarea;
 import entities.Waiter;
 import entities.Walls;
+import exceptions.InputNotValidException;
 
 import static com.mygdx.game.MyGdxGame.WORLD_HEIGHT;
 import static com.mygdx.game.MyGdxGame.WORLD_WIDTH;
@@ -14,17 +16,15 @@ import static com.mygdx.game.MyGdxGame.WORLD_WIDTH;
 public class LevelHandler {
     private Dishhandler dishhandler;
     private Guesthandler guesthandler;
-    private int numberOfDishes;
     private int time;
     private int money;
     private World world;
     private Waiter waiter;
     private Spawnarea spawnarea;
 
-    public LevelHandler(int numberOfDishes) {
+    public LevelHandler() {
         dishhandler = new Dishhandler();
         guesthandler = new Guesthandler();
-        this.numberOfDishes = numberOfDishes;
         world = new World(new Vector2(0, 0), true);
         Walls walls = new Walls(world);
         money = 60;
@@ -39,11 +39,11 @@ public class LevelHandler {
 
     private void intializeWaiter() {
         waiter = new Waiter(world, WORLD_WIDTH / 2, WORLD_HEIGHT / 2);
+        Gdx.app.log("INFO: ", "Waiter created");
     }
 
     private void drawField() {
         spawnarea = new Spawnarea();
-        spawnarea.printGridDimensions();
         Gridposition pos1 = new Gridposition(6, 20, "table");
         Gridposition pos2 = new Gridposition(8, 20, "table");
         Gridposition pos3 = new Gridposition(10, 20, "table");
@@ -53,7 +53,7 @@ public class LevelHandler {
         Gridposition pos7 = new Gridposition(10, 3, "counter");
         Gridposition pos8 = new Gridposition(5, 3, "counter");
         Gridposition pos9 = new Gridposition(15, 3, "counter");
-        Gridposition[] gridpositions = new Gridposition[9];
+        Gridposition[] gridpositions = new Gridposition[10];
         gridpositions[0] = pos1;
         gridpositions[1] = pos2;
         gridpositions[2] = pos3;
@@ -63,10 +63,15 @@ public class LevelHandler {
         gridpositions[6] = pos7;
         gridpositions[7] = pos8;
         gridpositions[8] = pos9;
-        spawnarea.initializeTables(gridpositions, world);
+        try {
+            spawnarea.initializeTables(gridpositions, world);
+        } catch (InputNotValidException e) {
+            Gdx.app.log("ERROR: ", "", e);
+        }
     }
 
     private void startTimer() {
+        Gdx.app.log("INFO: ", "Timer was started");
         time = 0;
         Timer.schedule(new Timer.Task() {
             @Override
@@ -76,14 +81,6 @@ public class LevelHandler {
                     money--;
             }
         }, 0, 1);
-    }
-
-    public Waiter getWaiter() {
-        return waiter;
-    }
-
-    public World getWorld() {
-        return world;
     }
 
     public void updateLevel() {
@@ -110,5 +107,13 @@ public class LevelHandler {
 
     public Guesthandler getGuesthandler() {
         return guesthandler;
+    }
+
+    public Waiter getWaiter() {
+        return waiter;
+    }
+
+    public World getWorld() {
+        return world;
     }
 }

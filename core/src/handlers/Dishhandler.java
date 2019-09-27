@@ -41,11 +41,13 @@ public class Dishhandler {
                 }
                 if (c.getDish() == null && !dishQueue.isEmpty()) {
                     Dish tempDish = new Dish(dishQueue.removeFirst(), c.getPosition());
+                    Gdx.app.log("INFO: ", "Created Dish");
                     c.setDish(tempDish);
                     dishes.add(tempDish);
                 }
                 if (dishQueue.isEmpty() && c.getDish() == null && neededDishAvailable) {
                     Dish tempDish = new Dish(Foodtype.getRandomFoodType(), c.getPosition());
+                    Gdx.app.log("INFO: ", "Created random Dish");
                     c.setDish(tempDish);
                     dishes.add(tempDish);
                 }
@@ -61,12 +63,15 @@ public class Dishhandler {
         if (Gdx.input.isKeyJustPressed(Input.Keys.X)) {
             if (waiter.getDish() != null) {
                 dishes.remove(waiter.getDish());
+                Gdx.app.log("INFO: ", "Dish has been removed by Button Press");
             }
             waiter.setDish(null);
+            Gdx.app.log("INFO: ", "Waiter no longer carries a dish");
         }
     }
 
     public void removeDish(Dish dish) {
+        Gdx.app.log("INFO: ", "Dish " + dish + " has been served and removed");
         dishes.remove(dish);
     }
 

@@ -2,8 +2,9 @@ package entities;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
+
+import java.util.Arrays;
 
 import static com.mygdx.game.MyGdxGame.WORLD_HEIGHT;
 import static com.mygdx.game.MyGdxGame.WORLD_WIDTH;
@@ -43,5 +44,13 @@ public class Counter {
     
     public void removeDish() {
     	dish = null;
+    }
+
+    @Override
+    public String toString() {
+        return "Counter{" +
+                ", positions=" + Arrays.toString(positions) +
+                ", dish=" + dish +
+                '}';
     }
 }
