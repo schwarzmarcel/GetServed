@@ -2,7 +2,6 @@ package entities;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-
 import handlers.Assets;
 
 import static com.mygdx.game.MyGdxGame.WORLD_HEIGHT;
@@ -45,7 +44,7 @@ public class Dish {
     @Override
     public String toString() {
         return "Dish{" +
-                ", type=" + type +
+                "type=" + type +
                 '}';
     }
 }
