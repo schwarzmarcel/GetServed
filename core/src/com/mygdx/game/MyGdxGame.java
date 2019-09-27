@@ -146,8 +146,8 @@ public class MyGdxGame extends ApplicationAdapter {
 
     private void drawOrders() {
     	for (Guest g : level.getGuesthandler().getActiveGuests()) {
-    		if((g.getSpawnTime() + 1) >= level.getTime()) {
-    			//TODO: draw textures for order
+    		if((level.getTime() >= g.getSpawnTime() + 1) && (g.getSpawnTime() + 2) >= level.getTime()) {
+    			g.getDish().getSprite().draw(batch);
     		}
     	}
     }

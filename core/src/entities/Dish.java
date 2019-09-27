@@ -12,9 +12,8 @@ public class Dish {
     public Foodtype type;
     private float[] position;
 
-    public Dish(Foodtype type, float[] positions){
+    public Dish(Foodtype type){
         this.type = type;
-        this.position = positions;
         switch (type) {
             case PIZZA:
                 sprite = new Sprite(Assets.manager.get(Assets.pizza, Texture.class));
@@ -28,7 +27,6 @@ public class Dish {
             default: break;
         }
         sprite.setSize(WORLD_WIDTH / 32, WORLD_HEIGHT / 18);
-        sprite.setPosition(position[0],position[1]);
     }
     public void setPosition(float[] positions){
         position = positions;

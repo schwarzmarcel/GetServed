@@ -40,13 +40,15 @@ public class Dishhandler {
                     }
                 }
                 if (c.getDish() == null && !dishQueue.isEmpty()) {
-                    Dish tempDish = new Dish(dishQueue.removeFirst(), c.getPosition());
+                    Dish tempDish = new Dish(dishQueue.removeFirst());
+                    tempDish.setPosition(c.getPosition());
                     Gdx.app.log("INFO: ", "Created Dish");
                     c.setDish(tempDish);
                     dishes.add(tempDish);
                 }
                 if (dishQueue.isEmpty() && c.getDish() == null && neededDishAvailable) {
-                    Dish tempDish = new Dish(Foodtype.getRandomFoodType(), c.getPosition());
+                    Dish tempDish = new Dish(Foodtype.getRandomFoodType());
+                    tempDish.setPosition(c.getPosition());
                     Gdx.app.log("INFO: ", "Created random Dish");
                     c.setDish(tempDish);
                     dishes.add(tempDish);

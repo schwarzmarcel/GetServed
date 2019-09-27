@@ -13,6 +13,7 @@ import static com.mygdx.game.MyGdxGame.WORLD_WIDTH;
 public class Guest {
     private Sprite sprite;
     private Table table;
+    private Dish dish;
     private int spawnTime;
     private int happiness;
     private int patience;
@@ -30,6 +31,7 @@ public class Guest {
         happiness = 3;
         timeElapsed = 0;
         order = Foodtype.getRandomFoodType();
+        dish = new Dish(order);
         sprite = new Sprite(Assets.manager.get(Assets.guest, Texture.class));
         sprite.setSize(WORLD_WIDTH / 32, WORLD_HEIGHT / 18);
         sprite.setColor(0, 1, 0, 1);
@@ -43,6 +45,8 @@ public class Guest {
     	position[0] = positionX;
         position[1] = positionY;
         sprite.setPosition(positionX, positionY);
+        float[] position = {positionX + dish.getSprite().getWidth() + 1, positionY};
+        dish.setPosition(position);
     }
     
     public void setColor(Color color) {
@@ -78,6 +82,10 @@ public class Guest {
     public Table getTable() {
 		return table;
 	}
+    
+    public Dish getDish() {
+    	return dish;
+    }
 
     public void setTimeElapsed(float time) {
     	timeElapsed = time;
