@@ -3,13 +3,12 @@ package entities;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import handlers.Assets;
 
 import java.util.Arrays;
 
 import static com.mygdx.game.MyGdxGame.WORLD_HEIGHT;
 import static com.mygdx.game.MyGdxGame.WORLD_WIDTH;
-
-import handlers.Assets;
 
 public class Guest {
     private Sprite sprite;
@@ -98,7 +97,7 @@ public class Guest {
     @Override
     public String toString() {
         return "Guest{" +
-                ", spawnTime=" + spawnTime +
+                "spawnTime=" + spawnTime +
                 ", happiness=" + happiness +
                 ", patience=" + patience +
                 ", wealth=" + wealth +
