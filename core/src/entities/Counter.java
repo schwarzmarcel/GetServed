@@ -4,6 +4,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.physics.box2d.World;
 
+import handlers.Assets;
+
 import java.util.Arrays;
 
 import static com.mygdx.game.MyGdxGame.WORLD_HEIGHT;
@@ -17,8 +19,7 @@ public class Counter {
     public Counter(World world, float positionX, float positionY) {
         this.positions[0] = positionX;
         this.positions[1] = positionY;
-        Texture texture = new Texture("Chef.png");
-        sprite = new Sprite(texture);
+        sprite = new Sprite(Assets.manager.get(Assets.counter, Texture.class));
         sprite.setSize(WORLD_WIDTH / 32, WORLD_HEIGHT / 18);
         sprite.setPosition(positionX, positionY);
         sprite.setColor(0, 1, 0, 1);

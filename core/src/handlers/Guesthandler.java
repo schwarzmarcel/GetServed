@@ -35,6 +35,7 @@ public class Guesthandler {
             }
             guestsToRemove.clear();
         }
+       
     }
 
     public void updateGuest(Guest guest, int time) {
@@ -72,7 +73,7 @@ public class Guesthandler {
 
     public void intializeGuests() {
         // temporary guest list for testing
-        guests.addLast(new Guest(1));
+        guests.addLast(new Guest(2));
         guests.addLast(new Guest(6));
         guests.addLast(new Guest(11));
         guests.addLast(new Guest(16));

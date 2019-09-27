@@ -11,6 +11,8 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.World;
+
+import handlers.Assets;
 import interfaces.Moveable;
 
 import static com.mygdx.game.MyGdxGame.WORLD_HEIGHT;
