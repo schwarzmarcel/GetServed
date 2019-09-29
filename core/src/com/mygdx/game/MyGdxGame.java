@@ -58,7 +58,7 @@ public class MyGdxGame extends ApplicationAdapter {
         camera.update();
         level.getWorld().step(1f / 60f, 6, 2);
         level.updateLevel();
-        level.getWaiter().move(1.5f);
+        level.getWaiter().move(1f);
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.setProjectionMatrix(camera.combined);
@@ -66,29 +66,9 @@ public class MyGdxGame extends ApplicationAdapter {
                 PIXELS_TO_METERS, 0);
         batch.begin();
         elapsedTime += Gdx.graphics.getDeltaTime();
-        TextureRegion currentFrame = level.getWaiter().getRunningAnimation().getKeyFrame(elapsedTime);
-
-        if (!Gdx.input.isKeyPressed(Input.Keys.UP) &&
-                !Gdx.input.isKeyPressed(Input.Keys.DOWN) &&
-                !Gdx.input.isKeyPressed(Input.Keys.LEFT) &&
-                !Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-            currentFrame = level.getWaiter().getSprite();
-        }
-
-        if (level.getWaiter().getOrientation().equals("right")) {
-            if (currentFrame.isFlipX()) {
-                currentFrame.flip(true, false);
-            }
-        }
-        if (level.getWaiter().getOrientation().equals("left")) {
-            if (!currentFrame.isFlipX()) {
-                currentFrame.flip(true, false);
-            }
-        }
-        batch.draw(currentFrame,
-                (level.getWaiter().getBody().getPosition().x * PIXELS_TO_METERS) - level.getWaiter().getSprite().getWidth() / 2,
-                (level.getWaiter().getBody().getPosition().y * PIXELS_TO_METERS) - level.getWaiter().getSprite().getHeight() / 2,
-                WORLD_WIDTH / 32, WORLD_HEIGHT / 16);
+        
+        
+        drawWaiter();
         drawGuests();
         drawDishes();
         drawOrders();
@@ -117,12 +97,6 @@ public class MyGdxGame extends ApplicationAdapter {
         layoutTip = new GlyphLayout();
     }
 
-    private void drawGuests() {
-        for (Guest g : level.getGuesthandler().getActiveGuests()) {
-            g.getSprite().draw(batch);
-        }
-    }
-
     private void showMoney() {
         String moneyText = "" + level.getMoney() + " $";
         layoutMoney.setText(moneyFont, moneyText);
@@ -135,7 +109,39 @@ public class MyGdxGame extends ApplicationAdapter {
         tipFont.draw(batch, layoutTip, WORLD_WIDTH - layoutTip.width - 1, WORLD_HEIGHT - layoutMoney.height - 3);
     }
 
-    private void drawDishes() {
+    private void drawWaiter() {
+        TextureRegion currentFrame = level.getWaiter().getRunningAnimation().getKeyFrame(elapsedTime);
+
+        if (!Gdx.input.isKeyPressed(Input.Keys.UP) &&
+                !Gdx.input.isKeyPressed(Input.Keys.DOWN) &&
+                !Gdx.input.isKeyPressed(Input.Keys.LEFT) &&
+                !Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+            currentFrame = level.getWaiter().getSprite();
+        }
+
+        if (level.getWaiter().getOrientation().equals("right")) {
+            if (currentFrame.isFlipX()) {
+                currentFrame.flip(true, false);
+            }
+        }
+        if (level.getWaiter().getOrientation().equals("left")) {
+            if (!currentFrame.isFlipX()) {
+                currentFrame.flip(true, false);
+            }
+        }
+        batch.draw(currentFrame,
+                (level.getWaiter().getBody().getPosition().x * PIXELS_TO_METERS) - level.getWaiter().getSprite().getWidth() / 2,
+                (level.getWaiter().getBody().getPosition().y * PIXELS_TO_METERS) - level.getWaiter().getSprite().getHeight() / 2,
+                WORLD_WIDTH / 32, WORLD_HEIGHT / 16);
+    }
+    
+    private void drawGuests() {
+	    for (Guest g : level.getGuesthandler().getActiveGuests()) {
+	        g.getSprite().draw(batch);
+	    }
+	}
+
+	private void drawDishes() {
         if (level.getDishhandler().getDishes() != null) {
             for (Dish d : level.getDishhandler().getDishes()
             ) {

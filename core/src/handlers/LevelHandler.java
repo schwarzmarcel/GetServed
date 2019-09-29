@@ -27,7 +27,7 @@ public class LevelHandler {
         guesthandler = new Guesthandler();
         world = new World(new Vector2(0, 0), true);
         Walls walls = new Walls(world);
-        money = 60;
+        money = 25;
     }
 
     public void initializeLevel() {
@@ -44,6 +44,7 @@ public class LevelHandler {
 
     private void drawField() {
         spawnarea = new Spawnarea();
+        guesthandler.setSpawnarea(spawnarea);
         Gridposition pos1 = new Gridposition(3, 19, "table");
         Gridposition pos2 = new Gridposition(5, 24, "table");
         Gridposition pos3 = new Gridposition(9, 20, "table");
@@ -77,14 +78,20 @@ public class LevelHandler {
             @Override
             public void run() {
                 time++;
-                if (money > 0)
-                    money--;
+                if (money > 1) {
+                    money = money - 2;
+                }
+                else if (money == 1) {
+                	money = 0;
+                }
+                if(money == 0) 
+                	Gdx.app.log("INFO: ", "You lost because you ran out of money :(");
             }
         }, 0, 1);
     }
 
     public void updateLevel() {
-        guesthandler.handleGuests(time, spawnarea, dishhandler);
+        guesthandler.handleGuests(time, dishhandler);
         dishhandler.updateDishes(waiter, spawnarea.getCounters(), time, guesthandler.getActiveGuests());
         dishhandler.trashBinHandler(waiter);
     }

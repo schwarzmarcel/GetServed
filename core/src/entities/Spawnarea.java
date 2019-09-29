@@ -17,6 +17,7 @@ public class Spawnarea {
     private final int colNumber = (int) (WORLD_WIDTH / CELLSIZE);
     private List<Table> tables = new ArrayList<Table>();
     private List<Counter> counters = new ArrayList<>();
+    private List<Table> freeTables = new ArrayList<Table>();
 
     public Spawnarea(){
     }
@@ -34,7 +35,9 @@ public class Spawnarea {
                     counters.add(new Counter(world, positionX, positionY));
                     Gdx.app.log("INFO: ", "Counter created");
                 } else if (g.getType().equals("table")) {
-                    tables.add(new Table(world, positionX, positionY));
+                	Table table = new Table(world, positionX, positionY);
+                    tables.add(table);
+                    freeTables.add(table);
                     Gdx.app.log("INFO: ", "Table created");
 
                 }
@@ -49,6 +52,19 @@ public class Spawnarea {
     public List<Table> getTables() {
         return tables;
     }
+    
+    public List<Table> getFreeTables(){
+    	return freeTables;
+    }
+    
+    public void addFreeTable(Table table) {
+    	freeTables.add(table);
+    }
+    
+    public void removeFreeTable(Table table) {
+    	freeTables.remove(table);
+    }
+    
     public List<Counter> getCounters(){
         return counters;
     }

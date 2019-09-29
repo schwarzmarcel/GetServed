@@ -26,8 +26,8 @@ public class Guest {
     public Guest(int time) {
         
         spawnTime = time;
-        patience = 30;
-        wealth = 40;
+        patience = 24;
+        wealth = 12;
         happiness = 3;
         timeElapsed = 0;
         order = Foodtype.getRandomFoodType();
