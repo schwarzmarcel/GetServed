@@ -22,7 +22,7 @@ public class Spawnarea {
     public Spawnarea(){
     }
 
-    public void initializeTables(Gridposition[] gridpositions, World world) throws InputNotValidException {
+    public void initializeTables(List<Gridposition> gridpositions, World world) throws InputNotValidException {
         for (Gridposition g: gridpositions
              ) {
             if (g != null) {

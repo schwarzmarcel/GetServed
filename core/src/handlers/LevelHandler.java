@@ -4,7 +4,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Timer;
-import entities.*;
+import entities.Gamelevel;
+import entities.Spawnarea;
+import entities.Waiter;
+import entities.Walls;
 import exceptions.InputNotValidException;
 
 import static com.mygdx.game.MyGdxGame.WORLD_HEIGHT;
@@ -42,29 +45,10 @@ public class LevelHandler {
     private void drawField() {
         spawnarea = new Spawnarea();
         guesthandler.setSpawnarea(spawnarea);
-        Gridposition pos1 = new Gridposition(3, 19, "table");
-        Gridposition pos2 = new Gridposition(5, 24, "table");
-        Gridposition pos3 = new Gridposition(9, 20, "table");
-        Gridposition pos4 = new Gridposition(9, 26, "table");
-        Gridposition pos5 = new Gridposition(13, 16, "table");
-        Gridposition pos6 = new Gridposition(16, 22, "table");
-        Gridposition pos7 = new Gridposition(10, 3, "counter");
-        Gridposition pos8 = new Gridposition(5, 3, "counter");
-        Gridposition pos9 = new Gridposition(15, 3, "counter");
-        Gridposition[] gridpositions = new Gridposition[10];
-        gridpositions[0] = pos1;
-        gridpositions[1] = pos2;
-        gridpositions[2] = pos3;
-        gridpositions[3] = pos4;
-        gridpositions[4] = pos5;
-        gridpositions[5] = pos6;
-        gridpositions[6] = pos7;
-        gridpositions[7] = pos8;
-        gridpositions[8] = pos9;
         JsonLevelReader reader = new JsonLevelReader();
         Gamelevel level = reader.generateLevel("../../level1");
         try {
-            spawnarea.initializeTables(gridpositions, world);
+            spawnarea.initializeTables(level.getGridpositionList(), world);
         } catch (InputNotValidException e) {
             Gdx.app.log("ERROR: ", "", e);
         }

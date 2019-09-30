@@ -1,0 +1,51 @@
+{
+	"name" : "level1",
+	"positions": [
+		{
+		 "row": 3,
+		 "col": 19,
+		 "type": "table"
+		},
+		{
+		 "row": 5,
+		 "col": 24,
+		 "type": "table"
+		},
+		{
+		"row": 9,
+		 "col": 20,
+		 "type": "table"
+		},
+		{
+		"row": 9,
+		 "col": 26,
+		 "type": "table"
+		},
+		{
+		"row": 13,
+		 "col": 16,
+		 "type": "table"
+		},
+		{
+		"row": 16,
+		 "col": 22,
+		 "type": "table"
+		},
+		{
+		"row": 10,
+		 "col": 3,
+		 "type": "counter"
+		},
+		{
+		"row": 5,
+		 "col": 3,
+		 "type": "counter"
+		},
+		{
+		"row": 15,
+		 "col": 3,
+		 "type": "counter"
+		}
+	],
+    "numberOfGuests": 10,
+}
