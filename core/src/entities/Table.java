@@ -5,6 +5,8 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 
+import handlers.Assets;
+
 import java.util.Arrays;
 
 import static com.mygdx.game.MyGdxGame.WORLD_HEIGHT;
@@ -19,11 +21,9 @@ public class Table {
     public Table(World world, float positionX, float positionY) {
         this.positions[0] = positionX;
         this.positions[1] = positionY;
-        Texture texture = new Texture("Chef.png");
-        sprite = new Sprite(texture);
-        sprite.setSize(WORLD_WIDTH / 32, WORLD_HEIGHT / 18);
+        sprite = new Sprite(Assets.manager.get(Assets.table, Texture.class));
+        sprite.setSize(WORLD_WIDTH / 24, WORLD_HEIGHT / 16);
         sprite.setPosition(positionX, positionY);
-        sprite.setColor(0, 1, 0, 1);
         box = new Box(world, sprite, false);
         box.getBody().getFixtureList().first().setUserData(this);
         guest = null;

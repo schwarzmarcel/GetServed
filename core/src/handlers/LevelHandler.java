@@ -108,4 +108,8 @@ public class LevelHandler {
     public World getWorld() {
         return world;
     }
+
+	public Spawnarea getSpawnarea() {
+		return spawnarea;
+	}
 }

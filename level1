@@ -32,17 +32,12 @@
 		 "type": "table"
 		},
 		{
-		"row": 10,
+		"row": 6,
 		 "col": 3,
 		 "type": "counter"
 		},
 		{
-		"row": 5,
-		 "col": 3,
-		 "type": "counter"
-		},
-		{
-		"row": 15,
+		"row": 12,
 		 "col": 3,
 		 "type": "counter"
 		}
@@ -51,50 +46,50 @@
 		{
 		"patience":24,
 		"happiness":3,
-		"wealth":12,
+		"wealth":14,
 		"spawntime": 2
 		},
 		{
 		"patience":24,
 		"happiness":3,
-		"wealth":12,
+		"wealth":14,
 		"spawntime": 4
 		},
 		{
 		"patience":24,
 		"happiness":3,
-		"wealth":12,
+		"wealth":14,
 		"spawntime": 6
 		},
 		{
 		"patience":24,
 		"happiness":3,
-		"wealth":12,
+		"wealth":14,
 		"spawntime": 12
 		},
 		{
 		"patience":24,
 		"happiness":3,
-		"wealth":12,
-		"spawntime": 14
+		"wealth":14,
+		"spawntime": 15
 		}
 		{
 		"patience":24,
 		"happiness":3,
-		"wealth":12,
+		"wealth":14,
 		"spawntime": 17
 		},
 		{
 		"patience":24,
 		"happiness":3,
-		"wealth":12,
-		"spawntime": 23
+		"wealth":14,
+		"spawntime": 22
 		},
 		{
 		"patience":24,
 		"happiness":3,
-		"wealth":12,
-		"spawntime": 25
+		"wealth":14,
+		"spawntime": 23
 		}
 	]
 }

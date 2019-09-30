@@ -20,9 +20,8 @@ public class Counter {
         this.positions[0] = positionX;
         this.positions[1] = positionY;
         sprite = new Sprite(Assets.manager.get(Assets.counter, Texture.class));
-        sprite.setSize(WORLD_WIDTH / 32, WORLD_HEIGHT / 18);
+        sprite.setSize(WORLD_WIDTH / 24, WORLD_HEIGHT / 9);
         sprite.setPosition(positionX, positionY);
-        sprite.setColor(0, 1, 0, 1);
         Box box = new Box(world, sprite, false);
         box.getBody().getFixtureList().first().setUserData(this);
         dish = null;

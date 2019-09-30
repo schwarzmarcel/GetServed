@@ -9,10 +9,11 @@ public class Assets {
 	
 	public static final String guest = "Chef.png";
 	public static final String waiter = "hero.png";
-	public static final String counter = "Chef.png";
+	public static final String counter = "counter.png";
 	public static final String pizza = "pizza.png";
 	public static final String burger = "burger.png";
 	public static final String pasta = "pasta.png";
+	public static final String table = "table_round.png";
 	
 	
 	public static void load() {
@@ -22,6 +23,7 @@ public class Assets {
 	manager.load(pizza, Texture.class);	
 	manager.load(burger, Texture.class);	
 	manager.load(pasta, Texture.class);	
+	manager.load(table, Texture.class);
 	}
 	
 	public static void dispose() {

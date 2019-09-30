@@ -67,7 +67,9 @@ public class MyGdxGame extends ApplicationAdapter {
         batch.begin();
         elapsedTime += Gdx.graphics.getDeltaTime();
         drawWaiter();
+        drawTables();
         drawGuests();
+        drawCounters();
         drawDishes();
         drawOrders();
         showMoney();
@@ -136,6 +138,18 @@ public class MyGdxGame extends ApplicationAdapter {
     private void drawGuests() {
 	    for (Guest g : level.getGuesthandler().getActiveGuests()) {
 	        g.getSprite().draw(batch);
+	    }
+	}
+    
+    private void drawTables() {
+	    for (Table t : level.getSpawnarea().getTables()) {
+	        t.getSprite().draw(batch);
+	    }
+	}
+    
+    private void drawCounters() {
+	    for (Counter c : level.getSpawnarea().getCounters()) {
+	        c.getSprite().draw(batch);
 	    }
 	}
 
