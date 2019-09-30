@@ -24,7 +24,6 @@ public class Guest {
 
 
     public Guest(int time) {
-        
         spawnTime = time;
         patience = 24;
         wealth = 12;

@@ -4,10 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Timer;
-import entities.Gridposition;
-import entities.Spawnarea;
-import entities.Waiter;
-import entities.Walls;
+import entities.*;
 import exceptions.InputNotValidException;
 
 import static com.mygdx.game.MyGdxGame.WORLD_HEIGHT;
@@ -64,6 +61,8 @@ public class LevelHandler {
         gridpositions[6] = pos7;
         gridpositions[7] = pos8;
         gridpositions[8] = pos9;
+        JsonLevelReader reader = new JsonLevelReader();
+        Gamelevel level = reader.generateLevel("../../level1");
         try {
             spawnarea.initializeTables(gridpositions, world);
         } catch (InputNotValidException e) {

@@ -29,4 +29,7 @@ public class Gridposition {
                 ", type='" + type + '\'' +
                 '}';
     }
+
+    public Gridposition() {
+    }
 }
