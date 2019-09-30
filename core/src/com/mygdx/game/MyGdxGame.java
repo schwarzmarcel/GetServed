@@ -14,9 +14,9 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import entities.*;
+import handlers.Assets;
 import handlers.GsContactListener;
 import handlers.LevelHandler;
-import handlers.Assets;
 
 public class MyGdxGame extends ApplicationAdapter {
 
@@ -66,8 +66,6 @@ public class MyGdxGame extends ApplicationAdapter {
                 PIXELS_TO_METERS, 0);
         batch.begin();
         elapsedTime += Gdx.graphics.getDeltaTime();
-        
-        
         drawWaiter();
         drawGuests();
         drawDishes();

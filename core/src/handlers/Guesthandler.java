@@ -26,7 +26,6 @@ public class Guesthandler {
 
     public void handleGuests(int time, Dishhandler dishhandler) {
         if (!guests.isEmpty()) {
-            System.out.println(this.guests.first());
             if (guests.first().getSpawnTime() == time) {
                 spawnGuest(guests.first(), dishhandler);
             }

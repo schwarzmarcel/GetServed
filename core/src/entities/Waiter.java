@@ -30,7 +30,7 @@ public class Waiter implements Moveable {
         sprite.setSize(WORLD_WIDTH / 32, WORLD_HEIGHT / 16);
         sprite.setPosition(positionX, positionY);
         TextureAtlas textureAtlas = new TextureAtlas(Gdx.files.internal("Spritesheets/Herosprites.atlas"));
-        runningAnimation = new Animation<TextureRegion>(0.033f, textureAtlas.getRegions(), Animation.PlayMode.LOOP);
+        runningAnimation = new Animation<TextureRegion>(0.05f, textureAtlas.getRegions(), Animation.PlayMode.LOOP);
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
         box = new Box(world, sprite, true);
