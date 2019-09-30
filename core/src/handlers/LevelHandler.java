@@ -21,6 +21,8 @@ public class LevelHandler {
     private World world;
     private Waiter waiter;
     private Spawnarea spawnarea;
+    private JsonLevelReader reader;
+    private Gamelevel level;
 
     public LevelHandler() {
         dishhandler = new Dishhandler();
@@ -28,13 +30,15 @@ public class LevelHandler {
         world = new World(new Vector2(0, 0), true);
         Walls walls = new Walls(world);
         money = 25;
+        reader = new JsonLevelReader();
+        level = reader.generateLevel("../../level1");
     }
 
     public void initializeLevel() {
         drawField();
         intializeWaiter();
         startTimer();
-        guesthandler.intializeGuests();
+        guesthandler.intializeGuests(level.getGuests());
     }
 
     private void intializeWaiter() {
@@ -45,8 +49,6 @@ public class LevelHandler {
     private void drawField() {
         spawnarea = new Spawnarea();
         guesthandler.setSpawnarea(spawnarea);
-        JsonLevelReader reader = new JsonLevelReader();
-        Gamelevel level = reader.generateLevel("../../level1");
         try {
             spawnarea.initializeTables(level.getGridpositionList(), world);
         } catch (InputNotValidException e) {

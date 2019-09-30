@@ -47,5 +47,54 @@
 		 "type": "counter"
 		}
 	],
-    "numberOfGuests": 10,
+	"guests":[
+		{
+		"patience":24,
+		"happiness":3,
+		"wealth":12,
+		"spawntime": 2
+		},
+		{
+		"patience":24,
+		"happiness":3,
+		"wealth":12,
+		"spawntime": 4
+		},
+		{
+		"patience":24,
+		"happiness":3,
+		"wealth":12,
+		"spawntime": 6
+		},
+		{
+		"patience":24,
+		"happiness":3,
+		"wealth":12,
+		"spawntime": 12
+		},
+		{
+		"patience":24,
+		"happiness":3,
+		"wealth":12,
+		"spawntime": 14
+		}
+		{
+		"patience":24,
+		"happiness":3,
+		"wealth":12,
+		"spawntime": 17
+		},
+		{
+		"patience":24,
+		"happiness":3,
+		"wealth":12,
+		"spawntime": 23
+		},
+		{
+		"patience":24,
+		"happiness":3,
+		"wealth":12,
+		"spawntime": 25
+		}
+	]
 }

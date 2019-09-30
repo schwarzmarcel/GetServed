@@ -14,26 +14,25 @@ public class Guest {
     private Sprite sprite;
     private Table table;
     private Dish dish;
-    private int spawnTime;
-    private int happiness;
-    private int patience;
-	private int wealth;
+    private long spawnTime;
+    private long happiness;
+    private long patience;
+    private long wealth;
     private float timeElapsed;
     private Foodtype order;
     private float[] position = new float[2];
 
-
-    public Guest(int time) {
-        spawnTime = time;
-        patience = 24;
-        wealth = 12;
-        happiness = 3;
-        timeElapsed = 0;
+    public Guest(long spawnTime, long happiness, long patience, long wealth) {
         order = Foodtype.getRandomFoodType();
         dish = new Dish(order);
         sprite = new Sprite(Assets.manager.get(Assets.guest, Texture.class));
         sprite.setSize(WORLD_WIDTH / 32, WORLD_HEIGHT / 18);
         sprite.setColor(0, 1, 0, 1);
+        this.spawnTime = spawnTime;
+        this.happiness = happiness;
+        this.patience = patience;
+        this.wealth = wealth;
+        timeElapsed = 0;
     }
 
     public Sprite getSprite() {
@@ -47,25 +46,25 @@ public class Guest {
         float[] position = {positionX + dish.getSprite().getWidth() + 1, positionY};
         dish.setPosition(position);
     }
-    
+
     public void setColor(Color color) {
     	sprite.setColor(color);
     }
 
-    public int getSpawnTime() {
+    public long getSpawnTime() {
 		return spawnTime;
 	}
 
-	public int getPatience() {
+    public long getPatience() {
 		return patience;
 	}
-    
+
     public int getTip() {
     	double tip = (wealth * ((patience - timeElapsed) / patience));
     	return (int) Math.ceil(tip);
     }
 
-    public int getHappiness() {
+    public long getHappiness() {
         return happiness;
     }
 
@@ -76,12 +75,12 @@ public class Guest {
 	public void setTable(Table table) {
         this.table = table;
     }
-   
-    
+
+
     public Table getTable() {
 		return table;
 	}
-    
+
     public Dish getDish() {
     	return dish;
     }
@@ -89,8 +88,8 @@ public class Guest {
     public void setTimeElapsed(float time) {
     	timeElapsed = time;
     }
-    
-	public float getTimeElapsed() {
+
+    public float getTimeElapsed() {
 		return timeElapsed;
 	}
 

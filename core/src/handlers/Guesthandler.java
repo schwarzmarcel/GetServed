@@ -8,6 +8,8 @@ import entities.Spawnarea;
 import entities.Table;
 
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Random;
 
 public class Guesthandler {
@@ -24,6 +26,7 @@ public class Guesthandler {
 
     public void handleGuests(int time, Dishhandler dishhandler) {
         if (!guests.isEmpty()) {
+            System.out.println(this.guests.first());
             if (guests.first().getSpawnTime() == time) {
                 spawnGuest(guests.first(), dishhandler);
             }
@@ -41,7 +44,7 @@ public class Guesthandler {
     }
 
     public void updateGuest(Guest guest, int time) {
-        int timeElapsed = time - guest.getSpawnTime();
+        long timeElapsed = time - guest.getSpawnTime();
         guest.setTimeElapsed(timeElapsed);
         if (timeElapsed >= guest.getPatience()) {
             guestsToRemove.add(guest);
@@ -75,17 +78,12 @@ public class Guesthandler {
     	
     }
 
-    public void intializeGuests() {
-        // temporary guest list for testing
-        guests.addLast(new Guest(2));
-        guests.addLast(new Guest(4));
-        guests.addLast(new Guest(6));
-        guests.addLast(new Guest(12));
-        guests.addLast(new Guest(14));
-        guests.addLast(new Guest(17));
-        guests.addLast(new Guest(23));
-        guests.addLast(new Guest(25));
-        Gdx.app.log("INFO: ", "Guests created");
+    public void intializeGuests(List<Guest> guests) {
+        guests.sort(Comparator.comparing(Guest::getSpawnTime));
+        for (Guest g : guests
+        ) {
+            this.guests.addLast(g);
+        }
     }
 
     public void removeActiveGuest(Guest guest) {

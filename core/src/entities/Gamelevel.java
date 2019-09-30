@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Gamelevel {
     private List<Gridposition> gridpositionList;
-    private Long numberOfGuests;
+    private List<Guest> guests;
     private String name;
 
 
@@ -16,14 +16,6 @@ public class Gamelevel {
         this.gridpositionList = gridpositionList;
     }
 
-    public Long getNumberOfGuests() {
-        return numberOfGuests;
-    }
-
-    public void setNumberOfGuests(Long numberOfGuests) {
-        this.numberOfGuests = numberOfGuests;
-    }
-
     public String getName() {
         return name;
     }
@@ -31,4 +23,13 @@ public class Gamelevel {
     public void setName(String name) {
         this.name = name;
     }
+
+    public List<Guest> getGuests() {
+        return guests;
+    }
+
+    public void setGuests(List<Guest> guests) {
+        this.guests = guests;
+    }
 }
+
