@@ -20,7 +20,16 @@ import handlers.GsContactListener;
 import handlers.LevelHandler;
 
 public class MyGdxGame extends ApplicationAdapter {
-
+    //TODO: improve visual feedback for guest and dish spawning / Guest movement? Maybe make the guest look around? fade out for guests?
+    //TODO: guest orders again when happiness is reduced
+    //TODO: maybe improve guest patience visualisation
+    //TODO: create list that shows all dishes that are on order right now
+    //TODO: improve overall logic for dish spawning
+    //TODO: add a visual queue for guests
+    //TODO: consider the distance between counters and guests
+    //TODO: more dishes and proper sprites
+    //TODO: improve distance between counters / maybe they should not be placed right next to each other
+    //TODO: adjust box size, maybe make it a little bit smaller to improve colision feeling
     private SpriteBatch batch;
     private Box2DDebugRenderer debugRenderer;
     private OrthographicCamera camera;
