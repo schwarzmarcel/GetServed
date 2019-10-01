@@ -16,6 +16,9 @@ import handlers.Assets;
 import handlers.GsContactListener;
 import handlers.LevelHandler;
 
+import java.util.Iterator;
+import java.util.Map;
+
 public class MyGdxGame extends ApplicationAdapter {
     //TODO: improve visual feedback for guest and dish spawning / Guest movement? Maybe make the guest look around? fade out for guests?
     //TODO: guest orders again when happiness is reduced
@@ -171,11 +174,15 @@ public class MyGdxGame extends ApplicationAdapter {
     }
 
     private void drawOrders() {
-        for (Sprite s: level.getActiveOrders()
+        for (Sprite s: level.getCurrentOrderSymbols()
              ) {
             if(s != null){
                 s.draw(batch);
             }
+        }
+        for (Sprite s: level.getActiveOrders()
+             ) {
+            s.draw(batch);
         }
     }
 

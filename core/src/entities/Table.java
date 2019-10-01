@@ -21,7 +21,7 @@ public class Table {
     public Table(World world, float positionX, float positionY) {
         this.positions[0] = positionX;
         this.positions[1] = positionY;
-        sprite = new Sprite(Assets.manager.get(Assets.table, Texture.class));
+        sprite = new Sprite(Assets.manager.get(Assets.TABLE, Texture.class));
         sprite.setSize(WORLD_WIDTH / 24, WORLD_HEIGHT / 16);
         sprite.setPosition(positionX, positionY);
         box = new Box(world, sprite, false);

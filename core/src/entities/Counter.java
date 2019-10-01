@@ -19,7 +19,7 @@ public class Counter {
     public Counter(World world, float positionX, float positionY) {
         this.positions[0] = positionX;
         this.positions[1] = positionY;
-        sprite = new Sprite(Assets.manager.get(Assets.counter, Texture.class));
+        sprite = new Sprite(Assets.manager.get(Assets.COUNTER, Texture.class));
         sprite.setSize(WORLD_WIDTH / 24, WORLD_HEIGHT / 9);
         sprite.setPosition(positionX, positionY);
         Box box = new Box(world, sprite, false);

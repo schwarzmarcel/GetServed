@@ -5,13 +5,11 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Timer;
-import entities.Gamelevel;
-import entities.Spawnarea;
-import entities.Waiter;
-import entities.Walls;
+import entities.*;
 import exceptions.InputNotValidException;
 
 import java.util.List;
+import java.util.Map;
 
 import static com.mygdx.game.MyGdxGame.WORLD_HEIGHT;
 import static com.mygdx.game.MyGdxGame.WORLD_WIDTH;
@@ -117,7 +115,10 @@ public class LevelHandler {
 		return spawnarea;
 	}
 
-	public List<Sprite> getActiveOrders(){
-        return guesthandler.getCurrentOrders();
+	public List<Sprite> getCurrentOrderSymbols(){
+        return guesthandler.getCurrentOrderSymbols();
+    }
+    public List<Sprite> getActiveOrders(){
+        return guesthandler.getActiveOrders();
     }
 }

@@ -26,7 +26,7 @@ public class Guest {
     public Guest(long spawnTime, long happiness, long patience, long wealth) {
         order = Foodtype.getRandomFoodType();
         dish = new Dish(order);
-        sprite = new Sprite(Assets.manager.get(Assets.guest, Texture.class));
+        sprite = new Sprite(Assets.manager.get(Assets.GUEST, Texture.class));
         sprite.setSize(WORLD_WIDTH / 32, WORLD_HEIGHT / 18);
         sprite.setColor(0, 1, 0, 1);
         this.spawnTime = spawnTime;

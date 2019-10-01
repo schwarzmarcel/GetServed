@@ -16,13 +16,13 @@ public class Dish {
         this.type = type;
         switch (type) {
             case PIZZA:
-                sprite = new Sprite(Assets.manager.get(Assets.pizza, Texture.class));
+                sprite = new Sprite(Assets.manager.get(Assets.PIZZA, Texture.class));
                 break;
             case BURGER:
-                sprite = new Sprite(Assets.manager.get(Assets.burger, Texture.class));
+                sprite = new Sprite(Assets.manager.get(Assets.BURGER, Texture.class));
                 break;
             case PASTA:
-                sprite = new Sprite(Assets.manager.get(Assets.pasta, Texture.class));
+                sprite = new Sprite(Assets.manager.get(Assets.PASTA, Texture.class));
                 break;
             default: break;
         }

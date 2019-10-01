@@ -26,7 +26,7 @@ public class Waiter implements Moveable {
     private boolean flipped = false;
 
     public Waiter(World world, float positionX, float positionY) {
-        sprite = new Sprite(Assets.manager.get(Assets.waiter, Texture.class));
+        sprite = new Sprite(Assets.manager.get(Assets.WAITER, Texture.class));
         sprite.setSize(WORLD_WIDTH / 32, WORLD_HEIGHT / 16);
         sprite.setPosition(positionX, positionY);
         TextureAtlas textureAtlas = new TextureAtlas(Gdx.files.internal("Spritesheets/Herosprites.atlas"));

@@ -2,6 +2,7 @@ package handlers;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.utils.Queue;
 import entities.Guest;
@@ -15,15 +16,17 @@ public class Guesthandler {
     private ArrayList<Guest> activeGuests;
     private ArrayList<Guest> guestsToRemove;
     private Spawnarea spawnarea;
-    private ArrayList<Sprite> currentOrders;
+    private ArrayList<Sprite> currentOrderSymbols;
+    private Map<Guest,Sprite> activeOrders;
     private Map<Guest,Integer> lastOrder;
 
     public Guesthandler() {
         guests = new Queue<>();
         activeGuests = new ArrayList<>();
         guestsToRemove = new ArrayList<>();
-        currentOrders = new ArrayList<>();
+        currentOrderSymbols = new ArrayList<>();
         lastOrder = new HashMap<>();
+        activeOrders = new HashMap<>();
     }
 
     public void handleGuests(int time, Dishhandler dishhandler) {
@@ -41,6 +44,7 @@ public class Guesthandler {
             }
             guestsToRemove.clear();
         }
+        updateOrderQueue();
     }
 
     public void updateGuest(Guest guest, int time) {
@@ -57,12 +61,12 @@ public class Guesthandler {
             guest.setWantsToOrder(true);
         }
         if(guest.isWantsToOrder()){
-            currentOrders.add(guest.getDish().getSprite());
+            currentOrderSymbols.add(guest.getDish().getSprite());
             guest.setWantsToOrder(false);
             lastOrder.put(guest,time);
         }
         if(lastOrder.get(guest) + 2 < time){
-            currentOrders.remove(guest.getDish().getSprite());
+            currentOrderSymbols.remove(guest.getDish().getSprite());
         }
     }
 
@@ -94,7 +98,8 @@ public class Guesthandler {
 
     public void removeActiveGuest(Guest guest) {
     	spawnarea.addFreeTable(guest.getTable());
-        currentOrders.remove(guest.getDish().getSprite());
+        currentOrderSymbols.remove(guest.getDish().getSprite());
+        activeOrders.remove(guest);
         activeGuests.remove(guest);
         guest.getTable().removeGuest();
         Gdx.app.log("INFO: ", "Guest " + guest + " removed.");
@@ -111,8 +116,27 @@ public class Guesthandler {
         return activeGuests;
     }
 
-    public ArrayList<Sprite> getCurrentOrders() {
-        return currentOrders;
+    public ArrayList<Sprite> getCurrentOrderSymbols() {
+        return currentOrderSymbols;
+    }
+    private void updateOrderQueue(){
+        int x = 2;
+        for (Guest g: activeGuests
+             ) {
+            Sprite sprite = g.getDish().getSprite();
+            sprite.setPosition(x,5);
+            activeOrders.put(g,sprite);
+            x = x + 5;
+        }
+    }
+
+    public List<Sprite> getActiveOrders() {
+        List<Sprite> sprites = new ArrayList<>();
+        for (Guest g: activeGuests
+             ) {
+            sprites.add(activeOrders.get(g));
+        }
+        return sprites;
     }
 }
 
