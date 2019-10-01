@@ -87,7 +87,7 @@ public class MyGdxGame extends ApplicationAdapter {
         if((lastTipTime + 2) >= level.getTime())
         showTip();
         batch.end();
-      //  if (true) debugRenderer.render(level.getWorld(), debugMatrix);
+        if (true) debugRenderer.render(level.getWorld(), debugMatrix);
         testContacts();
     }
 

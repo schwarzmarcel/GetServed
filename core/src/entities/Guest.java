@@ -64,10 +64,6 @@ public class Guest {
     	return (int) Math.ceil(tip);
     }
 
-    public long getHappiness() {
-        return happiness;
-    }
-
     public void setHappiness(int happiness) {
 		this.happiness = happiness;
 	}
@@ -75,7 +71,6 @@ public class Guest {
 	public void setTable(Table table) {
         this.table = table;
     }
-
 
     public Table getTable() {
 		return table;
@@ -89,15 +84,8 @@ public class Guest {
     	timeElapsed = time;
     }
 
-    public float getTimeElapsed() {
-		return timeElapsed;
-	}
-
 	public Foodtype getOrder() {
         return order;
-    }
-    public void setOrder(Foodtype order) {
-        this.order = order;
     }
 
     @Override

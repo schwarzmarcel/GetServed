@@ -76,7 +76,6 @@ public class Guesthandler {
     }
 
     public void intializeGuests(List<Guest> guests) {
-        guests.sort(Comparator.comparing(Guest::getSpawnTime));
         for (Guest g : guests
         ) {
             this.guests.addLast(g);
@@ -108,5 +107,7 @@ public class Guesthandler {
     public ArrayList<Guest> getGuestsToRemove() {
         return guestsToRemove;
     }
+
+
 }
 
