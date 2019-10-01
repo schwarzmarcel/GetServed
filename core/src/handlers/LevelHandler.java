@@ -1,6 +1,7 @@
 package handlers;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Timer;
@@ -9,6 +10,8 @@ import entities.Spawnarea;
 import entities.Waiter;
 import entities.Walls;
 import exceptions.InputNotValidException;
+
+import java.util.List;
 
 import static com.mygdx.game.MyGdxGame.WORLD_HEIGHT;
 import static com.mygdx.game.MyGdxGame.WORLD_WIDTH;
@@ -79,6 +82,7 @@ public class LevelHandler {
         guesthandler.handleGuests(time, dishhandler);
         dishhandler.updateDishes(waiter, spawnarea.getCounters(), time, guesthandler.getActiveGuests());
         dishhandler.trashBinHandler(waiter);
+
     }
 
     public int getMoney() {
@@ -112,4 +116,8 @@ public class LevelHandler {
 	public Spawnarea getSpawnarea() {
 		return spawnarea;
 	}
+
+	public List<Sprite> getActiveOrders(){
+        return guesthandler.getCurrentOrders();
+    }
 }

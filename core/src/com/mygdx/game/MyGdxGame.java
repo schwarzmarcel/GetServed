@@ -6,10 +6,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.GlyphLayout;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.Contact;
@@ -174,11 +171,12 @@ public class MyGdxGame extends ApplicationAdapter {
     }
 
     private void drawOrders() {
-    	for (Guest g : level.getGuesthandler().getActiveGuests()) {
-    		if((level.getTime() >= g.getSpawnTime() + 1) && (g.getSpawnTime() + 2) >= level.getTime()) {
-    			g.getDish().getSprite().draw(batch);
-    		}
-    	}
+        for (Sprite s: level.getActiveOrders()
+             ) {
+            if(s != null){
+                s.draw(batch);
+            }
+        }
     }
 
     private void testContacts() {

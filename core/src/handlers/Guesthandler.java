@@ -2,6 +2,7 @@ package handlers;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.utils.Queue;
 import entities.Guest;
 import entities.Spawnarea;
@@ -17,11 +18,13 @@ public class Guesthandler {
     private ArrayList<Guest> activeGuests;
     private ArrayList<Guest> guestsToRemove;
     private Spawnarea spawnarea;
+    private ArrayList<Sprite> currentOrders;
 
     public Guesthandler() {
-        guests = new Queue<Guest>();
-        activeGuests = new ArrayList<Guest>();
-        guestsToRemove = new ArrayList<Guest>();
+        guests = new Queue<>();
+        activeGuests = new ArrayList<>();
+        guestsToRemove = new ArrayList<>();
+        currentOrders = new ArrayList<>();
     }
 
     public void handleGuests(int time, Dishhandler dishhandler) {
@@ -39,7 +42,6 @@ public class Guesthandler {
             }
             guestsToRemove.clear();
         }
-       
     }
 
     public void updateGuest(Guest guest, int time) {
@@ -53,6 +55,12 @@ public class Guesthandler {
         } else if (timeElapsed >= (guest.getPatience() / 3)) {
             guest.setHappiness(2);
             guest.setColor(Color.YELLOW);
+        }
+        if (time > guest.getSpawnTime() + 2 && !(time > guest.getSpawnTime()+4)){
+            if(!currentOrders.contains(guest.getDish().getSprite())) currentOrders.add(guest.getDish().getSprite());
+        }
+        if (time > guest.getSpawnTime() + 4){
+            currentOrders.remove(guest.getDish().getSprite());
         }
     }
 
@@ -84,6 +92,7 @@ public class Guesthandler {
 
     public void removeActiveGuest(Guest guest) {
     	spawnarea.addFreeTable(guest.getTable());
+        currentOrders.remove(guest.getDish().getSprite());
         activeGuests.remove(guest);
         guest.getTable().removeGuest();
         Gdx.app.log("INFO: ", "Guest " + guest + " removed.");
@@ -96,18 +105,12 @@ public class Guesthandler {
 		this.spawnarea = spawnarea;
 	}
 
-	public Queue<Guest> getGuests() {
-        return guests;
-    }
-
     public ArrayList<Guest> getActiveGuests() {
         return activeGuests;
     }
 
-    public ArrayList<Guest> getGuestsToRemove() {
-        return guestsToRemove;
+    public ArrayList<Sprite> getCurrentOrders() {
+        return currentOrders;
     }
-
-
 }
 

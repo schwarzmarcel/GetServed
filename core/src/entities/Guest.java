@@ -35,16 +35,16 @@ public class Guest {
         timeElapsed = 0;
     }
 
-    public Sprite getSprite() {
-        return sprite;
-    }
-
     public void setPosition(float positionX, float positionY) {
     	position[0] = positionX;
         position[1] = positionY;
         sprite.setPosition(positionX, positionY);
         float[] position = {positionX + dish.getSprite().getWidth() + 1, positionY};
         dish.setPosition(position);
+    }
+
+    public Sprite getSprite() {
+        return sprite;
     }
 
     public void setColor(Color color) {
