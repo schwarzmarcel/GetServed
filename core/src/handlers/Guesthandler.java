@@ -56,10 +56,10 @@ public class Guesthandler {
         guest.setTimeElapsed(timeElapsed);
         if (timeElapsed >= guest.getPatience()) {
             guestsToRemove.add(guest);
-        } else if (timeElapsed >= (guest.getPatience() / 1.5)) {
+        } else if (timeElapsed >= (guest.getPatience() / 1)) {
             guest.setHappiness(1);
             guest.setColor(Color.RED);
-        } else if (timeElapsed >= (guest.getPatience() / 3) && guest.getHappiness() != 2 ) {
+        } else if (timeElapsed >= (guest.getPatience() / 2) && guest.getHappiness() != 2 ) {
             guest.setHappiness(2);
             guest.setColor(Color.YELLOW);
             guest.setWantsToOrder(true);
