@@ -65,7 +65,7 @@ public class LevelHandler {
             public void run() {
                 time++;
                 if (money > 1) {
-                    money = money - 2;
+                    money = money - 0;
                 }
                 else if (money == 1) {
                 	money = 0;

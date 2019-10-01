@@ -49,8 +49,8 @@ public class MyGdxGame extends ApplicationAdapter {
     @Override
     public void create() {
         Gdx.app.setLogLevel(Application.LOG_ERROR);
-    	Assets.load();
-    	Assets.manager.finishLoading();
+        Assets.load();
+        Assets.manager.finishLoading();
         batch = new SpriteBatch();
         level = new LevelHandler();
         level.initializeLevel();
@@ -84,18 +84,18 @@ public class MyGdxGame extends ApplicationAdapter {
         drawDishes();
         drawOrders();
         showMoney();
-        if((lastTipTime + 2) >= level.getTime())
-        showTip();
+        if ((lastTipTime + 2) >= level.getTime())
+            showTip();
         batch.end();
         if (true) debugRenderer.render(level.getWorld(), debugMatrix);
         testContacts();
     }
 
     @Override
-	public void dispose() {
-	    level.getWorld().dispose();
-	    Assets.dispose();
-	}
+    public void dispose() {
+        level.getWorld().dispose();
+        Assets.dispose();
+    }
 
     private void initializeFonts() {
         moneyFont = new BitmapFont(Gdx.files.internal("moneyfont2.fnt"));
@@ -145,26 +145,26 @@ public class MyGdxGame extends ApplicationAdapter {
                 (level.getWaiter().getBody().getPosition().y * PIXELS_TO_METERS) - level.getWaiter().getSprite().getHeight() / 2,
                 WORLD_WIDTH / 32, WORLD_HEIGHT / 16);
     }
-    
-    private void drawGuests() {
-	    for (Guest g : level.getGuesthandler().getActiveGuests()) {
-	        g.getSprite().draw(batch);
-	    }
-	}
-    
-    private void drawTables() {
-	    for (Table t : level.getSpawnarea().getTables()) {
-	        t.getSprite().draw(batch);
-	    }
-	}
-    
-    private void drawCounters() {
-	    for (Counter c : level.getSpawnarea().getCounters()) {
-	        c.getSprite().draw(batch);
-	    }
-	}
 
-	private void drawDishes() {
+    private void drawGuests() {
+        for (Guest g : level.getGuesthandler().getActiveGuests()) {
+            g.getSprite().draw(batch);
+        }
+    }
+
+    private void drawTables() {
+        for (Table t : level.getSpawnarea().getTables()) {
+            t.getSprite().draw(batch);
+        }
+    }
+
+    private void drawCounters() {
+        for (Counter c : level.getSpawnarea().getCounters()) {
+            c.getSprite().draw(batch);
+        }
+    }
+
+    private void drawDishes() {
         if (level.getDishhandler().getDishes() != null) {
             for (Dish d : level.getDishhandler().getDishes()
             ) {
@@ -174,15 +174,15 @@ public class MyGdxGame extends ApplicationAdapter {
     }
 
     private void drawOrders() {
-        for (Sprite s: level.getCurrentOrderSymbols()
-             ) {
-            if(s != null){
+        for (Sprite s : level.getCurrentOrderSymbols()
+        ) {
+            if (s != null) {
                 s.draw(batch);
             }
         }
-        for (Sprite s: level.getActiveOrders()
-             ) {
-            s.draw(batch);
+        for (Sprite s : level.getActiveOrders()
+        ) {
+            if (s != null) s.draw(batch);
         }
     }
 
