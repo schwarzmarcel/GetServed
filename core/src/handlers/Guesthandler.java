@@ -57,8 +57,6 @@ public class Guesthandler {
     }
 
     private void spawnGuest(Guest guest, Dishhandler dishhandler) {
-
-    	System.out.println(spawnarea.getFreeTables().size());
     	if(spawnarea.getFreeTables().size() != 0) {
     		Random rndm = new Random();
     		int tableID = rndm.nextInt(spawnarea.getFreeTables().size());

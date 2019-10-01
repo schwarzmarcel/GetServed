@@ -22,7 +22,7 @@ public class JsonLevelReader {
 
     public Gamelevel generateLevel(String filepath) {
         JSONParser parser = new JSONParser();
-        try (Reader reader = new FileReader("C:\\Users\\evasc\\Desktop\\Uni\\Auslandssemester\\Game Design\\tddd23\\level1")) {
+        try (Reader reader = new FileReader("../../level1")) {
             JSONObject jsonObject = (JSONObject) parser.parse(reader);
             Gamelevel level = new Gamelevel();
             String name = jsonObject.get("name").toString();

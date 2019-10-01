@@ -1,5 +1,6 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -38,6 +39,7 @@ public class MyGdxGame extends ApplicationAdapter {
 
     @Override
     public void create() {
+        Gdx.app.setLogLevel(Application.LOG_ERROR);
     	Assets.load();
     	Assets.manager.finishLoading();
         batch = new SpriteBatch();
