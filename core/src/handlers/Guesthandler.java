@@ -8,10 +8,7 @@ import entities.Guest;
 import entities.Spawnarea;
 import entities.Table;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class Guesthandler {
     private Queue<Guest> guests;
@@ -19,12 +16,14 @@ public class Guesthandler {
     private ArrayList<Guest> guestsToRemove;
     private Spawnarea spawnarea;
     private ArrayList<Sprite> currentOrders;
+    private Map<Guest,Integer> lastOrder;
 
     public Guesthandler() {
         guests = new Queue<>();
         activeGuests = new ArrayList<>();
         guestsToRemove = new ArrayList<>();
         currentOrders = new ArrayList<>();
+        lastOrder = new HashMap<>();
     }
 
     public void handleGuests(int time, Dishhandler dishhandler) {
@@ -52,14 +51,17 @@ public class Guesthandler {
         } else if (timeElapsed >= (guest.getPatience() / 1.5)) {
             guest.setHappiness(1);
             guest.setColor(Color.RED);
-        } else if (timeElapsed >= (guest.getPatience() / 3)) {
+        } else if (timeElapsed >= (guest.getPatience() / 3) && guest.getHappiness() != 2 ) {
             guest.setHappiness(2);
             guest.setColor(Color.YELLOW);
+            guest.setWantsToOrder(true);
         }
-        if (time > guest.getSpawnTime() + 2 && !(time > guest.getSpawnTime()+4)){
-            if(!currentOrders.contains(guest.getDish().getSprite())) currentOrders.add(guest.getDish().getSprite());
+        if(guest.isWantsToOrder()){
+            currentOrders.add(guest.getDish().getSprite());
+            guest.setWantsToOrder(false);
+            lastOrder.put(guest,time);
         }
-        if (time > guest.getSpawnTime() + 4){
+        if(lastOrder.get(guest) + 2 < time){
             currentOrders.remove(guest.getDish().getSprite());
         }
     }

@@ -21,6 +21,7 @@ public class Guest {
     private float timeElapsed;
     private Foodtype order;
     private float[] position = new float[2];
+    private boolean wantsToOrder = true;
 
     public Guest(long spawnTime, long happiness, long patience, long wealth) {
         order = Foodtype.getRandomFoodType();
@@ -86,6 +87,17 @@ public class Guest {
 
 	public Foodtype getOrder() {
         return order;
+    }
+
+    public long getHappiness() {
+        return happiness;
+    }
+    public void setWantsToOrder(boolean wantsToOrder) {
+        this.wantsToOrder = wantsToOrder;
+    }
+
+    public boolean isWantsToOrder() {
+        return wantsToOrder;
     }
 
     @Override
