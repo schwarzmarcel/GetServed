@@ -15,6 +15,7 @@ public class Guest {
     private Table table;
     private Dish dish;
     private long spawnTime;
+    private long orderTime;
     private long happiness;
     private long patience;
     private long wealth;
@@ -30,6 +31,7 @@ public class Guest {
         sprite.setSize(WORLD_WIDTH / 32, WORLD_HEIGHT / 18);
         sprite.setColor(0, 1, 0, 1);
         this.spawnTime = spawnTime;
+        this.orderTime = spawnTime;
         this.happiness = happiness;
         this.patience = patience;
         this.wealth = wealth;
@@ -40,7 +42,7 @@ public class Guest {
     	position[0] = positionX;
         position[1] = positionY;
         sprite.setPosition(positionX, positionY);
-        float[] position = {positionX + dish.getSprite().getWidth() + 1, positionY};
+        float[] position = {positionX + dish.getSprite().getWidth() + 2, positionY};
         dish.setPosition(position);
     }
 
@@ -56,7 +58,15 @@ public class Guest {
 		return spawnTime;
 	}
 
-    public long getPatience() {
+    public long getOrderTime() {
+		return orderTime;
+	}
+
+	public void setOrderTime(long orderTime) {
+		this.orderTime = orderTime;
+	}
+
+	public long getPatience() {
 		return patience;
 	}
 

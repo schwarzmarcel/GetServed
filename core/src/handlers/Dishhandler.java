@@ -7,82 +7,146 @@ import entities.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import static com.mygdx.game.MyGdxGame.PIXELS_TO_METERS;
 
 public class Dishhandler {
-    private int dishTimer;
-    private Queue<Foodtype> dishQueue;
-    private ArrayList<Dish> dishes;
 
+	private Queue<Foodtype> dishQueue;
+	private ArrayList<Dish> dishes;
+	private List<Counter> counters;
+	private Waiter waiter;
 
-    public Dishhandler() {
-        dishQueue = new Queue<Foodtype>();
-        dishes = new ArrayList<Dish>();
-    }
+	public Dishhandler() {
+		dishQueue = new Queue<Foodtype>();
+		dishes = new ArrayList<Dish>();
 
-    public void updateDishes(Waiter waiter, List<Counter> counters, int time, ArrayList<Guest> activeGuests) {
-        if (waiter.getDish() != null) {
-            waiter.getDish().getSprite().setPosition(
-                    (waiter.getBody().getPosition().x * PIXELS_TO_METERS) - waiter.getSprite().getWidth() / 2,
-                    (waiter.getBody().getPosition().y * PIXELS_TO_METERS) - waiter.getSprite().getHeight() / 2
-            );
-        }
-        for (Counter c : counters
-        ) {
-            if (dishTimer + 2 < time) {
-                boolean neededDishAvailable = false;
-                for (Dish d : dishes
-                ) {
-                    for (Guest g : activeGuests
-                    ) {
-                        if (d.type == g.getOrder()) neededDishAvailable = true;
-                    }
-                }
-                if (c.getDish() == null && !dishQueue.isEmpty()) {
-                    Dish tempDish = new Dish(dishQueue.removeFirst());
-                    tempDish.setPosition(c.getPosition());
-                    Gdx.app.log("INFO: ", "Created Dish");
-                    c.setDish(tempDish);
-                    dishes.add(tempDish);
-                }
-                if (dishQueue.isEmpty() && c.getDish() == null && neededDishAvailable) {
-                    Dish tempDish = new Dish(Foodtype.getRandomFoodType());
-                    tempDish.setPosition(c.getPosition());
-                    Gdx.app.log("INFO: ", "Created random Dish");
-                    c.setDish(tempDish);
-                    dishes.add(tempDish);
-                }
-            }
-        }
-    }
+	}
+	
+	public void initializeDishhandler(Waiter waiter, List<Counter> counters) {
+		this.waiter = waiter;
+		this.counters = counters;
+	}
 
-    public void addToDishQueue(Foodtype type) {
-        dishQueue.addLast(type);
-    }
+	public void updateDishes(int time, ArrayList<Guest> activeGuests) {
+		if (waiter.getDish() != null) {
+			waiter.getDish().getSprite().setPosition(
+					(waiter.getBody().getPosition().x * PIXELS_TO_METERS) - waiter.getSprite().getWidth() / 2,
+					(waiter.getBody().getPosition().y * PIXELS_TO_METERS) - waiter.getSprite().getHeight() / 2);
+		}
 
-    public void trashBinHandler(Waiter waiter) {
-        if (Gdx.input.isKeyJustPressed(Input.Keys.X)) {
-            if (waiter.getDish() != null) {
-                dishes.remove(waiter.getDish());
-                Gdx.app.log("INFO: ", "Dish has been removed by Button Press");
-            }
-            waiter.setDish(null);
-            Gdx.app.log("INFO: ", "Waiter no longer carries a dish");
-        }
-    }
+		for (Counter c : counters) {
 
-    public void removeDish(Dish dish) {
-        Gdx.app.log("INFO: ", "Dish " + dish + " has been served and removed");
-        dishes.remove(dish);
-    }
+			// for initialization
+			if (c.getNextDish() == null) {
+				Dish init;
+				if (dishQueue.notEmpty()) {
+					init = new Dish(dishQueue.removeFirst());
+				} else {
+					init = new Dish(Foodtype.getRandomFoodType());
+				}
+				c.setNextDish(init);
+				c.setLastDishTime(time);
+				dishes.add(init);
+				float[] displaypos = { c.getPosition()[0] - c.getSprite().getWidth(),
+						c.getPosition()[1] + (c.getSprite().getHeight() - init.getSprite().getHeight()) / 2 };
+				init.setPosition(displaypos);
+			}
 
-    public void updateDishTimer(int t) {
-        this.dishTimer = t;
-    }
+			// makes dishes spawn faster when counter is empty
+			if (c.getDish() == null)
+				c.setCookSpeed(3);
 
-    public ArrayList<Dish> getDishes() {
-        return dishes;
-    }
+			if ((time - c.getLastDishTime()) >= (6 / c.getCookSpeed()) + 1) {
+				Dish nextDish = null;
+				if (dishQueue.isEmpty()) {
+					for (Guest g : activeGuests) {
+						boolean dishAvailable = false;
+						for (Dish d : dishes) {
+							if (d.type == g.getOrder()) {
+								dishAvailable = true;
+								break;
+							}
+						}
+						if (!dishAvailable) {
+							nextDish = new Dish(g.getOrder());
+							break;
+						}
+					}
+					if (nextDish == null)
+						nextDish = new Dish(Foodtype.getRandomFoodType());
+				} else {
+					nextDish = new Dish(dishQueue.removeFirst());
+				}
+				c.setLastDishTime(time);
+				if (c.getDish() != null) {
+					dishes.remove(c.getDish());
+				}
+				dishes.add(nextDish);
+				float[] displaypos = { c.getPosition()[0] - c.getSprite().getWidth(),
+						c.getPosition()[1] + (c.getSprite().getHeight() - nextDish.getSprite().getHeight()) / 2 };
+				float[] counterpos = {
+						c.getPosition()[0] + (c.getSprite().getWidth() - nextDish.getSprite().getWidth()) / 2,
+						c.getPosition()[1] + (c.getSprite().getHeight() - nextDish.getSprite().getHeight()) / 2 };
+				nextDish.setPosition(displaypos);
+				c.getNextDish().setPosition(counterpos);
+				c.setDish(c.getNextDish());
+				c.setNextDish(nextDish);
+				c.setCookSpeed(1);
+			}
+		}
+
+//        for (Counter c : counters
+//        ) {
+//            if (dishTimer + 2 < time) {
+//                boolean neededDishAvailable = false;
+//                for (Dish d : dishes
+//                ) {
+//                    for (Guest g : activeGuests
+//                    ) {
+//                        if (d.type == g.getOrder()) neededDishAvailable = true;
+//                    }
+//                }
+//                if (c.getDish() == null && !dishQueue.isEmpty()) {
+//                    Dish tempDish = new Dish(dishQueue.removeFirst());
+//                    tempDish.setPosition(c.getPosition());
+//                    Gdx.app.log("INFO: ", "Created Dish");
+//                    c.setDish(tempDish);
+//                    dishes.add(tempDish);
+//                }
+//                if (dishQueue.isEmpty() && c.getDish() == null && neededDishAvailable) {
+//                    Dish tempDish = new Dish(Foodtype.getRandomFoodType());
+//                    tempDish.setPosition(c.getPosition());
+//                    Gdx.app.log("INFO: ", "Created random Dish");
+//                    c.setDish(tempDish);
+//                    dishes.add(tempDish);
+//                }
+//            }
+//        }
+	}
+
+	public void addToDishQueue(Foodtype type) {
+		dishQueue.addLast(type);
+	}
+
+	public void trashBinHandler(Waiter waiter) {
+		if (Gdx.input.isKeyJustPressed(Input.Keys.X)) {
+			if (waiter.getDish() != null) {
+				dishes.remove(waiter.getDish());
+				Gdx.app.log("INFO: ", "Dish has been removed by Button Press");
+			}
+			waiter.setDish(null);
+			Gdx.app.log("INFO: ", "Waiter no longer carries a dish");
+		}
+	}
+
+	public void removeDish(Dish dish) {
+		Gdx.app.log("INFO: ", "Dish " + dish + " has been served and removed");
+		dishes.remove(dish);
+	}
+
+	public ArrayList<Dish> getDishes() {
+		return dishes;
+	}
 }
-

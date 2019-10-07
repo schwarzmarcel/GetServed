@@ -32,7 +32,7 @@ public class LevelHandler {
         Walls walls = new Walls(world);
         money = 25;
         reader = new JsonLevelReader();
-        level = reader.generateLevel("../../level1");
+        level = reader.generateLevel("C:\\Users\\evasc\\Desktop\\Uni\\Auslandssemester\\Game Design\\tddd23\\level1");
     }
 
     public void initializeLevel() {
@@ -40,6 +40,9 @@ public class LevelHandler {
         intializeWaiter();
         startTimer();
         guesthandler.intializeGuests(level.getGuests());
+        dishhandler.initializeDishhandler(waiter, spawnarea.getCounters());
+        //this makes sure that one of the first dishes fits the first guests
+        dishhandler.addToDishQueue(guesthandler.getGuests().first().getOrder());
     }
 
     private void intializeWaiter() {
@@ -65,7 +68,7 @@ public class LevelHandler {
             public void run() {
                 time++;
                 if (money > 1) {
-                    money = money - 0;
+                    money = money - 2;
                 }
                 else if (money == 1) {
                 	money = 0;
@@ -78,7 +81,7 @@ public class LevelHandler {
 
     public void updateLevel() {
         guesthandler.handleGuests(time, dishhandler);
-        dishhandler.updateDishes(waiter, spawnarea.getCounters(), time, guesthandler.getActiveGuests());
+        dishhandler.updateDishes(time, guesthandler.getActiveGuests());
         dishhandler.trashBinHandler(waiter);
 
     }
@@ -115,10 +118,8 @@ public class LevelHandler {
 		return spawnarea;
 	}
 
-	public List<Sprite> getCurrentOrderSymbols(){
-        return guesthandler.getCurrentOrderSymbols();
-    }
-    public List<Sprite> getActiveOrders(){
-        return guesthandler.getActiveOrders();
-    }
+//	public List<Sprite> getCurrentOrderSymbols(){
+//        return guesthandler.getCurrentOrderSymbols();
+//    }
+   
 }
