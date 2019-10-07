@@ -32,7 +32,7 @@ public class Spawnarea {
                 float positionY = (g.getRow() * CELLSIZE) - CELLSIZE / 2;
                 float positionX = (g.getCol() * CELLSIZE) - CELLSIZE / 2;
                 if (g.getType().equals("counter")) {
-                    counters.add(new Counter(world, positionX, positionY));
+                    counters.add(new Counter(world, positionX, positionY, g.getRotation()));
                     Gdx.app.log("INFO: ", "Counter created");
                 } else if (g.getType().equals("table")) {
                 	Table table = new Table(world, positionX, positionY);

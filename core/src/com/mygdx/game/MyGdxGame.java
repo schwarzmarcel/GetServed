@@ -204,16 +204,31 @@ public class MyGdxGame extends ApplicationAdapter {
 		batch.end();
 		shapeRenderer.begin(ShapeType.Filled);
 		for (Counter c : level.getSpawnarea().getCounters()) {
+			if (c.getRotation() == 0) {
+				shapeRenderer.setColor(Color.LIGHT_GRAY);
+				shapeRenderer.rect(c.getPosition()[0] - c.getSprite().getWidth(),
+						c.getPosition()[1] + (c.getSprite().getHeight() - c.getNextDish().getSprite().getHeight() - 4),
+						c.getNextDish().getSprite().getWidth(), 1);
 
-			shapeRenderer.setColor(Color.LIGHT_GRAY);
-			shapeRenderer.rect(c.getPosition()[0] - c.getSprite().getWidth(),
-					c.getPosition()[1] + (c.getSprite().getHeight() - c.getNextDish().getSprite().getHeight() - 4),
-					c.getNextDish().getSprite().getWidth(), 1);
+				shapeRenderer.setColor(Color.BLUE);
+				shapeRenderer.rect(c.getPosition()[0] - c.getSprite().getWidth(),
+						c.getPosition()[1] + (c.getSprite().getHeight() - c.getNextDish().getSprite().getHeight() - 4),
+						(c.getNextDish().getSprite().getWidth())
+								* ((level.getTime() - c.getLastDishTime()) / (6 / c.getCookSpeed())),
+						1);
+				} else if (c.getRotation() == 1) {
+					shapeRenderer.setColor(Color.LIGHT_GRAY);
+					shapeRenderer.rect(c.getPosition()[0] + c.getSprite().getWidth() + 1,
+							c.getPosition()[1] + (c.getSprite().getHeight() - c.getNextDish().getSprite().getHeight() - 4),
+							c.getNextDish().getSprite().getWidth(), 1);
 
-			shapeRenderer.setColor(Color.BLUE);
-			shapeRenderer.rect(c.getPosition()[0] - c.getSprite().getWidth(),
-					c.getPosition()[1] + (c.getSprite().getHeight() - c.getNextDish().getSprite().getHeight() - 4),
-					(c.getNextDish().getSprite().getWidth()) * ((level.getTime() - c.getLastDishTime()) / (6 / c.getCookSpeed())), 1);
+					shapeRenderer.setColor(Color.BLUE);
+					shapeRenderer.rect(c.getPosition()[0] + c.getSprite().getWidth() + 1,
+							c.getPosition()[1] + (c.getSprite().getHeight() - c.getNextDish().getSprite().getHeight() - 4),
+							(c.getNextDish().getSprite().getWidth())
+									* ((level.getTime() - c.getLastDishTime()) / (6 / c.getCookSpeed())),
+							1);
+				}
 		}
 		shapeRenderer.end();
 		batch.begin();

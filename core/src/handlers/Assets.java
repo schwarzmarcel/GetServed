@@ -13,6 +13,8 @@ public class Assets {
 	public static final String PIZZA = "pizza.png";
 	public static final String BURGER = "burger.png";
 	public static final String PASTA = "pasta.png";
+	public static final String SALAD = "salad.png";
+	public static final String FISH = "fish.png";
 	public static final String TABLE = "table_round.png";
 	
 	
@@ -23,6 +25,8 @@ public class Assets {
 	manager.load(PIZZA, Texture.class);
 	manager.load(BURGER, Texture.class);
 	manager.load(PASTA, Texture.class);
+	manager.load(SALAD, Texture.class);
+	manager.load(FISH, Texture.class);
 	manager.load(TABLE, Texture.class);
 	}
 	

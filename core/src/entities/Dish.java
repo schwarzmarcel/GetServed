@@ -24,6 +24,12 @@ public class Dish {
             case PASTA:
                 sprite = new Sprite(Assets.manager.get(Assets.PASTA, Texture.class));
                 break;
+            case SALAD:
+                sprite = new Sprite(Assets.manager.get(Assets.SALAD, Texture.class));
+                break;
+            case FISH:
+                sprite = new Sprite(Assets.manager.get(Assets.FISH, Texture.class));
+                break;
             default: break;
         }
         sprite.setSize(WORLD_WIDTH / 32, WORLD_HEIGHT / 18);

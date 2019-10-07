@@ -3,43 +3,51 @@
 	"positions": [
 		{
 		 "row": 3,
-		 "col": 19,
-		 "type": "table"
+		 "col": 16,
+		 "type": "table",
+		 "rotation": 0
 		},
 		{
 		 "row": 5,
-		 "col": 24,
-		 "type": "table"
+		 "col": 21,
+		 "type": "table",
+		 "rotation": 0
 		},
 		{
 		"row": 9,
+		 "col": 18,
+		 "type": "table",
+		 "rotation": 0
+		},
+		{
+		"row": 7,
+		 "col": 11,
+		 "type": "table",
+		 "rotation": 0
+		},
+		{
+		"row": 13,
+		 "col": 13,
+		 "type": "table",
+		 "rotation": 0
+		},
+		{
+		"row": 15,
 		 "col": 20,
-		 "type": "table"
+		 "type": "table",
+		 "rotation": 0
+		},
+		{
+		"row": 9,
+		 "col": 5,
+		 "type": "counter",
+		 "rotation": 0
 		},
 		{
 		"row": 9,
 		 "col": 26,
-		 "type": "table"
-		},
-		{
-		"row": 13,
-		 "col": 16,
-		 "type": "table"
-		},
-		{
-		"row": 16,
-		 "col": 22,
-		 "type": "table"
-		},
-		{
-		"row": 6,
-		 "col": 3,
-		 "type": "counter"
-		},
-		{
-		"row": 12,
-		 "col": 3,
-		 "type": "counter"
+		 "type": "counter",
+		 "rotation": 2
 		}
 	],
 	"guests":[

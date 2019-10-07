@@ -49,9 +49,7 @@ public class Dishhandler {
 				c.setNextDish(init);
 				c.setLastDishTime(time);
 				dishes.add(init);
-				float[] displaypos = { c.getPosition()[0] - c.getSprite().getWidth(),
-						c.getPosition()[1] + (c.getSprite().getHeight() - init.getSprite().getHeight()) / 2 };
-				init.setPosition(displaypos);
+				init.setPosition(c.getDisplayPos());
 			}
 
 			// makes dishes spawn faster when counter is empty
@@ -84,13 +82,8 @@ public class Dishhandler {
 					dishes.remove(c.getDish());
 				}
 				dishes.add(nextDish);
-				float[] displaypos = { c.getPosition()[0] - c.getSprite().getWidth(),
-						c.getPosition()[1] + (c.getSprite().getHeight() - nextDish.getSprite().getHeight()) / 2 };
-				float[] counterpos = {
-						c.getPosition()[0] + (c.getSprite().getWidth() - nextDish.getSprite().getWidth()) / 2,
-						c.getPosition()[1] + (c.getSprite().getHeight() - nextDish.getSprite().getHeight()) / 2 };
-				nextDish.setPosition(displaypos);
-				c.getNextDish().setPosition(counterpos);
+				nextDish.setPosition(c.getDisplayPos());
+				c.getNextDish().setPosition(c.getDishPos());
 				c.setDish(c.getNextDish());
 				c.setNextDish(nextDish);
 				c.setCookSpeed(1);
