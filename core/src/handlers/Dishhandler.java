@@ -54,7 +54,7 @@ public class Dishhandler {
 
 			// makes dishes spawn faster when counter is empty
 			if (c.getDish() == null)
-				c.setCookSpeed(3);
+				c.setCookSpeed(2);
 
 			if ((time - c.getLastDishTime()) >= (6 / c.getCookSpeed()) + 1) {
 				Dish nextDish = null;

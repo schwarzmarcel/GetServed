@@ -2,14 +2,14 @@
 	"name" : "level1",
 	"positions": [
 		{
-		 "row": 3,
-		 "col": 16,
+		 "row": 9,
+		 "col": 13,
 		 "type": "table",
 		 "rotation": 0
 		},
 		{
 		 "row": 5,
-		 "col": 21,
+		 "col": 24,
 		 "type": "table",
 		 "rotation": 0
 		},
@@ -21,82 +21,100 @@
 		},
 		{
 		"row": 7,
-		 "col": 11,
+		 "col": 6,
 		 "type": "table",
 		 "rotation": 0
 		},
 		{
-		"row": 13,
-		 "col": 13,
+		"row": 11,
+		 "col": 8,
 		 "type": "table",
 		 "rotation": 0
+		},
+		{
+		"row": 12,
+		 "col": 23,
+		 "type": "table",
+		 "rotation": 0
+		},
+		{
+		"row": 3,
+		 "col": 15,
+		 "type": "counter",
+		 "rotation": 3
 		},
 		{
 		"row": 15,
-		 "col": 20,
-		 "type": "table",
-		 "rotation": 0
-		},
-		{
-		"row": 9,
-		 "col": 5,
-		 "type": "counter",
-		 "rotation": 0
-		},
-		{
-		"row": 9,
-		 "col": 26,
+		 "col": 15,
 		 "type": "counter",
 		 "rotation": 2
 		}
 	],
 	"guests":[
 		{
-		"patience":30,
+		"patience":24,
 		"happiness":3,
-		"wealth":12,
-		"spawntime": 3
+		"wealth":10,
+		"spawntime": 2
 		},
 		{
-		"patience":30,
+		"patience":24,
 		"happiness":3,
-		"wealth":12,
-		"spawntime": 7
+		"wealth":10,
+		"spawntime": 4
 		},
 		{
-		"patience":30,
+		"patience":24,
 		"happiness":3,
-		"wealth":12,
-		"spawntime": 12
+		"wealth":10,
+		"spawntime": 8
 		},
 		{
-		"patience":30,
+		"patience":24,
 		"happiness":3,
-		"wealth":12,
-		"spawntime": 16
+		"wealth":10,
+		"spawntime": 11
 		},
 		{
-		"patience":30,
+		"patience":24,
 		"happiness":3,
-		"wealth":12,
-		"spawntime": 20
-		}
-		{
-		"patience":30,
-		"happiness":3,
-		"wealth":12,
-		"spawntime": 25
+		"wealth":10,
+		"spawntime": 15
 		},
 		{
-		"patience":30,
+		"patience":24,
 		"happiness":3,
-		"wealth":12,
+		"wealth":10,
+		"spawntime": 18
+		},
+		{
+		"patience":24,
+		"happiness":3,
+		"wealth":10,
+		"spawntime": 21
+		},
+		{
+		"patience":24,
+		"happiness":3,
+		"wealth":10,
+		"spawntime": 24
+		},
+		{
+		"patience":24,
+		"happiness":3,
+		"wealth":10,
 		"spawntime": 28
 		},
 		{
-		"patience":30,
+		"patience":24,
 		"happiness":3,
-		"wealth":12,
+		"wealth":10,
+		"spawntime": 30
+		},
+		{
+		"patience":24,
+		"happiness":3,
+		"wealth":10,
 		"spawntime": 34
 		}
 	]

@@ -32,7 +32,7 @@ public class LevelHandler {
         Walls walls = new Walls(world);
         money = 25;
         reader = new JsonLevelReader();
-        level = reader.generateLevel("C:\\Users\\evasc\\Desktop\\Uni\\Auslandssemester\\Game Design\\tddd23\\level1");
+        level = reader.generateLevel("\\\\ad.liu.se\\home\\marsc932\\Documents\\tddd23\\level1");
     }
 
     public void initializeLevel() {

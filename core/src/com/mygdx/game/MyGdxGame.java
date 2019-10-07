@@ -53,7 +53,6 @@ public class MyGdxGame extends ApplicationAdapter {
 
 	@Override
 	public void create() {
-		Gdx.app.setLogLevel(Application.LOG_ERROR);
 		Assets.load();
 		Assets.manager.finishLoading();
 		batch = new SpriteBatch();
@@ -226,6 +225,30 @@ public class MyGdxGame extends ApplicationAdapter {
 					shapeRenderer.rect(c.getPosition()[0] + c.getSprite().getWidth() + 1,
 							c.getPosition()[1] + (c.getSprite().getHeight() - c.getNextDish().getSprite().getHeight() - 4),
 							(c.getNextDish().getSprite().getWidth())
+									* ((level.getTime() - c.getLastDishTime()) / (6 / c.getCookSpeed())),
+							1);
+				} else if (c.getRotation() == 2) {
+					shapeRenderer.setColor(Color.LIGHT_GRAY);
+					shapeRenderer.rect(c.getPosition()[0] + c.getSprite().getWidth() / 2 - c.getNextDish().getSprite().getWidth() / 2,
+							c.getPosition()[1] + c.getSprite().getHeight() + 1,
+							c.getNextDish().getSprite().getWidth(), 1);
+
+					shapeRenderer.setColor(Color.BLUE);
+					shapeRenderer.rect(c.getPosition()[0] + c.getSprite().getWidth() / 2 - c.getNextDish().getSprite().getWidth() / 2,
+							c.getPosition()[1] + c.getSprite().getHeight() + 1,
+							c.getNextDish().getSprite().getWidth()
+									* ((level.getTime() - c.getLastDishTime()) / (6 / c.getCookSpeed())),
+							1);
+				} else if (c.getRotation() == 3) {
+					shapeRenderer.setColor(Color.LIGHT_GRAY);
+					shapeRenderer.rect(c.getPosition()[0] + c.getSprite().getWidth() / 2 - c.getNextDish().getSprite().getWidth() / 2,
+							c.getPosition()[1] - 2,
+							c.getNextDish().getSprite().getWidth(), 1);
+
+					shapeRenderer.setColor(Color.BLUE);
+					shapeRenderer.rect(c.getPosition()[0] + c.getSprite().getWidth() / 2 - c.getNextDish().getSprite().getWidth() / 2,
+							c.getPosition()[1] - 2,
+							c.getNextDish().getSprite().getWidth()
 									* ((level.getTime() - c.getLastDishTime()) / (6 / c.getCookSpeed())),
 							1);
 				}

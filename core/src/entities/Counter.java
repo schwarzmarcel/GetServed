@@ -48,14 +48,18 @@ public class Counter {
 					positions[1] + (sprite.getHeight() - dish.getSprite().getHeight()) / 2 };
 			displayPos = displpos;
 		} else if (rotation == 2) {
-			float[] displpos = { positions[0] + sprite.getWidth() + 1,
-					positions[1] + (sprite.getHeight() - dish.getSprite().getHeight()) / 2 };
+			float[] displpos = { positions[0] + sprite.getWidth() / 2 - dish.getSprite().getWidth() / 2,
+					positions[1] + sprite.getHeight() + 3};
+			displayPos = displpos;
+		} else if (rotation == 3) {
+			float[] displpos = { positions[0] + sprite.getWidth() / 2 - dish.getSprite().getWidth() / 2,
+					positions[1] - dish.getSprite().getHeight() - 3};
 			displayPos = displpos;
 		}
 		
 		dish = null;
 		lastDishTime = 0;
-		cookSpeed = 0;
+		cookSpeed = 1;
 	}
 
 	public Sprite getSprite() {
