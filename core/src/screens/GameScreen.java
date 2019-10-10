@@ -160,8 +160,13 @@ public class GameScreen implements Screen{
 	}
 	
 	private void drawGuests() {
+		TextureRegion currentFrame;
 		for (Guest g : level.getGuesthandler().getActiveGuests()) {
-			g.getSprite().draw(batch);
+			currentFrame = g.getIdleAnimation().getKeyFrame(elapsedTime);
+			batch.draw(currentFrame,
+					g.getSprite().getX(),
+					g.getSprite().getY(),
+					WORLD_WIDTH / 16, WORLD_HEIGHT / 8);
 		}
 	}
 	

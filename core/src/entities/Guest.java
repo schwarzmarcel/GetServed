@@ -33,6 +33,7 @@ public class Guest {
     public Guest(long spawnTime, long happiness, long patience, long wealth) {
         int randomNum = ThreadLocalRandom.current().nextInt(1, 5 + 1);
         TextureAtlas textureAtlas = new TextureAtlas(Gdx.files.internal("character_sprites/Guest"+randomNum+".atlas"));
+        idleAnimation = new Animation<TextureRegion>(0.045f, textureAtlas.getRegions(), Animation.PlayMode.LOOP);
         sprite = new Sprite(textureAtlas.findRegion("Idle"));
         order = Foodtype.getRandomFoodType();
         dish = new Dish(order);
