@@ -6,7 +6,6 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -18,18 +17,11 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.mygdx.game.MyGdxGame;
-
-import entities.Counter;
-import entities.Dish;
-import entities.Guest;
-import entities.Table;
-import entities.Waiter;
+import entities.*;
 import handlers.GsContactListener;
 import handlers.LevelHandler;
 
-import static com.mygdx.game.MyGdxGame.WORLD_HEIGHT;
-import static com.mygdx.game.MyGdxGame.WORLD_WIDTH;
-import static com.mygdx.game.MyGdxGame.PIXELS_TO_METERS;
+import static com.mygdx.game.MyGdxGame.*;
 
 public class GameScreen implements Screen{
 	public MyGdxGame game;
@@ -162,7 +154,7 @@ public class GameScreen implements Screen{
 						- level.getWaiter().getSprite().getWidth() / 2,
 				(level.getWaiter().getBody().getPosition().y * PIXELS_TO_METERS)
 						- level.getWaiter().getSprite().getHeight() / 2,
-				WORLD_WIDTH / 32, WORLD_HEIGHT / 16);
+				WORLD_WIDTH / 16, WORLD_HEIGHT / 8);
 	}
 	
 	private void drawGuests() {

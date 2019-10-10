@@ -1,0 +1,233 @@
+
+Waiter_Walking.png
+size: 1024,1024
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Walking
+  rotate: false
+  xy: 2, 2
+  size: 458, 606
+  orig: 458, 606
+  offset: 0, 0
+  index: 1
+Walking
+  rotate: false
+  xy: 462, 2
+  size: 458, 606
+  orig: 458, 606
+  offset: 0, 0
+  index: 2
+
+Waiter_Walking2.png
+size: 1024,1024
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Walking
+  rotate: false
+  xy: 2, 2
+  size: 458, 606
+  orig: 458, 606
+  offset: 0, 0
+  index: 3
+Walking
+  rotate: false
+  xy: 462, 2
+  size: 458, 606
+  orig: 458, 606
+  offset: 0, 0
+  index: 4
+
+Waiter_Walking3.png
+size: 1024,1024
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Walking
+  rotate: false
+  xy: 2, 2
+  size: 458, 606
+  orig: 458, 606
+  offset: 0, 0
+  index: 5
+Walking
+  rotate: false
+  xy: 462, 2
+  size: 458, 606
+  orig: 458, 606
+  offset: 0, 0
+  index: 6
+
+Waiter_Walking4.png
+size: 1024,1024
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Walking
+  rotate: false
+  xy: 2, 2
+  size: 458, 606
+  orig: 458, 606
+  offset: 0, 0
+  index: 7
+Walking
+  rotate: false
+  xy: 462, 2
+  size: 458, 606
+  orig: 458, 606
+  offset: 0, 0
+  index: 8
+
+Waiter_Walking5.png
+size: 1024,1024
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Walking
+  rotate: false
+  xy: 2, 2
+  size: 458, 606
+  orig: 458, 606
+  offset: 0, 0
+  index: 9
+Walking
+  rotate: false
+  xy: 462, 2
+  size: 458, 606
+  orig: 458, 606
+  offset: 0, 0
+  index: 10
+
+Waiter_Walking6.png
+size: 1024,1024
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Walking
+  rotate: false
+  xy: 2, 2
+  size: 458, 606
+  orig: 458, 606
+  offset: 0, 0
+  index: 11
+Walking
+  rotate: false
+  xy: 462, 2
+  size: 458, 606
+  orig: 458, 606
+  offset: 0, 0
+  index: 12
+
+Waiter_Walking7.png
+size: 1024,1024
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Walking
+  rotate: false
+  xy: 2, 2
+  size: 458, 606
+  orig: 458, 606
+  offset: 0, 0
+  index: 13
+Walking
+  rotate: false
+  xy: 462, 2
+  size: 458, 606
+  orig: 458, 606
+  offset: 0, 0
+  index: 14
+
+Waiter_Walking8.png
+size: 1024,1024
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Walking
+  rotate: false
+  xy: 2, 2
+  size: 458, 606
+  orig: 458, 606
+  offset: 0, 0
+  index: 15
+Walking
+  rotate: false
+  xy: 462, 2
+  size: 458, 606
+  orig: 458, 606
+  offset: 0, 0
+  index: 16
+
+Waiter_Walking9.png
+size: 1024,1024
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Walking
+  rotate: false
+  xy: 2, 2
+  size: 458, 606
+  orig: 458, 606
+  offset: 0, 0
+  index: 17
+Walking
+  rotate: false
+  xy: 462, 2
+  size: 458, 606
+  orig: 458, 606
+  offset: 0, 0
+  index: 18
+
+Waiter_Walking10.png
+size: 1024,1024
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Walking
+  rotate: false
+  xy: 2, 2
+  size: 458, 606
+  orig: 458, 606
+  offset: 0, 0
+  index: 19
+Walking
+  rotate: false
+  xy: 462, 2
+  size: 458, 606
+  orig: 458, 606
+  offset: 0, 0
+  index: 20
+
+Waiter_Walking11.png
+size: 1024,1024
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Walking
+  rotate: false
+  xy: 2, 2
+  size: 458, 606
+  orig: 458, 606
+  offset: 0, 0
+  index: 21
+Walking
+  rotate: false
+  xy: 462, 2
+  size: 458, 606
+  orig: 458, 606
+  offset: 0, 0
+  index: 22
+
+Waiter_Walking12.png
+size: 512,1024
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Walking
+  rotate: false
+  xy: 2, 2
+  size: 458, 606
+  orig: 458, 606
+  offset: 0, 0
+  index: 23

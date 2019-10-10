@@ -1,45 +1,20 @@
 package com.mygdx.game;
 
-import com.badlogic.gdx.Application;
-import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.*;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
-import com.badlogic.gdx.math.Matrix4;
-import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
-import com.badlogic.gdx.physics.box2d.Contact;
-import com.badlogic.gdx.physics.box2d.Fixture;
-import entities.*;
 import handlers.Assets;
-import handlers.GsContactListener;
-import handlers.LevelHandler;
 import screens.GameScreen;
 import screens.MenuScreen;
 
-import static com.mygdx.game.MyGdxGame.WORLD_HEIGHT;
-import static com.mygdx.game.MyGdxGame.WORLD_WIDTH;
-
-import java.util.Iterator;
-import java.util.Map;
-
 public class MyGdxGame extends Game {
 	// TODO: improve visual feedback for guest and dish spawning / Guest movement?
-	// Maybe make the guest look around? fade out for guests?
 	// TODO: maybe improve guest patience visualisation
 	// TODO: improve overall logic for dish spawning
 	// TODO: add a visual queue for guests
-	// TODO: consider the distance between counters and guests
-	// TODO: more dishes and proper sprites
-	// TODO: improve distance between counters / maybe they should not be placed
-	// right next to each other
-	// TODO: adjust box size, maybe make it a little bit smaller to improve colision
-	// feeling
+	// TODO: proper sprites
+
 	private SpriteBatch batch;
 	private ShapeRenderer shapeRenderer;
 	private OrthographicCamera camera;

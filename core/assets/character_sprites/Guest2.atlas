@@ -1,0 +1,180 @@
+
+Guest2.png
+size: 1024,1024
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Idle
+  rotate: false
+  xy: 2, 2
+  size: 458, 606
+  orig: 458, 606
+  offset: 0, 0
+  index: 0
+Idle
+  rotate: false
+  xy: 462, 2
+  size: 458, 606
+  orig: 458, 606
+  offset: 0, 0
+  index: 1
+
+Guest22.png
+size: 1024,1024
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Idle
+  rotate: false
+  xy: 2, 2
+  size: 458, 606
+  orig: 458, 606
+  offset: 0, 0
+  index: 2
+Idle
+  rotate: false
+  xy: 462, 2
+  size: 458, 606
+  orig: 458, 606
+  offset: 0, 0
+  index: 3
+
+Guest23.png
+size: 1024,1024
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Idle
+  rotate: false
+  xy: 2, 2
+  size: 458, 606
+  orig: 458, 606
+  offset: 0, 0
+  index: 4
+Idle
+  rotate: false
+  xy: 462, 2
+  size: 458, 606
+  orig: 458, 606
+  offset: 0, 0
+  index: 5
+
+Guest24.png
+size: 1024,1024
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Idle
+  rotate: false
+  xy: 2, 2
+  size: 458, 606
+  orig: 458, 606
+  offset: 0, 0
+  index: 6
+Idle
+  rotate: false
+  xy: 462, 2
+  size: 458, 606
+  orig: 458, 606
+  offset: 0, 0
+  index: 7
+
+Guest25.png
+size: 1024,1024
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Idle
+  rotate: false
+  xy: 2, 2
+  size: 458, 606
+  orig: 458, 606
+  offset: 0, 0
+  index: 8
+Idle
+  rotate: false
+  xy: 462, 2
+  size: 458, 606
+  orig: 458, 606
+  offset: 0, 0
+  index: 9
+
+Guest26.png
+size: 1024,1024
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Idle
+  rotate: false
+  xy: 2, 2
+  size: 458, 606
+  orig: 458, 606
+  offset: 0, 0
+  index: 10
+Idle
+  rotate: false
+  xy: 462, 2
+  size: 458, 606
+  orig: 458, 606
+  offset: 0, 0
+  index: 11
+
+Guest27.png
+size: 1024,1024
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Idle
+  rotate: false
+  xy: 2, 2
+  size: 458, 606
+  orig: 458, 606
+  offset: 0, 0
+  index: 12
+Idle
+  rotate: false
+  xy: 462, 2
+  size: 458, 606
+  orig: 458, 606
+  offset: 0, 0
+  index: 13
+
+Guest28.png
+size: 1024,1024
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Idle
+  rotate: false
+  xy: 2, 2
+  size: 458, 606
+  orig: 458, 606
+  offset: 0, 0
+  index: 14
+Idle
+  rotate: false
+  xy: 462, 2
+  size: 458, 606
+  orig: 458, 606
+  offset: 0, 0
+  index: 15
+
+Guest29.png
+size: 1024,1024
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Idle
+  rotate: false
+  xy: 2, 2
+  size: 458, 606
+  orig: 458, 606
+  offset: 0, 0
+  index: 16
+Idle
+  rotate: false
+  xy: 462, 2
+  size: 458, 606
+  orig: 458, 606
+  offset: 0, 0
+  index: 17
