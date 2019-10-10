@@ -1,17 +1,23 @@
 package entities;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import handlers.Assets;
 
 import java.util.Arrays;
+import java.util.concurrent.ThreadLocalRandom;
 
 import static com.mygdx.game.MyGdxGame.WORLD_HEIGHT;
 import static com.mygdx.game.MyGdxGame.WORLD_WIDTH;
 
 public class Guest {
     private Sprite sprite;
+    private Animation<TextureRegion> idleAnimation;
     private Table table;
     private Dish dish;
     private long spawnTime;
@@ -25,9 +31,11 @@ public class Guest {
     private boolean wantsToOrder = true;
 
     public Guest(long spawnTime, long happiness, long patience, long wealth) {
+        int randomNum = ThreadLocalRandom.current().nextInt(1, 5 + 1);
+        TextureAtlas textureAtlas = new TextureAtlas(Gdx.files.internal("character_sprites/Guest"+randomNum+".atlas"));
+        sprite = new Sprite(textureAtlas.findRegion("Idle"));
         order = Foodtype.getRandomFoodType();
         dish = new Dish(order);
-        sprite = new Sprite(Assets.manager.get(Assets.GUEST, Texture.class));
         sprite.setSize(WORLD_WIDTH / 32, WORLD_HEIGHT / 18);
         sprite.setColor(0, 1, 0, 1);
         this.spawnTime = spawnTime;
@@ -102,12 +110,13 @@ public class Guest {
     public long getHappiness() {
         return happiness;
     }
-    public void setWantsToOrder(boolean wantsToOrder) {
-        this.wantsToOrder = wantsToOrder;
+
+    public Animation<TextureRegion> getIdleAnimation() {
+        return idleAnimation;
     }
 
-    public boolean isWantsToOrder() {
-        return wantsToOrder;
+    public void setIdleAnimation(Animation<TextureRegion> idleAnimation) {
+        this.idleAnimation = idleAnimation;
     }
 
     @Override
