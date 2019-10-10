@@ -57,13 +57,11 @@ public class Guesthandler {
 		} else if (timeElapsed >= (guest.getPatience() / 1.5)) {
 			if (guest.getHappiness() != 1) {
 				guest.setHappiness(1);
-				guest.setColor(Color.RED);
 				guest.setOrderTime(time);
 			}
 		} else if (timeElapsed >= (guest.getPatience() / 3)) {
 			if (guest.getHappiness() != 2) {
 				guest.setHappiness(2);
-				guest.setColor(Color.YELLOW);
 				guest.setOrderTime(time);
 			
 			}
@@ -81,7 +79,7 @@ public class Guesthandler {
 			guest.setTable(table);
 			table.setGuest(guest);
 			dishhandler.addToDishQueue(guest.getOrder());
-			Gdx.app.log("INFO: ", "Added " + guest.getOrder() + "to dishqueue");
+			Gdx.app.log("INFO: ", "Added " + guest.getOrder() + " to dishqueue");
 			activeGuests.add(guest);
 			Gdx.app.log("INFO: ", "Spawned " + guest);
 			guests.removeFirst();

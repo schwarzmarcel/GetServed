@@ -30,7 +30,7 @@ public class Waiter implements Moveable {
         runningAnimation = new Animation<TextureRegion>(0.015f, textureAtlas.getRegions(), Animation.PlayMode.LOOP);
         textureAtlas = new TextureAtlas(Gdx.files.internal("character_sprites/Waiter_Idle.atlas"));
         sprite = new Sprite(textureAtlas.findRegion("Idle"));
-        sprite.setSize(WORLD_WIDTH / 16, WORLD_HEIGHT / 8);
+        sprite.setSize(WORLD_WIDTH / 32, WORLD_HEIGHT / 16);
         sprite.setPosition(positionX, positionY);
         idleAnimation = new Animation<TextureRegion>(0.045f, textureAtlas.getRegions(), Animation.PlayMode.LOOP);
         BodyDef bodyDef = new BodyDef();

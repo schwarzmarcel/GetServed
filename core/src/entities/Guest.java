@@ -16,7 +16,6 @@ import static com.mygdx.game.MyGdxGame.WORLD_HEIGHT;
 import static com.mygdx.game.MyGdxGame.WORLD_WIDTH;
 
 public class Guest {
-    private Sprite sprite;
     private Animation<TextureRegion> idleAnimation;
     private Table table;
     private Dish dish;
@@ -28,17 +27,13 @@ public class Guest {
     private float timeElapsed;
     private Foodtype order;
     private float[] position = new float[2];
-    private boolean wantsToOrder = true;
 
     public Guest(long spawnTime, long happiness, long patience, long wealth) {
         int randomNum = ThreadLocalRandom.current().nextInt(1, 5 + 1);
         TextureAtlas textureAtlas = new TextureAtlas(Gdx.files.internal("character_sprites/Guest"+randomNum+".atlas"));
         idleAnimation = new Animation<TextureRegion>(0.045f, textureAtlas.getRegions(), Animation.PlayMode.LOOP);
-        sprite = new Sprite(textureAtlas.findRegion("Idle"));
         order = Foodtype.getRandomFoodType();
         dish = new Dish(order);
-        sprite.setSize(WORLD_WIDTH / 32, WORLD_HEIGHT / 18);
-        sprite.setColor(0, 1, 0, 1);
         this.spawnTime = spawnTime;
         this.orderTime = spawnTime;
         this.happiness = happiness;
@@ -50,19 +45,9 @@ public class Guest {
     public void setPosition(float positionX, float positionY) {
     	position[0] = positionX;
         position[1] = positionY;
-        sprite.setPosition(positionX, positionY);
         float[] position = {positionX + dish.getSprite().getWidth() + 2, positionY};
         dish.setPosition(position);
     }
-
-    public Sprite getSprite() {
-        return sprite;
-    }
-
-    public void setColor(Color color) {
-    	sprite.setColor(color);
-    }
-
     public long getSpawnTime() {
 		return spawnTime;
 	}
@@ -116,8 +101,8 @@ public class Guest {
         return idleAnimation;
     }
 
-    public void setIdleAnimation(Animation<TextureRegion> idleAnimation) {
-        this.idleAnimation = idleAnimation;
+    public float[] getPosition() {
+        return position;
     }
 
     @Override

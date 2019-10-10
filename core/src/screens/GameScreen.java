@@ -38,10 +38,6 @@ public class GameScreen implements Screen{
 	private GlyphLayout layoutTip;
 	private int tip;
 	private int lastTipTime;
-	
-	
-	
-
 
 	public GameScreen(MyGdxGame game, SpriteBatch batch, ShapeRenderer shapeRenderer, OrthographicCamera camera, String levelname) {
 		this.game = game;
@@ -49,19 +45,16 @@ public class GameScreen implements Screen{
 		this.shapeRenderer = shapeRenderer;
 		this.camera = camera;
 		initializeFonts();
-		Gdx.app.log("INFO:", "fonts initialized");
+		Gdx.app.log("INFO: ", "fonts initialized");
 		level = new LevelHandler(levelname, game);
 		level.initializeLevel();
-		Gdx.app.log("INFO:", "level initialized");
+		Gdx.app.log("INFO: ", "level initialized");
 		debugRenderer = new Box2DDebugRenderer();
 		contactListener = new GsContactListener();
 		level.getWorld().setContactListener(contactListener);
 	}
 
-	@Override
-	public void show() {
-		
-	}
+
 
 	@Override
 	public void render(float delta) {
@@ -88,30 +81,6 @@ public class GameScreen implements Screen{
 		if (true)
 			debugRenderer.render(level.getWorld(), debugMatrix);
 		testContacts();
-		
-	}
-
-	@Override
-	public void resize(int width, int height) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void pause() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void resume() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void hide() {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -156,7 +125,7 @@ public class GameScreen implements Screen{
 						- level.getWaiter().getSprite().getWidth() / 2,
 				(level.getWaiter().getBody().getPosition().y * PIXELS_TO_METERS)
 						- level.getWaiter().getSprite().getHeight() / 2,
-				WORLD_WIDTH / 16, WORLD_HEIGHT / 8);
+				WORLD_WIDTH / 32, WORLD_HEIGHT / 16);
 	}
 	
 	private void drawGuests() {
@@ -164,9 +133,9 @@ public class GameScreen implements Screen{
 		for (Guest g : level.getGuesthandler().getActiveGuests()) {
 			currentFrame = g.getIdleAnimation().getKeyFrame(elapsedTime);
 			batch.draw(currentFrame,
-					g.getSprite().getX(),
-					g.getSprite().getY(),
-					WORLD_WIDTH / 16, WORLD_HEIGHT / 8);
+					g.getPosition()[0],
+					g.getPosition()[1],
+					WORLD_WIDTH / 32, WORLD_HEIGHT / 16);
 		}
 	}
 	
@@ -322,4 +291,32 @@ public class GameScreen implements Screen{
 		}
 	}
 
+	@Override
+	public void show() {
+
+	}
+
+	@Override
+	public void resize(int width, int height) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void pause() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void resume() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void hide() {
+		// TODO Auto-generated method stub
+
+	}
 }

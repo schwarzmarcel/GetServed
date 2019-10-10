@@ -29,7 +29,7 @@ public class LevelHandler {
     private MyGdxGame game;
 
     public LevelHandler(String levelname, MyGdxGame game) {
-    	this.game = game;
+        this.game = game;
         dishhandler = new Dishhandler();
         guesthandler = new Guesthandler(game);
         world = new World(new Vector2(0, 0), true);
