@@ -1,0 +1,61 @@
+{
+	"name" : "level2",
+	"positions": [
+		{
+		 "row": 9,
+		 "col": 13,
+		 "type": "table",
+		 "rotation": 0
+		},
+		{
+		 "row": 5,
+		 "col": 24,
+		 "type": "table",
+		 "rotation": 0
+		},
+		{
+		"row": 9,
+		 "col": 18,
+		 "type": "table",
+		 "rotation": 0
+		},
+		{
+		"row": 7,
+		 "col": 6,
+		 "type": "table",
+		 "rotation": 0
+		},
+		{
+		"row": 11,
+		 "col": 8,
+		 "type": "table",
+		 "rotation": 0
+		},
+		{
+		"row": 12,
+		 "col": 23,
+		 "type": "table",
+		 "rotation": 0
+		},
+		{
+		"row": 3,
+		 "col": 15,
+		 "type": "counter",
+		 "rotation": 3
+		},
+		{
+		"row": 15,
+		 "col": 15,
+		 "type": "counter",
+		 "rotation": 2
+		}
+	],
+	"guests":[
+		{
+		"patience":24,
+		"happiness":3,
+		"wealth":10,
+		"spawntime": 2
+		}
+	]
+}

@@ -5,6 +5,8 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.utils.Queue;
+import com.mygdx.game.MyGdxGame;
+
 import entities.Foodtype;
 import entities.Guest;
 import entities.Spawnarea;
@@ -20,17 +22,13 @@ public class Guesthandler {
 	private ArrayList<Guest> activeGuests;
 	private ArrayList<Guest> guestsToRemove;
 	private Spawnarea spawnarea;
-//	private ArrayList<Sprite> currentOrderSymbols;
-//	private Map<Guest, Sprite> activeOrders;
-//	private Map<Guest, Integer> lastOrder;
+	private MyGdxGame game;
 
-	public Guesthandler() {
+	public Guesthandler(MyGdxGame game) {
 		guests = new Queue<>();
 		activeGuests = new ArrayList<>();
 		guestsToRemove = new ArrayList<>();
-//		currentOrderSymbols = new ArrayList<>();
-//		lastOrder = new HashMap<>();
-//		activeOrders = new HashMap<>();
+		this.game = game;
 	}
 
 	public void handleGuests(int time, Dishhandler dishhandler) {
@@ -100,13 +98,12 @@ public class Guesthandler {
 
 	public void removeActiveGuest(Guest guest) {
 		spawnarea.addFreeTable(guest.getTable());
-//		currentOrderSymbols.remove(guest.getDish().getSprite());
-//		activeOrders.remove(guest);
 		activeGuests.remove(guest);
 		guest.getTable().removeGuest();
 		Gdx.app.log("INFO: ", "Guest " + guest + " removed.");
 		if (guests.isEmpty()) {
 			Gdx.app.log("INFO: ", "You won! Good job!");
+			game.showMenu();
 		}
 	}
 
@@ -122,34 +119,5 @@ public class Guesthandler {
 		return guests;
 	}
 
-//	public ArrayList<Sprite> getCurrentOrderSymbols() {
-//		return currentOrderSymbols;
-//	}
-//
-//	private void updateOrderQueue() {
-//		int x = 2;
-//		// TODO: this is nasty so fix it
-//		for (Guest g : activeGuests) {
-//			Sprite sprite;
-//			Foodtype foodtype = g.getOrder();
-//			switch (foodtype) {
-//			case BURGER:
-//				sprite = new Sprite(Assets.manager.get(Assets.BURGER, Texture.class));
-//				break;
-//			case PASTA:
-//				sprite = new Sprite(Assets.manager.get(Assets.PASTA, Texture.class));
-//				break;
-//			case PIZZA:
-//				sprite = new Sprite(Assets.manager.get(Assets.PIZZA, Texture.class));
-//				break;
-//			default:
-//				throw new IllegalStateException("Unexpected value: " + foodtype);
-//			}
-//			sprite.setPosition(x, 5);
-//			sprite.setSize(WORLD_WIDTH / 32, WORLD_HEIGHT / 18);
-//			if (lastOrder.containsKey(g))
-//				activeOrders.put(g, sprite);
-//			x = x + 5;
-//		}
-//	}
+
 }

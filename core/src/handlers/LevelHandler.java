@@ -5,6 +5,8 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Timer;
+import com.mygdx.game.MyGdxGame;
+
 import entities.*;
 import exceptions.InputNotValidException;
 
@@ -24,15 +26,17 @@ public class LevelHandler {
     private Spawnarea spawnarea;
     private JsonLevelReader reader;
     private Gamelevel level;
+    private MyGdxGame game;
 
-    public LevelHandler() {
+    public LevelHandler(String levelname, MyGdxGame game) {
+    	this.game = game;
         dishhandler = new Dishhandler();
-        guesthandler = new Guesthandler();
+        guesthandler = new Guesthandler(game);
         world = new World(new Vector2(0, 0), true);
         Walls walls = new Walls(world);
         money = 25;
         reader = new JsonLevelReader();
-        level = reader.generateLevel("\\\\ad.liu.se\\home\\marsc932\\Documents\\tddd23\\level1");
+        level = reader.generateLevel(levelname);
     }
 
     public void initializeLevel() {
@@ -73,8 +77,10 @@ public class LevelHandler {
                 else if (money == 1) {
                 	money = 0;
                 }
-                if(money == 0) 
+                if(money == 0) {
                 	Gdx.app.log("INFO: ", "You lost because you ran out of money :(");
+                	game.showMenu();
+                }
             }
         }, 0, 1);
     }
@@ -118,8 +124,5 @@ public class LevelHandler {
 		return spawnarea;
 	}
 
-//	public List<Sprite> getCurrentOrderSymbols(){
-//        return guesthandler.getCurrentOrderSymbols();
-//    }
    
 }

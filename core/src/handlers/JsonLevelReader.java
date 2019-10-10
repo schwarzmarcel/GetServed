@@ -20,9 +20,11 @@ public class JsonLevelReader {
     private List<Gridposition> gridpositions = new ArrayList<>();
     private List<Guest> guestList = new ArrayList<>();
 
-    public Gamelevel generateLevel(String filepath) {
+    public Gamelevel generateLevel(String levelname) {
         JSONParser parser = new JSONParser();
-        try (Reader reader = new FileReader("\\\\ad.liu.se\\home\\marsc932\\Documents\\tddd23\\level1")) {
+        // \Users\evasc\Desktop\Uni\Auslandssemester\Game Design\tddd23\
+        String filepath = "C:\\Users\\evasc\\Desktop\\Uni\\Auslandssemester\\Game Design\\tddd23\\" + levelname;
+        try (Reader reader = new FileReader(filepath)) {
             JSONObject jsonObject = (JSONObject) parser.parse(reader);
             Gamelevel level = new Gamelevel();
             String name = jsonObject.get("name").toString();
