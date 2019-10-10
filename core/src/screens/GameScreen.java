@@ -132,11 +132,13 @@ public class GameScreen implements Screen{
 	}
 	
 	private void drawWaiter() {
-		TextureRegion currentFrame = level.getWaiter().getRunningAnimation().getKeyFrame(elapsedTime);
+		TextureRegion currentFrame;
 
 		if (!Gdx.input.isKeyPressed(Input.Keys.UP) && !Gdx.input.isKeyPressed(Input.Keys.DOWN)
 				&& !Gdx.input.isKeyPressed(Input.Keys.LEFT) && !Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-			currentFrame = level.getWaiter().getSprite();
+			currentFrame = level.getWaiter().getIdleAnimation().getKeyFrame(elapsedTime);
+		}else{
+			currentFrame = level.getWaiter().getRunningAnimation().getKeyFrame(elapsedTime);
 		}
 
 		if (level.getWaiter().getOrientation().equals("right")) {

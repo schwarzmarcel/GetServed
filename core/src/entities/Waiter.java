@@ -19,18 +19,20 @@ import static com.mygdx.game.MyGdxGame.WORLD_WIDTH;
 
 public class Waiter implements Moveable {
     private Animation<TextureRegion> runningAnimation;
+    private Animation<TextureRegion> idleAnimation;
     private Sprite sprite;
     private Box box;
     private Dish dish;
     private String orientation = "right";
-    private boolean flipped = false;
 
     public Waiter(World world, float positionX, float positionY) {
-        sprite = new Sprite(Assets.manager.get(Assets.WAITER, Texture.class));
+        TextureAtlas textureAtlas = new TextureAtlas(Gdx.files.internal("character_sprites/Waiter_Walking.atlas"));
+        runningAnimation = new Animation<TextureRegion>(0.015f, textureAtlas.getRegions(), Animation.PlayMode.LOOP);
+        textureAtlas = new TextureAtlas(Gdx.files.internal("character_sprites/Waiter_Idle.atlas"));
+        sprite = new Sprite(textureAtlas.findRegion("Idle"));
         sprite.setSize(WORLD_WIDTH / 16, WORLD_HEIGHT / 8);
         sprite.setPosition(positionX, positionY);
-        TextureAtlas textureAtlas = new TextureAtlas(Gdx.files.internal("character_sprites/waiter_walking.atlas"));
-        runningAnimation = new Animation<TextureRegion>(0.015f, textureAtlas.getRegions(), Animation.PlayMode.LOOP);
+        idleAnimation = new Animation<TextureRegion>(0.045f, textureAtlas.getRegions(), Animation.PlayMode.LOOP);
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
         box = new Box(world, sprite, true);
@@ -80,6 +82,14 @@ public class Waiter implements Moveable {
 
     public String getOrientation() {
         return orientation;
+    }
+
+    public Animation<TextureRegion> getIdleAnimation() {
+        return idleAnimation;
+    }
+
+    public void setIdleAnimation(Animation<TextureRegion> idleAnimation) {
+        this.idleAnimation = idleAnimation;
     }
 
     @Override
