@@ -1,10 +1,6 @@
 package entities;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import handlers.Assets;
@@ -12,23 +8,20 @@ import handlers.Assets;
 import java.util.Arrays;
 import java.util.concurrent.ThreadLocalRandom;
 
-import static com.mygdx.game.MyGdxGame.WORLD_HEIGHT;
-import static com.mygdx.game.MyGdxGame.WORLD_WIDTH;
-
 public class Guest {
     private Animation<TextureRegion> idleAnimation;
     private Table table;
     private Dish dish;
     private long spawnTime;
     private long orderTime;
-    private long happiness;
+    private float happiness = 100f;
     private long patience;
     private long wealth;
     private float timeElapsed;
     private Foodtype order;
     private float[] position = new float[2];
 
-    public Guest(long spawnTime, long happiness, long patience, long wealth) {
+    public Guest(long spawnTime, long patience, long wealth) {
         int randomNum = ThreadLocalRandom.current().nextInt(1, 5 + 1);
         TextureAtlas textureAtlas = null;
         switch (randomNum){
@@ -49,10 +42,13 @@ public class Guest {
         dish = new Dish(order);
         this.spawnTime = spawnTime;
         this.orderTime = spawnTime;
-        this.happiness = happiness;
         this.patience = patience;
         this.wealth = wealth;
         timeElapsed = 0;
+    }
+
+    public void calculateTip() {
+
     }
 
     public void setPosition(float positionX, float positionY) {
@@ -83,10 +79,6 @@ public class Guest {
     	return (int) Math.ceil(tip);
     }
 
-    public void setHappiness(int happiness) {
-		this.happiness = happiness;
-	}
-
 	public void setTable(Table table) {
         this.table = table;
     }
@@ -107,7 +99,7 @@ public class Guest {
         return order;
     }
 
-    public long getHappiness() {
+    public float getHappiness() {
         return happiness;
     }
 
