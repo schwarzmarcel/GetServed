@@ -30,7 +30,20 @@ public class Guest {
 
     public Guest(long spawnTime, long happiness, long patience, long wealth) {
         int randomNum = ThreadLocalRandom.current().nextInt(1, 5 + 1);
-        TextureAtlas textureAtlas = new TextureAtlas(Gdx.files.internal("character_sprites/Guest"+randomNum+".atlas"));
+        TextureAtlas textureAtlas = null;
+        switch (randomNum){
+        case 1: textureAtlas = Assets.manager.get(Assets.GUEST1, TextureAtlas.class);
+        	break;
+        case 2: textureAtlas = Assets.manager.get(Assets.GUEST2, TextureAtlas.class);
+    		break;
+        case 3: textureAtlas = Assets.manager.get(Assets.GUEST3, TextureAtlas.class);
+			break;
+        case 4: textureAtlas = Assets.manager.get(Assets.GUEST4, TextureAtlas.class);
+			break;
+        case 5: textureAtlas = Assets.manager.get(Assets.GUEST5, TextureAtlas.class);
+        	break;
+        default: break;
+        }
         idleAnimation = new Animation<TextureRegion>(0.045f, textureAtlas.getRegions(), Animation.PlayMode.LOOP);
         order = Foodtype.getRandomFoodType();
         dish = new Dish(order);

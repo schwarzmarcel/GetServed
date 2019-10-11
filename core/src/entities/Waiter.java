@@ -26,9 +26,9 @@ public class Waiter implements Moveable {
     private String orientation = "right";
 
     public Waiter(World world, float positionX, float positionY) {
-        TextureAtlas textureAtlas = new TextureAtlas(Gdx.files.internal("character_sprites/Waiter_Walking.atlas"));
-        runningAnimation = new Animation<TextureRegion>(0.015f, textureAtlas.getRegions(), Animation.PlayMode.LOOP);
-        textureAtlas = new TextureAtlas(Gdx.files.internal("character_sprites/Waiter_Idle.atlas"));
+        TextureAtlas textureAtlas = Assets.manager.get(Assets.WAITERWALKING, TextureAtlas.class);
+    	runningAnimation = new Animation<TextureRegion>(0.015f, textureAtlas.getRegions(), Animation.PlayMode.LOOP);
+        textureAtlas = Assets.manager.get(Assets.WAITERIDLE, TextureAtlas.class);
         sprite = new Sprite(textureAtlas.findRegion("Idle"));
         sprite.setSize(WORLD_WIDTH / 32, WORLD_HEIGHT / 16);
         sprite.setPosition(positionX, positionY);

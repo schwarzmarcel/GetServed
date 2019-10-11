@@ -99,7 +99,7 @@ public class Guesthandler {
 		activeGuests.remove(guest);
 		guest.getTable().removeGuest();
 		Gdx.app.log("INFO: ", "Guest " + guest + " removed.");
-		if (guests.isEmpty()) {
+		if (guests.isEmpty() && activeGuests.isEmpty()) {
 			Gdx.app.log("INFO: ", "You won! Good job!");
 			game.showMenu();
 		}
