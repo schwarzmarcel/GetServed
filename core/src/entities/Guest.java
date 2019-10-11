@@ -14,10 +14,9 @@ public class Guest {
     private Dish dish;
     private long spawnTime;
     private long orderTime;
-    private float happiness = 100f;
     private long patience;
+    private long dynamicPatience;
     private long wealth;
-    private float timeElapsed;
     private Foodtype order;
     private float[] position = new float[2];
 
@@ -44,13 +43,20 @@ public class Guest {
         this.orderTime = spawnTime;
         this.patience = patience;
         this.wealth = wealth;
-        timeElapsed = 0;
     }
 
-    public void calculateTip() {
-
+    public void receivedWrongDish() {
+        dynamicPatience = dynamicPatience - 25;
     }
 
+    public int getTip() {
+        long tip = wealth * (dynamicPatience / 100);
+        return (int) Math.ceil(tip);
+    }
+
+    public void calculatePatience(long timeElapsed) {
+        dynamicPatience = (patience - timeElapsed * 5);
+    }
     public void setPosition(float positionX, float positionY) {
     	position[0] = positionX;
         position[1] = positionY;
@@ -71,13 +77,8 @@ public class Guest {
 	}
 
 	public long getPatience() {
-		return patience;
+        return dynamicPatience;
 	}
-
-    public int getTip() {
-    	double tip = (wealth * ((patience - timeElapsed) / patience));
-    	return (int) Math.ceil(tip);
-    }
 
 	public void setTable(Table table) {
         this.table = table;
@@ -91,17 +92,10 @@ public class Guest {
     	return dish;
     }
 
-    public void setTimeElapsed(float time) {
-    	timeElapsed = time;
-    }
-
 	public Foodtype getOrder() {
         return order;
     }
 
-    public float getHappiness() {
-        return happiness;
-    }
 
     public Animation<TextureRegion> getIdleAnimation() {
         return idleAnimation;
@@ -115,7 +109,6 @@ public class Guest {
     public String toString() {
         return "Guest{" +
                 "spawnTime=" + spawnTime +
-                ", happiness=" + happiness +
                 ", patience=" + patience +
                 ", wealth=" + wealth +
                 ", order=" + order +

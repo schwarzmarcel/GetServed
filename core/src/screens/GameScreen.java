@@ -3,14 +3,12 @@ package screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
@@ -134,23 +132,21 @@ public class GameScreen implements Screen {
 		for (Guest g : level.getGuesthandler().getActiveGuests()) {
 			currentFrame = g.getIdleAnimation().getKeyFrame(elapsedTime);
 			batch.draw(currentFrame, g.getPosition()[0], g.getPosition()[1], WORLD_WIDTH / 32, WORLD_HEIGHT / 16);
-			drawHappiness(g);
+			drawPatience(g);
 		}
 	}
 
-	private void drawHappiness(Guest guest) {
+	private void drawPatience(Guest guest) {
 		batch.end();
 		shapeRenderer.begin(ShapeType.Filled);
-		
-		if(guest.getHappiness() == 3) 
+		long patience = guest.getPatience();
+		if (patience > 75)
 			shapeRenderer.setColor(Color.GREEN);
-		else if(guest.getHappiness() == 2)
+		else if (patience > 50 && patience <= 75)
 			shapeRenderer.setColor(Color.YELLOW);
 		else
 			shapeRenderer.setColor(Color.RED);
-			
-		shapeRenderer.rect(guest.getPosition()[0] - 2, guest.getPosition()[1], 1, ((float) guest.getHappiness() / 3) * 6);
-		
+		shapeRenderer.rect(guest.getPosition()[0] - 2, guest.getPosition()[1], 1, ((float) guest.getPatience() / 100) * 6);
 		shapeRenderer.end();
 		batch.begin();
 	}
