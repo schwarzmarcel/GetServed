@@ -14,8 +14,8 @@ public class Guest {
     private Dish dish;
     private long spawnTime;
     private long orderTime;
-    private long patience;
-    private long dynamicPatience;
+    private float patience;
+    private float dynamicPatience;
     private long wealth;
     private Foodtype order;
     private float[] position = new float[2];
@@ -46,16 +46,19 @@ public class Guest {
     }
 
     public void receivedWrongDish() {
-        dynamicPatience = dynamicPatience - 25;
+        patience = patience - ((dynamicPatience / 100) * 25);
     }
 
     public int getTip() {
-        long tip = wealth * (dynamicPatience / 100);
+        float tip = (wealth * (dynamicPatience / 100));
         return (int) Math.ceil(tip);
     }
 
     public void calculatePatience(long timeElapsed) {
         dynamicPatience = (patience - timeElapsed * 5);
+        if (dynamicPatience < 0) {
+            dynamicPatience = 0;
+        }
     }
     public void setPosition(float positionX, float positionY) {
     	position[0] = positionX;
@@ -76,7 +79,7 @@ public class Guest {
 		this.orderTime = orderTime;
 	}
 
-	public long getPatience() {
+    public float getPatience() {
         return dynamicPatience;
 	}
 
