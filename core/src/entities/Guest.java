@@ -61,6 +61,7 @@ public class Guest {
         float[] position = {positionX + dish.getSprite().getWidth() + 2, positionY};
         dish.setPosition(position);
     }
+    
     public long getSpawnTime() {
 		return spawnTime;
 	}

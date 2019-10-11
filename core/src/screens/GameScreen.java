@@ -3,12 +3,14 @@ package screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
@@ -18,12 +20,13 @@ import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.mygdx.game.MyGdxGame;
 import entities.*;
+import handlers.Assets;
 import handlers.GsContactListener;
 import handlers.LevelHandler;
 
 import static com.mygdx.game.MyGdxGame.*;
 
-public class GameScreen implements Screen{
+public class GameScreen implements Screen {
 	public MyGdxGame game;
 	private SpriteBatch batch;
 	private ShapeRenderer shapeRenderer;
@@ -33,13 +36,13 @@ public class GameScreen implements Screen{
 	private GsContactListener contactListener;
 	private float elapsedTime = 0;
 	private BitmapFont moneyFont;
-	private BitmapFont tipFont;
 	private GlyphLayout layoutMoney;
 	private GlyphLayout layoutTip;
 	private int tip;
 	private int lastTipTime;
 
-	public GameScreen(MyGdxGame game, SpriteBatch batch, ShapeRenderer shapeRenderer, OrthographicCamera camera, String levelname) {
+	public GameScreen(MyGdxGame game, SpriteBatch batch, ShapeRenderer shapeRenderer, OrthographicCamera camera,
+			String levelname) {
 		this.game = game;
 		this.batch = batch;
 		this.shapeRenderer = shapeRenderer;
@@ -53,8 +56,6 @@ public class GameScreen implements Screen{
 		contactListener = new GsContactListener();
 		level.getWorld().setContactListener(contactListener);
 	}
-
-
 
 	@Override
 	public void render(float delta) {
@@ -81,32 +82,32 @@ public class GameScreen implements Screen{
 		if (true)
 			debugRenderer.render(level.getWorld(), debugMatrix);
 		testContacts();
-		
+
 	}
 
 	@Override
 	public void dispose() {
-		level.getWorld().dispose();
+		//level.getWorld().dispose();
+		//debugRenderer.dispose();
+		
 	}
-	
+
 	private void initializeFonts() {
-		moneyFont = new BitmapFont(Gdx.files.internal("moneyfont2.fnt"));
+		moneyFont = Assets.manager.get(Assets.MONEYFONT, BitmapFont.class);
 		moneyFont.getData().setScale(0.1f);
 		layoutMoney = new GlyphLayout();
 		tip = 0;
 		lastTipTime = -3;
-		tipFont = new BitmapFont(Gdx.files.internal("moneyfont2.fnt"));
-		tipFont.getData().setScale(0.08f);
 		layoutTip = new GlyphLayout();
 	}
-	
+
 	private void drawWaiter() {
 		TextureRegion currentFrame;
 
 		if (!Gdx.input.isKeyPressed(Input.Keys.UP) && !Gdx.input.isKeyPressed(Input.Keys.DOWN)
 				&& !Gdx.input.isKeyPressed(Input.Keys.LEFT) && !Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
 			currentFrame = level.getWaiter().getIdleAnimation().getKeyFrame(elapsedTime);
-		}else{
+		} else {
 			currentFrame = level.getWaiter().getRunningAnimation().getKeyFrame(elapsedTime);
 		}
 
@@ -127,18 +128,33 @@ public class GameScreen implements Screen{
 						- level.getWaiter().getSprite().getHeight() / 2,
 				WORLD_WIDTH / 32, WORLD_HEIGHT / 16);
 	}
-	
+
 	private void drawGuests() {
 		TextureRegion currentFrame;
 		for (Guest g : level.getGuesthandler().getActiveGuests()) {
 			currentFrame = g.getIdleAnimation().getKeyFrame(elapsedTime);
-			batch.draw(currentFrame,
-					g.getPosition()[0],
-					g.getPosition()[1],
-					WORLD_WIDTH / 32, WORLD_HEIGHT / 16);
+			batch.draw(currentFrame, g.getPosition()[0], g.getPosition()[1], WORLD_WIDTH / 32, WORLD_HEIGHT / 16);
+			drawHappiness(g);
 		}
 	}
-	
+
+	private void drawHappiness(Guest guest) {
+		batch.end();
+		shapeRenderer.begin(ShapeType.Filled);
+		
+		if(guest.getHappiness() == 3) 
+			shapeRenderer.setColor(Color.GREEN);
+		else if(guest.getHappiness() == 2)
+			shapeRenderer.setColor(Color.YELLOW);
+		else
+			shapeRenderer.setColor(Color.RED);
+			
+		shapeRenderer.rect(guest.getPosition()[0] - 2, guest.getPosition()[1], 1, ((float) guest.getHappiness() / 3) * 6);
+		
+		shapeRenderer.end();
+		batch.begin();
+	}
+
 	private void drawTables() {
 		for (Table t : level.getSpawnarea().getTables()) {
 			t.getSprite().draw(batch);
@@ -158,7 +174,7 @@ public class GameScreen implements Screen{
 			}
 		}
 	}
-	
+
 	private void drawOrders() {
 
 		for (Guest g : level.getGuesthandler().getActiveGuests()) {
@@ -184,49 +200,49 @@ public class GameScreen implements Screen{
 						(c.getNextDish().getSprite().getWidth())
 								* ((level.getTime() - c.getLastDishTime()) / (6 / c.getCookSpeed())),
 						1);
-				} else if (c.getRotation() == 1) {
-					shapeRenderer.setColor(Color.LIGHT_GRAY);
-					shapeRenderer.rect(c.getPosition()[0] + c.getSprite().getWidth() + 1,
-							c.getPosition()[1] + (c.getSprite().getHeight() - c.getNextDish().getSprite().getHeight() - 4),
-							c.getNextDish().getSprite().getWidth(), 1);
+			} else if (c.getRotation() == 1) {
+				shapeRenderer.setColor(Color.LIGHT_GRAY);
+				shapeRenderer.rect(c.getPosition()[0] + c.getSprite().getWidth() + 1,
+						c.getPosition()[1] + (c.getSprite().getHeight() - c.getNextDish().getSprite().getHeight() - 4),
+						c.getNextDish().getSprite().getWidth(), 1);
 
-					shapeRenderer.setColor(Color.BLUE);
-					shapeRenderer.rect(c.getPosition()[0] + c.getSprite().getWidth() + 1,
-							c.getPosition()[1] + (c.getSprite().getHeight() - c.getNextDish().getSprite().getHeight() - 4),
-							(c.getNextDish().getSprite().getWidth())
-									* ((level.getTime() - c.getLastDishTime()) / (6 / c.getCookSpeed())),
-							1);
-				} else if (c.getRotation() == 2) {
-					shapeRenderer.setColor(Color.LIGHT_GRAY);
-					shapeRenderer.rect(c.getPosition()[0] + c.getSprite().getWidth() / 2 - c.getNextDish().getSprite().getWidth() / 2,
-							c.getPosition()[1] + c.getSprite().getHeight() + 1,
-							c.getNextDish().getSprite().getWidth(), 1);
+				shapeRenderer.setColor(Color.BLUE);
+				shapeRenderer.rect(c.getPosition()[0] + c.getSprite().getWidth() + 1,
+						c.getPosition()[1] + (c.getSprite().getHeight() - c.getNextDish().getSprite().getHeight() - 4),
+						(c.getNextDish().getSprite().getWidth())
+								* ((level.getTime() - c.getLastDishTime()) / (6 / c.getCookSpeed())),
+						1);
+			} else if (c.getRotation() == 2) {
+				shapeRenderer.setColor(Color.LIGHT_GRAY);
+				shapeRenderer.rect(
+						c.getPosition()[0] + c.getSprite().getWidth() / 2 - c.getNextDish().getSprite().getWidth() / 2,
+						c.getPosition()[1] + c.getSprite().getHeight() + 1, c.getNextDish().getSprite().getWidth(), 1);
 
-					shapeRenderer.setColor(Color.BLUE);
-					shapeRenderer.rect(c.getPosition()[0] + c.getSprite().getWidth() / 2 - c.getNextDish().getSprite().getWidth() / 2,
-							c.getPosition()[1] + c.getSprite().getHeight() + 1,
-							c.getNextDish().getSprite().getWidth()
-									* ((level.getTime() - c.getLastDishTime()) / (6 / c.getCookSpeed())),
-							1);
-				} else if (c.getRotation() == 3) {
-					shapeRenderer.setColor(Color.LIGHT_GRAY);
-					shapeRenderer.rect(c.getPosition()[0] + c.getSprite().getWidth() / 2 - c.getNextDish().getSprite().getWidth() / 2,
-							c.getPosition()[1] - 2,
-							c.getNextDish().getSprite().getWidth(), 1);
+				shapeRenderer.setColor(Color.BLUE);
+				shapeRenderer.rect(
+						c.getPosition()[0] + c.getSprite().getWidth() / 2 - c.getNextDish().getSprite().getWidth() / 2,
+						c.getPosition()[1] + c.getSprite().getHeight() + 1, c.getNextDish().getSprite().getWidth()
+								* ((level.getTime() - c.getLastDishTime()) / (6 / c.getCookSpeed())),
+						1);
+			} else if (c.getRotation() == 3) {
+				shapeRenderer.setColor(Color.LIGHT_GRAY);
+				shapeRenderer.rect(
+						c.getPosition()[0] + c.getSprite().getWidth() / 2 - c.getNextDish().getSprite().getWidth() / 2,
+						c.getPosition()[1] - 2, c.getNextDish().getSprite().getWidth(), 1);
 
-					shapeRenderer.setColor(Color.BLUE);
-					shapeRenderer.rect(c.getPosition()[0] + c.getSprite().getWidth() / 2 - c.getNextDish().getSprite().getWidth() / 2,
-							c.getPosition()[1] - 2,
-							c.getNextDish().getSprite().getWidth()
-									* ((level.getTime() - c.getLastDishTime()) / (6 / c.getCookSpeed())),
-							1);
-				}
+				shapeRenderer.setColor(Color.BLUE);
+				shapeRenderer.rect(
+						c.getPosition()[0] + c.getSprite().getWidth() / 2 - c.getNextDish().getSprite().getWidth() / 2,
+						c.getPosition()[1] - 2, c.getNextDish().getSprite().getWidth()
+								* ((level.getTime() - c.getLastDishTime()) / (6 / c.getCookSpeed())),
+						1);
+			}
 		}
 		shapeRenderer.end();
 		batch.begin();
 
 	}
-	
+
 	private void showMoney() {
 		String moneyText = "" + level.getMoney() + " $";
 		layoutMoney.setText(moneyFont, moneyText);
@@ -235,10 +251,10 @@ public class GameScreen implements Screen{
 
 	private void showTip() {
 		String tipText = "+ " + tip + " $";
-		layoutTip.setText(tipFont, tipText);
-		tipFont.draw(batch, layoutTip, WORLD_WIDTH - layoutTip.width - 1, WORLD_HEIGHT - layoutMoney.height - 3);
+		layoutTip.setText(moneyFont, tipText);
+		moneyFont.draw(batch, layoutTip, WORLD_WIDTH - layoutTip.width - 1, WORLD_HEIGHT - layoutMoney.height - 3);
 	}
-	
+
 	private void testContacts() {
 		if (contactListener.getContact() != null) {
 			Contact contact = contactListener.getContact();

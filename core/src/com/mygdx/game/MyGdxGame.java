@@ -56,13 +56,13 @@ public class MyGdxGame extends Game {
 		String levelname = "level" + level;
 		gameScreen = new GameScreen(this, batch, shapeRenderer, camera, levelname);
 		this.setScreen(gameScreen);
-		menuScreen.dispose();
+		//menuScreen.dispose();
 	}
 	
 	public void showMenu() {
 		menuScreen = new MenuScreen(this, batch);
+		//gameScreen.dispose();
 		this.setScreen(menuScreen);
-		gameScreen.dispose();
 		
 	}
 

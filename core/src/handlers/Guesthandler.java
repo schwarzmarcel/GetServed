@@ -46,7 +46,6 @@ public class Guesthandler {
 			}
 			guestsToRemove.clear();
 		}
-		// updateOrderQueue();
 	}
 
 	public void updateGuest(Guest guest, int time) {

@@ -3,6 +3,7 @@ package handlers;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 
 public class Assets {
@@ -24,6 +25,8 @@ public class Assets {
 	public static final String GUEST3 = "character_sprites/Guest3.atlas";
 	public static final String GUEST4 = "character_sprites/Guest4.atlas";
 	public static final String GUEST5 = "character_sprites/Guest5.atlas";
+	public static final String MONEYFONT = "moneyfont2.fnt";
+
 	
 	
 	
@@ -42,7 +45,7 @@ public class Assets {
 	manager.load(GUEST3, TextureAtlas.class);
 	manager.load(GUEST4, TextureAtlas.class);
 	manager.load(GUEST5, TextureAtlas.class);
-	
+	manager.load(MONEYFONT, BitmapFont.class);
 	}
 	
 	public static void dispose() {
