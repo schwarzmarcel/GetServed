@@ -56,7 +56,7 @@ public class Guest {
     }
 
     public void calculatePatience(long timeElapsed) {
-        dynamicPatience = (patience - timeElapsed * 5);
+        dynamicPatience = (patience - timeElapsed * 3);
         if (dynamicPatience < 0) {
             dynamicPatience = 0;
         }
