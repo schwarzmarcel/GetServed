@@ -172,7 +172,6 @@ public class GameScreen implements Screen {
 	}
 
 	private void drawOrders() {
-
 		for (Guest g : level.getGuesthandler().getActiveGuests()) {
 			if ((g.getOrderTime() + 1) >= level.getTime()) {
 				g.getDish().getSprite().draw(batch);
@@ -287,7 +286,7 @@ public class GameScreen implements Screen {
 								level.getGuesthandler().removeActiveGuest(guest);
 								Gdx.app.log("INFO: ", "Delivered correct Dish to Guest");
 							} else {
-								guest.receivedWrongDish();
+								guest.receivedWrongDish(level.getTime());
 								waiter.removeDish();
 								level.getDishhandler().removeDish(dish);
 								Gdx.app.log("INFO: ", "Delivered wrong dish to Guest");

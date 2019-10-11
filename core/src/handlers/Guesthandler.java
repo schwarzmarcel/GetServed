@@ -47,10 +47,9 @@ public class Guesthandler {
 		guest.calculatePatience(timeElapsed);
 		if (guest.getPatience() == 0) {
 			guestsToRemove.add(guest);
-		} else if (guest.getPatience() > 75) {
+		} else if (guest.getPatience() == 50) {
 				guest.setOrderTime(time);
-
-		} else if (guest.getPatience() < 50) {
+		} else if (guest.getPatience() == 20) {
 				guest.setOrderTime(time);
 		}
 

@@ -7,7 +7,6 @@ import entities.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import static com.mygdx.game.MyGdxGame.PIXELS_TO_METERS;
 
@@ -21,7 +20,6 @@ public class Dishhandler {
 	public Dishhandler() {
 		dishQueue = new Queue<Foodtype>();
 		dishes = new ArrayList<Dish>();
-
 	}
 	
 	public void initializeDishhandler(Waiter waiter, List<Counter> counters) {
@@ -89,34 +87,6 @@ public class Dishhandler {
 				c.setCookSpeed(1);
 			}
 		}
-
-//        for (Counter c : counters
-//        ) {
-//            if (dishTimer + 2 < time) {
-//                boolean neededDishAvailable = false;
-//                for (Dish d : dishes
-//                ) {
-//                    for (Guest g : activeGuests
-//                    ) {
-//                        if (d.type == g.getOrder()) neededDishAvailable = true;
-//                    }
-//                }
-//                if (c.getDish() == null && !dishQueue.isEmpty()) {
-//                    Dish tempDish = new Dish(dishQueue.removeFirst());
-//                    tempDish.setPosition(c.getPosition());
-//                    Gdx.app.log("INFO: ", "Created Dish");
-//                    c.setDish(tempDish);
-//                    dishes.add(tempDish);
-//                }
-//                if (dishQueue.isEmpty() && c.getDish() == null && neededDishAvailable) {
-//                    Dish tempDish = new Dish(Foodtype.getRandomFoodType());
-//                    tempDish.setPosition(c.getPosition());
-//                    Gdx.app.log("INFO: ", "Created random Dish");
-//                    c.setDish(tempDish);
-//                    dishes.add(tempDish);
-//                }
-//            }
-//        }
 	}
 
 	public void addToDishQueue(Foodtype type) {

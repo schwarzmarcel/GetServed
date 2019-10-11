@@ -45,8 +45,9 @@ public class Guest {
         this.wealth = wealth;
     }
 
-    public void receivedWrongDish() {
+    public void receivedWrongDish(int time) {
         patience = patience - ((dynamicPatience / 100) * 25);
+        setOrderTime(time);
     }
 
     public int getTip() {
