@@ -1,10 +1,6 @@
 package entities;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import handlers.Assets;
@@ -12,23 +8,19 @@ import handlers.Assets;
 import java.util.Arrays;
 import java.util.concurrent.ThreadLocalRandom;
 
-import static com.mygdx.game.MyGdxGame.WORLD_HEIGHT;
-import static com.mygdx.game.MyGdxGame.WORLD_WIDTH;
-
 public class Guest {
     private Animation<TextureRegion> idleAnimation;
     private Table table;
     private Dish dish;
     private long spawnTime;
     private long orderTime;
-    private long happiness;
-    private long patience;
+    private float patience;
+    private float dynamicPatience;
     private long wealth;
-    private float timeElapsed;
     private Foodtype order;
     private float[] position = new float[2];
 
-    public Guest(long spawnTime, long happiness, long patience, long wealth) {
+    public Guest(long spawnTime, long patience, long wealth) {
         int randomNum = ThreadLocalRandom.current().nextInt(1, 5 + 1);
         TextureAtlas textureAtlas = null;
         switch (randomNum){
@@ -49,12 +41,26 @@ public class Guest {
         dish = new Dish(order);
         this.spawnTime = spawnTime;
         this.orderTime = spawnTime;
-        this.happiness = happiness;
         this.patience = patience;
         this.wealth = wealth;
-        timeElapsed = 0;
     }
 
+    public void receivedWrongDish(int time) {
+        patience = patience - ((dynamicPatience / 100) * 25);
+        setOrderTime(time);
+    }
+
+    public int getTip() {
+        float tip = (wealth * (dynamicPatience / 100));
+        return (int) Math.ceil(tip);
+    }
+
+    public void calculatePatience(long timeElapsed) {
+        dynamicPatience = (patience - timeElapsed * 3);
+        if (dynamicPatience < 0) {
+            dynamicPatience = 0;
+        }
+    }
     public void setPosition(float positionX, float positionY) {
     	position[0] = positionX;
         position[1] = positionY;
@@ -74,17 +80,8 @@ public class Guest {
 		this.orderTime = orderTime;
 	}
 
-	public long getPatience() {
-		return patience;
-	}
-
-    public int getTip() {
-    	double tip = (wealth * ((patience - timeElapsed) / patience));
-    	return (int) Math.ceil(tip);
-    }
-
-    public void setHappiness(int happiness) {
-		this.happiness = happiness;
+    public float getPatience() {
+        return dynamicPatience;
 	}
 
 	public void setTable(Table table) {
@@ -99,17 +96,10 @@ public class Guest {
     	return dish;
     }
 
-    public void setTimeElapsed(float time) {
-    	timeElapsed = time;
-    }
-
 	public Foodtype getOrder() {
         return order;
     }
 
-    public long getHappiness() {
-        return happiness;
-    }
 
     public Animation<TextureRegion> getIdleAnimation() {
         return idleAnimation;
@@ -123,7 +113,6 @@ public class Guest {
     public String toString() {
         return "Guest{" +
                 "spawnTime=" + spawnTime +
-                ", happiness=" + happiness +
                 ", patience=" + patience +
                 ", wealth=" + wealth +
                 ", order=" + order +

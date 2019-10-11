@@ -1,21 +1,15 @@
 package handlers;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.utils.Queue;
 import com.mygdx.game.MyGdxGame;
-
-import entities.Foodtype;
 import entities.Guest;
 import entities.Spawnarea;
 import entities.Table;
 
-import java.util.*;
-
-import static com.mygdx.game.MyGdxGame.WORLD_HEIGHT;
-import static com.mygdx.game.MyGdxGame.WORLD_WIDTH;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class Guesthandler {
 	private Queue<Guest> guests;
@@ -50,20 +44,13 @@ public class Guesthandler {
 
 	public void updateGuest(Guest guest, int time) {
 		long timeElapsed = time - guest.getSpawnTime();
-		guest.setTimeElapsed(timeElapsed);
-		if (timeElapsed >= guest.getPatience()) {
+		guest.calculatePatience(timeElapsed);
+		if (guest.getPatience() == 0) {
 			guestsToRemove.add(guest);
-		} else if (timeElapsed >= (guest.getPatience() / 1.5)) {
-			if (guest.getHappiness() != 1) {
-				guest.setHappiness(1);
+		} else if (guest.getPatience() == 50) {
 				guest.setOrderTime(time);
-			}
-		} else if (timeElapsed >= (guest.getPatience() / 3)) {
-			if (guest.getHappiness() != 2) {
-				guest.setHappiness(2);
+		} else if (guest.getPatience() == 20) {
 				guest.setOrderTime(time);
-			
-			}
 		}
 
 	}

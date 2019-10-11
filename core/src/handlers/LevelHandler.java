@@ -1,17 +1,15 @@
 package handlers;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Timer;
 import com.mygdx.game.MyGdxGame;
-
-import entities.*;
+import entities.Gamelevel;
+import entities.Spawnarea;
+import entities.Waiter;
+import entities.Walls;
 import exceptions.InputNotValidException;
-
-import java.util.List;
-import java.util.Map;
 
 import static com.mygdx.game.MyGdxGame.WORLD_HEIGHT;
 import static com.mygdx.game.MyGdxGame.WORLD_WIDTH;
@@ -34,7 +32,7 @@ public class LevelHandler {
         guesthandler = new Guesthandler(game);
         world = new World(new Vector2(0, 0), true);
         Walls walls = new Walls(world);
-        money = 25;
+        money = 100;
         reader = new JsonLevelReader();
         level = reader.generateLevel(levelname);
     }

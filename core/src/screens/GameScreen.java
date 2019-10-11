@@ -3,14 +3,12 @@ package screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
@@ -134,23 +132,21 @@ public class GameScreen implements Screen {
 		for (Guest g : level.getGuesthandler().getActiveGuests()) {
 			currentFrame = g.getIdleAnimation().getKeyFrame(elapsedTime);
 			batch.draw(currentFrame, g.getPosition()[0], g.getPosition()[1], WORLD_WIDTH / 32, WORLD_HEIGHT / 16);
-			drawHappiness(g);
+			drawPatience(g);
 		}
 	}
 
-	private void drawHappiness(Guest guest) {
+	private void drawPatience(Guest guest) {
 		batch.end();
 		shapeRenderer.begin(ShapeType.Filled);
-		
-		if(guest.getHappiness() == 3) 
+		float patience = guest.getPatience();
+		if (patience > 75)
 			shapeRenderer.setColor(Color.GREEN);
-		else if(guest.getHappiness() == 2)
+		else if (patience > 50)
 			shapeRenderer.setColor(Color.YELLOW);
 		else
 			shapeRenderer.setColor(Color.RED);
-			
-		shapeRenderer.rect(guest.getPosition()[0] - 2, guest.getPosition()[1], 1, ((float) guest.getHappiness() / 3) * 6);
-		
+		shapeRenderer.rect(guest.getPosition()[0] - 2, guest.getPosition()[1], 1, ((float) guest.getPatience() / 100) * 5);
 		shapeRenderer.end();
 		batch.begin();
 	}
@@ -176,7 +172,6 @@ public class GameScreen implements Screen {
 	}
 
 	private void drawOrders() {
-
 		for (Guest g : level.getGuesthandler().getActiveGuests()) {
 			if ((g.getOrderTime() + 1) >= level.getTime()) {
 				g.getDish().getSprite().draw(batch);
@@ -188,54 +183,59 @@ public class GameScreen implements Screen {
 		batch.end();
 		shapeRenderer.begin(ShapeType.Filled);
 		for (Counter c : level.getSpawnarea().getCounters()) {
-			if (c.getRotation() == 0) {
-				shapeRenderer.setColor(Color.LIGHT_GRAY);
-				shapeRenderer.rect(c.getPosition()[0] - c.getSprite().getWidth(),
-						c.getPosition()[1] + (c.getSprite().getHeight() - c.getNextDish().getSprite().getHeight() - 4),
-						c.getNextDish().getSprite().getWidth(), 1);
+			switch (c.getRotation()) {
+				case 0:
+					shapeRenderer.setColor(Color.LIGHT_GRAY);
+					shapeRenderer.rect(c.getPosition()[0] - c.getSprite().getWidth(),
+							c.getPosition()[1] + (c.getSprite().getHeight() - c.getNextDish().getSprite().getHeight() - 4),
+							c.getNextDish().getSprite().getWidth(), 1);
 
-				shapeRenderer.setColor(Color.BLUE);
-				shapeRenderer.rect(c.getPosition()[0] - c.getSprite().getWidth(),
-						c.getPosition()[1] + (c.getSprite().getHeight() - c.getNextDish().getSprite().getHeight() - 4),
-						(c.getNextDish().getSprite().getWidth())
-								* ((level.getTime() - c.getLastDishTime()) / (6 / c.getCookSpeed())),
-						1);
-			} else if (c.getRotation() == 1) {
-				shapeRenderer.setColor(Color.LIGHT_GRAY);
-				shapeRenderer.rect(c.getPosition()[0] + c.getSprite().getWidth() + 1,
-						c.getPosition()[1] + (c.getSprite().getHeight() - c.getNextDish().getSprite().getHeight() - 4),
-						c.getNextDish().getSprite().getWidth(), 1);
+					shapeRenderer.setColor(Color.BLUE);
+					shapeRenderer.rect(c.getPosition()[0] - c.getSprite().getWidth(),
+							c.getPosition()[1] + (c.getSprite().getHeight() - c.getNextDish().getSprite().getHeight() - 4),
+							(c.getNextDish().getSprite().getWidth())
+									* ((level.getTime() - c.getLastDishTime()) / (6 / c.getCookSpeed())),
+							1);
+					break;
+				case 1:
+					shapeRenderer.setColor(Color.LIGHT_GRAY);
+					shapeRenderer.rect(c.getPosition()[0] + c.getSprite().getWidth() + 1,
+							c.getPosition()[1] + (c.getSprite().getHeight() - c.getNextDish().getSprite().getHeight() - 4),
+							c.getNextDish().getSprite().getWidth(), 1);
 
-				shapeRenderer.setColor(Color.BLUE);
-				shapeRenderer.rect(c.getPosition()[0] + c.getSprite().getWidth() + 1,
-						c.getPosition()[1] + (c.getSprite().getHeight() - c.getNextDish().getSprite().getHeight() - 4),
-						(c.getNextDish().getSprite().getWidth())
-								* ((level.getTime() - c.getLastDishTime()) / (6 / c.getCookSpeed())),
-						1);
-			} else if (c.getRotation() == 2) {
-				shapeRenderer.setColor(Color.LIGHT_GRAY);
-				shapeRenderer.rect(
-						c.getPosition()[0] + c.getSprite().getWidth() / 2 - c.getNextDish().getSprite().getWidth() / 2,
-						c.getPosition()[1] + c.getSprite().getHeight() + 1, c.getNextDish().getSprite().getWidth(), 1);
+					shapeRenderer.setColor(Color.BLUE);
+					shapeRenderer.rect(c.getPosition()[0] + c.getSprite().getWidth() + 1,
+							c.getPosition()[1] + (c.getSprite().getHeight() - c.getNextDish().getSprite().getHeight() - 4),
+							(c.getNextDish().getSprite().getWidth())
+									* ((level.getTime() - c.getLastDishTime()) / (6 / c.getCookSpeed())),
+							1);
+					break;
+				case 2:
+					shapeRenderer.setColor(Color.LIGHT_GRAY);
+					shapeRenderer.rect(
+							c.getPosition()[0] + c.getSprite().getWidth() / 2 - c.getNextDish().getSprite().getWidth() / 2,
+							c.getPosition()[1] + c.getSprite().getHeight() + 1, c.getNextDish().getSprite().getWidth(), 1);
 
-				shapeRenderer.setColor(Color.BLUE);
-				shapeRenderer.rect(
-						c.getPosition()[0] + c.getSprite().getWidth() / 2 - c.getNextDish().getSprite().getWidth() / 2,
-						c.getPosition()[1] + c.getSprite().getHeight() + 1, c.getNextDish().getSprite().getWidth()
-								* ((level.getTime() - c.getLastDishTime()) / (6 / c.getCookSpeed())),
-						1);
-			} else if (c.getRotation() == 3) {
-				shapeRenderer.setColor(Color.LIGHT_GRAY);
-				shapeRenderer.rect(
-						c.getPosition()[0] + c.getSprite().getWidth() / 2 - c.getNextDish().getSprite().getWidth() / 2,
-						c.getPosition()[1] - 2, c.getNextDish().getSprite().getWidth(), 1);
+					shapeRenderer.setColor(Color.BLUE);
+					shapeRenderer.rect(
+							c.getPosition()[0] + c.getSprite().getWidth() / 2 - c.getNextDish().getSprite().getWidth() / 2,
+							c.getPosition()[1] + c.getSprite().getHeight() + 1, c.getNextDish().getSprite().getWidth()
+									* ((level.getTime() - c.getLastDishTime()) / (6 / c.getCookSpeed())),
+							1);
+					break;
+				case 3:
+					shapeRenderer.setColor(Color.LIGHT_GRAY);
+					shapeRenderer.rect(
+							c.getPosition()[0] + c.getSprite().getWidth() / 2 - c.getNextDish().getSprite().getWidth() / 2,
+							c.getPosition()[1] - 2, c.getNextDish().getSprite().getWidth(), 1);
 
-				shapeRenderer.setColor(Color.BLUE);
-				shapeRenderer.rect(
-						c.getPosition()[0] + c.getSprite().getWidth() / 2 - c.getNextDish().getSprite().getWidth() / 2,
-						c.getPosition()[1] - 2, c.getNextDish().getSprite().getWidth()
-								* ((level.getTime() - c.getLastDishTime()) / (6 / c.getCookSpeed())),
-						1);
+					shapeRenderer.setColor(Color.BLUE);
+					shapeRenderer.rect(
+							c.getPosition()[0] + c.getSprite().getWidth() / 2 - c.getNextDish().getSprite().getWidth() / 2,
+							c.getPosition()[1] - 2, c.getNextDish().getSprite().getWidth()
+									* ((level.getTime() - c.getLastDishTime()) / (6 / c.getCookSpeed())),
+							1);
+					break;
 			}
 		}
 		shapeRenderer.end();
@@ -274,17 +274,22 @@ public class GameScreen implements Screen {
 					if (Gdx.input.isKeyJustPressed(Input.Keys.S)) {
 						if (level.getWaiter().getDish() != null && contactTable.getGuest() != null) {
 							Dish dish = level.getWaiter().getDish();
-							if (contactTable.getGuest().getOrder() == (level.getWaiter().getDish().type)) {
-								level.getWaiter().getDish().setPosition(contactTable.getPosition());
-								level.getWaiter().removeDish();
+							Waiter waiter = level.getWaiter();
+							Guest guest = contactTable.getGuest();
+							if (guest.getOrder() == (dish.type)) {
+								dish.setPosition(contactTable.getPosition());
+								waiter.removeDish();
 								level.getDishhandler().removeDish(dish);
-								tip = contactTable.getGuest().getTip();
+								tip = guest.getTip();
 								lastTipTime = level.getTime();
-								level.setMoney(level.getMoney() + contactTable.getGuest().getTip());
-								level.getGuesthandler().removeActiveGuest(contactTable.getGuest());
+								level.setMoney(level.getMoney() + guest.getTip());
+								level.getGuesthandler().removeActiveGuest(guest);
 								Gdx.app.log("INFO: ", "Delivered correct Dish to Guest");
 							} else {
-								Gdx.app.log("INFO: ", "Tried to deliver wrong dish to Guest");
+								guest.receivedWrongDish(level.getTime());
+								waiter.removeDish();
+								level.getDishhandler().removeDish(dish);
+								Gdx.app.log("INFO: ", "Delivered wrong dish to Guest");
 							}
 						}
 					}
@@ -299,7 +304,6 @@ public class GameScreen implements Screen {
 					if (contactCounter.getDish() != null && level.getWaiter().getDish() == null) {
 						level.getWaiter().setDish(contactCounter.getDish());
 						contactCounter.removeDish();
-
 					}
 
 				}
