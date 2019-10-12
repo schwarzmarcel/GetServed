@@ -20,6 +20,7 @@ public class MyGdxGame extends Game {
 	private OrthographicCamera camera;
 	private GameScreen gameScreen;
 	private MenuScreen menuScreen;
+	private int levelcount;
 	public static final float PIXELS_TO_METERS = 50f;
 	public static final float WORLD_WIDTH = 160;
 	public static final float WORLD_HEIGHT = 90;
@@ -38,6 +39,7 @@ public class MyGdxGame extends Game {
 		camera.update();
 		batch.setProjectionMatrix(camera.combined);
 		shapeRenderer.setProjectionMatrix(camera.combined);
+		levelcount = 1;
 	}
 
 	@Override
@@ -52,8 +54,8 @@ public class MyGdxGame extends Game {
 		shapeRenderer.dispose();
 	}
 	
-	public void startLevel(int level) {
-		String levelname = "level" + level;
+	public void startLevel() {
+		String levelname = "level" + levelcount;
 		gameScreen = new GameScreen(this, batch, shapeRenderer, camera, levelname);
 		this.setScreen(gameScreen);
 		//menuScreen.dispose();
@@ -63,7 +65,11 @@ public class MyGdxGame extends Game {
 		menuScreen = new MenuScreen(this, batch);
 		//gameScreen.dispose();
 		this.setScreen(menuScreen);
-		
+	}
+	
+	public void increaseLevel() {
+		if(levelcount == 1)
+			levelcount++;
 	}
 
 

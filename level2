@@ -56,6 +56,66 @@
 		"happiness":3,
 		"wealth":10,
 		"spawntime": 2
+		},
+		{
+		"patience":24,
+		"happiness":3,
+		"wealth":10,
+		"spawntime": 4
+		},
+		{
+		"patience":24,
+		"happiness":3,
+		"wealth":10,
+		"spawntime": 8
+		},
+		{
+		"patience":24,
+		"happiness":3,
+		"wealth":10,
+		"spawntime": 11
+		},
+		{
+		"patience":24,
+		"happiness":3,
+		"wealth":10,
+		"spawntime": 15
+		},
+		{
+		"patience":24,
+		"happiness":3,
+		"wealth":10,
+		"spawntime": 18
+		},
+		{
+		"patience":24,
+		"happiness":3,
+		"wealth":10,
+		"spawntime": 21
+		},
+		{
+		"patience":24,
+		"happiness":3,
+		"wealth":10,
+		"spawntime": 24
+		},
+		{
+		"patience":24,
+		"happiness":3,
+		"wealth":10,
+		"spawntime": 28
+		},
+		{
+		"patience":24,
+		"happiness":3,
+		"wealth":10,
+		"spawntime": 30
+		},
+		{
+		"patience":24,
+		"happiness":3,
+		"wealth":10,
+		"spawntime": 34
 		}
 	]
 }

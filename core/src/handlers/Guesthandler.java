@@ -102,6 +102,7 @@ public class Guesthandler {
 		if (guests.isEmpty() && activeGuests.isEmpty()) {
 			Gdx.app.log("INFO: ", "You won! Good job!");
 			Timer.instance().clear();
+			game.increaseLevel();
 			game.showMenu();
 		}
 	}

@@ -26,6 +26,10 @@ public class Assets {
 	public static final String GUEST4 = "character_sprites/Guest4.atlas";
 	public static final String GUEST5 = "character_sprites/Guest5.atlas";
 	public static final String MONEYFONT = "moneyfont2.fnt";
+	public static final String NEXTACTIVE = "nextactive.png";
+	public static final String NEXTPASSIVE = "nextpassive.png";
+	public static final String EXITACTIVE = "exitactive.png";
+	public static final String EXITPASSIVE = "exitpassive.png";
 
 	
 	
@@ -46,6 +50,11 @@ public class Assets {
 	manager.load(GUEST4, TextureAtlas.class);
 	manager.load(GUEST5, TextureAtlas.class);
 	manager.load(MONEYFONT, BitmapFont.class);
+	manager.load(NEXTACTIVE, Texture.class);
+	manager.load(NEXTPASSIVE, Texture.class);
+	manager.load(EXITACTIVE, Texture.class);
+	manager.load(EXITPASSIVE, Texture.class);
+	
 	}
 	
 	public static void dispose() {
