@@ -10,6 +10,9 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Guest {
     private Animation<TextureRegion> idleAnimation;
+    private Animation<TextureRegion> angryAnimation;
+    private Animation<TextureRegion> orderAnimation;
+    private String currentAction = "idle";
     private Table table;
     private Dish dish;
     private long spawnTime;
@@ -22,21 +25,41 @@ public class Guest {
 
     public Guest(long spawnTime, long patience, long wealth) {
         int randomNum = ThreadLocalRandom.current().nextInt(1, 5 + 1);
-        TextureAtlas textureAtlas = null;
-        switch (randomNum){
-        case 1: textureAtlas = Assets.manager.get(Assets.GUEST1, TextureAtlas.class);
-        	break;
-        case 2: textureAtlas = Assets.manager.get(Assets.GUEST2, TextureAtlas.class);
-    		break;
-        case 3: textureAtlas = Assets.manager.get(Assets.GUEST3, TextureAtlas.class);
-			break;
-        case 4: textureAtlas = Assets.manager.get(Assets.GUEST4, TextureAtlas.class);
-			break;
-        case 5: textureAtlas = Assets.manager.get(Assets.GUEST5, TextureAtlas.class);
-        	break;
-        default: break;
+        TextureAtlas textureAtlasIdle = null;
+        TextureAtlas textureAtlasAngry = null;
+        TextureAtlas textureAtlasOrdering = null;
+        switch (randomNum) {
+            case 1:
+                textureAtlasIdle = Assets.manager.get(Assets.GUEST1, TextureAtlas.class);
+                textureAtlasAngry = Assets.manager.get(Assets.GUEST1_ORDERING, TextureAtlas.class);
+                textureAtlasOrdering = Assets.manager.get(Assets.GUEST1_ANGRY, TextureAtlas.class);
+                break;
+            case 2:
+                textureAtlasIdle = Assets.manager.get(Assets.GUEST2, TextureAtlas.class);
+                textureAtlasAngry = Assets.manager.get(Assets.GUEST2_ORDERING, TextureAtlas.class);
+                textureAtlasOrdering = Assets.manager.get(Assets.GUEST2_ANGRY, TextureAtlas.class);
+                break;
+            case 3:
+                textureAtlasIdle = Assets.manager.get(Assets.GUEST3, TextureAtlas.class);
+                textureAtlasAngry = Assets.manager.get(Assets.GUEST3_ORDERING, TextureAtlas.class);
+                textureAtlasOrdering = Assets.manager.get(Assets.GUEST3_ANGRY, TextureAtlas.class);
+                break;
+            case 4:
+                textureAtlasIdle = Assets.manager.get(Assets.GUEST4, TextureAtlas.class);
+                textureAtlasAngry = Assets.manager.get(Assets.GUEST4_ORDERING, TextureAtlas.class);
+                textureAtlasOrdering = Assets.manager.get(Assets.GUEST4_ANGRY, TextureAtlas.class);
+                break;
+            case 5:
+                textureAtlasIdle = Assets.manager.get(Assets.GUEST5, TextureAtlas.class);
+                textureAtlasAngry = Assets.manager.get(Assets.GUEST5_ORDERING, TextureAtlas.class);
+                textureAtlasOrdering = Assets.manager.get(Assets.GUEST5_ANGRY, TextureAtlas.class);
+                break;
+            default:
+                break;
         }
-        idleAnimation = new Animation<TextureRegion>(0.045f, textureAtlas.getRegions(), Animation.PlayMode.LOOP);
+        idleAnimation = new Animation<TextureRegion>(0.045f, textureAtlasIdle.getRegions(), Animation.PlayMode.LOOP);
+        angryAnimation = new Animation<TextureRegion>(0.025f, textureAtlasAngry.getRegions(), Animation.PlayMode.LOOP);
+        orderAnimation = new Animation<TextureRegion>(0.025f, textureAtlasOrdering.getRegions(), Animation.PlayMode.LOOP);
         order = Foodtype.getRandomFoodType();
         dish = new Dish(order);
         this.spawnTime = spawnTime;
@@ -63,45 +86,53 @@ public class Guest {
             dynamicPatience = 0;
         }
     }
+
     public void setPosition(float positionX, float positionY) {
-    	position[0] = positionX;
+        position[0] = positionX;
         position[1] = positionY;
         float[] position = {positionX + dish.getSprite().getWidth() + 2, positionY};
         dish.setPosition(position);
     }
-    
+
     public long getSpawnTime() {
-		return spawnTime;
-	}
+        return spawnTime;
+    }
 
     public long getOrderTime() {
-		return orderTime;
-	}
+        return orderTime;
+    }
 
-	public void setOrderTime(long orderTime) {
-		this.orderTime = orderTime;
-	}
+    public void setOrderTime(long orderTime) {
+        this.orderTime = orderTime;
+    }
 
     public float getPatience() {
         return dynamicPatience;
-	}
-
-	public void setTable(Table table) {
-        this.table = table;
     }
 
     public Table getTable() {
-		return table;
-	}
-
-    public Dish getDish() {
-    	return dish;
+        return table;
     }
 
-	public Foodtype getOrder() {
+    public void setTable(Table table) {
+        this.table = table;
+    }
+
+    public Dish getDish() {
+        return dish;
+    }
+
+    public Foodtype getOrder() {
         return order;
     }
 
+    public String getCurrentAction() {
+        return currentAction;
+    }
+
+    public void setCurrentAction(String currentAction) {
+        this.currentAction = currentAction;
+    }
 
     public Animation<TextureRegion> getIdleAnimation() {
         return idleAnimation;

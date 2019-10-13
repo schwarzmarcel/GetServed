@@ -60,6 +60,7 @@ public class GameScreen implements Screen {
 		contactListener = new GsContactListener();
 		level.getWorld().setContactListener(contactListener);
 		tiledMap = new TmxMapLoader().load("Map/tile-map.tmx");
+		//tiledMap = Assets.manager.get(Assets.MAP, TiledMap.class);
 		MapProperties properties = tiledMap.getProperties();
 		int tileWidth = properties.get("tilewidth", Integer.class);
 		int tileHeight = properties.get("tileheight", Integer.class);
@@ -97,7 +98,7 @@ public class GameScreen implements Screen {
 		if ((lastTipTime + 2) >= level.getTime())
 			showTip();
 		batch.end();
-		if (true)
+		if (false)
 			debugRenderer.render(level.getWorld(), debugMatrix);
 		testContacts();
 
@@ -173,7 +174,8 @@ public class GameScreen implements Screen {
 
 	private void drawTables() {
 		for (Table t : level.getSpawnarea().getTables()) {
-			t.getSprite().draw(batch);
+			t.getTableSprite().draw(batch);
+			t.getChairSprite().draw(batch);
 		}
 	}
 

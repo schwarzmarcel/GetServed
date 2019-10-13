@@ -22,7 +22,7 @@
 		},
 		{
 		"row": 7,
-		 "col": 6,
+		 "col": 18,
 		 "type": "table",
 		 "rotation": 0
 		},
@@ -45,7 +45,7 @@
 		 "rotation": 3
 		},
 		{
-		"row": 15,
+		"row": 11,
 		 "col": 15,
 		 "type": "counter",
 		 "rotation": 2
