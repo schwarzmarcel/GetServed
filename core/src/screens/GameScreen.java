@@ -12,6 +12,10 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.Contact;
@@ -31,6 +35,8 @@ public class GameScreen implements Screen {
 	private LevelHandler level;
 	private Box2DDebugRenderer debugRenderer;
 	private OrthographicCamera camera;
+	private TiledMap tiledMap;
+	private TiledMapRenderer tiledMapRenderer;
 	private GsContactListener contactListener;
 	private float elapsedTime = 0;
 	private BitmapFont moneyFont;
@@ -53,15 +59,20 @@ public class GameScreen implements Screen {
 		debugRenderer = new Box2DDebugRenderer();
 		contactListener = new GsContactListener();
 		level.getWorld().setContactListener(contactListener);
+		tiledMap = new TmxMapLoader().load("Map/tile-map.tmx");
+		tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
 	}
 
 	@Override
 	public void render(float delta) {
 		camera.update();
+		tiledMapRenderer.setView(camera);
+		tiledMapRenderer.render();
 		level.getWorld().step(1f / 60f, 6, 2);
 		level.updateLevel();
 		level.getWaiter().move(1f);
-		Gdx.gl.glClearColor(1, 1, 1, 1);
+		Gdx.gl.glClearColor(1, 0, 0, 1);
+		Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		Matrix4 debugMatrix = batch.getProjectionMatrix().cpy().scale(PIXELS_TO_METERS, PIXELS_TO_METERS, 0);
 		batch.begin();

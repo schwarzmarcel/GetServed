@@ -34,8 +34,9 @@ public class MyGdxGame extends Game {
 		shapeRenderer = new ShapeRenderer();
 		menuScreen = new MenuScreen(this, batch);
 		this.setScreen(menuScreen);
-		camera = new OrthographicCamera(WORLD_WIDTH, WORLD_HEIGHT);
-		camera.position.set(WORLD_WIDTH / 2, WORLD_HEIGHT / 2, 0);
+        camera = new OrthographicCamera();
+        camera.setToOrtho(false, WORLD_WIDTH, WORLD_HEIGHT);
+        //camera.position.set(WORLD_WIDTH / 2, WORLD_HEIGHT / 2, 0);
 		camera.update();
 		batch.setProjectionMatrix(camera.combined);
 		shapeRenderer.setProjectionMatrix(camera.combined);
