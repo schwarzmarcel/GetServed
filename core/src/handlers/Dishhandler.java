@@ -90,33 +90,6 @@ public class Dishhandler {
 			}
 		}
 
-//        for (Counter c : counters
-//        ) {
-//            if (dishTimer + 2 < time) {
-//                boolean neededDishAvailable = false;
-//                for (Dish d : dishes
-//                ) {
-//                    for (Guest g : activeGuests
-//                    ) {
-//                        if (d.type == g.getOrder()) neededDishAvailable = true;
-//                    }
-//                }
-//                if (c.getDish() == null && !dishQueue.isEmpty()) {
-//                    Dish tempDish = new Dish(dishQueue.removeFirst());
-//                    tempDish.setPosition(c.getPosition());
-//                    Gdx.app.log("INFO: ", "Created Dish");
-//                    c.setDish(tempDish);
-//                    dishes.add(tempDish);
-//                }
-//                if (dishQueue.isEmpty() && c.getDish() == null && neededDishAvailable) {
-//                    Dish tempDish = new Dish(Foodtype.getRandomFoodType());
-//                    tempDish.setPosition(c.getPosition());
-//                    Gdx.app.log("INFO: ", "Created random Dish");
-//                    c.setDish(tempDish);
-//                    dishes.add(tempDish);
-//                }
-//            }
-//        }
 	}
 
 	public void addToDishQueue(Foodtype type) {

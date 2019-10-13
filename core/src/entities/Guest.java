@@ -41,8 +41,11 @@ public class Guest {
         dish = new Dish(order);
         this.spawnTime = spawnTime;
         this.orderTime = spawnTime;
-        this.patience = patience;
-        this.wealth = wealth;
+        randomNum = ThreadLocalRandom.current().nextInt((int) (0.2 * patience) * (-1), (int) (0.2 * patience) + 1);
+        this.patience = patience + randomNum;
+        System.out.println("random factor = " + randomNum);
+        randomNum = ThreadLocalRandom.current().nextInt((int) (0.2 * wealth) * (-1), (int) (0.2 * wealth) + 1);
+        this.wealth = wealth + randomNum;
     }
 
     public void receivedWrongDish(int time) {
