@@ -2,6 +2,7 @@ package handlers;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Queue;
+import com.badlogic.gdx.utils.Timer;
 import com.mygdx.game.MyGdxGame;
 import entities.Guest;
 import entities.Spawnarea;
@@ -87,6 +88,7 @@ public class Guesthandler {
 		Gdx.app.log("INFO: ", "Guest " + guest + " removed.");
 		if (guests.isEmpty() && activeGuests.isEmpty()) {
 			Gdx.app.log("INFO: ", "You won! Good job!");
+			Timer.instance().clear();
 			game.showMenu();
 		}
 	}

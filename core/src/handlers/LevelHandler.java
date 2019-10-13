@@ -77,7 +77,8 @@ public class LevelHandler {
                 }
                 if(money == 0) {
                 	Gdx.app.log("INFO: ", "You lost because you ran out of money :(");
-                	game.showMenu();
+                    Timer.instance().clear();
+                    game.showMenu();
                 }
             }
         }, 0, 1);
