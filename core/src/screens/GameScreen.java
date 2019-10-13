@@ -12,8 +12,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
+import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Matrix4;
@@ -36,7 +36,7 @@ public class GameScreen implements Screen {
 	private Box2DDebugRenderer debugRenderer;
 	private OrthographicCamera camera;
 	private TiledMap tiledMap;
-	private TiledMapRenderer tiledMapRenderer;
+	private OrthogonalTiledMapRenderer renderer;
 	private GsContactListener contactListener;
 	private float elapsedTime = 0;
 	private BitmapFont moneyFont;
@@ -45,8 +45,8 @@ public class GameScreen implements Screen {
 	private int tip;
 	private int lastTipTime;
 
-	public GameScreen(MyGdxGame game, SpriteBatch batch, ShapeRenderer shapeRenderer, OrthographicCamera camera,
-			String levelname) {
+	public GameScreen(MyGdxGame game, SpriteBatch batch, ShapeRenderer shapeRenderer,
+					  String levelname) {
 		this.game = game;
 		this.batch = batch;
 		this.shapeRenderer = shapeRenderer;
@@ -60,20 +60,29 @@ public class GameScreen implements Screen {
 		contactListener = new GsContactListener();
 		level.getWorld().setContactListener(contactListener);
 		tiledMap = new TmxMapLoader().load("Map/tile-map.tmx");
-		tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
+		MapProperties properties = tiledMap.getProperties();
+		int tileWidth = properties.get("tilewidth", Integer.class);
+		int tileHeight = properties.get("tileheight", Integer.class);
+		int mapWidthInTiles = properties.get("width", Integer.class);
+		int mapHeightInTiles = properties.get("height", Integer.class);
+		int mapWidthInPixels = mapWidthInTiles * tileWidth;
+		int mapHeightInPixels = mapHeightInTiles * tileHeight;
+		camera = new OrthographicCamera(1024.f, 576.f);
+		camera.position.x = mapWidthInPixels * .5f;
+		camera.position.y = mapHeightInPixels * .5f;
+		renderer = new OrthogonalTiledMapRenderer(tiledMap);
 	}
 
 	@Override
 	public void render(float delta) {
+		Gdx.gl.glClearColor(.5f, .7f, .9f, 1);
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		camera.update();
-		tiledMapRenderer.setView(camera);
-		tiledMapRenderer.render();
+		renderer.setView(camera);
+		renderer.render();
 		level.getWorld().step(1f / 60f, 6, 2);
 		level.updateLevel();
 		level.getWaiter().move(1f);
-		Gdx.gl.glClearColor(1, 0, 0, 1);
-		Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		Matrix4 debugMatrix = batch.getProjectionMatrix().cpy().scale(PIXELS_TO_METERS, PIXELS_TO_METERS, 0);
 		batch.begin();
 		elapsedTime += Gdx.graphics.getDeltaTime();

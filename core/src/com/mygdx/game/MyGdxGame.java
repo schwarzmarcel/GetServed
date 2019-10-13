@@ -36,7 +36,7 @@ public class MyGdxGame extends Game {
 		this.setScreen(menuScreen);
         camera = new OrthographicCamera();
         camera.setToOrtho(false, WORLD_WIDTH, WORLD_HEIGHT);
-        //camera.position.set(WORLD_WIDTH / 2, WORLD_HEIGHT / 2, 0);
+        camera.position.set(WORLD_WIDTH / 2, WORLD_HEIGHT / 2, 0);
 		camera.update();
 		batch.setProjectionMatrix(camera.combined);
 		shapeRenderer.setProjectionMatrix(camera.combined);
@@ -57,7 +57,7 @@ public class MyGdxGame extends Game {
 	
 	public void startLevel() {
 		String levelname = "level" + levelcount;
-		gameScreen = new GameScreen(this, batch, shapeRenderer, camera, levelname);
+        gameScreen = new GameScreen(this, batch, shapeRenderer, levelname);
 		this.setScreen(gameScreen);
 	}
 	
