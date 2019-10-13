@@ -43,7 +43,6 @@ public class Guest {
         this.orderTime = spawnTime;
         randomNum = ThreadLocalRandom.current().nextInt((int) (0.2 * patience) * (-1), (int) (0.2 * patience) + 1);
         this.patience = patience + randomNum;
-        System.out.println("random factor = " + randomNum);
         randomNum = ThreadLocalRandom.current().nextInt((int) (0.2 * wealth) * (-1), (int) (0.2 * wealth) + 1);
         this.wealth = wealth + randomNum;
     }

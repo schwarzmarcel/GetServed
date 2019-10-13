@@ -12,6 +12,7 @@ import exceptions.InputNotValidException;
 
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ThreadLocalRandom;
 
 import static com.mygdx.game.MyGdxGame.WORLD_HEIGHT;
 import static com.mygdx.game.MyGdxGame.WORLD_WIDTH;
@@ -45,8 +46,7 @@ public class LevelHandler {
         startTimer();
         guesthandler.intializeGuests(level.getGuests());
         dishhandler.initializeDishhandler(waiter, spawnarea.getCounters());
-        //this makes sure that one of the first dishes fits the first guests
-        dishhandler.addToDishQueue(guesthandler.getGuests().first().getOrder());
+        initializeDishqueue(guesthandler.getGuests().first().getOrder());
     }
 
     private void intializeWaiter() {
@@ -90,7 +90,19 @@ public class LevelHandler {
         guesthandler.handleGuests(time, dishhandler);
         dishhandler.updateDishes(time, guesthandler.getActiveGuests());
         dishhandler.trashBinHandler(waiter);
-
+    }
+    
+  //this makes sure that one of the first dishes fits the first guests
+    public void initializeDishqueue(Foodtype order) {
+    	Foodtype random = Foodtype.getRandomFoodType();
+    	int randomNum = ThreadLocalRandom.current().nextInt(1, 3);
+    	if(randomNum == 1) {
+    		dishhandler.addToDishQueue(order);
+    		dishhandler.addToDishQueue(random);
+    	}else{
+    		dishhandler.addToDishQueue(random);
+    		dishhandler.addToDishQueue(order);
+    	}
     }
 
     public int getMoney() {
