@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import handlers.Assets;
 import screens.GameScreen;
+import screens.LoadingScreen;
 import screens.MenuScreen;
 
 public class MyGdxGame extends Game {
@@ -18,6 +19,7 @@ public class MyGdxGame extends Game {
 	private SpriteBatch batch;
 	private ShapeRenderer shapeRenderer;
 	private OrthographicCamera camera;
+	private LoadingScreen loadingScreen;
 	private GameScreen gameScreen;
 	private MenuScreen menuScreen;
 	private int levelcount;
@@ -28,18 +30,18 @@ public class MyGdxGame extends Game {
 
 	@Override
 	public void create() {
-		Assets.load();
-		Assets.manager.finishLoading();
 		batch = new SpriteBatch();
 		shapeRenderer = new ShapeRenderer();
-		menuScreen = new MenuScreen(this, batch);
-		this.setScreen(menuScreen);
 		camera = new OrthographicCamera(WORLD_WIDTH, WORLD_HEIGHT);
 		camera.position.set(WORLD_WIDTH / 2, WORLD_HEIGHT / 2, 0);
 		camera.update();
 		batch.setProjectionMatrix(camera.combined);
 		shapeRenderer.setProjectionMatrix(camera.combined);
 		levelcount = 1;
+		
+		loadingScreen = new LoadingScreen(this, batch);
+		this.setScreen(loadingScreen);
+		
 	}
 
 	@Override
@@ -62,7 +64,8 @@ public class MyGdxGame extends Game {
 	
 	public void showMenu() {
 		menuScreen = new MenuScreen(this, batch);
-		gameScreen.dispose();
+		if(gameScreen != null)
+			gameScreen.dispose();
 		this.setScreen(menuScreen);
 	}
 	
@@ -70,6 +73,8 @@ public class MyGdxGame extends Game {
 		if(levelcount == 1)
 			levelcount++;
 	}
+	
+
 
 
 }
