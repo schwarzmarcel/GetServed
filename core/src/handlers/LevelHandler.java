@@ -35,12 +35,12 @@ public class LevelHandler {
         guesthandler = new Guesthandler(game);
         world = new World(new Vector2(0, 0), true);
         Walls walls = new Walls(world);
-        money = 100;
         reader = new JsonLevelReader();
         level = reader.generateLevel(levelname);
     }
 
     public void initializeLevel() {
+    	money = level.getMoney();
         drawField();
         intializeWaiter();
         startTimer();
@@ -136,6 +136,8 @@ public class LevelHandler {
 	public Spawnarea getSpawnarea() {
 		return spawnarea;
 	}
+
+
 
    
 }

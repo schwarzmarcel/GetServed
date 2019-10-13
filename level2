@@ -1,5 +1,7 @@
 {
 	"name" : "level2",
+	"money" : 25,
+	"dishes" : 5,
 	"positions": [
 		{
 		 "row": 9,

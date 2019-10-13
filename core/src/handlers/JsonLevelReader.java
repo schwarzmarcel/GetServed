@@ -31,6 +31,12 @@ public class JsonLevelReader {
             Gamelevel level = new Gamelevel();
             String name = jsonObject.get("name").toString();
             level.setName(name);
+            long moneyL = (long) jsonObject.get("money");
+            int money = (int) moneyL;
+            level.setMoney(money);
+            long dishesL = (long) jsonObject.get("dishes");
+            int dishes = (int) dishesL;
+//            level.setDishes(dishes);
             JSONArray positions = (JSONArray) jsonObject.get("positions");
             JSONArray guests = (JSONArray) jsonObject.get("guests");
             for (Object o : positions) {
