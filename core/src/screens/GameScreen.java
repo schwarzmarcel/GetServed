@@ -87,8 +87,8 @@ public class GameScreen implements Screen {
 
 	@Override
 	public void dispose() {
-		//level.getWorld().dispose();
-		//debugRenderer.dispose();
+		level.getWorld().dispose();
+		debugRenderer.dispose();
 		
 	}
 
@@ -108,6 +108,7 @@ public class GameScreen implements Screen {
 				&& !Gdx.input.isKeyPressed(Input.Keys.LEFT) && !Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
 			currentFrame = level.getWaiter().getIdleAnimation().getKeyFrame(elapsedTime);
 		} else {
+			
 			currentFrame = level.getWaiter().getRunningAnimation().getKeyFrame(elapsedTime);
 		}
 
