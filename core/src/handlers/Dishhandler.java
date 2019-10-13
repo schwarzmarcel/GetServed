@@ -97,7 +97,7 @@ public class Dishhandler {
 	}
 
 	public void trashBinHandler(Waiter waiter) {
-		if (Gdx.input.isKeyJustPressed(Input.Keys.X)) {
+		if (Gdx.input.isKeyJustPressed(Input.Keys.D)) {
 			if (waiter.getDish() != null) {
 				dishes.remove(waiter.getDish());
 				Gdx.app.log("INFO: ", "Dish has been removed by Button Press");
