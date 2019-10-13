@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.utils.Queue;
 import com.badlogic.gdx.utils.Timer;
 import com.mygdx.game.MyGdxGame;
-
 import entities.Foodtype;
 import entities.Guest;
 import entities.Spawnarea;
@@ -51,20 +50,13 @@ public class Guesthandler {
 
 	public void updateGuest(Guest guest, int time) {
 		long timeElapsed = time - guest.getSpawnTime();
-		guest.setTimeElapsed(timeElapsed);
-		if (timeElapsed >= guest.getPatience()) {
+		guest.calculatePatience(timeElapsed);
+		if (guest.getPatience() == 0) {
 			guestsToRemove.add(guest);
-		} else if (timeElapsed >= (guest.getPatience() / 1.5)) {
-			if (guest.getHappiness() != 1) {
-				guest.setHappiness(1);
+		} else if (guest.getPatience() == 50) {
 				guest.setOrderTime(time);
-			}
-		} else if (timeElapsed >= (guest.getPatience() / 3)) {
-			if (guest.getHappiness() != 2) {
-				guest.setHappiness(2);
+		} else if (guest.getPatience() == 20) {
 				guest.setOrderTime(time);
-			
-			}
 		}
 
 	}

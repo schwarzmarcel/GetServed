@@ -22,9 +22,8 @@ public class JsonLevelReader {
 
     public Gamelevel generateLevel(String levelname) {
         JSONParser parser = new JSONParser();
-        
-        String filepath = "\\Users\\evasc\\Desktop\\Uni\\Auslandssemester\\Game Design\\tddd23\\" + levelname;
-        //String filepath = "../../" + levelname;
+        // String filepath = "\\Users\\evasc\\Desktop\\Uni\\Auslandssemester\\Game Design\\tddd23\\" + levelname;
+        String filepath = "../../" + levelname;
         //String filepath = levelname;
         try (Reader reader = new FileReader(filepath)) {
             Gdx.app.log("INFO: ","Start reading JSON-Level-Config");
@@ -44,7 +43,6 @@ public class JsonLevelReader {
                 res = (JSONObject) guests.get(index);
                 guestList.add(new Guest(
                         (long) res.get("spawntime"),
-                        (long) res.get("happiness"),
                         (long) res.get("patience"),
                         (long) res.get("wealth")
                 ));

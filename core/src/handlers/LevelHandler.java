@@ -34,7 +34,7 @@ public class LevelHandler {
         guesthandler = new Guesthandler(game);
         world = new World(new Vector2(0, 0), true);
         Walls walls = new Walls(world);
-        money = 25;
+        money = 100;
         reader = new JsonLevelReader();
         level = reader.generateLevel(levelname);
     }
@@ -79,12 +79,11 @@ public class LevelHandler {
                 }
                 if(money == 0) {
                 	Gdx.app.log("INFO: ", "You lost because you ran out of money :(");
-                	Timer.instance().clear();
-                	game.showMenu();
+                    Timer.instance().clear();
+                    game.showMenu();
                 }
             }
         }, 0, 1);
-        
     }
 
     public void updateLevel() {
