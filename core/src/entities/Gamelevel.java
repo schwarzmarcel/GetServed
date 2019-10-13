@@ -6,6 +6,7 @@ public class Gamelevel {
     private List<Gridposition> gridpositionList;
     private List<Guest> guests;
     private String name;
+    private int money;
 
 
     public List<Gridposition> getGridpositionList() {
@@ -31,5 +32,14 @@ public class Gamelevel {
     public void setGuests(List<Guest> guests) {
         this.guests = guests;
     }
+
+	public int getMoney() {
+		return money;
+	}
+
+	public void setMoney(int money) {
+		this.money = money;
+	}
+
 }
 
