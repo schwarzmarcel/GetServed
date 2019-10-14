@@ -45,6 +45,7 @@ public class GameScreen implements Screen {
     private GlyphLayout layoutTip;
     private int tip;
     private int lastTipTime;
+	private Sprite coin;
 
     public GameScreen(MyGdxGame game, SpriteBatch batch, ShapeRenderer shapeRenderer,
                       String levelname) {
@@ -116,19 +117,22 @@ public class GameScreen implements Screen {
 
     @Override
     public void dispose() {
-        //level.getWorld().dispose();
-        //debugRenderer.dispose();
+        level.getWorld().dispose();
+        debugRenderer.dispose();
 
     }
 
     private void initializeFonts() {
         moneyFont = AssetsManager.manager.get(AssetsManager.MONEYFONT, BitmapFont.class);
-        moneyFont.getData().setScale(0.1f);
+        moneyFont.getData().setScale(0.08f);
         layoutMoney = new GlyphLayout();
         tip = 0;
         lastTipTime = -3;
         layoutTip = new GlyphLayout();
-    }
+    coin = new Sprite(Assets.manager.get(Assets.COIN, Texture.class));
+		coin.setSize(7, 7);
+		coin.setPosition(WORLD_WIDTH - coin.getWidth() - 4, WORLD_HEIGHT - coin.getHeight() - 3);
+	}
 
     private void drawWaiter() {
         TextureRegion currentFrame;
@@ -206,6 +210,7 @@ public class GameScreen implements Screen {
     private void drawOrders() {
         for (Guest g : levelManager.getGuestManager().getActiveGuests()) {
             if ((g.getOrderTime() + 1) >= levelManager.getTime()) {
+                g.getBubble().draw(batch);
                 g.getDish().getSprite().draw(batch);
             }
         }
@@ -276,15 +281,16 @@ public class GameScreen implements Screen {
     }
 
     private void showMoney() {
-        String moneyText = "" + levelManager.getLevel().getMoney() + " $";
+        String moneyText = "" + levelManager.getLevel().getMoney();
         layoutMoney.setText(moneyFont, moneyText);
-        moneyFont.draw(batch, layoutMoney, WORLD_WIDTH - layoutMoney.width - 1, WORLD_HEIGHT - 1);
+        moneyFont.draw(batch, layoutMoney, WORLD_WIDTH - layoutMoney.width - 12, WORLD_HEIGHT - 4);
+		coin.draw(batch);
     }
 
     private void showTip() {
-        String tipText = "+ " + tip + " $";
+        String tipText = "+ " + tip;
         layoutTip.setText(moneyFont, tipText);
-        moneyFont.draw(batch, layoutTip, WORLD_WIDTH - layoutTip.width - 1, WORLD_HEIGHT - layoutMoney.height - 3);
+        moneyFont.draw(batch, layoutTip, WORLD_WIDTH - layoutTip.width - 12, WORLD_HEIGHT - layoutMoney.height - 6);
     }
 
     private void reactToCollision() {

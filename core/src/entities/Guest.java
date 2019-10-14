@@ -1,6 +1,8 @@
 package entities;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import handlers.AssetsManager;
@@ -15,6 +17,7 @@ public class Guest {
     private Animation<TextureRegion> activeAnimation;
     private Table table;
     private Dish dish;
+    private Sprite bubble;
     private long spawnTime;
     private long orderTime;
     private float patience;
@@ -65,6 +68,8 @@ public class Guest {
         this.activeAnimation = idleAnimation;
         order = Foodtype.getRandomFoodType();
         dish = new Dish(order);
+        bubble = new Sprite(Assets.manager.get(Assets.BUBBLE, Texture.class));
+        bubble.setSize(8,8);
         this.spawnTime = spawnTime;
         this.orderTime = spawnTime + 1;
         randomNum = ThreadLocalRandom.current().nextInt((int) (0.2 * patience) * (-1), (int) (0.2 * patience) + 1);
@@ -93,8 +98,9 @@ public class Guest {
     public void setPosition(float positionX, float positionY) {
         position[0] = positionX;
         position[1] = positionY;
-        float[] position = {positionX + dish.getSprite().getWidth() + 2, positionY};
+        float[] position = {positionX + dish.getSprite().getWidth() + 2, positionY + 4};
         dish.setPosition(position);
+        bubble.setPosition(positionX + dish.getSprite().getWidth(), positionY + 2);
     }
 
     public long getSpawnTime() {
@@ -127,6 +133,10 @@ public class Guest {
 
     public Foodtype getOrder() {
         return order;
+    }
+
+    public Sprite getBubble() {
+        return bubble;
     }
 
     public Animation<TextureRegion> getIdleAnimation() {

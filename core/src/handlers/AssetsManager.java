@@ -24,7 +24,9 @@ public class AssetsManager {
 	public static final String GUEST3 = "character_sprites/Guest3.atlas";
 	public static final String GUEST4 = "character_sprites/Guest4.atlas";
 	public static final String GUEST5 = "character_sprites/Guest5.atlas";
-	public static final String MONEYFONT = "moneyfont2.fnt";
+	public static final String COIN = "coin.png";
+	public static final String BUBBLE = "bubble.png";
+	public static final String MONEYFONT = "goldfont.fnt";
 	public static final String NEXTACTIVE = "nextactive.png";
 	public static final String NEXTPASSIVE = "nextpassive.png";
 	public static final String EXITACTIVE = "exitactive.png";
@@ -73,6 +75,9 @@ public class AssetsManager {
 		manager.load(EXITACTIVE, Texture.class);
 		manager.load(EXITPASSIVE, Texture.class);
 		manager.load(CHAIR, Texture.class);
+		manager.load(BUBBLE, Texture.class);
+		manager.load(COIN, Texture.class);
+
 		/* manager.load(GUEST1_ANGRY, Texture.class);
         manager.load(GUEST1_ORDERING, Texture.class);
         manager.load(GUEST2_ORDERING, Texture.class);
