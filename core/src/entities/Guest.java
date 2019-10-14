@@ -59,7 +59,7 @@ public class Guest {
             default:
                 break;
         }
-        idleAnimation = new Animation<>(0.045f, textureAtlasIdle.getRegions(), Animation.PlayMode.LOOP);
+        idleAnimation = new Animation<TextureRegion>(0.045f, textureAtlasIdle.getRegions(), Animation.PlayMode.LOOP);
         //angryAnimation = new Animation<>(0.05f, textureAtlasAngry.getRegions(), Animation.PlayMode.NORMAL);
         //orderAnimation = new Animation<>(0.05f, textureAtlasOrdering.getRegions(), Animation.PlayMode.NORMAL);
         this.activeAnimation = idleAnimation;

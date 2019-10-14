@@ -1,5 +1,7 @@
 package entities;
 
+import com.badlogic.gdx.physics.box2d.World;
+
 import java.util.List;
 
 public class Gamelevel {
@@ -7,7 +9,11 @@ public class Gamelevel {
     private List<Guest> guests;
     private String name;
     private int money;
+    private Walls walls;
 
+    public void generateWalls(World world) {
+        this.walls = new Walls(world);
+    }
 
     public List<Gridposition> getGridpositionList() {
         return gridpositionList;

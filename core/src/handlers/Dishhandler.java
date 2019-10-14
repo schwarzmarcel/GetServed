@@ -7,7 +7,7 @@ import entities.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 import static com.mygdx.game.MyGdxGame.PIXELS_TO_METERS;
 
@@ -35,9 +35,7 @@ public class Dishhandler {
 					(waiter.getBody().getPosition().x * PIXELS_TO_METERS) - waiter.getSprite().getWidth() / 2,
 					(waiter.getBody().getPosition().y * PIXELS_TO_METERS) - waiter.getSprite().getHeight() / 2);
 		}
-
 		for (Counter c : counters) {
-
 			// for initialization
 			if (c.getNextDish() == null) {
 				Dish init;
@@ -110,6 +108,18 @@ public class Dishhandler {
 	public void removeDish(Dish dish) {
 		Gdx.app.log("INFO: ", "Dish " + dish + " has been served and removed");
 		dishes.remove(dish);
+	}
+
+	public void initializeDishQueue(Foodtype order) {
+		Foodtype random = Foodtype.getRandomFoodType();
+		int randomNum = ThreadLocalRandom.current().nextInt(1, 3);
+		if (randomNum == 1) {
+			addToDishQueue(order);
+			addToDishQueue(random);
+		} else {
+			addToDishQueue(random);
+			addToDishQueue(order);
+		}
 	}
 
 	public ArrayList<Dish> getDishes() {
