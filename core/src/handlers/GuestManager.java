@@ -70,7 +70,8 @@ public class GuestManager {
 
 	/**
 	 * this method spawns the guest on the on the field
-	 * @param guest the guest to be spawned; all guest objects are already created prior to spawning them
+	 *
+	 * @param guest       the guest to be spawned; all guest objects are already created prior to spawning them
 	 * @param dishManager the dishManager to add the order of the new guest to the queue
 	 */
 	private void spawnGuest(Guest guest, DishManager dishManager) {
@@ -94,6 +95,7 @@ public class GuestManager {
 
 	/**
 	 * this method initializes the guests for the game by putting them into the queue
+	 *
 	 * @param guests the list of guests
 	 */
 	void initializeGuests(List<Guest> guests) {
@@ -104,6 +106,7 @@ public class GuestManager {
 
 	/**
 	 * this method removes an active guest from the field
+	 *
 	 * @param guest the guest to be removed
 	 */
 	public void removeActiveGuest(Guest guest) {

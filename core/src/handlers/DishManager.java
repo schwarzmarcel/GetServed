@@ -21,7 +21,7 @@ public class DishManager {
     private List<Counter> counters;
     private Waiter waiter;
 
-	public DishManager() {
+    public DishManager() {
         dishQueue = new Queue<Foodtype>();
         activeDishes = new ArrayList<Dish>();
     }
@@ -142,6 +142,7 @@ public class DishManager {
     /**
      * this method initializes the queue for the dishes and ensures that for the first guest there will always
      * be the correct dish available and spawns another random dish on other counters
+     *
      * @param order the order of the first guest to be spawned
      */
     public void initializeDishQueue(Foodtype order) {

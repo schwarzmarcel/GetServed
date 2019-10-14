@@ -29,6 +29,7 @@ public class LevelManager {
 
     /**
      * this object handles the flow of the game structure for each level
+     *
      * @param levelName the name of the level e.g. level 1 to be handled
      */
     public LevelManager(String levelName) {

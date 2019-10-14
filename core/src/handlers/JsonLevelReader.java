@@ -32,7 +32,7 @@ public class JsonLevelReader {
         //String filepath = "../../" + levelName;
         String filepath = levelName;
         try (Reader reader = new FileReader(filepath)) {
-            Gdx.app.log("INFO: ","Start reading JSON-Level-Config");
+            Gdx.app.log("INFO: ", "Start reading JSON-Level-Config");
             JSONObject jsonObject = (JSONObject) parser.parse(reader);
             Gamelevel level = new Gamelevel();
             String name = jsonObject.get("name").toString();
@@ -58,7 +58,7 @@ public class JsonLevelReader {
             }
             level.setGridpositionList(gridpositions);
             level.setGuests(guestList);
-            Gdx.app.log("INFO: ","Finished reading JSON-Level-Config");
+            Gdx.app.log("INFO: ", "Finished reading JSON-Level-Config");
             return level;
         } catch (IOException | ParseException e) {
             Gdx.app.error("ERROR: ", "reading from JSON File failed", e);
