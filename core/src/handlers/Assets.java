@@ -11,13 +11,13 @@ public class Assets {
 
 	public static final String WAITERIDLE = "character_sprites/Waiter_Idle.atlas";
 	public static final String WAITERWALKING = "character_sprites/Waiter_Walking.atlas";
-	public static final String COUNTER = "counter.png";
+    public static final String COUNTER = "./Map/desk 1.png";
 	public static final String PIZZA = "pizza.png";
 	public static final String BURGER = "burger.png";
 	public static final String PASTA = "pasta.png";
 	public static final String SALAD = "salad.png";
 	public static final String FISH = "fish.png";
-	public static final String TABLE = "table_round.png";
+    public static final String TABLE = "./Map/table 1.png";
 	public static final String CHAIR = "./Map/Chair 1.png";
 	public static final String GUEST1 = "character_sprites/Guest1.atlas";
 	public static final String GUEST2 = "character_sprites/Guest2.atlas";
