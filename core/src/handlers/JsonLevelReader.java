@@ -68,10 +68,16 @@ public class JsonLevelReader {
         return null;
     }
 
-    private Gridposition convertJsonToGridPosition(Object s) {
+    /**
+     * this method converts a Json Object to a Gridposition Object
+     *
+     * @param o the object to be converted
+     * @return a Gridposition Object
+     */
+    private Gridposition convertJsonToGridPosition(Object o) {
         ObjectMapper objectMapper = new ObjectMapper();
         try {
-            return (objectMapper.readValue(s.toString(), Gridposition.class));
+            return (objectMapper.readValue(o.toString(), Gridposition.class));
         } catch (IOException e) {
             e.printStackTrace();
         }
