@@ -1,6 +1,7 @@
 package entities;
 
-import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.utils.Timer;
 
 import java.util.List;
 
@@ -8,12 +9,27 @@ public class Gamelevel {
     private List<Gridposition> gridpositionList;
     private List<Guest> guests;
     private String name;
-    private int money;
-    private Walls walls;
+    private long money;
 
-    public void generateWalls(World world) {
-        this.walls = new Walls(world);
+    /**
+     * this method get called every second and decrements the money of the game
+     */
+    public void decrementMoney() {
+        if (money > 1) {
+            money = money - 2;
+        } else if (money == 1) {
+            money = 0;
+        }
+        if (money == 0) {
+            Gdx.app.log("INFO: ", "The Game");
+            Timer.instance().clear();
+        }
     }
+
+    /**
+     * -----------------
+     * Getter and Setter
+     */
 
     public List<Gridposition> getGridpositionList() {
         return gridpositionList;
@@ -23,12 +39,12 @@ public class Gamelevel {
         this.gridpositionList = gridpositionList;
     }
 
-    public String getName() {
-        return name;
-    }
-
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public List<Guest> getGuests() {
@@ -39,11 +55,11 @@ public class Gamelevel {
         this.guests = guests;
     }
 
-	public int getMoney() {
+    public long getMoney() {
 		return money;
 	}
 
-	public void setMoney(int money) {
+    public void setMoney(long money) {
 		this.money = money;
 	}
 

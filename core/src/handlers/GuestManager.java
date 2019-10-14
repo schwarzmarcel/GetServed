@@ -22,10 +22,10 @@ public class GuestManager {
 		guestsToRemove = new ArrayList<>();
 	}
 
-	public void manageGuests(int time, Dishhandler dishhandler) {
+	public void manageGuests(int time, DishManager dishManager) {
 		if (!guests.isEmpty()) {
 			if (guests.first().getSpawnTime() == time) {
-				spawnGuest(guests.first(), dishhandler);
+				spawnGuest(guests.first(), dishManager);
 			}
 		}
 		for (Guest g : activeGuests) {
@@ -51,7 +51,7 @@ public class GuestManager {
 		}
 	}
 
-	private void spawnGuest(Guest guest, Dishhandler dishhandler) {
+	private void spawnGuest(Guest guest, DishManager dishManager) {
 		if (spawnarea.getFreeTables().size() != 0) {
 			Random rndm = new Random();
 			int tableID = rndm.nextInt(spawnarea.getFreeTables().size());
@@ -60,7 +60,7 @@ public class GuestManager {
 			guest.setPosition(table.getChairPosition()[0], table.getChairPosition()[1]);
 			guest.setTable(table);
 			table.setGuest(guest);
-			dishhandler.addToDishQueue(guest.getOrder());
+			dishManager.addToDishQueue(guest.getOrder());
 			Gdx.app.log("INFO: ", "Added " + guest.getOrder() + " to dishqueue");
 			activeGuests.add(guest);
 			Gdx.app.log("INFO: ", "Spawned " + guest);

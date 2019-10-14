@@ -7,8 +7,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.MyGdxGame;
-
-import handlers.Assets;
+import handlers.AssetsManager;
 
 import static com.mygdx.game.MyGdxGame.WORLD_HEIGHT;
 import static com.mygdx.game.MyGdxGame.WORLD_WIDTH;
@@ -32,26 +31,26 @@ public class LoadingScreen implements Screen{
 		this.game = game;
 		this.batch = batch;
 		setFinishLoading(false);
-		loading = new Sprite(Assets.manager.get(Assets.LOADING, Texture.class));
+        loading = new Sprite(AssetsManager.manager.get(AssetsManager.LOADING, Texture.class));
 		loading.setSize(64, WORLD_HEIGHT / 10);
 		loading.setPosition(WORLD_WIDTH / 2 - (loading.getWidth() / 2), 5);
 	//	pressEnter = new Sprite(new Texture("continue.png"));
-		arrows = new Sprite (Assets.manager.get(Assets.ARROWS, Texture.class));
+        arrows = new Sprite(AssetsManager.manager.get(AssetsManager.ARROWS, Texture.class));
 		arrows.setSize(15, 10);
 		arrows.setPosition(40, WORLD_HEIGHT - 25);
-		move = new Sprite (Assets.manager.get(Assets.MOVE, Texture.class));
+        move = new Sprite(AssetsManager.manager.get(AssetsManager.MOVE, Texture.class));
 		move.setSize(23, 5);
 		move.setPosition(51 + arrows.getWidth(), WORLD_HEIGHT - 24);
-		sKey = new Sprite(Assets.manager.get(Assets.SKEY, Texture.class));
+        sKey = new Sprite(AssetsManager.manager.get(AssetsManager.SKEY, Texture.class));
 		sKey.setSize(7, 7);
 		sKey.setPosition(44, WORLD_HEIGHT - 40);
-		serve = new Sprite(Assets.manager.get(Assets.SERVE, Texture.class));
+        serve = new Sprite(AssetsManager.manager.get(AssetsManager.SERVE, Texture.class));
 		serve.setSize(45, 6);
 		serve.setPosition(50 + arrows.getWidth(), WORLD_HEIGHT - 40);
-		dKey = new Sprite(Assets.manager.get(Assets.DKEY, Texture.class));
+        dKey = new Sprite(AssetsManager.manager.get(AssetsManager.DKEY, Texture.class));
 		dKey.setSize(7, 7);
 		dKey.setPosition(44, WORLD_HEIGHT - 55);
-		discard = new Sprite(Assets.manager.get(Assets.DISCARD, Texture.class));
+        discard = new Sprite(AssetsManager.manager.get(AssetsManager.DISCARD, Texture.class));
 		discard.setSize(50, 6);
 		discard.setPosition(50 + arrows.getWidth(), WORLD_HEIGHT - 55);
 		queueAssets();
@@ -64,7 +63,7 @@ public class LoadingScreen implements Screen{
 	}
 	
 	private void update(float delta) {
-		if(Assets.manager.update()) {
+        if (AssetsManager.manager.update()) {
 			game.showMenu();
 		}
 	}
@@ -117,7 +116,7 @@ public class LoadingScreen implements Screen{
 	}
 	
 	private void queueAssets() {
-		Assets.load();
+        AssetsManager.load();
 	}
 
 	public boolean isFinishLoading() {

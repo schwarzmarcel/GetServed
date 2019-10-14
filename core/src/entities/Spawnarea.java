@@ -18,6 +18,7 @@ public class Spawnarea {
     private List<Table> tables = new ArrayList<Table>();
     private List<Counter> counters = new ArrayList<>();
     private List<Table> freeTables = new ArrayList<Table>();
+    private Walls walls;
 
     public Spawnarea(){
     }
@@ -44,9 +45,25 @@ public class Spawnarea {
             }
         }
     }
-    public void printGridDimensions(){
-        System.out.println("Number of Rows:" + (int) WORLD_HEIGHT / CELLSIZE);
-        System.out.println("Number of Columns:" + (int) WORLD_WIDTH / CELLSIZE);
+
+    /**
+     * this method generates the physical borders of the gamelevel
+     *
+     * @param world the physical world that the walls are created in
+     */
+    public void generateWalls(World world) {
+        this.walls = new Walls(world);
+    }
+
+    @Override
+    public String toString() {
+        return "Spawnarea{" +
+                "CELLSIZE=" + CELLSIZE +
+                ", rowNumber=" + rowNumber +
+                ", colNumber=" + colNumber +
+                ", tables=" + tables +
+                ", counters=" + counters +
+                '}';
     }
 
     public List<Table> getTables() {
@@ -69,14 +86,4 @@ public class Spawnarea {
         return counters;
     }
 
-    @Override
-    public String toString() {
-        return "Spawnarea{" +
-                "CELLSIZE=" + CELLSIZE +
-                ", rowNumber=" + rowNumber +
-                ", colNumber=" + colNumber +
-                ", tables=" + tables +
-                ", counters=" + counters +
-                '}';
-    }
 }

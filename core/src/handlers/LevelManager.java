@@ -12,11 +12,14 @@ import exceptions.InputNotValidException;
 import static com.mygdx.game.MyGdxGame.WORLD_HEIGHT;
 import static com.mygdx.game.MyGdxGame.WORLD_WIDTH;
 
+/**
+ * The LevelManager initializes a level, builds the world for the level
+ * and is responsible for all changes during the game
+ */
 public class LevelManager {
-    private Dishhandler dishhandler;
+    private DishManager dishManager;
     private GuestManager guestManager;
     private int time;
-    private int money;
     private World world;
     private Waiter waiter;
     private Spawnarea gameField;
@@ -26,12 +29,11 @@ public class LevelManager {
 
     /**
      * this object handles the flow of the game structure for each level
-     *
      * @param levelName the name of the level e.g. level 1 to be handled
      */
     public LevelManager(String levelName) {
         this.levelName = levelName;
-        dishhandler = new Dishhandler();
+        dishManager = new DishManager();
         guestManager = new GuestManager();
     }
 
@@ -41,15 +43,13 @@ public class LevelManager {
     public void initializeLevel() {
         world = new World(new Vector2(0, 0), true);
         JsonLevelReader reader = new JsonLevelReader();
-        level = reader.generateLevel(levelName);
-        level.generateWalls(world);
-        money = level.getMoney();
-        initializeField();
+        level = reader.readLevelConfiguration(levelName);
+        initializeGameField();
         intializeWaiter();
         initializeTimer();
         guestManager.intializeGuests(level.getGuests());
-        dishhandler.initializeDishhandler(waiter, gameField.getCounters());
-        dishhandler.initializeDishQueue(guestManager.getGuests().first().getOrder());
+        dishManager.initializeDishhandler(waiter, gameField.getCounters());
+        dishManager.initializeDishQueue(guestManager.getGuests().first().getOrder());
     }
 
     /**
@@ -63,10 +63,11 @@ public class LevelManager {
     /**
      * this method initializes the basic game field
      */
-    private void initializeField() {
+    private void initializeGameField() {
         Gdx.app.log("INFO: ", "Begin drawing field");
         gameField = new Spawnarea();
         guestManager.setSpawnarea(gameField);
+        gameField.generateWalls(world);
         try {
             gameField.initializeTables(level.getGridpositionList(), world);
         } catch (InputNotValidException e) {
@@ -86,16 +87,7 @@ public class LevelManager {
             @Override
             public void run() {
                 time++;
-                if (money > 1) {
-                    money = money - 2;
-                } else if (money == 1) {
-                    money = 0;
-                }
-                if (money == 0) {
-                    Gdx.app.log("INFO: ", "The Game");
-                    Timer.instance().clear();
-                    levelOver = true;
-                }
+                level.decrementMoney();
             }
         }, 0, 1);
     }
@@ -104,9 +96,12 @@ public class LevelManager {
      * this method constantly updates the entire level as the game progresses over time
      */
     public void updateLevel() {
-        guestManager.manageGuests(time, dishhandler);
-        dishhandler.updateDishes(time, guestManager.getActiveGuests());
-        dishhandler.trashBinHandler(waiter);
+        guestManager.manageGuests(time, dishManager);
+        dishManager.updateDishes(time, guestManager.getActiveGuests());
+        dishManager.trashBinHandler(waiter);
+        if (level.getMoney() == 0) {
+            levelOver = true;
+        }
         if (guestManager.getActiveGuests().isEmpty() && guestManager.getGuests().isEmpty()) {
             Gdx.app.log("INFO: ", "Level was successfully finished");
             Timer.instance().clear();
@@ -114,21 +109,22 @@ public class LevelManager {
         }
     }
 
+    @Override
+    public String toString() {
+        return "LevelManager{" +
+                "waiter=" + waiter +
+                ", levelOver=" + levelOver +
+                ", levelName='" + levelName + '\'' +
+                '}';
+    }
 
     /**
      * ------------------
      * Setters and Getters
      */
-    public int getMoney() {
-        return money;
-    }
 
-    public void setMoney(int money) {
-        this.money = money;
-    }
-
-    public Dishhandler getDishhandler() {
-        return dishhandler;
+    public DishManager getDishManager() {
+        return dishManager;
     }
 
     public int getTime() {
@@ -154,4 +150,9 @@ public class LevelManager {
     public boolean isLevelOver() {
         return levelOver;
     }
+
+    public Gamelevel getLevel() {
+        return level;
+    }
+
 }

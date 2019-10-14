@@ -22,7 +22,7 @@ import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.mygdx.game.MyGdxGame;
 import entities.*;
-import handlers.Assets;
+import handlers.AssetsManager;
 import handlers.GsContactListener;
 import handlers.LevelManager;
 
@@ -121,7 +121,7 @@ public class GameScreen implements Screen {
     }
 
     private void initializeFonts() {
-        moneyFont = Assets.manager.get(Assets.MONEYFONT, BitmapFont.class);
+        moneyFont = AssetsManager.manager.get(AssetsManager.MONEYFONT, BitmapFont.class);
         moneyFont.getData().setScale(0.1f);
         layoutMoney = new GlyphLayout();
         tip = 0;
@@ -195,8 +195,8 @@ public class GameScreen implements Screen {
     }
 
     private void drawDishes() {
-        if (levelManager.getDishhandler().getDishes() != null) {
-            for (Dish d : levelManager.getDishhandler().getDishes()) {
+        if (levelManager.getDishManager().getDishes() != null) {
+            for (Dish d : levelManager.getDishManager().getDishes()) {
                 d.getSprite().draw(batch);
             }
         }
@@ -275,7 +275,7 @@ public class GameScreen implements Screen {
     }
 
     private void showMoney() {
-        String moneyText = "" + levelManager.getMoney() + " $";
+        String moneyText = "" + levelManager.getLevel().getMoney() + " $";
         layoutMoney.setText(moneyFont, moneyText);
         moneyFont.draw(batch, layoutMoney, WORLD_WIDTH - layoutMoney.width - 1, WORLD_HEIGHT - 1);
     }
@@ -311,16 +311,16 @@ public class GameScreen implements Screen {
                                 dish.setPosition(contactTable.getPosition());
                                 dish.setSpriteSize(40, 20);
                                 waiter.removeDish();
-                                levelManager.getDishhandler().removeDish(dish);
+                                levelManager.getDishManager().removeDish(dish);
                                 tip = guest.getTip();
                                 lastTipTime = levelManager.getTime();
-                                levelManager.setMoney(levelManager.getMoney() + guest.getTip());
+                                levelManager.getLevel().setMoney(levelManager.getLevel().getMoney() + guest.getTip());
                                 levelManager.getGuestManager().removeActiveGuest(guest);
                                 Gdx.app.log("INFO: ", "Delivered correct Dish to Guest");
                             } else {
                                 guest.receivedWrongDish(levelManager.getTime());
                                 waiter.removeDish();
-                                levelManager.getDishhandler().removeDish(dish);
+                                levelManager.getDishManager().removeDish(dish);
                                 Gdx.app.log("INFO: ", "Delivered wrong dish to Guest");
                             }
                         }

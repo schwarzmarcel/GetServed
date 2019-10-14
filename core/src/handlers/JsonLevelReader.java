@@ -20,19 +20,24 @@ public class JsonLevelReader {
     private List<Gridposition> gridpositions = new ArrayList<>();
     private List<Guest> guestList = new ArrayList<>();
 
-    public Gamelevel generateLevel(String levelname) {
+    /**
+     * this method reads the a level's corresponding JSON-File which determines the level' configuration
+     *
+     * @param levelName the identifier of the level
+     * @return a Gamelevel object that was build based on the configuration from the JSON File
+     */
+    public Gamelevel readLevelConfiguration(String levelName) {
         JSONParser parser = new JSONParser();
-        //String filepath = "\\Users\\evasc\\Desktop\\Uni\\Auslandssemester\\Game Design\\tddd23\\" + levelname;
-        //String filepath = "../../" + levelname;
-        String filepath = levelname;
+        //String filepath = "\\Users\\evasc\\Desktop\\Uni\\Auslandssemester\\Game Design\\tddd23\\" + levelName;
+        //String filepath = "../../" + levelName;
+        String filepath = levelName;
         try (Reader reader = new FileReader(filepath)) {
             Gdx.app.log("INFO: ","Start reading JSON-Level-Config");
             JSONObject jsonObject = (JSONObject) parser.parse(reader);
             Gamelevel level = new Gamelevel();
             String name = jsonObject.get("name").toString();
             level.setName(name);
-            long moneyL = (long) jsonObject.get("money");
-            int money = (int) moneyL;
+            long money = (long) jsonObject.get("money");
             level.setMoney(money);
             JSONArray positions = (JSONArray) jsonObject.get("positions");
             JSONArray guests = (JSONArray) jsonObject.get("guests");

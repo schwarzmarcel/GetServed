@@ -3,7 +3,6 @@ package entities;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -11,7 +10,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.World;
-import handlers.Assets;
+import handlers.AssetsManager;
 import interfaces.Moveable;
 
 import static com.mygdx.game.MyGdxGame.WORLD_HEIGHT;
@@ -26,9 +25,9 @@ public class Waiter implements Moveable {
     private String orientation = "right";
 
     public Waiter(World world, float positionX, float positionY) {
-        TextureAtlas textureAtlas = Assets.manager.get(Assets.WAITERWALKING, TextureAtlas.class);
+        TextureAtlas textureAtlas = AssetsManager.manager.get(AssetsManager.WAITERWALKING, TextureAtlas.class);
     	runningAnimation = new Animation<TextureRegion>(0.015f, textureAtlas.getRegions(), Animation.PlayMode.LOOP);
-        textureAtlas = Assets.manager.get(Assets.WAITERIDLE, TextureAtlas.class);
+        textureAtlas = AssetsManager.manager.get(AssetsManager.WAITERIDLE, TextureAtlas.class);
         sprite = new Sprite(textureAtlas.findRegion("Idle"));
         sprite.setSize(WORLD_WIDTH / 32, WORLD_HEIGHT / 16);
         sprite.setPosition(positionX, positionY);
