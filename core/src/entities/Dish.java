@@ -32,19 +32,19 @@ public class Dish {
                 break;
             default: break;
         }
-        sprite.setSize(WORLD_WIDTH / 64, WORLD_HEIGHT / 36);
+        sprite.setSize(WORLD_WIDTH / 40, WORLD_HEIGHT / 20);
     }
     public void setPosition(float[] positions){
         position = positions;
         this.sprite.setPosition(position[0],position[1]);
     }
-    public float[] getPosition(){
-        return position;
-    }
     public Sprite getSprite(){
         return sprite;
     }
 
+    public void setSpriteSize(int width, int height) {
+        sprite.setSize(WORLD_WIDTH / width, WORLD_HEIGHT / height);
+    }
     @Override
     public String toString() {
         return "Dish{" +

@@ -300,6 +300,7 @@ public class GameScreen implements Screen {
 							Guest guest = contactTable.getGuest();
 							if (guest.getOrder() == (dish.type)) {
 								dish.setPosition(contactTable.getPosition());
+								dish.setSpriteSize(40, 20);
 								waiter.removeDish();
 								level.getDishhandler().removeDish(dish);
 								tip = guest.getTip();
@@ -325,6 +326,7 @@ public class GameScreen implements Screen {
 						contactCounter = (Counter) fixtureB.getUserData();
 					if (contactCounter.getDish() != null && level.getWaiter().getDish() == null) {
 						level.getWaiter().setDish(contactCounter.getDish());
+						level.getWaiter().getDish().setSpriteSize(64, 32);
 						contactCounter.removeDish();
 					}
 
