@@ -32,8 +32,6 @@ public class MyGdxGame extends Game {
 	public void create() {
 		batch = new SpriteBatch();
 		shapeRenderer = new ShapeRenderer();
-		menuScreen = new MenuScreen(this, batch);
-		this.setScreen(menuScreen);
         camera = new OrthographicCamera();
         camera.setToOrtho(false, WORLD_WIDTH, WORLD_HEIGHT);
         camera.position.set(WORLD_WIDTH / 2, WORLD_HEIGHT / 2, 0);
