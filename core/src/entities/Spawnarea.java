@@ -70,6 +70,10 @@ public class Spawnarea {
                 '}';
     }
 
+    /**
+     * -----------------
+     * Getter and Setter
+     */
     public List<Table> getTables() {
         return tables;
     }

@@ -45,17 +45,17 @@ public class LevelManager {
         JsonLevelReader reader = new JsonLevelReader();
         level = reader.readLevelConfiguration(levelName);
         initializeGameField();
-        intializeWaiter();
+        initializeWaiter();
         initializeTimer();
-        guestManager.intializeGuests(level.getGuests());
+        guestManager.initializeGuests(level.getGuests());
         dishManager.initializeDishhandler(waiter, gameField.getCounters());
-        dishManager.initializeDishQueue(guestManager.getGuests().first().getOrder());
+        dishManager.initializeDishQueue(guestManager.getGuestQueue().first().getOrder());
     }
 
     /**
      * this method initializes the waiter
      */
-    private void intializeWaiter() {
+    private void initializeWaiter() {
         waiter = new Waiter(world, WORLD_WIDTH / 2, WORLD_HEIGHT / 2);
         Gdx.app.log("INFO: ", "Waiter created");
     }
@@ -102,7 +102,7 @@ public class LevelManager {
         if (level.getMoney() == 0) {
             levelOver = true;
         }
-        if (guestManager.getActiveGuests().isEmpty() && guestManager.getGuests().isEmpty()) {
+        if (guestManager.getActiveGuests().isEmpty() && guestManager.getGuestQueue().isEmpty()) {
             Gdx.app.log("INFO: ", "Level was successfully finished");
             Timer.instance().clear();
             levelOver = true;

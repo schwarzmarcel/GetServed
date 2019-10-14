@@ -11,21 +11,32 @@ import java.util.List;
 import java.util.Random;
 
 public class GuestManager {
-	private Queue<Guest> guests;
+	/**
+	 * guestQueue: this queue contains all the guests that will be spawned during the game in the correct order
+	 * activeGuests: this list contains all the guests at any time that are currently on the field
+	 * guestsToRemove: this list contains all the guests at any time that need to be removed from the field
+	 */
+	private Queue<Guest> guestQueue;
 	private ArrayList<Guest> activeGuests;
 	private ArrayList<Guest> guestsToRemove;
 	private Spawnarea spawnarea;
 
-	public GuestManager() {
-		guests = new Queue<>();
+	GuestManager() {
+		guestQueue = new Queue<>();
 		activeGuests = new ArrayList<>();
 		guestsToRemove = new ArrayList<>();
 	}
 
-	public void manageGuests(int time, DishManager dishManager) {
-		if (!guests.isEmpty()) {
-			if (guests.first().getSpawnTime() == time) {
-				spawnGuest(guests.first(), dishManager);
+	/**
+	 * This method will directly manages the guests during the game
+	 *
+	 * @param time        the current time since the level started
+	 * @param dishManager the object that manages the dishes; used to create the dishes when guests spawn
+	 */
+	void manageGuests(int time, DishManager dishManager) {
+		if (!guestQueue.isEmpty()) {
+			if (guestQueue.first().getSpawnTime() == time) {
+				spawnGuest(guestQueue.first(), dishManager);
 			}
 		}
 		for (Guest g : activeGuests) {
@@ -39,18 +50,29 @@ public class GuestManager {
 		}
 	}
 
-	public void updateGuest(Guest guest, int time) {
+	/**
+	 * this method updates a guests state
+	 *
+	 * @param guest the guest to be updated
+	 * @param time  the current time since the level started
+	 */
+	private void updateGuest(Guest guest, int time) {
 		long timeElapsed = time - guest.getSpawnTime();
 		guest.calculatePatience(timeElapsed);
 		if (guest.getPatience() == 0) {
 			guestsToRemove.add(guest);
 		} else if (guest.getPatience() == 50) {
-				guest.setOrderTime(time);
+			guest.setOrderTime(time);
 		} else if (guest.getPatience() == 20) {
-				guest.setOrderTime(time);
+			guest.setOrderTime(time);
 		}
 	}
 
+	/**
+	 * this method spawns the guest on the on the field
+	 * @param guest the guest to be spawned; all guest objects are already created prior to spawning them
+	 * @param dishManager the dishManager to add the order of the new guest to the queue
+	 */
 	private void spawnGuest(Guest guest, DishManager dishManager) {
 		if (spawnarea.getFreeTables().size() != 0) {
 			Random rndm = new Random();
@@ -64,24 +86,37 @@ public class GuestManager {
 			Gdx.app.log("INFO: ", "Added " + guest.getOrder() + " to dishqueue");
 			activeGuests.add(guest);
 			Gdx.app.log("INFO: ", "Spawned " + guest);
-			guests.removeFirst();
+			guestQueue.removeFirst();
 			Gdx.app.log("INFO: ", "Removed Guest from guestlist ");
 		}
 
 	}
 
-	public void intializeGuests(List<Guest> guests) {
+	/**
+	 * this method initializes the guests for the game by putting them into the queue
+	 * @param guests the list of guests
+	 */
+	void initializeGuests(List<Guest> guests) {
 		for (Guest g : guests) {
-			this.guests.addLast(g);
+			this.guestQueue.addLast(g);
 		}
 	}
 
+	/**
+	 * this method removes an active guest from the field
+	 * @param guest the guest to be removed
+	 */
 	public void removeActiveGuest(Guest guest) {
 		spawnarea.addFreeTable(guest.getTable());
 		activeGuests.remove(guest);
 		guest.getTable().removeGuest();
 		Gdx.app.log("INFO: ", "Guest " + guest + " removed.");
 	}
+
+	/**
+	 * -------------------
+	 * Getters and Setters
+	 */
 
 	public void setSpawnarea(Spawnarea spawnarea) {
 		this.spawnarea = spawnarea;
@@ -91,8 +126,8 @@ public class GuestManager {
 		return activeGuests;
 	}
 
-	public Queue<Guest> getGuests() {
-		return guests;
+	public Queue<Guest> getGuestQueue() {
+		return guestQueue;
 	}
 
 
