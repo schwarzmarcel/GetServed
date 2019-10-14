@@ -23,8 +23,13 @@ public class Spawnarea {
     public Spawnarea(){
     }
 
-    public void initializeTables(List<Gridposition> gridpositions, World world) throws InputNotValidException {
-        for (Gridposition g: gridpositions
+    /**
+     * @param gridPositions the location of the tables on counters to be created
+     * @param world         the world to create the physical borders of the tables and counters in
+     * @throws InputNotValidException if the number of columns or rows is set incorrectly this exception will be thrown
+     */
+    public void initializeTables(List<Gridposition> gridPositions, World world) throws InputNotValidException {
+        for (Gridposition g : gridPositions
              ) {
             if (g != null) {
                 if ((g.getCol() > colNumber) || (g.getRow() > rowNumber) || (g.getRow() < 0) || (g.getCol() < 0)) {
@@ -48,7 +53,6 @@ public class Spawnarea {
 
     /**
      * this method generates the physical borders of the gamelevel
-     *
      * @param world the physical world that the walls are created in
      */
     public void generateWalls(World world) {
