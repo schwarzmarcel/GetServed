@@ -28,6 +28,7 @@ import handlers.LevelManager;
 
 import static com.mygdx.game.MyGdxGame.*;
 
+//TODO: add commentary
 public class GameScreen implements Screen {
     public MyGdxGame game;
     private SpriteBatch batch;
@@ -109,7 +110,7 @@ public class GameScreen implements Screen {
         batch.end();
         if (false)
             debugRenderer.render(levelManager.getWorld(), debugMatrix);
-        testContacts();
+        reactToCollision();
 
     }
 
@@ -286,7 +287,7 @@ public class GameScreen implements Screen {
         moneyFont.draw(batch, layoutTip, WORLD_WIDTH - layoutTip.width - 1, WORLD_HEIGHT - layoutMoney.height - 3);
     }
 
-    private void testContacts() {
+    private void reactToCollision() {
         if (contactListener.getContact() != null) {
             Contact contact = contactListener.getContact();
             Fixture fixtureA = contact.getFixtureA();
