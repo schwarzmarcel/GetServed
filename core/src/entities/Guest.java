@@ -1,5 +1,6 @@
 package entities;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -15,6 +16,8 @@ public class Guest {
     private Animation<TextureRegion> angryAnimation;
     private Animation<TextureRegion> orderAnimation;
     private Animation<TextureRegion> activeAnimation;
+    private String currentAnimation;
+    private int lastAnimationTime = 0;
     private Table table;
     private String type;
     private Dish dish;
@@ -30,6 +33,7 @@ public class Guest {
 
     public Guest(long spawnTime, long patience, long wealth, String type) {
         int randomNum = ThreadLocalRandom.current().nextInt(1, 5 + 1);
+        randomNum = 1;
         TextureAtlas textureAtlasIdle = null;
         TextureAtlas textureAtlasAngry = null;
         TextureAtlas textureAtlasOrdering = null;
@@ -37,8 +41,8 @@ public class Guest {
             switch (randomNum) {
                 case 1:
                     textureAtlasIdle = Assets.manager.get(Assets.GUEST1, TextureAtlas.class);
-                    //textureAtlasAngry = new TextureAtlas(Gdx.files.internal("character_sprites/Guest1_Kick.atlas"));
-                    //textureAtlasOrdering = new TextureAtlas(Gdx.files.internal("character_sprites/Guest1_Jump.atlas"));
+                    textureAtlasAngry = new TextureAtlas(Gdx.files.internal("character_sprites/Guest1_Kick.atlas"));
+                    textureAtlasOrdering = new TextureAtlas(Gdx.files.internal("character_sprites/Guest1_Jump.atlas"));
                     //textureAtlasAngry = Assets.manager.get(Assets.GUEST1_ORDERING, TextureAtlas.class);
                     //textureAtlasOrdering = Assets.manager.get(Assets.GUEST1_ANGRY, TextureAtlas.class);
                     break;
@@ -66,14 +70,15 @@ public class Guest {
                 default:
                     break;
             }
-        }else if(type.equals("king")){
+        }else if(type.equals("king1")){
             textureAtlasIdle = Assets.manager.get(Assets.KING, TextureAtlas.class);
         }
 
         idleAnimation = new Animation<TextureRegion>(0.045f, textureAtlasIdle.getRegions(), Animation.PlayMode.LOOP);
-        //angryAnimation = new Animation<>(0.05f, textureAtlasAngry.getRegions(), Animation.PlayMode.NORMAL);
-        //orderAnimation = new Animation<>(0.05f, textureAtlasOrdering.getRegions(), Animation.PlayMode.NORMAL);
+        angryAnimation = new Animation<TextureRegion>(0.05f, textureAtlasAngry.getRegions(), Animation.PlayMode.LOOP);
+        orderAnimation = new Animation<TextureRegion>(0.05f, textureAtlasOrdering.getRegions(), Animation.PlayMode.LOOP);
         this.activeAnimation = idleAnimation;
+        this.currentAnimation = "idle";
         order = Foodtype.getRandomFoodType();
         dish = new Dish(order);
         bubble = new Sprite(Assets.manager.get(Assets.BUBBLE, Texture.class));
@@ -184,16 +189,29 @@ public class Guest {
         return activeAnimation;
     }
 
-    public void setActiveAnimation(String animation) {
+    public void setActiveAnimation(String animation, int time) {
         switch (animation) {
             case "idle":
                 this.activeAnimation = this.idleAnimation;
+                this.currentAnimation = "idle";
+                this.lastAnimationTime = time;
                 break;
             case "ordering":
                 this.activeAnimation = this.orderAnimation;
+                this.currentAnimation = "ordering";
+                this.lastAnimationTime = time;
                 break;
             case "angry":
                 this.activeAnimation = this.angryAnimation;
+                this.currentAnimation = "angry";
+                this.lastAnimationTime = time;
         }
+    }
+    public String getCurrentAnimation() {
+        return currentAnimation;
+    }
+
+    public int getLastAnimationTime() {
+        return lastAnimationTime;
     }
 }

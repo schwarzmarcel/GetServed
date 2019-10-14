@@ -32,7 +32,7 @@ public class MyGdxGame extends Game {
         camera.update();
         batch.setProjectionMatrix(camera.combined);
         shapeRenderer.setProjectionMatrix(camera.combined);
-        levelCount = 2;
+        levelCount = 1;
         Assets.loadingScreen();
         Assets.manager.finishLoading();
         loadingScreen = new LoadingScreen(this, batch);

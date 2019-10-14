@@ -162,7 +162,7 @@ public class GameScreen implements Screen {
     private void drawGuests() {
         TextureRegion currentFrame;
         for (Guest g : levelHandler.getGuestHandler().getActiveGuests()) {
-            currentFrame = g.getActiveAnimation().getKeyFrame(elapsedTime);
+            currentFrame = g.getActiveAnimation().getKeyFrame(elapsedTime,false);
             batch.draw(currentFrame, g.getPosition()[0], g.getPosition()[1], WORLD_WIDTH / 32, WORLD_HEIGHT / 16);
             drawPatience(g);
         }
@@ -325,6 +325,7 @@ public class GameScreen implements Screen {
                                 guest.receivedWrongDish(levelHandler.getTime());
                                 waiter.removeDish();
                                 levelHandler.getDishHandler().removeActiveDish(dish);
+                                guest.setActiveAnimation("angry",levelHandler.getTime());
                                 Gdx.app.log("INFO: ", "Delivered wrong dish to Guest");
                             }
                         }

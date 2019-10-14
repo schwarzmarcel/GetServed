@@ -61,10 +61,21 @@ public class GuestHandler {
 		guest.calculatePatience(timeElapsed);
 		if (guest.getPatience() == 0) {
 			guestsToRemove.add(guest);
-		} else if (guest.getPatience() == 50) {
+		} else if (guest.getPatience() <= 0.5 * guest.getMaxPatience()) {
 			guest.setOrderTime(time);
-		} else if (guest.getPatience() == 20) {
+			if(!guest.getCurrentAnimation().equals("ordering")){
+				guest.setActiveAnimation("ordering", time);
+			}
+		} else if (guest.getPatience() <= 0.2 * guest.getMaxPatience()) {
 			guest.setOrderTime(time);
+			if(!guest.getCurrentAnimation().equals("ordering")){
+				guest.setActiveAnimation("ordering", time);
+			}
+		}
+		if(guest.getCurrentAnimation().equals("angry") || guest.getCurrentAnimation().equals("ordering")){
+			if(guest.getLastAnimationTime() + 1 == time){
+				guest.setActiveAnimation("idle",time);
+			}
 		}
 	}
 
