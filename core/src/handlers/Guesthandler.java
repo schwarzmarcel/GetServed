@@ -1,21 +1,16 @@
 package handlers;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.utils.Queue;
 import com.badlogic.gdx.utils.Timer;
 import com.mygdx.game.MyGdxGame;
-import entities.Foodtype;
 import entities.Guest;
 import entities.Spawnarea;
 import entities.Table;
 
-import java.util.*;
-
-import static com.mygdx.game.MyGdxGame.WORLD_HEIGHT;
-import static com.mygdx.game.MyGdxGame.WORLD_WIDTH;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class Guesthandler {
 	private Queue<Guest> guests;
@@ -58,7 +53,6 @@ public class Guesthandler {
 		} else if (guest.getPatience() == 20) {
 				guest.setOrderTime(time);
 		}
-
 	}
 
 	private void spawnGuest(Guest guest, Dishhandler dishhandler) {
@@ -67,7 +61,7 @@ public class Guesthandler {
 			int tableID = rndm.nextInt(spawnarea.getFreeTables().size());
 			Table table = spawnarea.getFreeTables().get(tableID);
 			spawnarea.removeFreeTable(table);
-			guest.setPosition(table.getPosition()[0], table.getPosition()[1]);
+			guest.setPosition(table.getChairPosition()[0], table.getChairPosition()[1]);
 			guest.setTable(table);
 			table.setGuest(guest);
 			dishhandler.addToDishQueue(guest.getOrder());

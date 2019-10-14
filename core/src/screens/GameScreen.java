@@ -12,6 +12,10 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
+import com.badlogic.gdx.maps.MapProperties;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.Contact;
@@ -31,6 +35,8 @@ public class GameScreen implements Screen {
 	private LevelHandler level;
 	private Box2DDebugRenderer debugRenderer;
 	private OrthographicCamera camera;
+	private TiledMap tiledMap;
+	private OrthogonalTiledMapRenderer renderer;
 	private GsContactListener contactListener;
 	private float elapsedTime = 0;
 	private BitmapFont moneyFont;
@@ -39,8 +45,8 @@ public class GameScreen implements Screen {
 	private int tip;
 	private int lastTipTime;
 
-	public GameScreen(MyGdxGame game, SpriteBatch batch, ShapeRenderer shapeRenderer, OrthographicCamera camera,
-			String levelname) {
+	public GameScreen(MyGdxGame game, SpriteBatch batch, ShapeRenderer shapeRenderer,
+					  String levelname) {
 		this.game = game;
 		this.batch = batch;
 		this.shapeRenderer = shapeRenderer;
@@ -53,16 +59,31 @@ public class GameScreen implements Screen {
 		debugRenderer = new Box2DDebugRenderer();
 		contactListener = new GsContactListener();
 		level.getWorld().setContactListener(contactListener);
+		tiledMap = new TmxMapLoader().load("Map/tile-map.tmx");
+		//tiledMap = Assets.manager.get(Assets.MAP, TiledMap.class);
+		MapProperties properties = tiledMap.getProperties();
+		int tileWidth = properties.get("tilewidth", Integer.class);
+		int tileHeight = properties.get("tileheight", Integer.class);
+		int mapWidthInTiles = properties.get("width", Integer.class);
+		int mapHeightInTiles = properties.get("height", Integer.class);
+		int mapWidthInPixels = mapWidthInTiles * tileWidth;
+		int mapHeightInPixels = mapHeightInTiles * tileHeight;
+		camera = new OrthographicCamera(1024.f, 576.f);
+		camera.position.x = mapWidthInPixels * .5f;
+		camera.position.y = mapHeightInPixels * .5f;
+		renderer = new OrthogonalTiledMapRenderer(tiledMap);
 	}
 
 	@Override
 	public void render(float delta) {
+		Gdx.gl.glClearColor(.5f, .7f, .9f, 1);
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		camera.update();
+		renderer.setView(camera);
+		renderer.render();
 		level.getWorld().step(1f / 60f, 6, 2);
 		level.updateLevel();
 		level.getWaiter().move(1f);
-		Gdx.gl.glClearColor(1, 1, 1, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		Matrix4 debugMatrix = batch.getProjectionMatrix().cpy().scale(PIXELS_TO_METERS, PIXELS_TO_METERS, 0);
 		batch.begin();
 		elapsedTime += Gdx.graphics.getDeltaTime();
@@ -77,7 +98,7 @@ public class GameScreen implements Screen {
 		if ((lastTipTime + 2) >= level.getTime())
 			showTip();
 		batch.end();
-		if (true)
+		if (false)
 			debugRenderer.render(level.getWorld(), debugMatrix);
 		testContacts();
 
@@ -130,7 +151,7 @@ public class GameScreen implements Screen {
 	private void drawGuests() {
 		TextureRegion currentFrame;
 		for (Guest g : level.getGuesthandler().getActiveGuests()) {
-			currentFrame = g.getIdleAnimation().getKeyFrame(elapsedTime);
+			currentFrame = g.getActiveAnimation().getKeyFrame(elapsedTime);
 			batch.draw(currentFrame, g.getPosition()[0], g.getPosition()[1], WORLD_WIDTH / 32, WORLD_HEIGHT / 16);
 			drawPatience(g);
 		}
@@ -153,7 +174,8 @@ public class GameScreen implements Screen {
 
 	private void drawTables() {
 		for (Table t : level.getSpawnarea().getTables()) {
-			t.getSprite().draw(batch);
+			t.getTableSprite().draw(batch);
+			t.getChairSprite().draw(batch);
 		}
 	}
 

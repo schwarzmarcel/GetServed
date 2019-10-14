@@ -2,9 +2,7 @@ package entities;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
-
 import handlers.Assets;
 
 import java.util.Arrays;
@@ -13,28 +11,43 @@ import static com.mygdx.game.MyGdxGame.WORLD_HEIGHT;
 import static com.mygdx.game.MyGdxGame.WORLD_WIDTH;
 
 public class Table {
-    private Sprite sprite;
+    private Sprite tableSprite;
+    private Sprite chairSprite;
     private Box box;
     private float[] positions = new float[2];
+    private float[] chairPosition = new float[2];
     private Guest guest;
 
     public Table(World world, float positionX, float positionY) {
         this.positions[0] = positionX;
         this.positions[1] = positionY;
-        sprite = new Sprite(Assets.manager.get(Assets.TABLE, Texture.class));
-        sprite.setSize(WORLD_WIDTH / 24, WORLD_HEIGHT / 16);
-        sprite.setPosition(positionX, positionY);
-        box = new Box(world, sprite, false);
+        this.chairPosition[0] = positionX + 2.5f;
+        this.chairPosition[1] = positionY + 5f;
+        tableSprite = new Sprite(Assets.manager.get(Assets.TABLE, Texture.class));
+        chairSprite = new Sprite(Assets.manager.get(Assets.CHAIR, Texture.class));
+        tableSprite.setSize(WORLD_WIDTH / 32, WORLD_HEIGHT / 18);
+        chairSprite.setSize(WORLD_WIDTH / 64, WORLD_HEIGHT / 36);
+        tableSprite.setPosition(positionX, positionY);
+        chairSprite.setPosition(positionX + 2.5f, positionY + 5f);
+        box = new Box(world, tableSprite, false);
         box.getBody().getFixtureList().first().setUserData(this);
         guest = null;
     }
 
-    public Sprite getSprite() {
-        return sprite;
+    public Sprite getTableSprite() {
+        return tableSprite;
     }
 
-    public Body getBody() {
-        return box.getBody();
+    public Sprite getChairSprite() {
+        return chairSprite;
+    }
+
+    public float[] getChairPosition() {
+        return chairPosition;
+    }
+
+    public void setChairPosition(float[] chairPosition) {
+        this.chairPosition = chairPosition;
     }
 
     public float[] getPosition() {

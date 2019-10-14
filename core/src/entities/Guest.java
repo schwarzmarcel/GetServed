@@ -10,6 +10,9 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Guest {
     private Animation<TextureRegion> idleAnimation;
+    private Animation<TextureRegion> angryAnimation;
+    private Animation<TextureRegion> orderAnimation;
+    private Animation<TextureRegion> activeAnimation;
     private Table table;
     private Dish dish;
     private long spawnTime;
@@ -22,25 +25,48 @@ public class Guest {
 
     public Guest(long spawnTime, long patience, long wealth) {
         int randomNum = ThreadLocalRandom.current().nextInt(1, 5 + 1);
-        TextureAtlas textureAtlas = null;
-        switch (randomNum){
-        case 1: textureAtlas = Assets.manager.get(Assets.GUEST1, TextureAtlas.class);
-        	break;
-        case 2: textureAtlas = Assets.manager.get(Assets.GUEST2, TextureAtlas.class);
-    		break;
-        case 3: textureAtlas = Assets.manager.get(Assets.GUEST3, TextureAtlas.class);
-			break;
-        case 4: textureAtlas = Assets.manager.get(Assets.GUEST4, TextureAtlas.class);
-			break;
-        case 5: textureAtlas = Assets.manager.get(Assets.GUEST5, TextureAtlas.class);
-        	break;
-        default: break;
+        TextureAtlas textureAtlasIdle = null;
+        TextureAtlas textureAtlasAngry = null;
+        TextureAtlas textureAtlasOrdering = null;
+        switch (randomNum) {
+            case 1:
+                textureAtlasIdle = Assets.manager.get(Assets.GUEST1, TextureAtlas.class);
+                //textureAtlasAngry = new TextureAtlas(Gdx.files.internal("character_sprites/Guest1_Kick.atlas"));
+                //textureAtlasOrdering = new TextureAtlas(Gdx.files.internal("character_sprites/Guest1_Jump.atlas"));
+                //textureAtlasAngry = Assets.manager.get(Assets.GUEST1_ORDERING, TextureAtlas.class);
+                //textureAtlasOrdering = Assets.manager.get(Assets.GUEST1_ANGRY, TextureAtlas.class);
+                break;
+            case 2:
+                textureAtlasIdle = Assets.manager.get(Assets.GUEST2, TextureAtlas.class);
+                //textureAtlasAngry = Assets.manager.get(Assets.GUEST2_ORDERING, TextureAtlas.class);
+                //textureAtlasOrdering = Assets.manager.get(Assets.GUEST2_ANGRY, TextureAtlas.class);
+                break;
+            case 3:
+                textureAtlasIdle = Assets.manager.get(Assets.GUEST3, TextureAtlas.class);
+                //textureAtlasAngry = Assets.manager.get(Assets.GUEST3_ORDERING, TextureAtlas.class);
+                //textureAtlasOrdering = Assets.manager.get(Assets.GUEST3_ANGRY, TextureAtlas.class);
+                break;
+            case 4:
+                textureAtlasIdle = Assets.manager.get(Assets.GUEST4, TextureAtlas.class);
+                //textureAtlasAngry = Assets.manager.get(Assets.GUEST4_ORDERING, TextureAtlas.class);
+                //textureAtlasOrdering = Assets.manager.get(Assets.GUEST4_ANGRY, TextureAtlas.class);
+                break;
+            case 5:
+                textureAtlasIdle = Assets.manager.get(Assets.GUEST5, TextureAtlas.class);
+                //textureAtlasAngry = Assets.manager.get(Assets.GUEST5_ORDERING, TextureAtlas.class);
+                //textureAtlasOrdering = Assets.manager.get(Assets.GUEST5_ANGRY, TextureAtlas.class);
+                break;
+            default:
+                break;
         }
-        idleAnimation = new Animation<TextureRegion>(0.045f, textureAtlas.getRegions(), Animation.PlayMode.LOOP);
+        idleAnimation = new Animation<>(0.045f, textureAtlasIdle.getRegions(), Animation.PlayMode.LOOP);
+        //angryAnimation = new Animation<>(0.05f, textureAtlasAngry.getRegions(), Animation.PlayMode.NORMAL);
+        //orderAnimation = new Animation<>(0.05f, textureAtlasOrdering.getRegions(), Animation.PlayMode.NORMAL);
+        this.activeAnimation = idleAnimation;
         order = Foodtype.getRandomFoodType();
         dish = new Dish(order);
         this.spawnTime = spawnTime;
-        this.orderTime = spawnTime;
+        this.orderTime = spawnTime + 1;
         randomNum = ThreadLocalRandom.current().nextInt((int) (0.2 * patience) * (-1), (int) (0.2 * patience) + 1);
         this.patience = patience + randomNum;
         randomNum = ThreadLocalRandom.current().nextInt((int) (0.2 * wealth) * (-1), (int) (0.2 * wealth) + 1);
@@ -63,45 +89,45 @@ public class Guest {
             dynamicPatience = 0;
         }
     }
+
     public void setPosition(float positionX, float positionY) {
-    	position[0] = positionX;
+        position[0] = positionX;
         position[1] = positionY;
         float[] position = {positionX + dish.getSprite().getWidth() + 2, positionY};
         dish.setPosition(position);
     }
-    
+
     public long getSpawnTime() {
-		return spawnTime;
-	}
+        return spawnTime;
+    }
 
     public long getOrderTime() {
-		return orderTime;
-	}
+        return orderTime;
+    }
 
-	public void setOrderTime(long orderTime) {
-		this.orderTime = orderTime;
-	}
+    public void setOrderTime(long orderTime) {
+        this.orderTime = orderTime;
+    }
 
     public float getPatience() {
         return dynamicPatience;
-	}
-
-	public void setTable(Table table) {
-        this.table = table;
     }
 
     public Table getTable() {
-		return table;
-	}
+        return table;
+    }
+
+    public void setTable(Table table) {
+        this.table = table;
+    }
 
     public Dish getDish() {
-    	return dish;
+        return dish;
     }
 
-	public Foodtype getOrder() {
+    public Foodtype getOrder() {
         return order;
     }
-
 
     public Animation<TextureRegion> getIdleAnimation() {
         return idleAnimation;
@@ -120,5 +146,22 @@ public class Guest {
                 ", order=" + order +
                 ", position=" + Arrays.toString(position) +
                 '}';
+    }
+
+    public Animation<TextureRegion> getActiveAnimation() {
+        return activeAnimation;
+    }
+
+    public void setActiveAnimation(String animation) {
+        switch (animation) {
+            case "idle":
+                this.activeAnimation = this.idleAnimation;
+                break;
+            case "ordering":
+                this.activeAnimation = this.orderAnimation;
+                break;
+            case "angry":
+                this.activeAnimation = this.angryAnimation;
+        }
     }
 }
