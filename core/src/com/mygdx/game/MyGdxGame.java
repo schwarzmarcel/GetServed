@@ -4,7 +4,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import handlers.AssetsManager;
+import handlers.Assets;
 import screens.GameScreen;
 import screens.LoadingScreen;
 import screens.MenuScreen;
@@ -33,8 +33,8 @@ public class MyGdxGame extends Game {
         batch.setProjectionMatrix(camera.combined);
         shapeRenderer.setProjectionMatrix(camera.combined);
         levelCount = 1;
-        AssetsManager.loadingScreen();
-        AssetsManager.manager.finishLoading();
+        Assets.loadingScreen();
+        Assets.manager.finishLoading();
         loadingScreen = new LoadingScreen(this, batch);
         this.setScreen(loadingScreen);
 
@@ -47,7 +47,7 @@ public class MyGdxGame extends Game {
 
     @Override
     public void dispose() {
-        AssetsManager.dispose();
+        Assets.dispose();
         batch.dispose();
         shapeRenderer.dispose();
     }

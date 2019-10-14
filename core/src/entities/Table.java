@@ -3,7 +3,7 @@ package entities;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.physics.box2d.World;
-import handlers.AssetsManager;
+import handlers.Assets;
 
 import java.util.Arrays;
 
@@ -23,8 +23,8 @@ public class Table {
         this.positions[1] = positionY;
         this.chairPosition[0] = positionX + 2.5f;
         this.chairPosition[1] = positionY + 5f;
-        tableSprite = new Sprite(AssetsManager.manager.get(AssetsManager.TABLE, Texture.class));
-        chairSprite = new Sprite(AssetsManager.manager.get(AssetsManager.CHAIR, Texture.class));
+        tableSprite = new Sprite(Assets.manager.get(Assets.TABLE, Texture.class));
+        chairSprite = new Sprite(Assets.manager.get(Assets.CHAIR, Texture.class));
         tableSprite.setSize(WORLD_WIDTH / 32, WORLD_HEIGHT / 18);
         chairSprite.setSize(WORLD_WIDTH / 64, WORLD_HEIGHT / 36);
         tableSprite.setPosition(positionX, positionY);

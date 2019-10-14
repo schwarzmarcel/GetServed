@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 
-public class AssetsManager {
+public class Assets {
 
 	public static final AssetManager manager = new AssetManager();
 

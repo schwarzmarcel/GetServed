@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import handlers.AssetsManager;
+import handlers.Assets;
 
 import java.util.Arrays;
 import java.util.concurrent.ThreadLocalRandom;
@@ -33,31 +33,31 @@ public class Guest {
         TextureAtlas textureAtlasOrdering = null;
         switch (randomNum) {
             case 1:
-                textureAtlasIdle = AssetsManager.manager.get(AssetsManager.GUEST1, TextureAtlas.class);
+                textureAtlasIdle = Assets.manager.get(Assets.GUEST1, TextureAtlas.class);
                 //textureAtlasAngry = new TextureAtlas(Gdx.files.internal("character_sprites/Guest1_Kick.atlas"));
                 //textureAtlasOrdering = new TextureAtlas(Gdx.files.internal("character_sprites/Guest1_Jump.atlas"));
-                //textureAtlasAngry = AssetsManager.manager.get(AssetsManager.GUEST1_ORDERING, TextureAtlas.class);
-                //textureAtlasOrdering = AssetsManager.manager.get(AssetsManager.GUEST1_ANGRY, TextureAtlas.class);
+                //textureAtlasAngry = Assets.manager.get(Assets.GUEST1_ORDERING, TextureAtlas.class);
+                //textureAtlasOrdering = Assets.manager.get(Assets.GUEST1_ANGRY, TextureAtlas.class);
                 break;
             case 2:
-                textureAtlasIdle = AssetsManager.manager.get(AssetsManager.GUEST2, TextureAtlas.class);
-                //textureAtlasAngry = AssetsManager.manager.get(AssetsManager.GUEST2_ORDERING, TextureAtlas.class);
-                //textureAtlasOrdering = AssetsManager.manager.get(AssetsManager.GUEST2_ANGRY, TextureAtlas.class);
+                textureAtlasIdle = Assets.manager.get(Assets.GUEST2, TextureAtlas.class);
+                //textureAtlasAngry = Assets.manager.get(Assets.GUEST2_ORDERING, TextureAtlas.class);
+                //textureAtlasOrdering = Assets.manager.get(Assets.GUEST2_ANGRY, TextureAtlas.class);
                 break;
             case 3:
-                textureAtlasIdle = AssetsManager.manager.get(AssetsManager.GUEST3, TextureAtlas.class);
-                //textureAtlasAngry = AssetsManager.manager.get(AssetsManager.GUEST3_ORDERING, TextureAtlas.class);
-                //textureAtlasOrdering = AssetsManager.manager.get(AssetsManager.GUEST3_ANGRY, TextureAtlas.class);
+                textureAtlasIdle = Assets.manager.get(Assets.GUEST3, TextureAtlas.class);
+                //textureAtlasAngry = Assets.manager.get(Assets.GUEST3_ORDERING, TextureAtlas.class);
+                //textureAtlasOrdering = Assets.manager.get(Assets.GUEST3_ANGRY, TextureAtlas.class);
                 break;
             case 4:
-                textureAtlasIdle = AssetsManager.manager.get(AssetsManager.GUEST4, TextureAtlas.class);
-                //textureAtlasAngry = AssetsManager.manager.get(AssetsManager.GUEST4_ORDERING, TextureAtlas.class);
-                //textureAtlasOrdering = AssetsManager.manager.get(AssetsManager.GUEST4_ANGRY, TextureAtlas.class);
+                textureAtlasIdle = Assets.manager.get(Assets.GUEST4, TextureAtlas.class);
+                //textureAtlasAngry = Assets.manager.get(Assets.GUEST4_ORDERING, TextureAtlas.class);
+                //textureAtlasOrdering = Assets.manager.get(Assets.GUEST4_ANGRY, TextureAtlas.class);
                 break;
             case 5:
-                textureAtlasIdle = AssetsManager.manager.get(AssetsManager.GUEST5, TextureAtlas.class);
-                //textureAtlasAngry = AssetsManager.manager.get(AssetsManager.GUEST5_ORDERING, TextureAtlas.class);
-                //textureAtlasOrdering = AssetsManager.manager.get(AssetsManager.GUEST5_ANGRY, TextureAtlas.class);
+                textureAtlasIdle = Assets.manager.get(Assets.GUEST5, TextureAtlas.class);
+                //textureAtlasAngry = Assets.manager.get(Assets.GUEST5_ORDERING, TextureAtlas.class);
+                //textureAtlasOrdering = Assets.manager.get(Assets.GUEST5_ANGRY, TextureAtlas.class);
                 break;
             default:
                 break;

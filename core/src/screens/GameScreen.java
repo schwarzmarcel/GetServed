@@ -6,10 +6,8 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.GlyphLayout;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.maps.MapProperties;
@@ -22,7 +20,7 @@ import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.mygdx.game.MyGdxGame;
 import entities.*;
-import handlers.AssetsManager;
+import handlers.Assets;
 import handlers.GsContactListener;
 import handlers.LevelManager;
 
@@ -117,13 +115,13 @@ public class GameScreen implements Screen {
 
     @Override
     public void dispose() {
-        level.getWorld().dispose();
+        levelManager.getWorld().dispose();
         debugRenderer.dispose();
 
     }
 
     private void initializeFonts() {
-        moneyFont = AssetsManager.manager.get(AssetsManager.MONEYFONT, BitmapFont.class);
+        moneyFont = Assets.manager.get(Assets.MONEYFONT, BitmapFont.class);
         moneyFont.getData().setScale(0.08f);
         layoutMoney = new GlyphLayout();
         tip = 0;

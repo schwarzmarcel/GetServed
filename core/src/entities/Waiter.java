@@ -10,7 +10,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.World;
-import handlers.AssetsManager;
+import handlers.Assets;
 import interfaces.Moveable;
 
 import static com.mygdx.game.MyGdxGame.WORLD_HEIGHT;
@@ -32,9 +32,9 @@ public class Waiter implements Moveable {
      * @param positionY the initial position of the waiter on the Y axis
      */
     public Waiter(World world, float positionX, float positionY) {
-        TextureAtlas textureAtlas = AssetsManager.manager.get(AssetsManager.WAITERWALKING, TextureAtlas.class);
+        TextureAtlas textureAtlas = Assets.manager.get(Assets.WAITERWALKING, TextureAtlas.class);
         runningAnimation = new Animation<TextureRegion>(0.015f, textureAtlas.getRegions(), Animation.PlayMode.LOOP);
-        textureAtlas = AssetsManager.manager.get(AssetsManager.WAITERIDLE, TextureAtlas.class);
+        textureAtlas = Assets.manager.get(Assets.WAITERIDLE, TextureAtlas.class);
         sprite = new Sprite(textureAtlas.findRegion("Idle"));
         sprite.setSize(WORLD_WIDTH / 32, WORLD_HEIGHT / 16);
         sprite.setPosition(positionX, positionY);

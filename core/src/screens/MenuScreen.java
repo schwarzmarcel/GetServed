@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.MyGdxGame;
-import handlers.AssetsManager;
+import handlers.Assets;
 
 import static com.mygdx.game.MyGdxGame.WORLD_HEIGHT;
 import static com.mygdx.game.MyGdxGame.WORLD_WIDTH;
@@ -27,16 +27,16 @@ public class MenuScreen implements Screen{
 		this.game = game;
 		this.batch = batch;
 		nextorexit = true;
-        nextactive = new Sprite(AssetsManager.manager.get(AssetsManager.NEXTACTIVE, Texture.class));
+        nextactive = new Sprite(Assets.manager.get(Assets.NEXTACTIVE, Texture.class));
 		nextactive.setSize(WORLD_WIDTH / 3, WORLD_HEIGHT / 8);
 		nextactive.setPosition(WORLD_WIDTH / 2 - (nextactive.getWidth() / 2), WORLD_HEIGHT / 2 - (nextactive.getHeight() / 2) + 15);
-        exitactive = new Sprite(AssetsManager.manager.get(AssetsManager.EXITACTIVE, Texture.class));
+        exitactive = new Sprite(Assets.manager.get(Assets.EXITACTIVE, Texture.class));
 		exitactive.setSize(WORLD_WIDTH / 7, WORLD_HEIGHT / 8);
 		exitactive.setPosition(WORLD_WIDTH / 2 - (exitactive.getWidth() / 2), WORLD_HEIGHT / 2 - (exitactive.getHeight() / 2) - 15);
-        nextpassive = new Sprite(AssetsManager.manager.get(AssetsManager.NEXTPASSIVE, Texture.class));
+        nextpassive = new Sprite(Assets.manager.get(Assets.NEXTPASSIVE, Texture.class));
 		nextpassive.setSize(WORLD_WIDTH / 3, WORLD_HEIGHT / 8);
 		nextpassive.setPosition(WORLD_WIDTH / 2 - (nextpassive.getWidth() / 2), WORLD_HEIGHT / 2 - (nextpassive.getHeight() / 2) + 15);
-        exitpassive = new Sprite(AssetsManager.manager.get(AssetsManager.EXITPASSIVE, Texture.class));
+        exitpassive = new Sprite(Assets.manager.get(Assets.EXITPASSIVE, Texture.class));
 		exitpassive.setSize(WORLD_WIDTH / 7, WORLD_HEIGHT / 8);
 		exitpassive.setPosition(WORLD_WIDTH / 2 - (exitpassive.getWidth() / 2), WORLD_HEIGHT / 2 - (exitpassive.getHeight() / 2) - 15);
 	}

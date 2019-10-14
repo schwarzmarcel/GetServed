@@ -3,7 +3,7 @@ package entities;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.physics.box2d.World;
-import handlers.AssetsManager;
+import handlers.Assets;
 
 import java.util.Arrays;
 
@@ -25,7 +25,7 @@ public class Counter {
 		this.positions[0] = positionX;
 		this.positions[1] = positionY;
 		this.rotation = rotation;
-		sprite = new Sprite(AssetsManager.manager.get(AssetsManager.COUNTER, Texture.class));
+		sprite = new Sprite(Assets.manager.get(Assets.COUNTER, Texture.class));
 		if(rotation == 0 || rotation == 1) {
 			sprite.setSize(WORLD_WIDTH / 24, WORLD_HEIGHT / 9);
 		}else {
