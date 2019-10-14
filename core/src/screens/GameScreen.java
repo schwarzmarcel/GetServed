@@ -6,8 +6,10 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -44,6 +46,7 @@ public class GameScreen implements Screen {
 	private GlyphLayout layoutTip;
 	private int tip;
 	private int lastTipTime;
+	private Sprite coin;
 
 	public GameScreen(MyGdxGame game, SpriteBatch batch, ShapeRenderer shapeRenderer,
 					  String levelname) {
@@ -113,11 +116,14 @@ public class GameScreen implements Screen {
 
 	private void initializeFonts() {
 		moneyFont = Assets.manager.get(Assets.MONEYFONT, BitmapFont.class);
-		moneyFont.getData().setScale(0.1f);
+		moneyFont.getData().setScale(0.08f);
 		layoutMoney = new GlyphLayout();
 		tip = 0;
 		lastTipTime = -3;
 		layoutTip = new GlyphLayout();
+		coin = new Sprite(Assets.manager.get(Assets.COIN, Texture.class));
+		coin.setSize(7, 7);
+		coin.setPosition(WORLD_WIDTH - coin.getWidth() - 4, WORLD_HEIGHT - coin.getHeight() - 3);
 	}
 
 	private void drawWaiter() {
@@ -266,15 +272,16 @@ public class GameScreen implements Screen {
 	}
 
 	private void showMoney() {
-		String moneyText = "" + level.getMoney() + " $";
+		String moneyText = "" + level.getMoney();
 		layoutMoney.setText(moneyFont, moneyText);
-		moneyFont.draw(batch, layoutMoney, WORLD_WIDTH - layoutMoney.width - 1, WORLD_HEIGHT - 1);
+		moneyFont.draw(batch, layoutMoney, WORLD_WIDTH - layoutMoney.width - 12, WORLD_HEIGHT - 4);
+		coin.draw(batch);
 	}
 
 	private void showTip() {
-		String tipText = "+ " + tip + " $";
+		String tipText = "+ " + tip;
 		layoutTip.setText(moneyFont, tipText);
-		moneyFont.draw(batch, layoutTip, WORLD_WIDTH - layoutTip.width - 1, WORLD_HEIGHT - layoutMoney.height - 3);
+		moneyFont.draw(batch, layoutTip, WORLD_WIDTH - layoutTip.width - 12, WORLD_HEIGHT - layoutMoney.height - 6);
 	}
 
 	private void testContacts() {
