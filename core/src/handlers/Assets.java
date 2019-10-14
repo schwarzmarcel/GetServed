@@ -9,8 +9,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 public class Assets {
 
 	public static final AssetManager manager = new AssetManager();
-	
-	
+
 	public static final String WAITERIDLE = "character_sprites/Waiter_Idle.atlas";
 	public static final String WAITERWALKING = "character_sprites/Waiter_Walking.atlas";
 	public static final String COUNTER = "counter.png";
@@ -31,34 +30,52 @@ public class Assets {
 	public static final String EXITACTIVE = "exitactive.png";
 	public static final String EXITPASSIVE = "exitpassive.png";
 
-	
-	
-	
+	public static final String ARROWS = "arrowkeys.png";
+	public static final String SKEY = "Keyboard_White_S.png";
+	public static final String DKEY = "Keyboard_White_D.png";
+	public static final String MOVE = "move.png";
+	public static final String SERVE = "serve.png";
+	public static final String DISCARD = "discard.png";
+	public static final String LOADING = "loading.png";
+	public static final String ENTER = "continue.png";
+
 	public static void load() {
-	manager.load(COUNTER, Texture.class);
-	manager.load(PIZZA, Texture.class);
-	manager.load(BURGER, Texture.class);
-	manager.load(PASTA, Texture.class);
-	manager.load(SALAD, Texture.class);
-	manager.load(FISH, Texture.class);
-	manager.load(TABLE, Texture.class);
-	manager.load(WAITERIDLE, TextureAtlas.class);
-	manager.load(WAITERWALKING, TextureAtlas.class);
-	manager.load(GUEST1, TextureAtlas.class);
-	manager.load(GUEST2, TextureAtlas.class);
-	manager.load(GUEST3, TextureAtlas.class);
-	manager.load(GUEST4, TextureAtlas.class);
-	manager.load(GUEST5, TextureAtlas.class);
-	manager.load(MONEYFONT, BitmapFont.class);
-	manager.load(NEXTACTIVE, Texture.class);
-	manager.load(NEXTPASSIVE, Texture.class);
-	manager.load(EXITACTIVE, Texture.class);
-	manager.load(EXITPASSIVE, Texture.class);
-	
+		manager.load(COUNTER, Texture.class);
+		manager.load(PIZZA, Texture.class);
+		manager.load(BURGER, Texture.class);
+		manager.load(PASTA, Texture.class);
+		manager.load(SALAD, Texture.class);
+		manager.load(FISH, Texture.class);
+		manager.load(TABLE, Texture.class);
+		manager.load(WAITERIDLE, TextureAtlas.class);
+		manager.load(WAITERWALKING, TextureAtlas.class);
+		manager.load(GUEST1, TextureAtlas.class);
+		manager.load(GUEST2, TextureAtlas.class);
+		manager.load(GUEST3, TextureAtlas.class);
+		manager.load(GUEST4, TextureAtlas.class);
+		manager.load(GUEST5, TextureAtlas.class);
+		manager.load(MONEYFONT, BitmapFont.class);
+		manager.load(NEXTACTIVE, Texture.class);
+		manager.load(NEXTPASSIVE, Texture.class);
+		manager.load(EXITACTIVE, Texture.class);
+		manager.load(EXITPASSIVE, Texture.class);
+
 	}
-	
+
+	public static void loadingScreen() {
+		manager.load(ARROWS, Texture.class);
+		manager.load(SKEY, Texture.class);
+		manager.load(DKEY, Texture.class);
+		manager.load(MOVE, Texture.class);
+		manager.load(SERVE, Texture.class);
+		manager.load(DISCARD, Texture.class);
+		manager.load(LOADING, Texture.class);
+		manager.load(ENTER, Texture.class);
+		
+	}
+
 	public static void dispose() {
 		manager.dispose();
 	}
-	
+
 }
