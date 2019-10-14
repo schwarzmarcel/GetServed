@@ -5,8 +5,8 @@ import java.util.Random;
 public enum Foodtype {
     BURGER,
     PIZZA,
-    PASTA,
-	SALAD,
+    CHICKEN,
+    POMMES,
 	FISH;
 
     public static Foodtype getRandomFoodType() {

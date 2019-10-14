@@ -21,18 +21,18 @@ public class Dish {
             case BURGER:
                 sprite = new Sprite(Assets.manager.get(Assets.BURGER, Texture.class));
                 break;
-            case PASTA:
-                sprite = new Sprite(Assets.manager.get(Assets.PASTA, Texture.class));
+            case CHICKEN:
+                sprite = new Sprite(Assets.manager.get(Assets.CHICKEN, Texture.class));
                 break;
-            case SALAD:
-                sprite = new Sprite(Assets.manager.get(Assets.SALAD, Texture.class));
+            case POMMES:
+                sprite = new Sprite(Assets.manager.get(Assets.POMMES, Texture.class));
                 break;
             case FISH:
                 sprite = new Sprite(Assets.manager.get(Assets.FISH, Texture.class));
                 break;
             default: break;
         }
-        sprite.setSize(WORLD_WIDTH / 32, WORLD_HEIGHT / 18);
+        sprite.setSize(WORLD_WIDTH / 64, WORLD_HEIGHT / 36);
     }
     public void setPosition(float[] positions){
         position = positions;
