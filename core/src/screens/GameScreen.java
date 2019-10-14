@@ -7,11 +7,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.GlyphLayout;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.maps.MapProperties;
@@ -109,8 +105,8 @@ public class GameScreen implements Screen {
 
 	@Override
 	public void dispose() {
-		//level.getWorld().dispose();
-		//debugRenderer.dispose();
+		level.getWorld().dispose();
+		debugRenderer.dispose();
 		
 	}
 
@@ -202,6 +198,7 @@ public class GameScreen implements Screen {
 	private void drawOrders() {
 		for (Guest g : level.getGuesthandler().getActiveGuests()) {
 			if ((g.getOrderTime() + 1) >= level.getTime()) {
+				g.getBubble().draw(batch);
 				g.getDish().getSprite().draw(batch);
 			}
 		}
