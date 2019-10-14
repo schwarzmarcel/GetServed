@@ -11,7 +11,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import static com.mygdx.game.MyGdxGame.PIXELS_TO_METERS;
 
-public class DishManager {
+public class DishHandler {
     /**
      * dishQueue: contains the Dishes that will spawn next on the field
      * activeDishes: this list contains the dishes that are currently on the field at any given time
@@ -21,13 +21,13 @@ public class DishManager {
     private List<Counter> counters;
     private Waiter waiter;
 
-    public DishManager() {
+    public DishHandler() {
         dishQueue = new Queue<Foodtype>();
         activeDishes = new ArrayList<Dish>();
     }
 
     /**
-     * this method initializes the DishManager
+     * this method initializes the DishHandler
      *
      * @param waiter   the waiter who carries the dishes
      * @param counters the counters where the dishes spawn on
@@ -68,7 +68,7 @@ public class DishManager {
             if (c.getDish() == null)
                 c.setCookSpeed(2);
 
-            if ((time - c.getLastDishTime()) >= (float) (6 / c.getCookSpeed()) + 1) {
+            if ((time - c.getLastDishTime()) >= (float) (5 / c.getCookSpeed()) + 1) {
                 Dish nextDish = null;
                 if (dishQueue.isEmpty()) {
                     for (Guest g : activeGuests) {

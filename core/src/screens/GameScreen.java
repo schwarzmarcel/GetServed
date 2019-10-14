@@ -22,7 +22,7 @@ import com.mygdx.game.MyGdxGame;
 import entities.*;
 import handlers.Assets;
 import handlers.GsContactListener;
-import handlers.LevelManager;
+import handlers.LevelHandler;
 
 import static com.mygdx.game.MyGdxGame.*;
 
@@ -31,7 +31,7 @@ public class GameScreen implements Screen {
     public MyGdxGame game;
     private SpriteBatch batch;
     private ShapeRenderer shapeRenderer;
-    private LevelManager levelManager;
+    private LevelHandler levelHandler;
     private Box2DDebugRenderer debugRenderer;
     private OrthographicCamera camera;
     private TiledMap tiledMap;
@@ -54,13 +54,13 @@ public class GameScreen implements Screen {
 
         initializeFonts();
         Gdx.app.log("INFO: ", "Fonts initialized");
-        levelManager = new LevelManager(levelname);
+        levelHandler = new LevelHandler(levelname);
         Gdx.app.log("INFO: ", "Beginning level initializing");
-        levelManager.initializeLevel();
+        levelHandler.initializeLevel();
         Gdx.app.log("INFO: ", "Finished Level initialized");
 
         contactListener = new GsContactListener();
-        levelManager.getWorld().setContactListener(contactListener);
+        levelHandler.getWorld().setContactListener(contactListener);
 
         tiledMap = new TmxMapLoader().load("Map/tile-map.tmx");
         MapProperties properties = tiledMap.getProperties();
@@ -86,9 +86,9 @@ public class GameScreen implements Screen {
         camera.update();
         renderer.setView(camera);
         renderer.render();
-        levelManager.getWorld().step(1f / 60f, 6, 2);
-        levelManager.updateLevel();
-        levelManager.getWaiter().move(1f);
+        levelHandler.getWorld().step(1f / 60f, 6, 2);
+        levelHandler.updateLevel();
+        levelHandler.getWaiter().move(1f);
         Matrix4 debugMatrix = batch.getProjectionMatrix().cpy().scale(PIXELS_TO_METERS, PIXELS_TO_METERS, 0);
         batch.begin();
         elapsedTime += Gdx.graphics.getDeltaTime();
@@ -100,22 +100,22 @@ public class GameScreen implements Screen {
         drawOrders();
         drawDishProgress();
         showMoney();
-        if (levelManager.isLevelOver()) {
+        if (levelHandler.isLevelOver()) {
             game.increaseLevel();
             game.showMenu();
         }
-        if ((lastTipTime + 2) >= levelManager.getTime())
+        if ((lastTipTime + 2) >= levelHandler.getTime())
             showTip();
         batch.end();
         if (false)
-            debugRenderer.render(levelManager.getWorld(), debugMatrix);
+            debugRenderer.render(levelHandler.getWorld(), debugMatrix);
         reactToCollision();
 
     }
 
     @Override
     public void dispose() {
-        levelManager.getWorld().dispose();
+        levelHandler.getWorld().dispose();
         debugRenderer.dispose();
 
     }
@@ -137,32 +137,32 @@ public class GameScreen implements Screen {
 
         if (!Gdx.input.isKeyPressed(Input.Keys.UP) && !Gdx.input.isKeyPressed(Input.Keys.DOWN)
                 && !Gdx.input.isKeyPressed(Input.Keys.LEFT) && !Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-            currentFrame = levelManager.getWaiter().getIdleAnimation().getKeyFrame(elapsedTime);
+            currentFrame = levelHandler.getWaiter().getIdleAnimation().getKeyFrame(elapsedTime);
         } else {
-            currentFrame = levelManager.getWaiter().getRunningAnimation().getKeyFrame(elapsedTime);
+            currentFrame = levelHandler.getWaiter().getRunningAnimation().getKeyFrame(elapsedTime);
         }
 
-        if (levelManager.getWaiter().getOrientation().equals("right")) {
+        if (levelHandler.getWaiter().getOrientation().equals("right")) {
             if (currentFrame.isFlipX()) {
                 currentFrame.flip(true, false);
             }
         }
-        if (levelManager.getWaiter().getOrientation().equals("left")) {
+        if (levelHandler.getWaiter().getOrientation().equals("left")) {
             if (!currentFrame.isFlipX()) {
                 currentFrame.flip(true, false);
             }
         }
         batch.draw(currentFrame,
-                (levelManager.getWaiter().getBody().getPosition().x * PIXELS_TO_METERS)
-                        - levelManager.getWaiter().getSprite().getWidth() / 2,
-                (levelManager.getWaiter().getBody().getPosition().y * PIXELS_TO_METERS)
-                        - levelManager.getWaiter().getSprite().getHeight() / 2,
+                (levelHandler.getWaiter().getBody().getPosition().x * PIXELS_TO_METERS)
+                        - levelHandler.getWaiter().getSprite().getWidth() / 2,
+                (levelHandler.getWaiter().getBody().getPosition().y * PIXELS_TO_METERS)
+                        - levelHandler.getWaiter().getSprite().getHeight() / 2,
                 WORLD_WIDTH / 32, WORLD_HEIGHT / 16);
     }
 
     private void drawGuests() {
         TextureRegion currentFrame;
-        for (Guest g : levelManager.getGuestManager().getActiveGuests()) {
+        for (Guest g : levelHandler.getGuestHandler().getActiveGuests()) {
             currentFrame = g.getActiveAnimation().getKeyFrame(elapsedTime);
             batch.draw(currentFrame, g.getPosition()[0], g.getPosition()[1], WORLD_WIDTH / 32, WORLD_HEIGHT / 16);
             drawPatience(g);
@@ -173,41 +173,41 @@ public class GameScreen implements Screen {
         batch.end();
         shapeRenderer.begin(ShapeType.Filled);
         float patience = guest.getPatience();
-        if (patience > 75)
+        if (patience > 0.75 * guest.getMaxPatience())
             shapeRenderer.setColor(Color.GREEN);
-        else if (patience > 50)
+        else if (patience > 0.5 * guest.getMaxPatience())
             shapeRenderer.setColor(Color.YELLOW);
         else
             shapeRenderer.setColor(Color.RED);
-        shapeRenderer.rect(guest.getPosition()[0] - 2, guest.getPosition()[1], 1, ((float) guest.getPatience() / 100) * 5);
+        shapeRenderer.rect(guest.getPosition()[0] - 2, guest.getPosition()[1], 1, ((float) guest.getPatience() / guest.getMaxPatience()) * 5);
         shapeRenderer.end();
         batch.begin();
     }
 
     private void drawTables() {
-        for (Table t : levelManager.getGameField().getTables()) {
+        for (Table t : levelHandler.getGameField().getTables()) {
             t.getTableSprite().draw(batch);
             t.getChairSprite().draw(batch);
         }
     }
 
     private void drawCounters() {
-        for (Counter c : levelManager.getGameField().getCounters()) {
+        for (Counter c : levelHandler.getGameField().getCounters()) {
             c.getSprite().draw(batch);
         }
     }
 
     private void drawDishes() {
-        if (levelManager.getDishManager().getActiveDishes() != null) {
-            for (Dish d : levelManager.getDishManager().getActiveDishes()) {
+        if (levelHandler.getDishHandler().getActiveDishes() != null) {
+            for (Dish d : levelHandler.getDishHandler().getActiveDishes()) {
                 d.getSprite().draw(batch);
             }
         }
     }
 
     private void drawOrders() {
-        for (Guest g : levelManager.getGuestManager().getActiveGuests()) {
-            if ((g.getOrderTime() + 1) >= levelManager.getTime()) {
+        for (Guest g : levelHandler.getGuestHandler().getActiveGuests()) {
+            if ((g.getOrderTime() + 1) >= levelHandler.getTime()) {
                 g.getBubble().draw(batch);
                 g.getDish().getSprite().draw(batch);
             }
@@ -217,7 +217,7 @@ public class GameScreen implements Screen {
     private void drawDishProgress() {
         batch.end();
         shapeRenderer.begin(ShapeType.Filled);
-        for (Counter c : levelManager.getGameField().getCounters()) {
+        for (Counter c : levelHandler.getGameField().getCounters()) {
             switch (c.getRotation()) {
                 case 0:
                     shapeRenderer.setColor(Color.LIGHT_GRAY);
@@ -229,7 +229,7 @@ public class GameScreen implements Screen {
                     shapeRenderer.rect(c.getPosition()[0] - c.getSprite().getWidth(),
                             c.getPosition()[1] + (c.getSprite().getHeight() - c.getNextDish().getSprite().getHeight() - 4),
                             (c.getNextDish().getSprite().getWidth())
-                                    * ((levelManager.getTime() - c.getLastDishTime()) / (6 / c.getCookSpeed())),
+                                    * ((levelHandler.getTime() - c.getLastDishTime()) / (6 / c.getCookSpeed())),
                             1);
                     break;
                 case 1:
@@ -242,7 +242,7 @@ public class GameScreen implements Screen {
                     shapeRenderer.rect(c.getPosition()[0] + c.getSprite().getWidth() + 1,
                             c.getPosition()[1] + (c.getSprite().getHeight() - c.getNextDish().getSprite().getHeight() - 4),
                             (c.getNextDish().getSprite().getWidth())
-                                    * ((levelManager.getTime() - c.getLastDishTime()) / (6 / c.getCookSpeed())),
+                                    * ((levelHandler.getTime() - c.getLastDishTime()) / (6 / c.getCookSpeed())),
                             1);
                     break;
                 case 2:
@@ -255,7 +255,7 @@ public class GameScreen implements Screen {
                     shapeRenderer.rect(
                             c.getPosition()[0] + c.getSprite().getWidth() / 2 - c.getNextDish().getSprite().getWidth() / 2,
                             c.getPosition()[1] + c.getSprite().getHeight() + 1, c.getNextDish().getSprite().getWidth()
-                                    * ((levelManager.getTime() - c.getLastDishTime()) / (6 / c.getCookSpeed())),
+                                    * ((levelHandler.getTime() - c.getLastDishTime()) / (6 / c.getCookSpeed())),
                             1);
                     break;
                 case 3:
@@ -268,7 +268,7 @@ public class GameScreen implements Screen {
                     shapeRenderer.rect(
                             c.getPosition()[0] + c.getSprite().getWidth() / 2 - c.getNextDish().getSprite().getWidth() / 2,
                             c.getPosition()[1] - 2, c.getNextDish().getSprite().getWidth()
-                                    * ((levelManager.getTime() - c.getLastDishTime()) / (6 / c.getCookSpeed())),
+                                    * ((levelHandler.getTime() - c.getLastDishTime()) / (6 / c.getCookSpeed())),
                             1);
                     break;
             }
@@ -279,7 +279,7 @@ public class GameScreen implements Screen {
     }
 
     private void showMoney() {
-        String moneyText = "" + levelManager.getLevel().getMoney();
+        String moneyText = "" + levelHandler.getLevel().getMoney();
         layoutMoney.setText(moneyFont, moneyText);
         moneyFont.draw(batch, layoutMoney, WORLD_WIDTH - layoutMoney.width - 12, WORLD_HEIGHT - 4);
 		coin.draw(batch);
@@ -308,24 +308,24 @@ public class GameScreen implements Screen {
                         contactTable = (Table) fixtureB.getUserData();
 
                     if (Gdx.input.isKeyJustPressed(Input.Keys.S)) {
-                        if (levelManager.getWaiter().getDish() != null && contactTable.getGuest() != null) {
-                            Dish dish = levelManager.getWaiter().getDish();
-                            Waiter waiter = levelManager.getWaiter();
+                        if (levelHandler.getWaiter().getDish() != null && contactTable.getGuest() != null) {
+                            Dish dish = levelHandler.getWaiter().getDish();
+                            Waiter waiter = levelHandler.getWaiter();
                             Guest guest = contactTable.getGuest();
                             if (guest.getOrder() == (dish.type)) {
                                 dish.setPosition(contactTable.getPosition());
                                 dish.setSpriteSize(40, 20);
                                 waiter.removeDish();
-                                levelManager.getDishManager().removeActiveDish(dish);
+                                levelHandler.getDishHandler().removeActiveDish(dish);
                                 tip = guest.getTip();
-                                lastTipTime = levelManager.getTime();
-                                levelManager.getLevel().setMoney(levelManager.getLevel().getMoney() + guest.getTip());
-                                levelManager.getGuestManager().removeActiveGuest(guest);
+                                lastTipTime = levelHandler.getTime();
+                                levelHandler.getLevel().setMoney(levelHandler.getLevel().getMoney() + guest.getTip());
+                                levelHandler.getGuestHandler().removeActiveGuest(guest);
                                 Gdx.app.log("INFO: ", "Delivered correct Dish to Guest");
                             } else {
-                                guest.receivedWrongDish(levelManager.getTime());
+                                guest.receivedWrongDish(levelHandler.getTime());
                                 waiter.removeDish();
-                                levelManager.getDishManager().removeActiveDish(dish);
+                                levelHandler.getDishHandler().removeActiveDish(dish);
                                 Gdx.app.log("INFO: ", "Delivered wrong dish to Guest");
                             }
                         }
@@ -338,9 +338,9 @@ public class GameScreen implements Screen {
                         contactCounter = (Counter) fixtureA.getUserData();
                     else
                         contactCounter = (Counter) fixtureB.getUserData();
-                    if (contactCounter.getDish() != null && levelManager.getWaiter().getDish() == null) {
-                        levelManager.getWaiter().setDish(contactCounter.getDish());
-                        levelManager.getWaiter().getDish().setSpriteSize(64, 32);
+                    if (contactCounter.getDish() != null && levelHandler.getWaiter().getDish() == null) {
+                        levelHandler.getWaiter().setDish(contactCounter.getDish());
+                        levelHandler.getWaiter().getDish().setSpriteSize(64, 32);
                         contactCounter.removeDish();
                     }
 

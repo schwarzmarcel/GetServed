@@ -22,6 +22,7 @@ public class Guest {
     private long orderTime;
     private float patience;
     private float dynamicPatience;
+    private float maxPatience;
     private long wealth;
     private Foodtype order;
     private float[] position = new float[2];
@@ -74,6 +75,7 @@ public class Guest {
         this.orderTime = spawnTime + 1;
         randomNum = ThreadLocalRandom.current().nextInt((int) (0.2 * patience) * (-1), (int) (0.2 * patience) + 1);
         this.patience = patience + randomNum;
+        this.maxPatience = patience + randomNum;
         randomNum = ThreadLocalRandom.current().nextInt((int) (0.2 * wealth) * (-1), (int) (0.2 * wealth) + 1);
         this.wealth = wealth + randomNum;
     }
@@ -129,6 +131,10 @@ public class Guest {
 
     public Dish getDish() {
         return dish;
+    }
+
+    public float getMaxPatience() {
+        return maxPatience;
     }
 
     public Foodtype getOrder() {

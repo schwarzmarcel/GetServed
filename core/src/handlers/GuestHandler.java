@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class GuestManager {
+public class GuestHandler {
 	/**
 	 * guestQueue: this queue contains all the guests that will be spawned during the game in the correct order
 	 * activeGuests: this list contains all the guests at any time that are currently on the field
@@ -21,7 +21,7 @@ public class GuestManager {
 	private ArrayList<Guest> guestsToRemove;
 	private GameField gameField;
 
-	GuestManager() {
+	GuestHandler() {
 		guestQueue = new Queue<>();
 		activeGuests = new ArrayList<>();
 		guestsToRemove = new ArrayList<>();
@@ -31,12 +31,12 @@ public class GuestManager {
 	 * This method will directly manages the guests during the game
 	 *
 	 * @param time        the current time since the level started
-	 * @param dishManager the object that manages the dishes; used to create the dishes when guests spawn
+	 * @param dishHandler the object that manages the dishes; used to create the dishes when guests spawn
 	 */
-	void manageGuests(int time, DishManager dishManager) {
+	void manageGuests(int time, DishHandler dishHandler) {
 		if (!guestQueue.isEmpty()) {
 			if (guestQueue.first().getSpawnTime() == time) {
-				spawnGuest(guestQueue.first(), dishManager);
+				spawnGuest(guestQueue.first(), dishHandler);
 			}
 		}
 		for (Guest g : activeGuests) {
@@ -72,9 +72,9 @@ public class GuestManager {
 	 * this method spawns the guest on the on the field
 	 *
 	 * @param guest       the guest to be spawned; all guest objects are already created prior to spawning them
-	 * @param dishManager the dishManager to add the order of the new guest to the queue
+	 * @param dishHandler the dishHandler to add the order of the new guest to the queue
 	 */
-	private void spawnGuest(Guest guest, DishManager dishManager) {
+	private void spawnGuest(Guest guest, DishHandler dishHandler) {
 		if (gameField.getFreeTables().size() != 0) {
 			Random rndm = new Random();
 			int tableID = rndm.nextInt(gameField.getFreeTables().size());
@@ -83,7 +83,7 @@ public class GuestManager {
 			guest.setPosition(table.getChairPosition()[0], table.getChairPosition()[1]);
 			guest.setTable(table);
 			table.setGuest(guest);
-			dishManager.addToDishQueue(guest.getOrder());
+			dishHandler.addToDishQueue(guest.getOrder());
 			Gdx.app.log("INFO: ", "Added " + guest.getOrder() + " to dishqueue");
 			activeGuests.add(guest);
 			Gdx.app.log("INFO: ", "Spawned " + guest);
