@@ -16,6 +16,7 @@ public class Guest {
     private Animation<TextureRegion> orderAnimation;
     private Animation<TextureRegion> activeAnimation;
     private Table table;
+    private String type;
     private Dish dish;
     private Sprite bubble;
     private long spawnTime;
@@ -27,42 +28,48 @@ public class Guest {
     private Foodtype order;
     private float[] position = new float[2];
 
-    public Guest(long spawnTime, long patience, long wealth) {
+    public Guest(long spawnTime, long patience, long wealth, String type) {
         int randomNum = ThreadLocalRandom.current().nextInt(1, 5 + 1);
         TextureAtlas textureAtlasIdle = null;
         TextureAtlas textureAtlasAngry = null;
         TextureAtlas textureAtlasOrdering = null;
-        switch (randomNum) {
-            case 1:
-                textureAtlasIdle = Assets.manager.get(Assets.GUEST1, TextureAtlas.class);
-                //textureAtlasAngry = new TextureAtlas(Gdx.files.internal("character_sprites/Guest1_Kick.atlas"));
-                //textureAtlasOrdering = new TextureAtlas(Gdx.files.internal("character_sprites/Guest1_Jump.atlas"));
-                //textureAtlasAngry = Assets.manager.get(Assets.GUEST1_ORDERING, TextureAtlas.class);
-                //textureAtlasOrdering = Assets.manager.get(Assets.GUEST1_ANGRY, TextureAtlas.class);
-                break;
-            case 2:
-                textureAtlasIdle = Assets.manager.get(Assets.GUEST2, TextureAtlas.class);
-                //textureAtlasAngry = Assets.manager.get(Assets.GUEST2_ORDERING, TextureAtlas.class);
-                //textureAtlasOrdering = Assets.manager.get(Assets.GUEST2_ANGRY, TextureAtlas.class);
-                break;
-            case 3:
-                textureAtlasIdle = Assets.manager.get(Assets.GUEST3, TextureAtlas.class);
-                //textureAtlasAngry = Assets.manager.get(Assets.GUEST3_ORDERING, TextureAtlas.class);
-                //textureAtlasOrdering = Assets.manager.get(Assets.GUEST3_ANGRY, TextureAtlas.class);
-                break;
-            case 4:
-                textureAtlasIdle = Assets.manager.get(Assets.GUEST4, TextureAtlas.class);
-                //textureAtlasAngry = Assets.manager.get(Assets.GUEST4_ORDERING, TextureAtlas.class);
-                //textureAtlasOrdering = Assets.manager.get(Assets.GUEST4_ANGRY, TextureAtlas.class);
-                break;
-            case 5:
-                textureAtlasIdle = Assets.manager.get(Assets.GUEST5, TextureAtlas.class);
-                //textureAtlasAngry = Assets.manager.get(Assets.GUEST5_ORDERING, TextureAtlas.class);
-                //textureAtlasOrdering = Assets.manager.get(Assets.GUEST5_ANGRY, TextureAtlas.class);
-                break;
-            default:
-                break;
+        if(type.equals("normal")){
+            switch (randomNum) {
+                case 1:
+                    textureAtlasIdle = Assets.manager.get(Assets.GUEST1, TextureAtlas.class);
+                    //textureAtlasAngry = new TextureAtlas(Gdx.files.internal("character_sprites/Guest1_Kick.atlas"));
+                    //textureAtlasOrdering = new TextureAtlas(Gdx.files.internal("character_sprites/Guest1_Jump.atlas"));
+                    //textureAtlasAngry = Assets.manager.get(Assets.GUEST1_ORDERING, TextureAtlas.class);
+                    //textureAtlasOrdering = Assets.manager.get(Assets.GUEST1_ANGRY, TextureAtlas.class);
+                    break;
+                case 2:
+                    textureAtlasIdle = Assets.manager.get(Assets.GUEST2, TextureAtlas.class);
+                    //textureAtlasAngry = Assets.manager.get(Assets.GUEST2_ORDERING, TextureAtlas.class);
+                    //textureAtlasOrdering = Assets.manager.get(Assets.GUEST2_ANGRY, TextureAtlas.class);
+                    break;
+                case 3:
+                    textureAtlasIdle = Assets.manager.get(Assets.GUEST3, TextureAtlas.class);
+                    //textureAtlasAngry = Assets.manager.get(Assets.GUEST3_ORDERING, TextureAtlas.class);
+                    //textureAtlasOrdering = Assets.manager.get(Assets.GUEST3_ANGRY, TextureAtlas.class);
+                    break;
+                case 4:
+                    textureAtlasIdle = Assets.manager.get(Assets.GUEST4, TextureAtlas.class);
+                    //textureAtlasAngry = Assets.manager.get(Assets.GUEST4_ORDERING, TextureAtlas.class);
+                    //textureAtlasOrdering = Assets.manager.get(Assets.GUEST4_ANGRY, TextureAtlas.class);
+                    break;
+                case 5:
+                    textureAtlasIdle = Assets.manager.get(Assets.GUEST5, TextureAtlas.class);
+                    //textureAtlasAngry = Assets.manager.get(Assets.GUEST5_ORDERING, TextureAtlas.class);
+                    //textureAtlasOrdering = Assets.manager.get(Assets.GUEST5_ANGRY, TextureAtlas.class);
+                    break;
+                case 6:
+                default:
+                    break;
+            }
+        }else if(type.equals("king")){
+            textureAtlasIdle = Assets.manager.get(Assets.KING, TextureAtlas.class);
         }
+
         idleAnimation = new Animation<TextureRegion>(0.045f, textureAtlasIdle.getRegions(), Animation.PlayMode.LOOP);
         //angryAnimation = new Animation<>(0.05f, textureAtlasAngry.getRegions(), Animation.PlayMode.NORMAL);
         //orderAnimation = new Animation<>(0.05f, textureAtlasOrdering.getRegions(), Animation.PlayMode.NORMAL);
@@ -73,6 +80,7 @@ public class Guest {
         bubble.setSize(8,8);
         this.spawnTime = spawnTime;
         this.orderTime = spawnTime + 1;
+        this.type = type;
         randomNum = ThreadLocalRandom.current().nextInt((int) (0.2 * patience) * (-1), (int) (0.2 * patience) + 1);
         this.patience = patience + randomNum;
         this.maxPatience = patience + randomNum;
@@ -86,7 +94,7 @@ public class Guest {
     }
 
     public int getTip() {
-        float tip = (wealth * (dynamicPatience / 100));
+        float tip = (wealth * (dynamicPatience / maxPatience));
         return (int) Math.ceil(tip);
     }
 
@@ -151,6 +159,14 @@ public class Guest {
 
     public float[] getPosition() {
         return position;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     @Override

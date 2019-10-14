@@ -57,7 +57,7 @@ public class GameScreen implements Screen {
         levelHandler = new LevelHandler(levelname);
         Gdx.app.log("INFO: ", "Beginning level initializing");
         levelHandler.initializeLevel();
-        Gdx.app.log("INFO: ", "Finished Level initialized");
+        Gdx.app.log("INFO: ", "Finished Level initializing");
 
         contactListener = new GsContactListener();
         levelHandler.getWorld().setContactListener(contactListener);

@@ -24,7 +24,7 @@ public class Gamelevel {
             money = 0;
         }
         if (money == 0) {
-            Gdx.app.log("INFO: ", "The Game");
+            Gdx.app.log("INFO: ", "The Game was lost because you ran out of money");
             Timer.instance().clear();
         }
     }

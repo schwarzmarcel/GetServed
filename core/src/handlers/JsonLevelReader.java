@@ -54,7 +54,8 @@ public class JsonLevelReader {
                 guestList.add(new Guest(
                         (long) res.get("spawntime"),
                         (long) res.get("patience"),
-                        (long) res.get("wealth")
+                        (long) res.get("wealth"),
+                        (String) res.get("type")
                 ));
                 index++;
             }

@@ -24,6 +24,7 @@ public class Assets {
 	public static final String GUEST3 = "character_sprites/Guest3.atlas";
 	public static final String GUEST4 = "character_sprites/Guest4.atlas";
 	public static final String GUEST5 = "character_sprites/Guest5.atlas";
+	public static final String KING = "character_sprites/King.atlas";
 	public static final String COIN = "coin.png";
 	public static final String BUBBLE = "bubble.png";
 	public static final String MONEYFONT = "goldfont.fnt";
@@ -69,6 +70,7 @@ public class Assets {
 		manager.load(GUEST3, TextureAtlas.class);
 		manager.load(GUEST4, TextureAtlas.class);
 		manager.load(GUEST5, TextureAtlas.class);
+		manager.load(KING, TextureAtlas.class);
 		manager.load(MONEYFONT, BitmapFont.class);
 		manager.load(NEXTACTIVE, Texture.class);
 		manager.load(NEXTPASSIVE, Texture.class);
