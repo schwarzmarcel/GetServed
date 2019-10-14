@@ -100,17 +100,16 @@ public class GameScreen implements Screen {
         drawOrders();
         drawDishProgress();
         showMoney();
-        if (levelHandler.isLevelOver()) {
-            game.increaseLevel();
-            game.showMenu();
-        }
         if ((lastTipTime + 2) >= levelHandler.getTime())
             showTip();
         batch.end();
         if (false)
             debugRenderer.render(levelHandler.getWorld(), debugMatrix);
         reactToCollision();
-
+        if (levelHandler.isLevelOver()) {
+            game.increaseLevel();
+            game.showMenu();
+        }
     }
 
     @Override

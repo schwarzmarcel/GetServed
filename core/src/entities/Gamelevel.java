@@ -15,9 +15,12 @@ public class Gamelevel {
      * this method get called every second and decrements the money of the game
      */
     public void decrementMoney() {
-        if (money > 1) {
+        if (money >= 1) {
             money = money - 2;
-        } else if (money == 1) {
+            if(money < 0){
+                money = 0;
+            }
+        } else if (money < 0) {
             money = 0;
         }
         if (money == 0) {
