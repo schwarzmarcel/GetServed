@@ -53,7 +53,6 @@ public class Guesthandler {
 		} else if (guest.getPatience() == 20) {
 				guest.setOrderTime(time);
 		}
-
 	}
 
 	private void spawnGuest(Guest guest, Dishhandler dishhandler) {

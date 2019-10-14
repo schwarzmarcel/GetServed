@@ -151,7 +151,7 @@ public class GameScreen implements Screen {
 	private void drawGuests() {
 		TextureRegion currentFrame;
 		for (Guest g : level.getGuesthandler().getActiveGuests()) {
-			currentFrame = g.getIdleAnimation().getKeyFrame(elapsedTime);
+			currentFrame = g.getActiveAnimation().getKeyFrame(elapsedTime);
 			batch.draw(currentFrame, g.getPosition()[0], g.getPosition()[1], WORLD_WIDTH / 32, WORLD_HEIGHT / 16);
 			drawPatience(g);
 		}
