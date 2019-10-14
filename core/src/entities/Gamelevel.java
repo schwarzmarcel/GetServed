@@ -26,7 +26,7 @@ public class Gamelevel {
         }
     }
 
-    /**
+    /*
      * -----------------
      * Getter and Setter
      */

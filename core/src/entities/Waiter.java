@@ -24,9 +24,16 @@ public class Waiter implements Moveable {
     private Dish dish;
     private String orientation = "right";
 
+    /**
+     * constructor for the waiter
+     *
+     * @param world     the physics world for the waiter to be created in
+     * @param positionX the initial position of the waiter on the X axis
+     * @param positionY the initial position of the waiter on the Y axis
+     */
     public Waiter(World world, float positionX, float positionY) {
         TextureAtlas textureAtlas = AssetsManager.manager.get(AssetsManager.WAITERWALKING, TextureAtlas.class);
-    	runningAnimation = new Animation<TextureRegion>(0.015f, textureAtlas.getRegions(), Animation.PlayMode.LOOP);
+        runningAnimation = new Animation<TextureRegion>(0.015f, textureAtlas.getRegions(), Animation.PlayMode.LOOP);
         textureAtlas = AssetsManager.manager.get(AssetsManager.WAITERIDLE, TextureAtlas.class);
         sprite = new Sprite(textureAtlas.findRegion("Idle"));
         sprite.setSize(WORLD_WIDTH / 32, WORLD_HEIGHT / 16);
@@ -55,6 +62,19 @@ public class Waiter implements Moveable {
         box.getBody().setLinearVelocity(velX, velY);
     }
 
+    @Override
+    public String toString() {
+        return "Waiter{" +
+                "box=" + box +
+                ", dish=" + dish +
+                '}';
+    }
+
+    /*
+     * -----------------
+     * Getter and Setter
+     */
+
     public Sprite getSprite() {
         return sprite;
     }
@@ -70,9 +90,9 @@ public class Waiter implements Moveable {
     public void setDish(Dish dish) {
         this.dish = dish;
     }
-    
+
     public void removeDish() {
-    	dish = null;
+        dish = null;
     }
 
     public Animation<TextureRegion> getRunningAnimation() {
@@ -89,13 +109,5 @@ public class Waiter implements Moveable {
 
     public void setIdleAnimation(Animation<TextureRegion> idleAnimation) {
         this.idleAnimation = idleAnimation;
-    }
-
-    @Override
-    public String toString() {
-        return "Waiter{" +
-                "box=" + box +
-                ", dish=" + dish +
-                '}';
     }
 }

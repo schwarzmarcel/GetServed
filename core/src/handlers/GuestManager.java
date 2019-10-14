@@ -2,8 +2,8 @@ package handlers;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Queue;
+import entities.GameField;
 import entities.Guest;
-import entities.Spawnarea;
 import entities.Table;
 
 import java.util.ArrayList;
@@ -19,7 +19,7 @@ public class GuestManager {
 	private Queue<Guest> guestQueue;
 	private ArrayList<Guest> activeGuests;
 	private ArrayList<Guest> guestsToRemove;
-	private Spawnarea spawnarea;
+	private GameField gameField;
 
 	GuestManager() {
 		guestQueue = new Queue<>();
@@ -74,11 +74,11 @@ public class GuestManager {
 	 * @param dishManager the dishManager to add the order of the new guest to the queue
 	 */
 	private void spawnGuest(Guest guest, DishManager dishManager) {
-		if (spawnarea.getFreeTables().size() != 0) {
+		if (gameField.getFreeTables().size() != 0) {
 			Random rndm = new Random();
-			int tableID = rndm.nextInt(spawnarea.getFreeTables().size());
-			Table table = spawnarea.getFreeTables().get(tableID);
-			spawnarea.removeFreeTable(table);
+			int tableID = rndm.nextInt(gameField.getFreeTables().size());
+			Table table = gameField.getFreeTables().get(tableID);
+			gameField.removeFreeTable(table);
 			guest.setPosition(table.getChairPosition()[0], table.getChairPosition()[1]);
 			guest.setTable(table);
 			table.setGuest(guest);
@@ -107,19 +107,19 @@ public class GuestManager {
 	 * @param guest the guest to be removed
 	 */
 	public void removeActiveGuest(Guest guest) {
-		spawnarea.addFreeTable(guest.getTable());
+		gameField.addFreeTable(guest.getTable());
 		activeGuests.remove(guest);
 		guest.getTable().removeGuest();
 		Gdx.app.log("INFO: ", "Guest " + guest + " removed.");
 	}
 
-	/**
+	/*
 	 * -------------------
 	 * Getters and Setters
 	 */
 
-	public void setSpawnarea(Spawnarea spawnarea) {
-		this.spawnarea = spawnarea;
+	public void setGameField(GameField gameField) {
+		this.gameField = gameField;
 	}
 
 	public ArrayList<Guest> getActiveGuests() {

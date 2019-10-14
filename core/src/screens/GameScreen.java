@@ -195,8 +195,8 @@ public class GameScreen implements Screen {
     }
 
     private void drawDishes() {
-        if (levelManager.getDishManager().getDishes() != null) {
-            for (Dish d : levelManager.getDishManager().getDishes()) {
+        if (levelManager.getDishManager().getActiveDishes() != null) {
+            for (Dish d : levelManager.getDishManager().getActiveDishes()) {
                 d.getSprite().draw(batch);
             }
         }
@@ -311,7 +311,7 @@ public class GameScreen implements Screen {
                                 dish.setPosition(contactTable.getPosition());
                                 dish.setSpriteSize(40, 20);
                                 waiter.removeDish();
-                                levelManager.getDishManager().removeDish(dish);
+                                levelManager.getDishManager().removeActiveDish(dish);
                                 tip = guest.getTip();
                                 lastTipTime = levelManager.getTime();
                                 levelManager.getLevel().setMoney(levelManager.getLevel().getMoney() + guest.getTip());
@@ -320,7 +320,7 @@ public class GameScreen implements Screen {
                             } else {
                                 guest.receivedWrongDish(levelManager.getTime());
                                 waiter.removeDish();
-                                levelManager.getDishManager().removeDish(dish);
+                                levelManager.getDishManager().removeActiveDish(dish);
                                 Gdx.app.log("INFO: ", "Delivered wrong dish to Guest");
                             }
                         }

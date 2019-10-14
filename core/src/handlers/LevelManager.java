@@ -4,8 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Timer;
+import entities.GameField;
 import entities.Gamelevel;
-import entities.Spawnarea;
 import entities.Waiter;
 import exceptions.InputNotValidException;
 
@@ -22,7 +22,7 @@ public class LevelManager {
     private int time;
     private World world;
     private Waiter waiter;
-    private Spawnarea gameField;
+    private GameField gameField;
     private Gamelevel level;
     private boolean levelOver = false;
     private String levelName;
@@ -48,7 +48,7 @@ public class LevelManager {
         initializeWaiter();
         initializeTimer();
         guestManager.initializeGuests(level.getGuests());
-        dishManager.initializeDishhandler(waiter, gameField.getCounters());
+        dishManager.initializeDishManager(waiter, gameField.getCounters());
         dishManager.initializeDishQueue(guestManager.getGuestQueue().first().getOrder());
     }
 
@@ -65,8 +65,8 @@ public class LevelManager {
      */
     private void initializeGameField() {
         Gdx.app.log("INFO: ", "Begin drawing field");
-        gameField = new Spawnarea();
-        guestManager.setSpawnarea(gameField);
+        gameField = new GameField();
+        guestManager.setGameField(gameField);
         gameField.generateWalls(world);
         try {
             gameField.initializeTables(level.getGridpositionList(), world);
@@ -118,7 +118,7 @@ public class LevelManager {
                 '}';
     }
 
-    /**
+    /*
      * ------------------
      * Setters and Getters
      */
@@ -143,7 +143,7 @@ public class LevelManager {
         return world;
     }
 
-    public Spawnarea getGameField() {
+    public GameField getGameField() {
         return gameField;
     }
 
