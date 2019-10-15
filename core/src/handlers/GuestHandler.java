@@ -63,13 +63,16 @@ public class GuestHandler {
 			guestsToRemove.add(guest);
 		} else if (guest.getPatience() <= 0.5 * guest.getMaxPatience()) {
 			guest.setOrderTime(time);
-			if(!guest.getCurrentAnimation().equals("ordering")){
+			if (!guest.getCurrentAnimation().equals("ordering") && !guest.isJustOrdered()) {
 				guest.setActiveAnimation("ordering", time);
+				guest.setJustOrdered(true);
 			}
 		} else if (guest.getPatience() <= 0.2 * guest.getMaxPatience()) {
 			guest.setOrderTime(time);
-			if(!guest.getCurrentAnimation().equals("ordering")){
+			guest.setJustOrdered(false);
+			if (!guest.getCurrentAnimation().equals("ordering") && !guest.isJustOrdered()) {
 				guest.setActiveAnimation("ordering", time);
+				guest.setJustOrdered(true);
 			}
 		}
 		if(guest.getCurrentAnimation().equals("angry") || guest.getCurrentAnimation().equals("ordering")){

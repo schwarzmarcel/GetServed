@@ -18,6 +18,7 @@ public class Guest {
     private Animation<TextureRegion> activeAnimation;
     private String currentAnimation;
     private int lastAnimationTime = 0;
+    private boolean justOrdered = false;
     private Table table;
     private String type;
     private Dish dish;
@@ -39,6 +40,7 @@ public class Guest {
         TextureAtlas textureAtlasOrdering = null;
         if(type.equals("normal")){
             switch (randomNum) {
+                //TODO: move stuff into assetshandler! also potentially create animation class
                 case 1:
                     textureAtlasIdle = Assets.manager.get(Assets.GUEST1, TextureAtlas.class);
                     textureAtlasAngry = new TextureAtlas(Gdx.files.internal("character_sprites/Guest1_Kick.atlas"));
@@ -48,21 +50,29 @@ public class Guest {
                     break;
                 case 2:
                     textureAtlasIdle = Assets.manager.get(Assets.GUEST2, TextureAtlas.class);
+                    textureAtlasAngry = new TextureAtlas(Gdx.files.internal("character_sprites/Guest2_Kick.atlas"));
+                    textureAtlasOrdering = new TextureAtlas(Gdx.files.internal("character_sprites/Guest2_Jump.atlas"));
                     //textureAtlasAngry = Assets.manager.get(Assets.GUEST2_ORDERING, TextureAtlas.class);
                     //textureAtlasOrdering = Assets.manager.get(Assets.GUEST2_ANGRY, TextureAtlas.class);
                     break;
                 case 3:
                     textureAtlasIdle = Assets.manager.get(Assets.GUEST3, TextureAtlas.class);
+                    textureAtlasAngry = new TextureAtlas(Gdx.files.internal("character_sprites/Guest3_Kick.atlas"));
+                    textureAtlasOrdering = new TextureAtlas(Gdx.files.internal("character_sprites/Guest3_Jump.atlas"));
                     //textureAtlasAngry = Assets.manager.get(Assets.GUEST3_ORDERING, TextureAtlas.class);
                     //textureAtlasOrdering = Assets.manager.get(Assets.GUEST3_ANGRY, TextureAtlas.class);
                     break;
                 case 4:
                     textureAtlasIdle = Assets.manager.get(Assets.GUEST4, TextureAtlas.class);
+                    textureAtlasAngry = new TextureAtlas(Gdx.files.internal("character_sprites/Guest4_Kick.atlas"));
+                    textureAtlasOrdering = new TextureAtlas(Gdx.files.internal("character_sprites/Guest4_Jump.atlas"));
                     //textureAtlasAngry = Assets.manager.get(Assets.GUEST4_ORDERING, TextureAtlas.class);
                     //textureAtlasOrdering = Assets.manager.get(Assets.GUEST4_ANGRY, TextureAtlas.class);
                     break;
                 case 5:
                     textureAtlasIdle = Assets.manager.get(Assets.GUEST5, TextureAtlas.class);
+                    textureAtlasAngry = new TextureAtlas(Gdx.files.internal("character_sprites/Guest5_Kick.atlas"));
+                    textureAtlasOrdering = new TextureAtlas(Gdx.files.internal("character_sprites/Guest5_Jump.atlas"));
                     //textureAtlasAngry = Assets.manager.get(Assets.GUEST5_ORDERING, TextureAtlas.class);
                     //textureAtlasOrdering = Assets.manager.get(Assets.GUEST5_ANGRY, TextureAtlas.class);
                     break;
@@ -70,13 +80,16 @@ public class Guest {
                 default:
                     break;
             }
-        }else if(type.equals("king1")){
+        } else if (type.equals("king")) {
             textureAtlasIdle = Assets.manager.get(Assets.KING, TextureAtlas.class);
+            //TODO: add animations for the king
+            //textureAtlasAngry = new TextureAtlas(Gdx.files.internal("character_sprites/King_Kick.atlas"));
+            //textureAtlasOrdering = new TextureAtlas(Gdx.files.internal("character_sprites/King_Jump.atlas"));
         }
 
         idleAnimation = new Animation<TextureRegion>(0.045f, textureAtlasIdle.getRegions(), Animation.PlayMode.LOOP);
         angryAnimation = new Animation<TextureRegion>(0.05f, textureAtlasAngry.getRegions(), Animation.PlayMode.LOOP);
-        orderAnimation = new Animation<TextureRegion>(0.05f, textureAtlasOrdering.getRegions(), Animation.PlayMode.LOOP);
+        orderAnimation = new Animation<TextureRegion>(0.07f, textureAtlasOrdering.getRegions(), Animation.PlayMode.LOOP);
         this.activeAnimation = idleAnimation;
         this.currentAnimation = "idle";
         order = Foodtype.getRandomFoodType();
@@ -213,5 +226,13 @@ public class Guest {
 
     public int getLastAnimationTime() {
         return lastAnimationTime;
+    }
+
+    public boolean isJustOrdered() {
+        return justOrdered;
+    }
+
+    public void setJustOrdered(boolean justOrdered) {
+        this.justOrdered = justOrdered;
     }
 }

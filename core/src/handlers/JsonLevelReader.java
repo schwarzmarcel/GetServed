@@ -30,9 +30,9 @@ public class JsonLevelReader {
         JSONParser parser = new JSONParser();
         //String filepath = "\\Users\\evasc\\Desktop\\Uni\\Auslandssemester\\Game Design\\tddd23\\" + levelName;
         //String filepath = "../../" + levelName;
-        String filepath = levelName;
+        //String filepath = levelName;
         //String filepath = "\\Users\\evasc\\Desktop\\Uni\\Auslandssemester\\Game Design\\tddd23\\" + levelname;
-        // String filepath = "../../" + levelname;
+        String filepath = "../../" + levelName;
         try (Reader reader = new FileReader(filepath)) {
             Gdx.app.log("INFO: ", "Start reading JSON-Level-Config");
             JSONObject jsonObject = (JSONObject) parser.parse(reader);
