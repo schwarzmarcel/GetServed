@@ -80,16 +80,16 @@ public class Assets {
 		manager.load(BUBBLE, Texture.class);
 		manager.load(COIN, Texture.class);
 
-		/* manager.load(GUEST1_ANGRY, Texture.class);
-        manager.load(GUEST1_ORDERING, Texture.class);
-        manager.load(GUEST2_ORDERING, Texture.class);
+		manager.load(GUEST1_ANGRY, TextureAtlas.class);
+        manager.load(GUEST1_ORDERING, TextureAtlas.class);
+        manager.load(GUEST2_ORDERING, TextureAtlas.class);
         manager.load(GUEST2_ANGRY, TextureAtlas.class);
         manager.load(GUEST3_ANGRY, TextureAtlas.class);
         manager.load(GUEST3_ORDERING, TextureAtlas.class);
         manager.load(GUEST4_ANGRY, TextureAtlas.class);
         manager.load(GUEST4_ORDERING, TextureAtlas.class);
         manager.load(GUEST5_ANGRY, TextureAtlas.class);
-        manager.load(GUEST5_ORDERING, TextureAtlas.class);*/
+        manager.load(GUEST5_ORDERING, TextureAtlas.class);
 
 	}
 

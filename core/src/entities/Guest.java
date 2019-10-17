@@ -42,38 +42,28 @@ public class Guest {
                 //TODO: move stuff into assetshandler! also potentially create animation class
                 case 1:
                     textureAtlasIdle = Assets.manager.get(Assets.GUEST1, TextureAtlas.class);
-                    textureAtlasAngry = new TextureAtlas(Gdx.files.internal("character_sprites/Guest1_Kick.atlas"));
-                    textureAtlasOrdering = new TextureAtlas(Gdx.files.internal("character_sprites/Guest1_Jump.atlas"));
-                    //textureAtlasAngry = Assets.manager.get(Assets.GUEST1_ORDERING, TextureAtlas.class);
-                    //textureAtlasOrdering = Assets.manager.get(Assets.GUEST1_ANGRY, TextureAtlas.class);
+                    textureAtlasAngry = Assets.manager.get(Assets.GUEST1_ORDERING, TextureAtlas.class);
+                    textureAtlasOrdering = Assets.manager.get(Assets.GUEST1_ANGRY, TextureAtlas.class);
                     break;
                 case 2:
                     textureAtlasIdle = Assets.manager.get(Assets.GUEST2, TextureAtlas.class);
-                    textureAtlasAngry = new TextureAtlas(Gdx.files.internal("character_sprites/Guest2_Kick.atlas"));
-                    textureAtlasOrdering = new TextureAtlas(Gdx.files.internal("character_sprites/Guest2_Jump.atlas"));
-                    //textureAtlasAngry = Assets.manager.get(Assets.GUEST2_ORDERING, TextureAtlas.class);
-                    //textureAtlasOrdering = Assets.manager.get(Assets.GUEST2_ANGRY, TextureAtlas.class);
+                    textureAtlasAngry = Assets.manager.get(Assets.GUEST2_ORDERING, TextureAtlas.class);
+                    textureAtlasOrdering = Assets.manager.get(Assets.GUEST2_ANGRY, TextureAtlas.class);
                     break;
                 case 3:
                     textureAtlasIdle = Assets.manager.get(Assets.GUEST3, TextureAtlas.class);
-                    textureAtlasAngry = new TextureAtlas(Gdx.files.internal("character_sprites/Guest3_Kick.atlas"));
-                    textureAtlasOrdering = new TextureAtlas(Gdx.files.internal("character_sprites/Guest3_Jump.atlas"));
-                    //textureAtlasAngry = Assets.manager.get(Assets.GUEST3_ORDERING, TextureAtlas.class);
-                    //textureAtlasOrdering = Assets.manager.get(Assets.GUEST3_ANGRY, TextureAtlas.class);
+                    textureAtlasAngry = Assets.manager.get(Assets.GUEST3_ORDERING, TextureAtlas.class);
+                    textureAtlasOrdering = Assets.manager.get(Assets.GUEST3_ANGRY, TextureAtlas.class);
                     break;
                 case 4:
                     textureAtlasIdle = Assets.manager.get(Assets.GUEST4, TextureAtlas.class);
-                    textureAtlasAngry = new TextureAtlas(Gdx.files.internal("character_sprites/Guest4_Kick.atlas"));
-                    textureAtlasOrdering = new TextureAtlas(Gdx.files.internal("character_sprites/Guest4_Jump.atlas"));
-                    //textureAtlasAngry = Assets.manager.get(Assets.GUEST4_ORDERING, TextureAtlas.class);
-                    //textureAtlasOrdering = Assets.manager.get(Assets.GUEST4_ANGRY, TextureAtlas.class);
+                    textureAtlasAngry = Assets.manager.get(Assets.GUEST4_ORDERING, TextureAtlas.class);
+                    textureAtlasOrdering = Assets.manager.get(Assets.GUEST4_ANGRY, TextureAtlas.class);
                     break;
                 case 5:
                     textureAtlasIdle = Assets.manager.get(Assets.GUEST5, TextureAtlas.class);
-                    textureAtlasAngry = new TextureAtlas(Gdx.files.internal("character_sprites/Guest5_Kick.atlas"));
-                    textureAtlasOrdering = new TextureAtlas(Gdx.files.internal("character_sprites/Guest5_Jump.atlas"));
-                    //textureAtlasAngry = Assets.manager.get(Assets.GUEST5_ORDERING, TextureAtlas.class);
-                    //textureAtlasOrdering = Assets.manager.get(Assets.GUEST5_ANGRY, TextureAtlas.class);
+                    textureAtlasAngry = Assets.manager.get(Assets.GUEST5_ORDERING, TextureAtlas.class);
+                    textureAtlasOrdering = Assets.manager.get(Assets.GUEST5_ANGRY, TextureAtlas.class);
                     break;
                 case 6:
                 default:
