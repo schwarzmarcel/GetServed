@@ -1,6 +1,5 @@
 package entities;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -18,7 +17,9 @@ public class Guest {
     private Animation<TextureRegion> activeAnimation;
     private String currentAnimation;
     private int lastAnimationTime = 0;
+    private int despawnTime = 0;
     private boolean justOrdered = false;
+    private boolean isServed = false;
     private Table table;
     private String type;
     private Dish dish;
@@ -37,9 +38,8 @@ public class Guest {
         TextureAtlas textureAtlasIdle = null;
         TextureAtlas textureAtlasAngry = null;
         TextureAtlas textureAtlasOrdering = null;
-        if(type.equals("normal")){
+        if (type.equals("normal")) {
             switch (randomNum) {
-                //TODO: move stuff into assetshandler! also potentially create animation class
                 case 1:
                     textureAtlasIdle = Assets.manager.get(Assets.GUEST1, TextureAtlas.class);
                     textureAtlasAngry = Assets.manager.get(Assets.GUEST1_ORDERING, TextureAtlas.class);
@@ -71,23 +71,19 @@ public class Guest {
             }
         } else if (type.equals("king")) {
             textureAtlasIdle = Assets.manager.get(Assets.KING, TextureAtlas.class);
-            //TODO: add animations for the king
-            //textureAtlasAngry = new TextureAtlas(Gdx.files.internal("character_sprites/King_Kick.atlas"));
-            //textureAtlasOrdering = new TextureAtlas(Gdx.files.internal("character_sprites/King_Jump.atlas"));
+            textureAtlasAngry = Assets.manager.get(Assets.KING_KICK, TextureAtlas.class);
+            textureAtlasOrdering = Assets.manager.get(Assets.KING_JUMP, TextureAtlas.class);
         }
 
         idleAnimation = new Animation<TextureRegion>(0.045f, textureAtlasIdle.getRegions(), Animation.PlayMode.LOOP);
-        if (!type.equals("king")) {
-            angryAnimation = new Animation<TextureRegion>(0.05f, textureAtlasAngry.getRegions(), Animation.PlayMode.LOOP);
-            orderAnimation = new Animation<TextureRegion>(0.07f, textureAtlasOrdering.getRegions(), Animation.PlayMode.LOOP);
-        }
-
+        angryAnimation = new Animation<TextureRegion>(0.05f, textureAtlasAngry.getRegions(), Animation.PlayMode.LOOP);
+        orderAnimation = new Animation<TextureRegion>(0.07f, textureAtlasOrdering.getRegions(), Animation.PlayMode.LOOP);
         this.activeAnimation = idleAnimation;
         this.currentAnimation = "idle";
         order = Foodtype.getRandomFoodType();
         dish = new Dish(order);
         bubble = new Sprite(Assets.manager.get(Assets.BUBBLE, Texture.class));
-        bubble.setSize(8,8);
+        bubble.setSize(8, 8);
         this.spawnTime = spawnTime;
         this.orderTime = spawnTime + 1;
         this.type = type;
@@ -123,6 +119,9 @@ public class Guest {
         bubble.setPosition(positionX + dish.getSprite().getWidth(), positionY + 2);
     }
 
+    public void setDish(Dish dish) {
+        this.dish = dish;
+    }
     public long getSpawnTime() {
         return spawnTime;
     }
@@ -179,42 +178,30 @@ public class Guest {
         this.type = type;
     }
 
-    @Override
-    public String toString() {
-        return "Guest{" +
-                "spawnTime=" + spawnTime +
-                ", patience=" + patience +
-                ", wealth=" + wealth +
-                ", order=" + order +
-                ", position=" + Arrays.toString(position) +
-                '}';
-    }
-
     public Animation<TextureRegion> getActiveAnimation() {
         return activeAnimation;
     }
 
     public void setActiveAnimation(String animation, int time) {
-        if (!type.equals("king")) {
-            switch (animation) {
-                case "idle":
-                    this.activeAnimation = this.idleAnimation;
-                    this.currentAnimation = "idle";
-                    this.lastAnimationTime = time;
-                    break;
-                case "ordering":
-                    this.activeAnimation = this.orderAnimation;
-                    this.currentAnimation = "ordering";
-                    this.lastAnimationTime = time;
-                    break;
-                case "angry":
-                    this.activeAnimation = this.angryAnimation;
-                    this.currentAnimation = "angry";
-                    this.lastAnimationTime = time;
-            }
+        switch (animation) {
+            case "idle":
+                this.activeAnimation = this.idleAnimation;
+                this.currentAnimation = "idle";
+                this.lastAnimationTime = time;
+                break;
+            case "ordering":
+                this.activeAnimation = this.orderAnimation;
+                this.currentAnimation = "ordering";
+                this.lastAnimationTime = time;
+                break;
+            case "angry":
+                this.activeAnimation = this.angryAnimation;
+                this.currentAnimation = "angry";
+                this.lastAnimationTime = time;
         }
 
     }
+
     public String getCurrentAnimation() {
         return currentAnimation;
     }
@@ -229,5 +216,32 @@ public class Guest {
 
     public void setJustOrdered(boolean justOrdered) {
         this.justOrdered = justOrdered;
+    }
+
+    public int getDespawnTime() {
+        return despawnTime;
+    }
+
+    public void setDespawnTime(int despawnTime) {
+        this.despawnTime = despawnTime;
+    }
+
+    public boolean isServed() {
+        return isServed;
+    }
+
+    public void setServed(boolean served) {
+        isServed = served;
+    }
+
+    @Override
+    public String toString() {
+        return "Guest{" +
+                "spawnTime=" + spawnTime +
+                ", patience=" + patience +
+                ", wealth=" + wealth +
+                ", order=" + order +
+                ", position=" + Arrays.toString(position) +
+                '}';
     }
 }

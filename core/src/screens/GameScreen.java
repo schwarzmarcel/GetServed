@@ -317,43 +317,48 @@ public class GameScreen implements Screen {
 					else
 						contactTable = (Table) fixtureB.getUserData();
 
-					if (Gdx.input.isKeyJustPressed(Input.Keys.S)) {
-						if (levelHandler.getWaiter().getDish() != null && contactTable.getGuest() != null) {
-							Dish dish = levelHandler.getWaiter().getDish();
-							Waiter waiter = levelHandler.getWaiter();
-							Guest guest = contactTable.getGuest();
-							if (guest.getOrder() == (dish.type)) {
-								dish.setPosition(contactTable.getPosition());
-								dish.setSpriteSize(40, 20);
-								waiter.removeDish();
-								levelHandler.getDishHandler().removeActiveDish(dish);
-								tip = guest.getTip();
-								lastTipTime = levelHandler.getTime();
-								levelHandler.getLevel().setMoney(levelHandler.getLevel().getMoney() + guest.getTip());
-								levelHandler.getGuestHandler().removeActiveGuest(guest);
-								Gdx.app.log("INFO: ", "Delivered correct Dish to Guest");
-							} else {
-								guest.receivedWrongDish(levelHandler.getTime());
-								waiter.removeDish();
-								levelHandler.getDishHandler().removeActiveDish(dish);
-								guest.setActiveAnimation("angry", levelHandler.getTime());
-								Gdx.app.log("INFO: ", "Delivered wrong dish to Guest");
-							}
-						}
-					}
-				}
-			}
-			if ((fixtureA.getUserData() instanceof Counter) || (fixtureB.getUserData() instanceof Counter)) {
-				if ((fixtureA.getUserData() instanceof Waiter) || (fixtureB.getUserData() instanceof Waiter)) {
-					if (fixtureA.getUserData() instanceof Counter)
-						contactCounter = (Counter) fixtureA.getUserData();
-					else
-						contactCounter = (Counter) fixtureB.getUserData();
-					if (contactCounter.getDish() != null && levelHandler.getWaiter().getDish() == null) {
-						levelHandler.getWaiter().setDish(contactCounter.getDish());
-						levelHandler.getWaiter().getDish().setSpriteSize(64, 32);
-						contactCounter.removeDish();
-					}
+                    if (Gdx.input.isKeyJustPressed(Input.Keys.S)) {
+                        if (levelHandler.getWaiter().getDish() != null && contactTable.getGuest() != null) {
+                            Dish dish = levelHandler.getWaiter().getDish();
+                            Waiter waiter = levelHandler.getWaiter();
+                            Guest guest = contactTable.getGuest();
+                            if (guest.getOrder() == (dish.type)) {
+                                if (!guest.isServed()) {
+                                    dish.setPosition(
+                                            new float[]{
+                                                    contactTable.getPosition()[0] + contactTable.getTableSprite().getWidth() / 4,
+                                                    contactTable.getPosition()[1] + contactTable.getTableSprite().getHeight() / 2});
+                                    waiter.removeDish();
+                                    guest.setDish(dish);
+                                    tip = guest.getTip();
+                                    lastTipTime = levelHandler.getTime();
+                                    levelHandler.getLevel().setMoney(levelHandler.getLevel().getMoney() + guest.getTip());
+                                    guest.setDespawnTime(levelHandler.getTime() + 2);
+                                    guest.setServed(true);
+                                    Gdx.app.log("INFO: ", "Delivered correct Dish to Guest");
+                                }
+                            } else {
+                                guest.receivedWrongDish(levelHandler.getTime());
+                                waiter.removeDish();
+                                levelHandler.getDishHandler().removeActiveDish(dish);
+                                guest.setActiveAnimation("angry", levelHandler.getTime());
+                                Gdx.app.log("INFO: ", "Delivered wrong dish to Guest");
+                            }
+                        }
+                    }
+                }
+            }
+            if ((fixtureA.getUserData() instanceof Counter) || (fixtureB.getUserData() instanceof Counter)) {
+                if ((fixtureA.getUserData() instanceof Waiter) || (fixtureB.getUserData() instanceof Waiter)) {
+                    if (fixtureA.getUserData() instanceof Counter)
+                        contactCounter = (Counter) fixtureA.getUserData();
+                    else
+                        contactCounter = (Counter) fixtureB.getUserData();
+                    if (contactCounter.getDish() != null && levelHandler.getWaiter().getDish() == null) {
+                        levelHandler.getWaiter().setDish(contactCounter.getDish());
+                        levelHandler.getWaiter().getDish().setSpriteSize(64, 32);
+                        contactCounter.removeDish();
+                    }
 
 				}
 			}
