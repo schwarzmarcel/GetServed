@@ -24,7 +24,7 @@ public class LevelHandler {
     private Waiter waiter;
     private GameField gameField;
     private Gamelevel level;
-    private boolean levelOver = false;
+    private int levelOver = 0;
     private String levelName;
 
     /**
@@ -101,12 +101,12 @@ public class LevelHandler {
         dishHandler.updateDishes(time, guestHandler.getActiveGuests());
         dishHandler.trashBinHandler(waiter);
         if (level.getMoney() == 0) {
-            levelOver = true;
+            levelOver = 1;
         }
         if (guestHandler.getActiveGuests().isEmpty() && guestHandler.getGuestQueue().isEmpty()) {
             Gdx.app.log("INFO: ", "Level was successfully finished");
             Timer.instance().clear();
-            levelOver = true;
+            levelOver = 2;
         }
     }
 
@@ -148,7 +148,7 @@ public class LevelHandler {
         return gameField;
     }
 
-    public boolean isLevelOver() {
+    public int getLevelOver() {
         return levelOver;
     }
 

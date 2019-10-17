@@ -89,6 +89,7 @@ public class Assets {
 		manager.load(CHAIR, Texture.class);
 		manager.load(BUBBLE, Texture.class);
 		manager.load(COIN, Texture.class);
+
 	}
 
 	public static void loadingScreen() {
