@@ -1,6 +1,7 @@
 package screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
@@ -17,6 +18,7 @@ public class LoadingScreen implements Screen{
 	private SpriteBatch batch;
 	private boolean finishLoading;
 	private Sprite loading;
+	private Sprite enter;
 	private Sprite discard;
 	private Sprite serve;
 	private Sprite sKey;
@@ -31,10 +33,13 @@ public class LoadingScreen implements Screen{
 	public LoadingScreen(MyGdxGame game, SpriteBatch batch) {
 		this.game = game;
 		this.batch = batch;
-		setFinishLoading(false);
+		finishLoading = false;
         loading = new Sprite(Assets.manager.get(Assets.LOADING, Texture.class));
 		loading.setSize(64, WORLD_HEIGHT / 10);
 		loading.setPosition(WORLD_WIDTH / 2 - (loading.getWidth() / 2), 5);
+		enter = new Sprite(Assets.manager.get(Assets.ENTER, Texture.class));
+		enter.setSize(64, WORLD_HEIGHT / 12);
+		enter.setPosition(WORLD_WIDTH / 2 - (enter.getWidth() / 2), 5);
         arrows = new Sprite(Assets.manager.get(Assets.ARROWS, Texture.class));
 		arrows.setSize(15, 10);
 		arrows.setPosition(33, WORLD_HEIGHT - 20);
@@ -71,7 +76,7 @@ public class LoadingScreen implements Screen{
 	private void update(float delta) {
         if (Assets.manager.update()) {
         	game.initializeEndLevelScreen();
-			game.showMenu();
+			finishLoading = true;
 		}
 	}
 
@@ -81,7 +86,10 @@ public class LoadingScreen implements Screen{
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		update(delta);
 		batch.begin();
-		loading.draw(batch);
+		if(!finishLoading)
+			loading.draw(batch);
+		else
+			enter.draw(batch);
 		discard.draw(batch);
 		serve.draw(batch);
 		arrows.draw(batch);
@@ -91,6 +99,12 @@ public class LoadingScreen implements Screen{
 		coin.draw(batch);
 		dontlose.draw(batch);
 		batch.end();
+		
+		if(finishLoading) {
+			if(Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
+				game.showMenu();
+			}
+		}
 		
 	}
 
@@ -128,12 +142,6 @@ public class LoadingScreen implements Screen{
         Assets.load();
 	}
 
-	public boolean isFinishLoading() {
-		return finishLoading;
-	}
-
-	public void setFinishLoading(boolean finishLoading) {
-		this.finishLoading = finishLoading;
-	}
+	
 
 }

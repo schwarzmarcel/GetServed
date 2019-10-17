@@ -98,7 +98,6 @@ public class Assets {
 		manager.load(EXITPASSIVE, Texture.class);
 		manager.load(LEVELCLEARED, Texture.class);
 		manager.load(LEVELFAILED, Texture.class);
-		manager.load(ENTER, Texture.class);
 		manager.load(CHAIR, Texture.class);
 		manager.load(BUBBLE, Texture.class);
 
@@ -114,6 +113,7 @@ public class Assets {
 		manager.load(LOADING, Texture.class);
 		manager.load(COIN, Texture.class);
 		manager.load(DONTLOSE, Texture.class);
+		manager.load(ENTER, Texture.class);
 	}
 
 	public static void dispose() {
