@@ -37,28 +37,28 @@ public class LoadingScreen implements Screen{
 		loading.setPosition(WORLD_WIDTH / 2 - (loading.getWidth() / 2), 5);
         arrows = new Sprite(Assets.manager.get(Assets.ARROWS, Texture.class));
 		arrows.setSize(15, 10);
-		arrows.setPosition(35, WORLD_HEIGHT - 20);
+		arrows.setPosition(33, WORLD_HEIGHT - 20);
         move = new Sprite(Assets.manager.get(Assets.MOVE, Texture.class));
 		move.setSize(23, 5);
-		move.setPosition(46 + arrows.getWidth(), WORLD_HEIGHT - 20);
+		move.setPosition(44 + arrows.getWidth(), WORLD_HEIGHT - 20);
         sKey = new Sprite(Assets.manager.get(Assets.SKEY, Texture.class));
 		sKey.setSize(7, 7);
-		sKey.setPosition(39, WORLD_HEIGHT - 35);
+		sKey.setPosition(37, WORLD_HEIGHT - 35);
         serve = new Sprite(Assets.manager.get(Assets.SERVE, Texture.class));
 		serve.setSize(45, 6);
-		serve.setPosition(45 + arrows.getWidth(), WORLD_HEIGHT - 35);
+		serve.setPosition(43 + arrows.getWidth(), WORLD_HEIGHT - 35);
         dKey = new Sprite(Assets.manager.get(Assets.DKEY, Texture.class));
 		dKey.setSize(7, 7);
-		dKey.setPosition(39, WORLD_HEIGHT - 50);
+		dKey.setPosition(37, WORLD_HEIGHT - 50);
         discard = new Sprite(Assets.manager.get(Assets.DISCARD, Texture.class));
 		discard.setSize(50, 6);
-		discard.setPosition(45 + arrows.getWidth(), WORLD_HEIGHT - 50);
+		discard.setPosition(43 + arrows.getWidth(), WORLD_HEIGHT - 50);
 		dontlose = new Sprite(Assets.manager.get(Assets.DONTLOSE, Texture.class));
 		dontlose.setSize(88, 6);
-		dontlose.setPosition(45 + arrows.getWidth(), WORLD_HEIGHT - 65);
+		dontlose.setPosition(43 + arrows.getWidth(), WORLD_HEIGHT - 65);
 		coin = new Sprite(Assets.manager.get(Assets.COIN, Texture.class));
 		coin.setSize(7, 7);
-		coin.setPosition(39, WORLD_HEIGHT - 65);
+		coin.setPosition(37, WORLD_HEIGHT - 65);
 		queueAssets();
 		
 	}
