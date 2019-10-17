@@ -34,7 +34,6 @@ public class Guest {
 
     public Guest(long spawnTime, long patience, long wealth, String type) {
         int randomNum = ThreadLocalRandom.current().nextInt(1, 5 + 1);
-        randomNum = 1;
         TextureAtlas textureAtlasIdle = null;
         TextureAtlas textureAtlasAngry = null;
         TextureAtlas textureAtlasOrdering = null;
@@ -88,8 +87,11 @@ public class Guest {
         }
 
         idleAnimation = new Animation<TextureRegion>(0.045f, textureAtlasIdle.getRegions(), Animation.PlayMode.LOOP);
-        angryAnimation = new Animation<TextureRegion>(0.05f, textureAtlasAngry.getRegions(), Animation.PlayMode.LOOP);
-        orderAnimation = new Animation<TextureRegion>(0.07f, textureAtlasOrdering.getRegions(), Animation.PlayMode.LOOP);
+        if (!type.equals("king")) {
+            angryAnimation = new Animation<TextureRegion>(0.05f, textureAtlasAngry.getRegions(), Animation.PlayMode.LOOP);
+            orderAnimation = new Animation<TextureRegion>(0.07f, textureAtlasOrdering.getRegions(), Animation.PlayMode.LOOP);
+        }
+
         this.activeAnimation = idleAnimation;
         this.currentAnimation = "idle";
         order = Foodtype.getRandomFoodType();
@@ -203,22 +205,25 @@ public class Guest {
     }
 
     public void setActiveAnimation(String animation, int time) {
-        switch (animation) {
-            case "idle":
-                this.activeAnimation = this.idleAnimation;
-                this.currentAnimation = "idle";
-                this.lastAnimationTime = time;
-                break;
-            case "ordering":
-                this.activeAnimation = this.orderAnimation;
-                this.currentAnimation = "ordering";
-                this.lastAnimationTime = time;
-                break;
-            case "angry":
-                this.activeAnimation = this.angryAnimation;
-                this.currentAnimation = "angry";
-                this.lastAnimationTime = time;
+        if (!type.equals("king")) {
+            switch (animation) {
+                case "idle":
+                    this.activeAnimation = this.idleAnimation;
+                    this.currentAnimation = "idle";
+                    this.lastAnimationTime = time;
+                    break;
+                case "ordering":
+                    this.activeAnimation = this.orderAnimation;
+                    this.currentAnimation = "ordering";
+                    this.lastAnimationTime = time;
+                    break;
+                case "angry":
+                    this.activeAnimation = this.angryAnimation;
+                    this.currentAnimation = "angry";
+                    this.lastAnimationTime = time;
+            }
         }
+
     }
     public String getCurrentAnimation() {
         return currentAnimation;

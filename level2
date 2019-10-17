@@ -1,139 +1,132 @@
 {
 	"name" : "level2",
-	"money" : 25,
+	"money" : 22,
 	"positions": [
-		{
-		 "row": 9,
-		 "col": 13,
+	{
+		 "row": 12,
+		 "col": 12,
 		 "type": "table",
 		 "rotation": 0
 		},
 		{
 		 "row": 5,
-		 "col": 24,
+		 "col": 12,
 		 "type": "table",
 		 "rotation": 0
 		},
 		{
 		"row": 9,
-		 "col": 18,
-		 "type": "table",
-		 "rotation": 0
-		},
-		{
-		"row": 7,
-		 "col": 6,
-		 "type": "table",
-		 "rotation": 0
-		},
-		{
-		"row": 11,
-		 "col": 8,
-		 "type": "table",
-		 "rotation": 0
-		},
-		{
-		"row": 12,
-		 "col": 23,
+		 "col": 15,
 		 "type": "table",
 		 "rotation": 0
 		},
 		{
 		"row": 3,
-		 "col": 11,
-		 "type": "counter",
-		 "rotation": 3
+		 "col": 16,
+		 "type": "table",
+		 "rotation": 0
 		},
 		{
-		"row": 15,
-		 "col": 15,
+		"row": 6,
+		 "col": 20,
+		 "type": "table",
+		 "rotation": 0
+		},
+		{
+		"row": 11,
+		 "col": 20,
+		 "type": "table",
+		 "rotation": 0
+		},
+		{
+		"row": 7,
+		 "col": 7,
 		 "type": "counter",
-		 "rotation": 2
+		 "rotation": 0
+		},
+		{
+		"row": 7,
+		 "col": 24,
+		 "type": "counter",
+		 "rotation": 1
 		}
 	],
 	"guests":[
-	    {
-    		"patience":50,
-    		"happiness":3,
-    		"wealth":1000,
-    		"spawntime": 1,
-    		"type": "king"
-    	},
 		{
 		"patience":100,
 		"happiness":3,
-		"wealth":10,
+		"wealth":8,
 		"spawntime": 2,
 		"type": "normal"
 		},
 		{
 		"patience":100,
 		"happiness":3,
-		"wealth":10,
+		"wealth":8,
 		"spawntime": 4,
 		"type": "normal"
 		},
 		{
 		"patience":100,
 		"happiness":3,
-		"wealth":10,
-		"spawntime": 8,
+		"wealth":8,
+		"spawntime": 7,
 		"type": "normal"
 		},
 		{
 		"patience":100,
 		"happiness":3,
-		"wealth":10,
-		"spawntime": 11,
+		"wealth":8,
+		"spawntime": 10,
+		"type": "normal"
+		},
+		{
+    		"patience":32,
+    		"happiness":3,
+    		"wealth":36,
+    		"spawntime": 12,
+    		"type": "king"
+    	},
+		{
+		"patience":100,
+		"happiness":3,
+		"wealth":8,
+		"spawntime": 16,
 		"type": "normal"
 		},
 		{
 		"patience":100,
 		"happiness":3,
-		"wealth":10,
-		"spawntime": 15,
-		"type": "normal"
-		},
-		{
-		"patience":100,
-		"happiness":3,
-		"wealth":10,
+		"wealth":8,
 		"spawntime": 18,
 		"type": "normal"
 		},
 		{
 		"patience":100,
 		"happiness":3,
-		"wealth":10,
-		"spawntime": 21,
+		"wealth":8,
+		"spawntime": 22,
 		"type": "normal"
 		},
 		{
 		"patience":100,
 		"happiness":3,
-		"wealth":10,
+		"wealth":8,
 		"spawntime": 24,
 		"type": "normal"
 		},
 		{
 		"patience":100,
 		"happiness":3,
-		"wealth":10,
-		"spawntime": 28,
+		"wealth":8,
+		"spawntime": 26,
 		"type": "normal"
 		},
 		{
 		"patience":100,
 		"happiness":3,
-		"wealth":10,
+		"wealth":8,
 		"spawntime": 30,
-		"type": "normal"
-		},
-		{
-		"patience":100,
-		"happiness":3,
-		"wealth":10,
-		"spawntime": 34,
 		"type": "normal"
 		}
 	]
