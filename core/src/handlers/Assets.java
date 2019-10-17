@@ -28,6 +28,7 @@ public class Assets {
 	public static final String COIN = "coin.png";
 	public static final String BUBBLE = "bubble.png";
 	public static final String MONEYFONT = "goldfont.fnt";
+    public static final String LEVELFONT = "levelfont.fnt";
 	public static final String NEXTACTIVE = "nextactive.png";
 	public static final String NEXTPASSIVE = "nextpassive.png";
 	public static final String EXITACTIVE = "exitactive.png";
@@ -90,6 +91,7 @@ public class Assets {
 		manager.load(KING_JUMP, TextureAtlas.class);
 		manager.load(KING, TextureAtlas.class);
 		manager.load(MONEYFONT, BitmapFont.class);
+        manager.load(LEVELFONT, BitmapFont.class);
 		manager.load(NEXTACTIVE, Texture.class);
 		manager.load(NEXTPASSIVE, Texture.class);
 		manager.load(EXITACTIVE, Texture.class);

@@ -42,6 +42,7 @@ public class LevelHandler {
      * This method initializes and builds the level
      */
     public void initializeLevel() {
+        Gdx.app.log("INFO: ", "Beginning level initializing");
         world = new World(new Vector2(0, 0), true);
         JsonLevelReader reader = new JsonLevelReader();
         level = reader.readLevelConfiguration(levelName);
@@ -51,6 +52,7 @@ public class LevelHandler {
         guestHandler.initializeGuests(level.getGuests());
         dishHandler.initializeDishManager(waiter, gameField.getCounters());
         dishHandler.initializeDishQueue(guestHandler.getGuestQueue().first().getOrder());
+        Gdx.app.log("INFO: ", "Finished Level initializing");
     }
 
     /**

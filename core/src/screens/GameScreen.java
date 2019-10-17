@@ -39,7 +39,8 @@ public class GameScreen implements Screen {
 	private GsContactListener contactListener;
 	private float elapsedTime = 0;
 	private BitmapFont moneyFont;
-	private GlyphLayout layoutMoney;
+    private BitmapFont levelFont;
+    private GlyphLayout layoutMoney;
 	private GlyphLayout layoutTip;
 	private GlyphLayout layoutLevel;
 	private int tip;
@@ -51,17 +52,13 @@ public class GameScreen implements Screen {
 		this.batch = batch;
 		this.shapeRenderer = shapeRenderer;
 
-		initializeFonts();
-		Gdx.app.log("INFO: ", "Fonts initialized");
-		levelHandler = new LevelHandler(levelname);
-		Gdx.app.log("INFO: ", "Beginning level initializing");
-		levelHandler.initializeLevel();
-		Gdx.app.log("INFO: ", "Finished Level initializing");
+        initializeFonts();
+        levelHandler = new LevelHandler(levelname);
+        levelHandler.initializeLevel();
+        contactListener = new GsContactListener();
+        levelHandler.getWorld().setContactListener(contactListener);
 
-		contactListener = new GsContactListener();
-		levelHandler.getWorld().setContactListener(contactListener);
-
-		tiledMap = new TmxMapLoader().load("Map/tile-map.tmx");
+        tiledMap = new TmxMapLoader().load("Map/map.tmx");
 		MapProperties properties = tiledMap.getProperties();
 		int tileWidth = properties.get("tilewidth", Integer.class);
 		int tileHeight = properties.get("tileheight", Integer.class);
@@ -106,7 +103,7 @@ public class GameScreen implements Screen {
 		if (false)
 			debugRenderer.render(levelHandler.getWorld(), debugMatrix);
 		reactToCollision();
-		if (levelHandler.getLevelOver() == 1) {	
+        if (levelHandler.getLevelOver() == 1) {
 			game.showEndScreen(false);
 		} else if (levelHandler.getLevelOver() == 2) {
 			game.increaseLevel();
@@ -119,20 +116,23 @@ public class GameScreen implements Screen {
 		levelHandler.getWorld().dispose();
 		debugRenderer.dispose();
 
-	}
+    }
 
-	private void initializeFonts() {
-		moneyFont = Assets.manager.get(Assets.MONEYFONT, BitmapFont.class);
-		moneyFont.getData().setScale(0.08f);
-		layoutMoney = new GlyphLayout();
-		tip = 0;
-		lastTipTime = -3;
-		layoutTip = new GlyphLayout();
-		coin = new Sprite(Assets.manager.get(Assets.COIN, Texture.class));
-		coin.setSize(7, 7);
-		coin.setPosition(WORLD_WIDTH - coin.getWidth() - 4, WORLD_HEIGHT - coin.getHeight() - 3);
-		layoutLevel = new GlyphLayout();
-	}
+    private void initializeFonts() {
+        moneyFont = Assets.manager.get(Assets.MONEYFONT, BitmapFont.class);
+        levelFont = Assets.manager.get(Assets.LEVELFONT, BitmapFont.class);
+        moneyFont.getData().setScale(0.08f);
+        levelFont.getData().setScale(0.061f);
+        layoutMoney = new GlyphLayout();
+        layoutLevel = new GlyphLayout();
+        tip = 0;
+        lastTipTime = -3;
+        layoutTip = new GlyphLayout();
+        coin = new Sprite(Assets.manager.get(Assets.COIN, Texture.class));
+        coin.setSize(7, 7);
+        coin.setPosition(WORLD_WIDTH - coin.getWidth() - 4, WORLD_HEIGHT - coin.getHeight() - 3);
+        Gdx.app.log("INFO: ", "Fonts initialized");
+    }
 
 	private void drawWaiter() {
 		TextureRegion currentFrame;
@@ -279,15 +279,15 @@ public class GameScreen implements Screen {
 		shapeRenderer.end();
 		batch.begin();
 
-	}
+    }
 
 	private void showLevel() {
 		String level = "Level " + game.getLevelCount();
-		layoutLevel.setText(moneyFont, level);
-		moneyFont.draw(batch, layoutLevel, 3, WORLD_HEIGHT - 12);
-		
-	}
-	
+        layoutLevel.setText(levelFont, level);
+        levelFont.draw(batch, layoutLevel, 11, 18);
+
+    }
+
 	private void showMoney() {
 		String moneyText = "" + levelHandler.getLevel().getMoney();
 		layoutMoney.setText(moneyFont, moneyText);
@@ -322,28 +322,7 @@ public class GameScreen implements Screen {
                             Dish dish = levelHandler.getWaiter().getDish();
                             Waiter waiter = levelHandler.getWaiter();
                             Guest guest = contactTable.getGuest();
-                            if (guest.getOrder() == (dish.type)) {
-                                if (!guest.isServed()) {
-                                    dish.setPosition(
-                                            new float[]{
-                                                    contactTable.getPosition()[0] + contactTable.getTableSprite().getWidth() / 4,
-                                                    contactTable.getPosition()[1] + contactTable.getTableSprite().getHeight() / 2});
-                                    waiter.removeDish();
-                                    guest.setDish(dish);
-                                    tip = guest.getTip();
-                                    lastTipTime = levelHandler.getTime();
-                                    levelHandler.getLevel().setMoney(levelHandler.getLevel().getMoney() + guest.getTip());
-                                    guest.setDespawnTime(levelHandler.getTime() + 2);
-                                    guest.setServed(true);
-                                    Gdx.app.log("INFO: ", "Delivered correct Dish to Guest");
-                                }
-                            } else {
-                                guest.receivedWrongDish(levelHandler.getTime());
-                                waiter.removeDish();
-                                levelHandler.getDishHandler().removeActiveDish(dish);
-                                guest.setActiveAnimation("angry", levelHandler.getTime());
-                                Gdx.app.log("INFO: ", "Delivered wrong dish to Guest");
-                            }
+                            serveGuest(contactTable, dish, waiter, guest);
                         }
                     }
                 }
@@ -360,10 +339,35 @@ public class GameScreen implements Screen {
                         contactCounter.removeDish();
                     }
 
-				}
-			}
-		}
-	}
+                }
+            }
+        }
+    }
+
+    private void serveGuest(Table contactTable, Dish dish, Waiter waiter, Guest guest) {
+        if (guest.getOrder() == (dish.type)) {
+            if (!guest.isServed()) {
+                dish.setPosition(
+                        new float[]{
+                                contactTable.getPosition()[0] + contactTable.getTableSprite().getWidth() / 4,
+                                contactTable.getPosition()[1] + contactTable.getTableSprite().getHeight() / 2});
+                waiter.removeDish();
+                guest.setDish(dish);
+                tip = guest.getTip();
+                lastTipTime = levelHandler.getTime();
+                levelHandler.getLevel().setMoney(levelHandler.getLevel().getMoney() + guest.getTip());
+                guest.setDespawnTime(levelHandler.getTime() + 2);
+                guest.setServed(true);
+                Gdx.app.log("INFO: ", "Delivered correct Dish to Guest");
+            }
+        } else {
+            guest.receivedWrongDish(levelHandler.getTime());
+            waiter.removeDish();
+            levelHandler.getDishHandler().removeActiveDish(dish);
+            guest.setActiveAnimation("angry", levelHandler.getTime());
+            Gdx.app.log("INFO: ", "Delivered wrong dish to Guest");
+        }
+    }
 
 	@Override
 	public void show() {
