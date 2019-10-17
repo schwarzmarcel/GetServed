@@ -41,6 +41,7 @@ public class GameScreen implements Screen {
 	private BitmapFont moneyFont;
 	private GlyphLayout layoutMoney;
 	private GlyphLayout layoutTip;
+	private GlyphLayout layoutLevel;
 	private int tip;
 	private int lastTipTime;
 	private Sprite coin;
@@ -98,6 +99,7 @@ public class GameScreen implements Screen {
 		drawOrders();
 		drawDishProgress();
 		showMoney();
+		showLevel();
 		if ((lastTipTime + 2) >= levelHandler.getTime())
 			showTip();
 		batch.end();
@@ -128,6 +130,7 @@ public class GameScreen implements Screen {
 		coin = new Sprite(Assets.manager.get(Assets.COIN, Texture.class));
 		coin.setSize(7, 7);
 		coin.setPosition(WORLD_WIDTH - coin.getWidth() - 4, WORLD_HEIGHT - coin.getHeight() - 3);
+		layoutLevel = new GlyphLayout();
 	}
 
 	private void drawWaiter() {
@@ -277,6 +280,13 @@ public class GameScreen implements Screen {
 
 	}
 
+	private void showLevel() {
+		String level = "Level " + game.getLevelCount();
+		layoutLevel.setText(moneyFont, level);
+		moneyFont.draw(batch, layoutLevel, 3, WORLD_HEIGHT - 12);
+		
+	}
+	
 	private void showMoney() {
 		String moneyText = "" + levelHandler.getLevel().getMoney();
 		layoutMoney.setText(moneyFont, moneyText);
