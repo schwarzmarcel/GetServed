@@ -53,16 +53,16 @@ public class DishHandler {
         }
         for (Counter c : counters) {
             if (c.getNextDish() == null) {
-                Dish init;
+                Dish initDish;
                 if (dishQueue.notEmpty()) {
-                    init = new Dish(dishQueue.removeFirst());
+                    initDish = new Dish(dishQueue.removeFirst());
                 } else {
-                    init = new Dish(Foodtype.getRandomFoodType());
+                    initDish = new Dish(Foodtype.getRandomFoodType());
                 }
-                c.setNextDish(init);
+                c.setNextDish(initDish);
                 c.setLastDishTime(time);
-                activeDishes.add(init);
-                init.setPosition(c.getDisplayPos());
+                activeDishes.add(initDish);
+                initDish.setPosition(c.getCookingPosition());
             }
 
             if (c.getDish() == null)
@@ -94,8 +94,8 @@ public class DishHandler {
                     activeDishes.remove(c.getDish());
                 }
                 activeDishes.add(nextDish);
-                nextDish.setPosition(c.getDisplayPos());
-                c.getNextDish().setPosition(c.getDishPos());
+                nextDish.setPosition(c.getCookingPosition());
+                c.getNextDish().setPosition(c.getDishCounterPos());
                 c.setDish(c.getNextDish());
                 c.setNextDish(nextDish);
                 c.setCookSpeed(1);

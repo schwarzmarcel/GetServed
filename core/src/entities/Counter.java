@@ -14,8 +14,8 @@ public class Counter {
 	private Sprite sprite;
 	private int rotation;
 	private float[] positions = new float[2];
-	private float[] displayPos = new float[2];
-	private float[] dishPos = new float[2];
+    private float[] cookingPosition = new float[2];
+    private float[] dishCounterPos;
 	private Dish dish;
 	private Dish nextDish;
 	private float lastDishTime;
@@ -36,24 +36,24 @@ public class Counter {
 		box.getBody().getFixtureList().first().setUserData(this);
 		dish = new Dish(Foodtype.getRandomFoodType());
 		float[] dpos = { positions[0] + (sprite.getWidth() - dish.getSprite().getWidth()) / 2,
-				positions[1] + (sprite.getHeight() - dish.getSprite().getHeight()) / 2 };
-		dishPos = dpos;
+                positions[1] + (sprite.getHeight() - dish.getSprite().getHeight()) / 2 + 1};
+        dishCounterPos = dpos;
 		if (rotation == 0) {
 			float[] displpos = { positions[0] - sprite.getWidth(),
 					positions[1] + (sprite.getHeight() - dish.getSprite().getHeight()) / 2 };
-			displayPos = displpos;
+            cookingPosition = displpos;
 		} else if (rotation == 1) {
 			float[] displpos = { positions[0] + sprite.getWidth() + 1,
 					positions[1] + (sprite.getHeight() - dish.getSprite().getHeight()) / 2 };
-			displayPos = displpos;
+            cookingPosition = displpos;
 		} else if (rotation == 2) {
 			float[] displpos = { positions[0] + sprite.getWidth() / 2 - dish.getSprite().getWidth() / 2,
 					positions[1] + sprite.getHeight() + 3};
-			displayPos = displpos;
+            cookingPosition = displpos;
 		} else if (rotation == 3) {
 			float[] displpos = { positions[0] + sprite.getWidth() / 2 - dish.getSprite().getWidth() / 2,
 					positions[1] - dish.getSprite().getHeight() - 3};
-			displayPos = displpos;
+            cookingPosition = displpos;
 		}
 		
 		dish = null;
@@ -110,12 +110,12 @@ public class Counter {
 		this.cookSpeed = cookSpeed;
 	}
 
-	public float[] getDishPos() {
-		return dishPos;
-	}
+    public float[] getDishCounterPos() {
+        return dishCounterPos;
+    }
 
-	public float[] getDisplayPos() {
-		return displayPos;
+    public float[] getCookingPosition() {
+        return cookingPosition;
 	}
 
 	public int getRotation() {

@@ -32,7 +32,7 @@ public class Dish {
                 break;
             default: break;
         }
-        sprite.setSize(WORLD_WIDTH / 40, WORLD_HEIGHT / 20);
+        sprite.setSize(WORLD_WIDTH / 42, WORLD_HEIGHT / 22);
     }
     public void setPosition(float[] positions){
         position = positions;
