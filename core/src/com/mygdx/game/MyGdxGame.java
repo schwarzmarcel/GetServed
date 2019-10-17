@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import handlers.Assets;
+import screens.EndLevelScreen;
 import screens.GameScreen;
 import screens.LoadingScreen;
 import screens.MenuScreen;
@@ -20,6 +21,7 @@ public class MyGdxGame extends Game {
     private LoadingScreen loadingScreen;
     private GameScreen gameScreen;
     private MenuScreen menuScreen;
+    private EndLevelScreen endLevelScreen;
     private int levelCount;
 
     @Override
@@ -66,11 +68,16 @@ public class MyGdxGame extends Game {
      */
     public void showMenu() {
         menuScreen = new MenuScreen(this, batch);
-        if (gameScreen != null)
-            gameScreen.dispose();
         this.setScreen(menuScreen);
     }
 
+    public void showEndScreen(boolean winOrLoss) {
+    	 if (gameScreen != null)
+             gameScreen.dispose();
+    	endLevelScreen.setWin(winOrLoss);
+    	this.setScreen(endLevelScreen);
+    }
+    
     /**
      * increases the level counter for the next level
      */
@@ -81,6 +88,10 @@ public class MyGdxGame extends Game {
 
 	public int getLevelCount() {
 		return levelCount;
+	}
+	
+	public void initializeEndLevelScreen(){
+		endLevelScreen = new EndLevelScreen(this, batch);
 	}
 
 

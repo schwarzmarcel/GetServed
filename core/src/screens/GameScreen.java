@@ -106,10 +106,11 @@ public class GameScreen implements Screen {
 		if (false)
 			debugRenderer.render(levelHandler.getWorld(), debugMatrix);
 		reactToCollision();
-		if (levelHandler.getLevelOver() > 0) {
-			if (levelHandler.getLevelOver() == 2)
-				game.increaseLevel();
-			game.showMenu();
+		if (levelHandler.getLevelOver() == 1) {	
+			game.showEndScreen(false);
+		} else if (levelHandler.getLevelOver() == 2) {
+			game.increaseLevel();
+			game.showEndScreen(true);
 		}
 	}
 

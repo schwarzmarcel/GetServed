@@ -32,6 +32,10 @@ public class Assets {
 	public static final String NEXTPASSIVE = "nextpassive.png";
 	public static final String EXITACTIVE = "exitactive.png";
 	public static final String EXITPASSIVE = "exitpassive.png";
+	public static final String LEVELCLEARED = "levelcleared.png";
+	public static final String LEVELFAILED = "levelfailed.png";
+	public static final String ENTER = "continue.png";
+	
 
 	public static final String ARROWS = "arrowkeys.png";
 	public static final String SKEY = "Keyboard_White_S.png";
@@ -40,7 +44,7 @@ public class Assets {
 	public static final String SERVE = "serve.png";
 	public static final String DISCARD = "discard.png";
 	public static final String LOADING = "loading.png";
-	public static final String ENTER = "continue.png";
+	public static final String DONTLOSE = "dontlose.png";
 
 	public static final String GUEST1_ANGRY = "character_sprites/Guest1_Kick.atlas";
 	public static final String GUEST1_ORDERING = "character_sprites/Guest1_Jump.atlas";
@@ -76,9 +80,11 @@ public class Assets {
 		manager.load(NEXTPASSIVE, Texture.class);
 		manager.load(EXITACTIVE, Texture.class);
 		manager.load(EXITPASSIVE, Texture.class);
+		manager.load(LEVELCLEARED, Texture.class);
+		manager.load(LEVELFAILED, Texture.class);
+		manager.load(ENTER, Texture.class);
 		manager.load(CHAIR, Texture.class);
 		manager.load(BUBBLE, Texture.class);
-		manager.load(COIN, Texture.class);
 
 		manager.load(GUEST1_ANGRY, TextureAtlas.class);
         manager.load(GUEST1_ORDERING, TextureAtlas.class);
@@ -101,8 +107,8 @@ public class Assets {
 		manager.load(SERVE, Texture.class);
 		manager.load(DISCARD, Texture.class);
 		manager.load(LOADING, Texture.class);
-		manager.load(ENTER, Texture.class);
-
+		manager.load(COIN, Texture.class);
+		manager.load(DONTLOSE, Texture.class);
 	}
 
 	public static void dispose() {
