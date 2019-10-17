@@ -54,77 +54,66 @@
 	"guests":[
 		{
 		"patience":100,
-		"happiness":3,
 		"wealth":8,
 		"spawntime": 2,
 		"type": "normal"
 		},
 		{
 		"patience":100,
-		"happiness":3,
 		"wealth":8,
 		"spawntime": 4,
 		"type": "normal"
 		},
 		{
 		"patience":100,
-		"happiness":3,
 		"wealth":8,
 		"spawntime": 7,
 		"type": "normal"
 		},
 		{
 		"patience":100,
-		"happiness":3,
 		"wealth":8,
 		"spawntime": 10,
 		"type": "normal"
 		},
 		{
     		"patience":32,
-    		"happiness":3,
     		"wealth":36,
     		"spawntime": 12,
     		"type": "king"
     	},
 		{
 		"patience":100,
-		"happiness":3,
 		"wealth":8,
 		"spawntime": 16,
 		"type": "normal"
 		},
 		{
 		"patience":100,
-		"happiness":3,
 		"wealth":8,
 		"spawntime": 18,
 		"type": "normal"
 		},
 		{
 		"patience":100,
-		"happiness":3,
 		"wealth":8,
 		"spawntime": 22,
 		"type": "normal"
 		},
 		{
 		"patience":100,
-		"happiness":3,
 		"wealth":8,
 		"spawntime": 24,
 		"type": "normal"
 		},
 		{
 		"patience":100,
-		"happiness":3,
 		"wealth":8,
 		"spawntime": 26,
 		"type": "normal"
 		},
 		{
 		"patience":100,
-		"happiness":3,
 		"wealth":8,
 		"spawntime": 30,
 		"type": "normal"

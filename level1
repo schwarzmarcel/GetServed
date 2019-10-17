@@ -42,42 +42,36 @@
 	"guests":[
 		{
 		"patience":120,
-		"happiness":3,
 		"wealth":14,
 		"spawntime": 3,
 		"type": "normal"
 		},
 		{
 		"patience":120,
-		"happiness":3,
 		"wealth":14,
 		"spawntime": 8,
         "type": "normal"
 		},
 		{
 		"patience":120,
-		"happiness":3,
 		"wealth":14,
 		"spawntime": 13,
 		"type": "normal"
 		},
 		{
 		"patience":120,
-		"happiness":3,
 		"wealth":14,
 		"spawntime": 19,
 		"type": "normal"
 		},
 		{
 		"patience":120,
-		"happiness":3,
 		"wealth":14,
 		"spawntime": 24,
 		"type": "normal"
 		},
 		{
 		"patience":120,
-		"happiness":3,
 		"wealth":14,
 		"spawntime": 29,
 		"type": "normal"
