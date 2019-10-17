@@ -44,7 +44,7 @@ public class GuestHandler {
 		}
 		if (!guestsToRemove.isEmpty()) {
 			for (Guest g : guestsToRemove) {
-				activeGuests.remove(g);
+				removeActiveGuest(g, time, dishHandler);
 			}
 			guestsToRemove.clear();
 		}
@@ -59,9 +59,13 @@ public class GuestHandler {
 	private void updateGuest(Guest guest, int time) {
 		long timeElapsed = time - guest.getSpawnTime();
 		guest.calculatePatience(timeElapsed);
+		if (guest.getDespawnTime() != 0) {
+			guestsToRemove.add(guest);
+		}
 		if (guest.getPatience() == 0) {
 			guestsToRemove.add(guest);
-		} else if (guest.getPatience() <= 0.5 * guest.getMaxPatience()) {
+		}
+		if (guest.getPatience() <= 0.5 * guest.getMaxPatience()) {
 			guest.setOrderTime(time);
 			if (!guest.getCurrentAnimation().equals("ordering") && !guest.isJustOrdered()) {
 				guest.setActiveAnimation("ordering", time);
@@ -123,11 +127,14 @@ public class GuestHandler {
 	 *
 	 * @param guest the guest to be removed
 	 */
-	public void removeActiveGuest(Guest guest) {
-		gameField.addFreeTable(guest.getTable());
-		activeGuests.remove(guest);
-		guest.getTable().removeGuest();
-		Gdx.app.log("INFO: ", "Guest " + guest + " removed.");
+	public void removeActiveGuest(Guest guest, int time, DishHandler dishHandler) {
+		if (time >= guest.getDespawnTime()) {
+			gameField.addFreeTable(guest.getTable());
+			dishHandler.removeActiveDish(guest.getDish());
+			activeGuests.remove(guest);
+			guest.getTable().removeGuest();
+			Gdx.app.log("INFO: ", "Guest " + guest + " removed.");
+		}
 	}
 
 	/*

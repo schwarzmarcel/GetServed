@@ -17,7 +17,9 @@ public class Guest {
     private Animation<TextureRegion> activeAnimation;
     private String currentAnimation;
     private int lastAnimationTime = 0;
+    private int despawnTime = 0;
     private boolean justOrdered = false;
+    private boolean isServed = false;
     private Table table;
     private String type;
     private Dish dish;
@@ -117,6 +119,9 @@ public class Guest {
         bubble.setPosition(positionX + dish.getSprite().getWidth(), positionY + 2);
     }
 
+    public void setDish(Dish dish) {
+        this.dish = dish;
+    }
     public long getSpawnTime() {
         return spawnTime;
     }
@@ -173,17 +178,6 @@ public class Guest {
         this.type = type;
     }
 
-    @Override
-    public String toString() {
-        return "Guest{" +
-                "spawnTime=" + spawnTime +
-                ", patience=" + patience +
-                ", wealth=" + wealth +
-                ", order=" + order +
-                ", position=" + Arrays.toString(position) +
-                '}';
-    }
-
     public Animation<TextureRegion> getActiveAnimation() {
         return activeAnimation;
     }
@@ -222,5 +216,32 @@ public class Guest {
 
     public void setJustOrdered(boolean justOrdered) {
         this.justOrdered = justOrdered;
+    }
+
+    public int getDespawnTime() {
+        return despawnTime;
+    }
+
+    public void setDespawnTime(int despawnTime) {
+        this.despawnTime = despawnTime;
+    }
+
+    public boolean isServed() {
+        return isServed;
+    }
+
+    public void setServed(boolean served) {
+        isServed = served;
+    }
+
+    @Override
+    public String toString() {
+        return "Guest{" +
+                "spawnTime=" + spawnTime +
+                ", patience=" + patience +
+                ", wealth=" + wealth +
+                ", order=" + order +
+                ", position=" + Arrays.toString(position) +
+                '}';
     }
 }
