@@ -7,11 +7,14 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.World;
 import handlers.Assets;
 import interfaces.Moveable;
+
+import java.util.List;
 
 import static com.mygdx.game.MyGdxGame.WORLD_HEIGHT;
 import static com.mygdx.game.MyGdxGame.WORLD_WIDTH;
@@ -23,6 +26,7 @@ public class Waiter implements Moveable {
     private Box box;
     private Dish dish;
     private String orientation = "right";
+    private List<Table> tables;
 
     /**
      * constructor for the waiter
@@ -60,6 +64,26 @@ public class Waiter implements Moveable {
             velX = (speed * -1);
         }
         box.getBody().setLinearVelocity(velX, velY);
+    }
+
+    public Table getClosestTable(){
+        Vector2 currentWaiterPos = box.getBody().getPosition();
+        float smallestDist = 99;
+        float tempDist = 0;
+        Table closestTable = new Table();
+        for (Table t:tables
+             ) {
+            tempDist = currentWaiterPos.dst(t.getBox().getBody().getPosition());
+            if(tempDist < smallestDist){
+                smallestDist = tempDist;
+                closestTable = t;
+            }
+        }
+        if(smallestDist >= 0.19){
+            return null;
+        }else{
+            return closestTable;
+        }
     }
 
     @Override
@@ -109,5 +133,9 @@ public class Waiter implements Moveable {
 
     public void setIdleAnimation(Animation<TextureRegion> idleAnimation) {
         this.idleAnimation = idleAnimation;
+    }
+
+    public void setTables(List<Table> tables) {
+        this.tables = tables;
     }
 }
