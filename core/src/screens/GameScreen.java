@@ -345,7 +345,6 @@ public class GameScreen implements Screen {
     private void serveGuest(Table contactTable, Dish dish, Waiter waiter, Guest guest) {
         if (guest.getOrder() == (dish.type)) {
             if (!guest.isServed()) {
-            	if(contactTable.equals(waiter.getClosestTable())) System.out.println("fuck yeah");
                 dish.setPosition(
                         new float[]{
                                 contactTable.getPosition()[0] + contactTable.getTableSprite().getWidth() / 4,
