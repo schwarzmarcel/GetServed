@@ -34,6 +34,9 @@ public class Table {
         guest = null;
     }
 
+    public Table() {
+    }
+
     public Sprite getTableSprite() {
         return tableSprite;
     }
@@ -64,6 +67,10 @@ public class Table {
     
     public void removeGuest() {
     	this.guest = null;
+    }
+
+    public Box getBox() {
+        return box;
     }
 
     @Override

@@ -100,9 +100,10 @@ public class GameScreen implements Screen {
 		if ((lastTipTime + 2) >= levelHandler.getTime())
 			showTip();
 		batch.end();
-		if (false)
+		if (true)
 			debugRenderer.render(levelHandler.getWorld(), debugMatrix);
 		reactToCollision();
+		serveDishChecker();
         if (levelHandler.getLevelOver() == 1) {
 			game.showEndScreen(false);
 		} else if (levelHandler.getLevelOver() == 2) {
@@ -308,25 +309,6 @@ public class GameScreen implements Screen {
 			Fixture fixtureB = contact.getFixtureB();
 			Table contactTable;
 			Counter contactCounter;
-
-			if ((fixtureA.getUserData() instanceof Table) || (fixtureB.getUserData() instanceof Table)) {
-				if ((fixtureA.getUserData() instanceof Waiter) || (fixtureB.getUserData() instanceof Waiter)) {
-
-					if (fixtureA.getUserData() instanceof Table)
-						contactTable = (Table) fixtureA.getUserData();
-					else
-						contactTable = (Table) fixtureB.getUserData();
-
-                    if (Gdx.input.isKeyJustPressed(Input.Keys.S)) {
-                        if (levelHandler.getWaiter().getDish() != null && contactTable.getGuest() != null) {
-                            Dish dish = levelHandler.getWaiter().getDish();
-                            Waiter waiter = levelHandler.getWaiter();
-                            Guest guest = contactTable.getGuest();
-                            serveGuest(contactTable, dish, waiter, guest);
-                        }
-                    }
-                }
-            }
             if ((fixtureA.getUserData() instanceof Counter) || (fixtureB.getUserData() instanceof Counter)) {
                 if ((fixtureA.getUserData() instanceof Waiter) || (fixtureB.getUserData() instanceof Waiter)) {
                     if (fixtureA.getUserData() instanceof Counter)
@@ -344,9 +326,26 @@ public class GameScreen implements Screen {
         }
     }
 
+    private void serveDishChecker(){
+		if (Gdx.input.isKeyJustPressed(Input.Keys.S)) {
+			Table closestTable =  levelHandler.getWaiter().getClosestTable();
+			if(closestTable == null){
+				Gdx.app.log("INFO: ", "Tried to serve a dish, but no table was close enough!");
+			}else{
+				if (levelHandler.getWaiter().getDish() != null && closestTable.getGuest() != null) {
+					Dish dish = levelHandler.getWaiter().getDish();
+					Waiter waiter = levelHandler.getWaiter();
+					Guest guest = closestTable.getGuest();
+					serveGuest(closestTable, dish, waiter, guest);
+				}
+			}
+		}
+	}
+
     private void serveGuest(Table contactTable, Dish dish, Waiter waiter, Guest guest) {
         if (guest.getOrder() == (dish.type)) {
             if (!guest.isServed()) {
+            	if(contactTable.equals(waiter.getClosestTable())) System.out.println("fuck yeah");
                 dish.setPosition(
                         new float[]{
                                 contactTable.getPosition()[0] + contactTable.getTableSprite().getWidth() / 4,

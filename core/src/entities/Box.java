@@ -18,8 +18,10 @@ public class Box {
         bodyDef.position.set((sprite.getX() + sprite.getWidth() / 2) / PIXELS_TO_METERS, (sprite.getY() + sprite.getHeight() / 2) / PIXELS_TO_METERS);
         body = world.createBody(bodyDef);
         body.setUserData(sprite);
-        PolygonShape shape = new PolygonShape();
-        shape.setAsBox((sprite.getWidth()/2) / PIXELS_TO_METERS,(sprite.getHeight()/2) / PIXELS_TO_METERS);
+        CircleShape shape = new CircleShape();
+        //PolygonShape shape = new PolygonShape();
+        //shape.setAsBox((sprite.getWidth()/2) / PIXELS_TO_METERS,(sprite.getHeight()/2) / PIXELS_TO_METERS);
+        shape.setRadius((sprite.getWidth()/2) / PIXELS_TO_METERS);
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = shape;
         body.createFixture(fixtureDef);
