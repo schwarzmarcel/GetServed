@@ -66,6 +66,7 @@ public class LoadingScreen implements Screen{
 		coin.setPosition(37, WORLD_HEIGHT - 65);
 		queueAssets();
 		
+		
 	}
 	
 	@Override

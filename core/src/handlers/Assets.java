@@ -1,6 +1,7 @@
 package handlers;
 
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -59,6 +60,10 @@ public class Assets {
 	public static final String GUEST5_ORDERING = "character_sprites/Guest5_Jump.atlas";
 	public static final String KING_KICK = "character_sprites/King_Kick.atlas";
 	public static final String KING_JUMP = "character_sprites/King_Jump.atlas";
+	
+	public static final String BELL = "Audio/bell.wav";
+	public static final String FANFARE = "Audio/fanfare.wav";
+	public static final String HEY = "Audio/hey.wav";
 
 
 	public static void load() {
@@ -100,6 +105,9 @@ public class Assets {
 		manager.load(LEVELFAILED, Texture.class);
 		manager.load(CHAIR, Texture.class);
 		manager.load(BUBBLE, Texture.class);
+		manager.load(BELL, Sound.class);
+		manager.load(FANFARE, Sound.class);
+		manager.load(HEY, Sound.class);
 
 	}
 

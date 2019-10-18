@@ -1,6 +1,7 @@
 package handlers;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.utils.Queue;
 import entities.GameField;
 import entities.Guest;
@@ -20,6 +21,7 @@ public class GuestHandler {
 	private ArrayList<Guest> activeGuests;
 	private ArrayList<Guest> guestsToRemove;
 	private GameField gameField;
+
 
 	GuestHandler() {
 		guestQueue = new Queue<>();
@@ -107,6 +109,7 @@ public class GuestHandler {
 			Gdx.app.log("INFO: ", "Spawned " + guest);
 			guestQueue.removeFirst();
 			Gdx.app.log("INFO: ", "Removed Guest from guestlist ");
+			guest.playSpawnsound();
 		}
 
 	}

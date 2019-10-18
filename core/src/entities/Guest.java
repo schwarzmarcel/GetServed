@@ -1,5 +1,6 @@
 package entities;
 
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -32,6 +33,7 @@ public class Guest {
     private long wealth;
     private Foodtype order;
     private float[] position = new float[2];
+    private Sound spawnsound;
 
     public Guest(long spawnTime, long patience, long wealth, String type) {
         int randomNum = ThreadLocalRandom.current().nextInt(1, 5 + 1);
@@ -39,6 +41,7 @@ public class Guest {
         TextureAtlas textureAtlasAngry = null;
         TextureAtlas textureAtlasOrdering = null;
         if (type.equals("normal")) {
+        	spawnsound = Assets.manager.get(Assets.HEY, Sound.class);
             switch (randomNum) {
                 case 1:
                     textureAtlasIdle = Assets.manager.get(Assets.GUEST1, TextureAtlas.class);
@@ -73,6 +76,7 @@ public class Guest {
             textureAtlasIdle = Assets.manager.get(Assets.KING, TextureAtlas.class);
             textureAtlasAngry = Assets.manager.get(Assets.KING_KICK, TextureAtlas.class);
             textureAtlasOrdering = Assets.manager.get(Assets.KING_JUMP, TextureAtlas.class);
+            spawnsound = Assets.manager.get(Assets.FANFARE, Sound.class);
         }
 
         idleAnimation = new Animation<TextureRegion>(0.045f, textureAtlasIdle.getRegions(), Animation.PlayMode.LOOP);
@@ -117,6 +121,14 @@ public class Guest {
         float[] position = {positionX + dish.getSprite().getWidth() + 2, positionY + 4};
         dish.setPosition(position);
         bubble.setPosition(positionX + dish.getSprite().getWidth(), positionY + 2);
+    }
+    
+    public void playSpawnsound() {
+    	long soundId = spawnsound.play();
+    	if(type.equals("king"))
+    		spawnsound.setPitch(soundId, 1.2f);
+    	else
+    		spawnsound.setVolume(soundId, 0.3f);
     }
 
     public void setDish(Dish dish) {

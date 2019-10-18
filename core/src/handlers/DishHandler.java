@@ -2,6 +2,7 @@ package handlers;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.utils.Queue;
 import entities.*;
 
@@ -20,10 +21,12 @@ public class DishHandler {
     private ArrayList<Dish> activeDishes;
     private List<Counter> counters;
     private Waiter waiter;
+   
 
     public DishHandler() {
         dishQueue = new Queue<Foodtype>();
         activeDishes = new ArrayList<Dish>();
+        
     }
 
     /**

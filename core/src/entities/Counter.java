@@ -1,5 +1,6 @@
 package entities;
 
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.physics.box2d.World;
@@ -20,6 +21,7 @@ public class Counter {
 	private Dish nextDish;
 	private float lastDishTime;
 	private int cookSpeed;
+	private Sound bell;
 
 	public Counter(World world, float positionX, float positionY, int rotation) {
 		this.positions[0] = positionX;
@@ -59,8 +61,15 @@ public class Counter {
 		dish = null;
 		lastDishTime = 0;
 		cookSpeed = 1;
+		bell = Assets.manager.get(Assets.BELL, Sound.class);
 	}
 
+	public void playBell() {
+        long bellId = bell.play();
+        bell.setPitch(bellId, 2f);
+        bell.setVolume(bellId, 0.6f);
+	}
+	
 	public Sprite getSprite() {
 		return sprite;
 	}
@@ -75,6 +84,7 @@ public class Counter {
 
 	public void setDish(Dish dish) {
 		this.dish = dish;
+		playBell();
 	}
 
 	public float getLastDishTime() {
@@ -120,5 +130,9 @@ public class Counter {
 
 	public int getRotation() {
 		return rotation;
+	}
+
+	public Sound getBell() {
+		return bell;
 	}
 }
