@@ -194,6 +194,10 @@ public class Guest {
         return activeAnimation;
     }
 
+    public void setSpawnTime(long spawnTime) {
+        this.spawnTime = spawnTime;
+    }
+
     public void setActiveAnimation(String animation, int time) {
         switch (animation) {
             case "idle":

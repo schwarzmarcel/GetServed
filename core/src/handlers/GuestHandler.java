@@ -37,6 +37,9 @@ public class GuestHandler {
 	void manageGuests(int time, DishHandler dishHandler) {
 		if (!guestQueue.isEmpty()) {
 			if (time >= guestQueue.first().getSpawnTime()) {
+				if(time > guestQueue.first().getSpawnTime()){
+					guestQueue.first().setSpawnTime(time);
+				}
 				spawnGuest(guestQueue.first(), dishHandler);
 			}
 		}
