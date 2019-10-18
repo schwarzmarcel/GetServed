@@ -350,8 +350,8 @@ public class GameScreen implements Screen {
                         new float[]{
                                 contactTable.getPosition()[0] + contactTable.getTableSprite().getWidth() / 4,
                                 contactTable.getPosition()[1] + contactTable.getTableSprite().getHeight() / 2});
-                waiter.removeDish();
 				guest.setOrderTime(guest.getOrderTime() - 10);
+                waiter.removeDish();
                 guest.setDish(dish);
                 tip = guest.getTip();
                 lastTipTime = levelHandler.getTime();

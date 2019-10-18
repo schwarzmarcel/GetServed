@@ -1,7 +1,6 @@
 package handlers;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.utils.Queue;
 import entities.GameField;
 import entities.Guest;
@@ -68,15 +67,15 @@ public class GuestHandler {
 			guestsToRemove.add(guest);
 		}
 		if (guest.getPatience() <= 0.5 * guest.getMaxPatience()) {
-			guest.setOrderTime(time);
 			if (!guest.getCurrentAnimation().equals("ordering") && !guest.isJustOrdered()) {
+				guest.setOrderTime(time);
 				guest.setActiveAnimation("ordering", time);
 				guest.setJustOrdered(true);
 			}
 		} else if (guest.getPatience() <= 0.2 * guest.getMaxPatience()) {
-			guest.setOrderTime(time);
 			guest.setJustOrdered(false);
 			if (!guest.getCurrentAnimation().equals("ordering") && !guest.isJustOrdered()) {
+				guest.setOrderTime(time);
 				guest.setActiveAnimation("ordering", time);
 				guest.setJustOrdered(true);
 			}
