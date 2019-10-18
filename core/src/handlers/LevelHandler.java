@@ -60,6 +60,7 @@ public class LevelHandler {
      */
     private void initializeWaiter() {
         waiter = new Waiter(world, WORLD_WIDTH / 2, WORLD_HEIGHT / 2);
+        waiter.setTables(gameField.getTables());
         Gdx.app.log("INFO: ", "Waiter created");
     }
 
