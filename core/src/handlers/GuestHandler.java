@@ -36,7 +36,7 @@ public class GuestHandler {
 	 */
 	void manageGuests(int time, DishHandler dishHandler) {
 		if (!guestQueue.isEmpty()) {
-			if (guestQueue.first().getSpawnTime() == time) {
+			if (time >= guestQueue.first().getSpawnTime()) {
 				spawnGuest(guestQueue.first(), dishHandler);
 			}
 		}
@@ -107,7 +107,8 @@ public class GuestHandler {
 			activeGuests.add(guest);
 			Gdx.app.log("INFO: ", "Spawned " + guest);
 			guestQueue.removeFirst();
-			Gdx.app.log("INFO: ", "Removed Guest from guestlist ");
+			System.out.println(guestQueue);
+			Gdx.app.log("INFO: ", "Removed Guest from guestList ");
 			guest.playSpawnsound();
 		}
 
