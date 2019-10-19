@@ -93,7 +93,7 @@ public class GameScreen implements Screen {
         renderer.render();
         levelHandler.getWorld().step(1f / 60f, 6, 2);
         levelHandler.updateLevel();
-        levelHandler.getWaiter().move(1f);
+        levelHandler.getWaiter().move(0.9f);
         Matrix4 debugMatrix = batch.getProjectionMatrix().cpy().scale(PIXELS_TO_METERS, PIXELS_TO_METERS, 0);
         batch.begin();
         elapsedTime += Gdx.graphics.getDeltaTime();
@@ -189,14 +189,14 @@ public class GameScreen implements Screen {
                         - levelHandler.getWaiter().getSprite().getWidth() / 2,
                 (levelHandler.getWaiter().getBody().getPosition().y * PIXELS_TO_METERS)
                         - levelHandler.getWaiter().getSprite().getHeight() / 2,
-                WORLD_WIDTH / 32, WORLD_HEIGHT / 16);
+                5.5f, 6.5f);
     }
 
     private void drawGuests() {
         TextureRegion currentFrame;
         for (Guest g : levelHandler.getGuestHandler().getActiveGuests()) {
             currentFrame = g.getActiveAnimation().getKeyFrame(elapsedTime, false);
-            batch.draw(currentFrame, g.getPosition()[0], g.getPosition()[1], WORLD_WIDTH / 32, WORLD_HEIGHT / 16);
+            batch.draw(currentFrame, g.getPosition()[0], g.getPosition()[1], 5,  6);
             drawPatience(g);
         }
     }
@@ -255,25 +255,25 @@ public class GameScreen implements Screen {
                 case 0:
                     shapeRenderer.setColor(Color.LIGHT_GRAY);
                     shapeRenderer.rect(c.getPosition()[0] - c.getSprite().getWidth(),
-                            c.getPosition()[1] + (c.getSprite().getHeight() - c.getNextDish().getSprite().getHeight() - 4),
+                            c.getPosition()[1] + (c.getSprite().getHeight() - c.getNextDish().getSprite().getHeight() - 5),
                             c.getNextDish().getSprite().getWidth(), 1);
 
                     shapeRenderer.setColor(Color.BLUE);
                     shapeRenderer.rect(c.getPosition()[0] - c.getSprite().getWidth(),
-                            c.getPosition()[1] + (c.getSprite().getHeight() - c.getNextDish().getSprite().getHeight() - 4),
+                            c.getPosition()[1] + (c.getSprite().getHeight() - c.getNextDish().getSprite().getHeight() - 5),
                             (c.getNextDish().getSprite().getWidth())
                                     * ((levelHandler.getTime() - c.getLastDishTime()) / (6 / c.getCookSpeed())),
                             1);
                     break;
                 case 1:
                     shapeRenderer.setColor(Color.LIGHT_GRAY);
-                    shapeRenderer.rect(c.getPosition()[0] + c.getSprite().getWidth() + 1,
-                            c.getPosition()[1] + (c.getSprite().getHeight() - c.getNextDish().getSprite().getHeight() - 4),
+                    shapeRenderer.rect(c.getPosition()[0] + c.getSprite().getWidth() + 2,
+                            c.getPosition()[1] + (c.getSprite().getHeight() - c.getNextDish().getSprite().getHeight() - 5),
                             c.getNextDish().getSprite().getWidth(), 1);
 
                     shapeRenderer.setColor(Color.BLUE);
-                    shapeRenderer.rect(c.getPosition()[0] + c.getSprite().getWidth() + 1,
-                            c.getPosition()[1] + (c.getSprite().getHeight() - c.getNextDish().getSprite().getHeight() - 4),
+                    shapeRenderer.rect(c.getPosition()[0] + c.getSprite().getWidth() + 2,
+                            c.getPosition()[1] + (c.getSprite().getHeight() - c.getNextDish().getSprite().getHeight() - 5),
                             (c.getNextDish().getSprite().getWidth())
                                     * ((levelHandler.getTime() - c.getLastDishTime()) / (6 / c.getCookSpeed())),
                             1);
@@ -339,7 +339,7 @@ public class GameScreen implements Screen {
                         contactCounter = (Counter) fixtureB.getUserData();
                     if (contactCounter.getDish() != null && levelHandler.getWaiter().getDish() == null) {
                         levelHandler.getWaiter().setDish(contactCounter.getDish());
-                        levelHandler.getWaiter().getDish().setSpriteSize(64, 32);
+                        levelHandler.getWaiter().getDish().setSpriteSize(3f, 3f);
                         contactCounter.removeDish();
                     }
 
