@@ -106,6 +106,7 @@ public class GameScreen implements Screen {
         drawDishProgress();
         showMoney();
         drawLevel();
+        drawCooks();
         if ((lastTipTime + 2) >= levelHandler.getTime())
             showTip();
         batch.end();
@@ -139,6 +140,15 @@ public class GameScreen implements Screen {
                 14,
                 (float) (levelHandler.getLevelDisplay().getWidth() * 0.015),
                 (float) (levelHandler.getLevelDisplay().getHeight() * 0.015));
+    }
+
+    private void drawCooks() {
+        TextureRegion currentFrame;
+        for (Cook c : levelHandler.getCooks()
+        ) {
+            currentFrame = c.getIdleAnimation().getKeyFrame(elapsedTime, false);
+            batch.draw(currentFrame, c.getPosition()[0] - 5, c.getPosition()[1], WORLD_WIDTH / 32, WORLD_HEIGHT / 16);
+        }
     }
 
     private void initializeFonts() {

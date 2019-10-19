@@ -6,10 +6,10 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Timer;
-import entities.GameField;
-import entities.Gamelevel;
-import entities.Waiter;
+import entities.*;
 import exceptions.InputNotValidException;
+
+import java.util.ArrayList;
 
 import static com.mygdx.game.MyGdxGame.WORLD_HEIGHT;
 import static com.mygdx.game.MyGdxGame.WORLD_WIDTH;
@@ -21,6 +21,7 @@ import static com.mygdx.game.MyGdxGame.WORLD_WIDTH;
 public class LevelHandler {
     private DishHandler dishHandler;
     private GuestHandler guestHandler;
+    private ArrayList<Cook> cooks;
     private int time;
     private World world;
     private Waiter waiter;
@@ -50,13 +51,21 @@ public class LevelHandler {
         world = new World(new Vector2(0, 0), true);
         JsonLevelReader reader = new JsonLevelReader();
         level = reader.readLevelConfiguration(levelName);
+        cooks = new ArrayList<>();
         initializeGameField();
         initializeWaiter();
+        initializeCooks();
         initializeTimer();
         guestHandler.initializeGuests(level.getGuests());
         dishHandler.initializeDishManager(waiter, gameField.getCounters());
         dishHandler.initializeDishQueue(guestHandler.getGuestQueue().first().getOrder());
         Gdx.app.log("INFO: ", "Finished Level initializing");
+    }
+
+    private void initializeCooks() {
+        for (Counter c : gameField.getCounters()) {
+            cooks.add(new Cook(world, c.getCookingPosition()));
+        }
     }
 
     /**
@@ -190,5 +199,9 @@ public class LevelHandler {
 
     public Sprite getLevelDisplay() {
         return levelDisplay;
+    }
+
+    public ArrayList<Cook> getCooks() {
+        return cooks;
     }
 }

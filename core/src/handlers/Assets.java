@@ -44,6 +44,7 @@ public class Assets {
 	public static final String GUEST9_ANGRY = "character_sprites/Guest9_Kick.atlas";
 	public static final String GUEST9_ORDERING = "character_sprites/Guest9_Jump.atlas";
 	public static final String KING = "character_sprites/King.atlas";
+	public static final String COOK = "character_sprites/Cook_Idle.atlas";
 	public static final String KING_KICK = "character_sprites/King_Kick.atlas";
 	public static final String KING_JUMP = "character_sprites/King_Jump.atlas";
 
@@ -167,6 +168,7 @@ public class Assets {
 		manager.load(KING_KICK, TextureAtlas.class);
 		manager.load(KING_JUMP, TextureAtlas.class);
 		manager.load(KING, TextureAtlas.class);
+		manager.load(COOK, TextureAtlas.class);
 		manager.load(MONEYFONT, BitmapFont.class);
         manager.load(LEVELFONT, BitmapFont.class);
 		manager.load(NEXTACTIVE, Texture.class);
