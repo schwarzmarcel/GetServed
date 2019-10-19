@@ -22,11 +22,11 @@ public class Cook {
         TextureAtlas textureAtlas = Assets.manager.get(Assets.COOK, TextureAtlas.class);
         idleAnimation = new Animation<TextureRegion>(0.045f, textureAtlas.getRegions(), Animation.PlayMode.LOOP);
         sprite = new Sprite(textureAtlas.findRegion("Idle"));
-        sprite.setSize(WORLD_WIDTH / 32, WORLD_HEIGHT / 16);
+        sprite.setSize(WORLD_WIDTH / 30, WORLD_HEIGHT / 15);
         sprite.setPosition(positions[0], positions[1]);
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
-        box = new Box(world, sprite, true, true);
+        box = new Box(world, sprite, false, true);
         box.getBody().getFixtureList().first().setUserData(this);
     }
 

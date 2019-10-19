@@ -110,7 +110,7 @@ public class GameScreen implements Screen {
         if ((lastTipTime + 2) >= levelHandler.getTime())
             showTip();
         batch.end();
-        if (false)
+        if (true)
             debugRenderer.render(levelHandler.getWorld(), debugMatrix);
         reactToCollision();
         serveDishChecker();
@@ -147,7 +147,7 @@ public class GameScreen implements Screen {
         for (Cook c : levelHandler.getCooks()
         ) {
             currentFrame = c.getIdleAnimation().getKeyFrame(elapsedTime, false);
-            batch.draw(currentFrame, c.getPosition()[0] - 5, c.getPosition()[1], WORLD_WIDTH / 32, WORLD_HEIGHT / 16);
+            batch.draw(currentFrame, c.getPosition()[0] - 5, c.getPosition()[1], WORLD_WIDTH / 28, WORLD_HEIGHT / 14);
         }
     }
 
