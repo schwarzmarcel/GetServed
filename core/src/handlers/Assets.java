@@ -99,7 +99,6 @@ public class Assets {
 	public static final String NO1 = "Audio/no_alex.wav";
 	public static final String NOTFORME1 = "Audio/notforme_alex.wav";
 	public static final String HELLO2 = "Audio/hello_ian.wav";
-    public static final String HEY = "Audio/hey.wav";
     public static final String HEY2 = "Audio/hey_ian.wav";
 	public static final String WHATSUP2 = "Audio/whatsup_ian.wav";
 	public static final String NO2 = "Audio/no_ian.wav";
@@ -193,7 +192,6 @@ public class Assets {
 		manager.load(NOTFORME1, Sound.class);
 		manager.load(HELLO2, Sound.class);
 		manager.load(HEY2, Sound.class);
-        manager.load(HEY, Sound.class);
 		manager.load(WHATSUP2, Sound.class);
 		manager.load(NO2, Sound.class);
 		manager.load(NOTFORME2, Sound.class);
