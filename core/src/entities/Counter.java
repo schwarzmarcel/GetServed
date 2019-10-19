@@ -27,18 +27,22 @@ public class Counter {
 		this.positions[0] = positionX;
 		this.positions[1] = positionY;
 		this.rotation = rotation;
-		sprite = new Sprite(Assets.manager.get(Assets.COUNTER, Texture.class));
+        if (rotation != 3 && rotation != 2) {
+            sprite = new Sprite(Assets.manager.get(Assets.COUNTER_TURNED, Texture.class));
+        } else {
+            sprite = new Sprite(Assets.manager.get(Assets.COUNTER, Texture.class));
+        }
 		if(rotation == 0 || rotation == 1) {
 			sprite.setSize(WORLD_WIDTH / 24, WORLD_HEIGHT / 9);
 		}else {
 			sprite.setSize(WORLD_HEIGHT / 9, WORLD_WIDTH / 24);
 		}
 		sprite.setPosition(positionX, positionY);
-		Box box = new Box(world, sprite, false);
+        Box box = new Box(world, sprite, false, true);
 		box.getBody().getFixtureList().first().setUserData(this);
 		dish = new Dish(Foodtype.getRandomFoodType());
 		float[] dpos = { positions[0] + (sprite.getWidth() - dish.getSprite().getWidth()) / 2,
-                positions[1] + (sprite.getHeight() - dish.getSprite().getHeight()) / 2 + 1};
+                (float) (positions[1] + (sprite.getHeight() - dish.getSprite().getHeight()) / 2 + 1.5)};
         dishCounterPos = dpos;
 		if (rotation == 0) {
 			float[] displpos = { positions[0] - sprite.getWidth(),

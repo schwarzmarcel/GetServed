@@ -22,6 +22,8 @@ import static com.mygdx.game.MyGdxGame.WORLD_WIDTH;
 public class Waiter implements Moveable {
     private Animation<TextureRegion> runningAnimation;
     private Animation<TextureRegion> idleAnimation;
+    private Animation<TextureRegion> dyingAnimation;
+    private boolean isAllowedToMove = true;
     private Sprite sprite;
     private Box box;
     private Dish dish;
@@ -36,34 +38,40 @@ public class Waiter implements Moveable {
      * @param positionY the initial position of the waiter on the Y axis
      */
     public Waiter(World world, float positionX, float positionY) {
-        TextureAtlas textureAtlas = Assets.manager.get(Assets.WAITERWALKING, TextureAtlas.class);
+        TextureAtlas textureAtlas = Assets.manager.get(Assets.WAITER_WALKING, TextureAtlas.class);
         runningAnimation = new Animation<TextureRegion>(0.015f, textureAtlas.getRegions(), Animation.PlayMode.LOOP);
-        textureAtlas = Assets.manager.get(Assets.WAITERIDLE, TextureAtlas.class);
+        textureAtlas = Assets.manager.get(Assets.WAITER_IDLE, TextureAtlas.class);
         sprite = new Sprite(textureAtlas.findRegion("Idle"));
         sprite.setSize(WORLD_WIDTH / 32, WORLD_HEIGHT / 16);
         sprite.setPosition(positionX, positionY);
         idleAnimation = new Animation<TextureRegion>(0.045f, textureAtlas.getRegions(), Animation.PlayMode.LOOP);
+        textureAtlas = Assets.manager.get(Assets.WAITER_DYING, TextureAtlas.class);
+        dyingAnimation = new Animation<TextureRegion>(0.3f, textureAtlas.getRegions(), Animation.PlayMode.NORMAL);
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
-        box = new Box(world, sprite, true);
+        box = new Box(world, sprite, true, false);
         box.getBody().getFixtureList().first().setUserData(this);
         dish = null;
     }
 
     public void move(float speed) {
-        float velX = 0, velY = 0;
-        if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
-            velY = speed;
-        } else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-            orientation = "right";
-            velX = speed;
-        } else if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-            velY = (speed * -1);
-        } else if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-            orientation = "left";
-            velX = (speed * -1);
+        if (isAllowedToMove) {
+            float velX = 0, velY = 0;
+            if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
+                velY = speed;
+            } else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+                orientation = "right";
+                velX = speed;
+            } else if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
+                velY = (speed * -1);
+            } else if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+                orientation = "left";
+                velX = (speed * -1);
+            }
+            box.getBody().setLinearVelocity(velX, velY);
+        } else {
+            box.getBody().setLinearVelocity(0, 0);
         }
-        box.getBody().setLinearVelocity(velX, velY);
     }
 
     public Table getClosestTable(){
@@ -131,11 +139,16 @@ public class Waiter implements Moveable {
         return idleAnimation;
     }
 
-    public void setIdleAnimation(Animation<TextureRegion> idleAnimation) {
-        this.idleAnimation = idleAnimation;
-    }
-
     public void setTables(List<Table> tables) {
         this.tables = tables;
+    }
+
+    public void setAllowedToMove(boolean allowedToMove) {
+        isAllowedToMove = allowedToMove;
+    }
+
+    public void activateDyingAnimation() {
+        this.idleAnimation = dyingAnimation;
+        this.runningAnimation = dyingAnimation;
     }
 }

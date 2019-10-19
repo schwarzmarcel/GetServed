@@ -1,3 +1,4 @@
+
 Waiter_Idle.png
 size: 1024,1024
 format: RGBA8888
@@ -6,8 +7,8 @@ repeat: none
 Idle
   rotate: false
   xy: 2, 2
-  size: 520, 640
-  orig: 520, 640
+  size: 538, 674
+  orig: 538, 674
   offset: 0, 0
   index: 0
 
@@ -19,8 +20,8 @@ repeat: none
 Idle
   rotate: false
   xy: 2, 2
-  size: 520, 640
-  orig: 520, 640
+  size: 538, 674
+  orig: 538, 674
   offset: 0, 0
   index: 1
 
@@ -32,8 +33,8 @@ repeat: none
 Idle
   rotate: false
   xy: 2, 2
-  size: 520, 640
-  orig: 520, 640
+  size: 538, 674
+  orig: 538, 674
   offset: 0, 0
   index: 2
 
@@ -45,8 +46,8 @@ repeat: none
 Idle
   rotate: false
   xy: 2, 2
-  size: 520, 640
-  orig: 520, 640
+  size: 538, 674
+  orig: 538, 674
   offset: 0, 0
   index: 3
 
@@ -58,8 +59,8 @@ repeat: none
 Idle
   rotate: false
   xy: 2, 2
-  size: 520, 640
-  orig: 520, 640
+  size: 538, 674
+  orig: 538, 674
   offset: 0, 0
   index: 4
 
@@ -71,8 +72,8 @@ repeat: none
 Idle
   rotate: false
   xy: 2, 2
-  size: 520, 640
-  orig: 520, 640
+  size: 538, 674
+  orig: 538, 674
   offset: 0, 0
   index: 5
 
@@ -84,8 +85,8 @@ repeat: none
 Idle
   rotate: false
   xy: 2, 2
-  size: 520, 640
-  orig: 520, 640
+  size: 538, 674
+  orig: 538, 674
   offset: 0, 0
   index: 6
 
@@ -97,8 +98,8 @@ repeat: none
 Idle
   rotate: false
   xy: 2, 2
-  size: 520, 640
-  orig: 520, 640
+  size: 538, 674
+  orig: 538, 674
   offset: 0, 0
   index: 7
 
@@ -110,8 +111,8 @@ repeat: none
 Idle
   rotate: false
   xy: 2, 2
-  size: 520, 640
-  orig: 520, 640
+  size: 538, 674
+  orig: 538, 674
   offset: 0, 0
   index: 8
 
@@ -123,8 +124,8 @@ repeat: none
 Idle
   rotate: false
   xy: 2, 2
-  size: 520, 640
-  orig: 520, 640
+  size: 538, 674
+  orig: 538, 674
   offset: 0, 0
   index: 9
 
@@ -136,8 +137,8 @@ repeat: none
 Idle
   rotate: false
   xy: 2, 2
-  size: 520, 640
-  orig: 520, 640
+  size: 538, 674
+  orig: 538, 674
   offset: 0, 0
   index: 10
 
@@ -149,8 +150,8 @@ repeat: none
 Idle
   rotate: false
   xy: 2, 2
-  size: 520, 640
-  orig: 520, 640
+  size: 538, 674
+  orig: 538, 674
   offset: 0, 0
   index: 11
 
@@ -162,8 +163,8 @@ repeat: none
 Idle
   rotate: false
   xy: 2, 2
-  size: 520, 640
-  orig: 520, 640
+  size: 538, 674
+  orig: 538, 674
   offset: 0, 0
   index: 12
 
@@ -175,8 +176,8 @@ repeat: none
 Idle
   rotate: false
   xy: 2, 2
-  size: 520, 640
-  orig: 520, 640
+  size: 538, 674
+  orig: 538, 674
   offset: 0, 0
   index: 13
 
@@ -188,8 +189,8 @@ repeat: none
 Idle
   rotate: false
   xy: 2, 2
-  size: 520, 640
-  orig: 520, 640
+  size: 538, 674
+  orig: 538, 674
   offset: 0, 0
   index: 14
 
@@ -201,8 +202,8 @@ repeat: none
 Idle
   rotate: false
   xy: 2, 2
-  size: 520, 640
-  orig: 520, 640
+  size: 538, 674
+  orig: 538, 674
   offset: 0, 0
   index: 15
 
@@ -214,8 +215,8 @@ repeat: none
 Idle
   rotate: false
   xy: 2, 2
-  size: 520, 640
-  orig: 520, 640
+  size: 538, 674
+  orig: 538, 674
   offset: 0, 0
   index: 16
 
@@ -227,7 +228,7 @@ repeat: none
 Idle
   rotate: false
   xy: 2, 2
-  size: 520, 640
-  orig: 520, 640
+  size: 538, 674
+  orig: 538, 674
   offset: 0, 0
   index: 17

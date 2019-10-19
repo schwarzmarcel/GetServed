@@ -1,6 +1,8 @@
 package handlers;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Timer;
@@ -25,7 +27,9 @@ public class LevelHandler {
     private GameField gameField;
     private Gamelevel level;
     private int levelOver = 0;
+    private int timeLevelOver = -1;
     private String levelName;
+    private Sprite levelDisplay;
 
     /**
      * this object handles the flow of the game structure for each level
@@ -68,6 +72,23 @@ public class LevelHandler {
      * this method initializes the basic game field
      */
     private void initializeGameField() {
+        switch (levelName) {
+            case "level1":
+                levelDisplay = new Sprite(Assets.manager.get(Assets.Level1, Texture.class));
+                break;
+            case "level2":
+                levelDisplay = new Sprite(Assets.manager.get(Assets.Level2, Texture.class));
+                break;
+            case "level3":
+                levelDisplay = new Sprite(Assets.manager.get(Assets.Level3, Texture.class));
+                break;
+            case "level4":
+                levelDisplay = new Sprite(Assets.manager.get(Assets.Level4, Texture.class));
+                break;
+            case "level5":
+                levelDisplay = new Sprite(Assets.manager.get(Assets.Level5, Texture.class));
+                break;
+        }
         Gdx.app.log("INFO: ", "Begin drawing field");
         gameField = new GameField();
         guestHandler.setGameField(gameField);
@@ -103,7 +124,15 @@ public class LevelHandler {
         guestHandler.manageGuests(time, dishHandler);
         dishHandler.updateDishes(time, guestHandler.getActiveGuests());
         dishHandler.trashBinHandler(waiter);
-        if (level.getMoney() == 0) {
+        if (level.getMoney() == 0 && timeLevelOver == -1) {
+            Gdx.app.log("INFO: ", "The Level was lost because the money ran out");
+            timeLevelOver = time;
+            waiter.setAllowedToMove(false);
+            waiter.activateDyingAnimation();
+
+        }
+        if (timeLevelOver + 1 == time) {
+            Timer.instance().clear();
             levelOver = 1;
         }
         if (guestHandler.getActiveGuests().isEmpty() && guestHandler.getGuestQueue().isEmpty()) {
@@ -159,4 +188,7 @@ public class LevelHandler {
         return level;
     }
 
+    public Sprite getLevelDisplay() {
+        return levelDisplay;
+    }
 }
