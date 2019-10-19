@@ -29,7 +29,7 @@ public class Table {
         chairSprite.setSize(WORLD_WIDTH / 64, WORLD_HEIGHT / 36);
         tableSprite.setPosition(positionX, positionY);
         chairSprite.setPosition(positionX + 2.5f, positionY + 5f);
-        box = new Box(world, tableSprite, false);
+        box = new Box(world, tableSprite, false, true);
         box.getBody().getFixtureList().first().setUserData(this);
         guest = null;
     }

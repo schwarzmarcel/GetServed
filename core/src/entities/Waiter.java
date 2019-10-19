@@ -49,7 +49,7 @@ public class Waiter implements Moveable {
         dyingAnimation = new Animation<TextureRegion>(0.3f, textureAtlas.getRegions(), Animation.PlayMode.NORMAL);
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
-        box = new Box(world, sprite, true);
+        box = new Box(world, sprite, true, false);
         box.getBody().getFixtureList().first().setUserData(this);
         dish = null;
     }

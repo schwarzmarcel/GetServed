@@ -34,7 +34,7 @@ public class Counter {
 			sprite.setSize(WORLD_HEIGHT / 9, WORLD_WIDTH / 24);
 		}
 		sprite.setPosition(positionX, positionY);
-		Box box = new Box(world, sprite, false);
+        Box box = new Box(world, sprite, false, true);
 		box.getBody().getFixtureList().first().setUserData(this);
 		dish = new Dish(Foodtype.getRandomFoodType());
 		float[] dpos = { positions[0] + (sprite.getWidth() - dish.getSprite().getWidth()) / 2,
