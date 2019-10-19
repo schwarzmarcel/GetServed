@@ -36,7 +36,7 @@ public class Guest {
     private Sound spawnsound;
 
     public Guest(long spawnTime, long patience, long wealth, String type) {
-        int randomNum = ThreadLocalRandom.current().nextInt(1, 5 + 1);
+        int randomNum = ThreadLocalRandom.current().nextInt(1, 9 + 1);
         TextureAtlas textureAtlasIdle = null;
         TextureAtlas textureAtlasAngry = null;
         TextureAtlas textureAtlasOrdering = null;
@@ -69,6 +69,25 @@ public class Guest {
                     textureAtlasOrdering = Assets.manager.get(Assets.GUEST5_ANGRY, TextureAtlas.class);
                     break;
                 case 6:
+                    textureAtlasIdle = Assets.manager.get(Assets.GUEST6, TextureAtlas.class);
+                    textureAtlasAngry = Assets.manager.get(Assets.GUEST6_ORDERING, TextureAtlas.class);
+                    textureAtlasOrdering = Assets.manager.get(Assets.GUEST6_ANGRY, TextureAtlas.class);
+                    break;
+                case 7:
+                    textureAtlasIdle = Assets.manager.get(Assets.GUEST7, TextureAtlas.class);
+                    textureAtlasAngry = Assets.manager.get(Assets.GUEST7_ORDERING, TextureAtlas.class);
+                    textureAtlasOrdering = Assets.manager.get(Assets.GUEST7_ANGRY, TextureAtlas.class);
+                    break;
+                case 8:
+                    textureAtlasIdle = Assets.manager.get(Assets.GUEST8, TextureAtlas.class);
+                    textureAtlasAngry = Assets.manager.get(Assets.GUEST8_ORDERING, TextureAtlas.class);
+                    textureAtlasOrdering = Assets.manager.get(Assets.GUEST8_ANGRY, TextureAtlas.class);
+                    break;
+                case 9:
+                    textureAtlasIdle = Assets.manager.get(Assets.GUEST9, TextureAtlas.class);
+                    textureAtlasAngry = Assets.manager.get(Assets.GUEST9_ORDERING, TextureAtlas.class);
+                    textureAtlasOrdering = Assets.manager.get(Assets.GUEST9_ANGRY, TextureAtlas.class);
+                    break;
                 default:
                     break;
             }
