@@ -68,23 +68,19 @@ public class GuestHandler {
 		}
 		if (guest.getPatience() == 0) {
 			guestsToRemove.add(guest);
-		}
-		if (guest.getPatience() <= 0.5 * guest.getMaxPatience()) {
-			if (!guest.getCurrentAnimation().equals("ordering") && !guest.isJustOrdered()) {
-				guest.setOrderTime(time);
+		}else if (guest.getPatience() <= 0.4 * guest.getMaxPatience() && guest.getHappiness() == 2) {
+			guest.setHappiness(1);
+			guest.setOrderTime(time);
+			if(!(guest.getLastAnimationTime() + 1 >= time))
 				guest.setActiveAnimation("ordering", time);
-				guest.setJustOrdered(true);
-			}
-		} else if (guest.getPatience() <= 0.2 * guest.getMaxPatience()) {
-			guest.setJustOrdered(false);
-			if (!guest.getCurrentAnimation().equals("ordering") && !guest.isJustOrdered()) {
-				guest.setOrderTime(time);
+		}else if (guest.getPatience() <= 0.75 * guest.getMaxPatience() && guest.getHappiness() == 3) {
+			guest.setHappiness(2);
+			guest.setOrderTime(time);
+			if(!(guest.getLastAnimationTime() + 1 >= time))
 				guest.setActiveAnimation("ordering", time);
-				guest.setJustOrdered(true);
-			}
 		}
 		if(guest.getCurrentAnimation().equals("angry") || guest.getCurrentAnimation().equals("ordering")){
-			if(guest.getLastAnimationTime() + 1 == time){
+			if(guest.getLastAnimationTime() + 1 <= time){
 				guest.setActiveAnimation("idle",time);
 			}
 		}
