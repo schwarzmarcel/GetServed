@@ -15,7 +15,8 @@ public class Box {
         }else{
             bodyDef.type = BodyDef.BodyType.StaticBody;
         }
-        bodyDef.position.set((sprite.getX() + sprite.getWidth() / 2) / PIXELS_TO_METERS, (sprite.getY() + sprite.getHeight() / 2) / PIXELS_TO_METERS);
+        bodyDef.position.set((sprite.getX() + sprite.getWidth() / 2) / PIXELS_TO_METERS,
+                (sprite.getY() + sprite.getHeight() / 2) / PIXELS_TO_METERS);
         body = world.createBody(bodyDef);
         body.setUserData(sprite);
         CircleShape shape = new CircleShape();
