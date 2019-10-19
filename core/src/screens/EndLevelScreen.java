@@ -6,6 +6,7 @@ import static com.mygdx.game.MyGdxGame.WORLD_WIDTH;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -22,6 +23,8 @@ public class EndLevelScreen implements Screen{
 	private Sprite failed;
 	private Sprite pressEnter;
 	private boolean win = false;
+	private Sound applause;
+	private Sound boo;
 	
 	public EndLevelScreen(MyGdxGame game, SpriteBatch batch) {
 		this.game = game;
@@ -35,11 +38,13 @@ public class EndLevelScreen implements Screen{
 		pressEnter = new Sprite(Assets.manager.get(Assets.ENTER, Texture.class));
 		pressEnter.setSize(WORLD_WIDTH / 4, WORLD_HEIGHT / 16);
 		pressEnter.setPosition(WORLD_WIDTH / 2 - pressEnter.getWidth() / 2, 10);
+		
+		applause = Assets.manager.get(Assets.APPLAUSE, Sound.class);
+		boo = Assets.manager.get(Assets.BOO, Sound.class);
 	}
 	
 	@Override
 	public void show() {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -60,6 +65,17 @@ public class EndLevelScreen implements Screen{
 			game.showMenu();
 		}
 		
+	}
+	
+	public void playEndSound() {
+		if(win) {
+			long soundId = applause.play();
+			applause.setVolume(soundId, 0.7f);
+			applause.setPitch(soundId, 1.1f);
+		}else {
+			long soundId = boo.play();
+			boo.setVolume(soundId, 0.5f);
+		}
 	}
 
 	@Override

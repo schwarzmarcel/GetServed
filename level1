@@ -1,6 +1,6 @@
 {
 	"name" : "level1",
-	"money" : 100,
+	"money" : 20,
 	"positions": [
 		{
 		 "row": 10,

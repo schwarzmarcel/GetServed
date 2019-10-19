@@ -3,6 +3,8 @@ package screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -44,6 +46,8 @@ public class GameScreen implements Screen {
     private int tip;
     private int lastTipTime;
     private Sprite coin;
+	private Sound music;
+	private long musicId;
 
     public GameScreen(MyGdxGame game, SpriteBatch batch, ShapeRenderer shapeRenderer, String levelname) {
         this.game = game;
@@ -70,8 +74,17 @@ public class GameScreen implements Screen {
         camera.position.x = mapWidthInPixels * .5f;
         camera.position.y = mapHeightInPixels * .5f;
 
-        debugRenderer = new Box2DDebugRenderer();
-    }
+		debugRenderer = new Box2DDebugRenderer();
+
+		if(game.getLevelCount() <= 2)
+			music = Assets.manager.get(Assets.MUSIC1, Sound.class);
+		else
+			music = Assets.manager.get(Assets.MUSIC2, Sound.class);
+		musicId = music.play();
+		music.setPitch(musicId, 1f);
+		music.setVolume(musicId, 0.5f);
+
+	}
 
     @Override
     public void render(float delta) {
@@ -102,6 +115,12 @@ public class GameScreen implements Screen {
             debugRenderer.render(levelHandler.getWorld(), debugMatrix);
         reactToCollision();
         serveDishChecker();
+
+		if(levelHandler.getTime() == 21)
+			music.setPitch(musicId, 1.05f);
+		else if(levelHandler.getTime() == 38)
+			music.setPitch(musicId, 1.1f);
+
         if (levelHandler.getLevelOver() == 1) {
             game.showEndScreen(false);
         } else if (levelHandler.getLevelOver() == 2) {
@@ -110,19 +129,18 @@ public class GameScreen implements Screen {
         }
     }
 
+	@Override
+	public void dispose() {
+		music.stop();
+		levelHandler.getWorld().dispose();
+		debugRenderer.dispose();
+    }
     private void drawLevel() {
         batch.draw(levelHandler.getLevelDisplay(),
                 (float) 11.2,
                 14,
                 (float) (levelHandler.getLevelDisplay().getWidth() * 0.015),
                 (float) (levelHandler.getLevelDisplay().getHeight() * 0.015));
-    }
-
-    @Override
-    public void dispose() {
-        levelHandler.getWorld().dispose();
-        debugRenderer.dispose();
-
     }
 
     private void initializeFonts() {
@@ -353,6 +371,7 @@ public class GameScreen implements Screen {
                 levelHandler.getLevel().setMoney(levelHandler.getLevel().getMoney() + guest.getTip());
                 guest.setDespawnTime(levelHandler.getTime() + 2);
                 guest.setServed(true);
+                guest.playPaysound();
                 Gdx.app.log("INFO: ", "Delivered correct Dish to Guest");
             }
         } else {
@@ -360,6 +379,7 @@ public class GameScreen implements Screen {
             waiter.removeDish();
             levelHandler.getDishHandler().removeActiveDish(dish);
             guest.setActiveAnimation("angry", levelHandler.getTime());
+            guest.playRefuseSound();
             Gdx.app.log("INFO: ", "Delivered wrong dish to Guest");
         }
     }

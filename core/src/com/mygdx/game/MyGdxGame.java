@@ -75,6 +75,7 @@ public class MyGdxGame extends Game {
     	 if (gameScreen != null)
              gameScreen.dispose();
     	endLevelScreen.setWin(winOrLoss);
+    	endLevelScreen.playEndSound();
     	this.setScreen(endLevelScreen);
     }
     
