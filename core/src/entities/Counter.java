@@ -38,7 +38,7 @@ public class Counter {
 		box.getBody().getFixtureList().first().setUserData(this);
 		dish = new Dish(Foodtype.getRandomFoodType());
 		float[] dpos = { positions[0] + (sprite.getWidth() - dish.getSprite().getWidth()) / 2,
-                positions[1] + (sprite.getHeight() - dish.getSprite().getHeight()) / 2 + 1};
+                (float) (positions[1] + (sprite.getHeight() - dish.getSprite().getHeight()) / 2 + 1.5)};
         dishCounterPos = dpos;
 		if (rotation == 0) {
 			float[] displpos = { positions[0] - sprite.getWidth(),

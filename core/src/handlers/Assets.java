@@ -54,7 +54,7 @@ public class Assets {
 	public static final String POMMES = "./Food/pommes.png";
 	public static final String CHICKEN = "./Food/chicken.png";
 	public static final String FISH = "./Food/fish.png";
-    public static final String COUNTER = "./Map/desk 1.png";
+	public static final String COUNTER = "./Map/counter.png";
 
 	// map related resources
     public static final String TABLE = "./Map/table 1.png";
