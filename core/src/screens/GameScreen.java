@@ -96,7 +96,7 @@ public class GameScreen implements Screen {
 		drawOrders();
 		drawDishProgress();
 		showMoney();
-		showLevel();
+		drawLevel();
 		if ((lastTipTime + 2) >= levelHandler.getTime())
 			showTip();
 		batch.end();
@@ -112,6 +112,14 @@ public class GameScreen implements Screen {
 		}
 	}
 
+	private void drawLevel() {
+		batch.draw(levelHandler.getLevelDisplay(),
+				(float) 11.2,
+				14,
+				(float) (levelHandler.getLevelDisplay().getWidth() * 0.015),
+				(float) (levelHandler.getLevelDisplay().getHeight() * 0.015));
+	}
+
 	@Override
 	public void dispose() {
 		levelHandler.getWorld().dispose();
@@ -121,11 +129,8 @@ public class GameScreen implements Screen {
 
     private void initializeFonts() {
         moneyFont = Assets.manager.get(Assets.MONEYFONT, BitmapFont.class);
-        levelFont = Assets.manager.get(Assets.LEVELFONT, BitmapFont.class);
         moneyFont.getData().setScale(0.08f);
-        levelFont.getData().setScale(0.061f);
         layoutMoney = new GlyphLayout();
-        layoutLevel = new GlyphLayout();
         tip = 0;
         lastTipTime = -3;
         layoutTip = new GlyphLayout();
@@ -279,13 +284,6 @@ public class GameScreen implements Screen {
 		}
 		shapeRenderer.end();
 		batch.begin();
-
-    }
-
-	private void showLevel() {
-		String level = "Level " + game.getLevelCount();
-        layoutLevel.setText(levelFont, level);
-        levelFont.draw(batch, layoutLevel, 11, 18);
 
     }
 

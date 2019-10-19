@@ -61,6 +61,11 @@ public class Assets {
 	public static final String CHAIR = "./Map/Chair 1.png";
 	public static final String COIN = "coin.png";
 	public static final String BUBBLE = "bubble.png";
+    public static final String Level1 = "level1.png";
+    public static final String Level2 = "level2.png";
+    public static final String Level3 = "level3.png";
+    public static final String Level4 = "level4.png";
+    public static final String Level5 = "level5.png";
 
 	// font related resources
 	public static final String MONEYFONT = "goldfont.fnt";
@@ -141,6 +146,11 @@ public class Assets {
 		manager.load(LEVELFAILED, Texture.class);
 		manager.load(CHAIR, Texture.class);
 		manager.load(BUBBLE, Texture.class);
+        manager.load(Level1, Texture.class);
+        manager.load(Level2, Texture.class);
+        manager.load(Level3, Texture.class);
+        manager.load(Level4, Texture.class);
+        manager.load(Level5, Texture.class);
 		manager.load(BELL, Sound.class);
 		manager.load(FANFARE, Sound.class);
 		manager.load(HEY, Sound.class);
