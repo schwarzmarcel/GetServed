@@ -46,6 +46,7 @@ public class GameScreen implements Screen {
     private Sprite coin;
 	private Sound music;
 	private long musicId;
+	int test = 0;
 
     public GameScreen(MyGdxGame game, SpriteBatch batch, ShapeRenderer shapeRenderer, String levelname) {
         this.game = game;
@@ -205,12 +206,12 @@ public class GameScreen implements Screen {
         batch.end();
         shapeRenderer.begin(ShapeType.Filled);
         float patience = guest.getPatience();
-        if (patience > 0.75 * guest.getMaxPatience())
-            shapeRenderer.setColor(Color.GREEN);
-        else if (patience > 0.5 * guest.getMaxPatience())
-            shapeRenderer.setColor(Color.YELLOW);
-        else
+        shapeRenderer.setColor(Color.GREEN);
+        if (patience <= 0.4 * guest.getMaxPatience()) {
             shapeRenderer.setColor(Color.RED);
+        }else if(patience <= 0.75 * guest.getMaxPatience()) {
+            shapeRenderer.setColor(Color.YELLOW);
+        }
         shapeRenderer.rect(guest.getPosition()[0] - 2, guest.getPosition()[1], 1,
                 ((float) guest.getPatience() / guest.getMaxPatience()) * 5);
         shapeRenderer.end();
@@ -240,7 +241,7 @@ public class GameScreen implements Screen {
 
     private void drawOrders() {
         for (Guest g : levelHandler.getGuestHandler().getActiveGuests()) {
-            if ((g.getOrderTime() + 1) >= levelHandler.getTime()) {
+            if (((g.getOrderTime() + 1) >= levelHandler.getTime()) && (!g.isServed())) {
                 g.getBubble().draw(batch);
                 g.getDish().getSprite().draw(batch);
             }

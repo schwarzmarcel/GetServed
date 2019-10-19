@@ -19,7 +19,6 @@ public class Guest {
     private String currentAnimation;
     private int lastAnimationTime = 0;
     private int despawnTime = 0;
-    private boolean justOrdered = false;
     private boolean isServed = false;
     private Table table;
     private String type;
@@ -30,6 +29,7 @@ public class Guest {
     private float patience;
     private float dynamicPatience;
     private float maxPatience;
+    private int happiness;
     private long wealth;
     private Foodtype order;
     private float[] position = new float[2];
@@ -144,48 +144,48 @@ public class Guest {
             switch (randomNum) {
                 case 1:
                     textureAtlasIdle = Assets.manager.get(Assets.GUEST1, TextureAtlas.class);
-                    textureAtlasAngry = Assets.manager.get(Assets.GUEST1_ORDERING, TextureAtlas.class);
-                    textureAtlasOrdering = Assets.manager.get(Assets.GUEST1_ANGRY, TextureAtlas.class);
+                    textureAtlasAngry = Assets.manager.get(Assets.GUEST1_ANGRY, TextureAtlas.class);
+                    textureAtlasOrdering = Assets.manager.get(Assets.GUEST1_ORDERING, TextureAtlas.class);
                     break;
                 case 2:
                     textureAtlasIdle = Assets.manager.get(Assets.GUEST2, TextureAtlas.class);
-                    textureAtlasAngry = Assets.manager.get(Assets.GUEST2_ORDERING, TextureAtlas.class);
-                    textureAtlasOrdering = Assets.manager.get(Assets.GUEST2_ANGRY, TextureAtlas.class);
+                    textureAtlasAngry = Assets.manager.get(Assets.GUEST2_ANGRY, TextureAtlas.class);
+                    textureAtlasOrdering = Assets.manager.get(Assets.GUEST2_ORDERING, TextureAtlas.class);
                     break;
                 case 3:
                     textureAtlasIdle = Assets.manager.get(Assets.GUEST3, TextureAtlas.class);
-                    textureAtlasAngry = Assets.manager.get(Assets.GUEST3_ORDERING, TextureAtlas.class);
-                    textureAtlasOrdering = Assets.manager.get(Assets.GUEST3_ANGRY, TextureAtlas.class);
+                    textureAtlasAngry = Assets.manager.get(Assets.GUEST3_ANGRY, TextureAtlas.class);
+                    textureAtlasOrdering = Assets.manager.get(Assets.GUEST3_ORDERING, TextureAtlas.class);
                     break;
                 case 4:
                     textureAtlasIdle = Assets.manager.get(Assets.GUEST4, TextureAtlas.class);
-                    textureAtlasAngry = Assets.manager.get(Assets.GUEST4_ORDERING, TextureAtlas.class);
-                    textureAtlasOrdering = Assets.manager.get(Assets.GUEST4_ANGRY, TextureAtlas.class);
+                    textureAtlasAngry = Assets.manager.get(Assets.GUEST4_ANGRY, TextureAtlas.class);
+                    textureAtlasOrdering = Assets.manager.get(Assets.GUEST4_ORDERING, TextureAtlas.class);
                     break;
                 case 5:
                     textureAtlasIdle = Assets.manager.get(Assets.GUEST5, TextureAtlas.class);
-                    textureAtlasAngry = Assets.manager.get(Assets.GUEST5_ORDERING, TextureAtlas.class);
-                    textureAtlasOrdering = Assets.manager.get(Assets.GUEST5_ANGRY, TextureAtlas.class);
+                    textureAtlasAngry = Assets.manager.get(Assets.GUEST5_ANGRY, TextureAtlas.class);
+                    textureAtlasOrdering = Assets.manager.get(Assets.GUEST5_ORDERING, TextureAtlas.class);
                     break;
                 case 6:
                     textureAtlasIdle = Assets.manager.get(Assets.GUEST6, TextureAtlas.class);
-                    textureAtlasAngry = Assets.manager.get(Assets.GUEST6_ORDERING, TextureAtlas.class);
-                    textureAtlasOrdering = Assets.manager.get(Assets.GUEST6_ANGRY, TextureAtlas.class);
+                    textureAtlasAngry = Assets.manager.get(Assets.GUEST6_ANGRY, TextureAtlas.class);
+                    textureAtlasOrdering = Assets.manager.get(Assets.GUEST6_ORDERING, TextureAtlas.class);
                     break;
                 case 7:
                     textureAtlasIdle = Assets.manager.get(Assets.GUEST7, TextureAtlas.class);
-                    textureAtlasAngry = Assets.manager.get(Assets.GUEST7_ORDERING, TextureAtlas.class);
-                    textureAtlasOrdering = Assets.manager.get(Assets.GUEST7_ANGRY, TextureAtlas.class);
+                    textureAtlasAngry = Assets.manager.get(Assets.GUEST7_ANGRY, TextureAtlas.class);
+                    textureAtlasOrdering = Assets.manager.get(Assets.GUEST7_ORDERING, TextureAtlas.class);
                     break;
                 case 8:
                     textureAtlasIdle = Assets.manager.get(Assets.GUEST8, TextureAtlas.class);
-                    textureAtlasAngry = Assets.manager.get(Assets.GUEST8_ORDERING, TextureAtlas.class);
-                    textureAtlasOrdering = Assets.manager.get(Assets.GUEST8_ANGRY, TextureAtlas.class);
+                    textureAtlasAngry = Assets.manager.get(Assets.GUEST8_ANGRY, TextureAtlas.class);
+                    textureAtlasOrdering = Assets.manager.get(Assets.GUEST8_ORDERING, TextureAtlas.class);
                     break;
                 case 9:
                     textureAtlasIdle = Assets.manager.get(Assets.GUEST9, TextureAtlas.class);
-                    textureAtlasAngry = Assets.manager.get(Assets.GUEST9_ORDERING, TextureAtlas.class);
-                    textureAtlasOrdering = Assets.manager.get(Assets.GUEST9_ANGRY, TextureAtlas.class);
+                    textureAtlasAngry = Assets.manager.get(Assets.GUEST9_ANGRY, TextureAtlas.class);
+                    textureAtlasOrdering = Assets.manager.get(Assets.GUEST9_ORDERING, TextureAtlas.class);
                     break;
                 default:
                     break;
@@ -199,9 +199,10 @@ public class Guest {
         }
         idleAnimation = new Animation<TextureRegion>(0.045f, textureAtlasIdle.getRegions(), Animation.PlayMode.LOOP);
         angryAnimation = new Animation<TextureRegion>(0.05f, textureAtlasAngry.getRegions(), Animation.PlayMode.LOOP);
-        orderAnimation = new Animation<TextureRegion>(0.07f, textureAtlasOrdering.getRegions(), Animation.PlayMode.LOOP);
-        this.activeAnimation = idleAnimation;
-        this.currentAnimation = "idle";
+        orderAnimation = new Animation<TextureRegion>(0.1f, textureAtlasOrdering.getRegions(), Animation.PlayMode.LOOP);
+        this.activeAnimation = orderAnimation;
+        this.currentAnimation = "ordering";
+        this.lastAnimationTime = (int) spawnTime;
         order = Foodtype.getRandomFoodType();
         dish = new Dish(order);
         bubble = new Sprite(Assets.manager.get(Assets.BUBBLE, Texture.class));
@@ -214,6 +215,7 @@ public class Guest {
         this.maxPatience = patience + randomNum;
         randomNum = ThreadLocalRandom.current().nextInt((int) (0.2 * wealth) * (-1), (int) (0.2 * wealth) + 1);
         this.wealth = wealth + randomNum;
+        happiness = 3;
         paysound = Assets.manager.get(Assets.PAY, Sound.class);
     }
 
@@ -355,14 +357,6 @@ public class Guest {
         return lastAnimationTime;
     }
 
-    public boolean isJustOrdered() {
-        return justOrdered;
-    }
-
-    public void setJustOrdered(boolean justOrdered) {
-        this.justOrdered = justOrdered;
-    }
-
     public int getDespawnTime() {
         return despawnTime;
     }
@@ -389,4 +383,12 @@ public class Guest {
                 ", position=" + Arrays.toString(position) +
                 '}';
     }
+
+	public int getHappiness() {
+		return happiness;
+	}
+
+	public void setHappiness(int happiness) {
+		this.happiness = happiness;
+	}
 }
