@@ -57,7 +57,7 @@ public class Assets {
 	public static final String COUNTER = "./Map/counter.png";
 
 	// map related resources
-    public static final String TABLE = "./Map/table 1.png";
+    public static final String TABLE = "./Map/tablewithcandle.png";
 	public static final String CHAIR = "./Map/Chair 1.png";
 	public static final String COIN = "coin.png";
 	public static final String BUBBLE = "bubble.png";
