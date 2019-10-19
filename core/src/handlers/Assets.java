@@ -1,6 +1,7 @@
 package handlers;
 
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -63,7 +64,36 @@ public class Assets {
 	
 	public static final String BELL = "Audio/bell.wav";
 	public static final String FANFARE = "Audio/fanfare.wav";
-	public static final String HEY = "Audio/hey.wav";
+	public static final String PAY = "Audio/pay.wav";
+	public static final String HI1 = "Audio/hi_alex.wav";
+	public static final String YO1 = "Audio/yo_alex.wav";
+	public static final String GREETINGS1 = "Audio/greetings_alex.wav";
+	public static final String NO1 = "Audio/no_alex.wav";
+	public static final String NOTFORME1 = "Audio/notforme_alex.wav";
+	public static final String HELLO2 = "Audio/hello_ian.wav";
+	public static final String HEY2 = "Audio/hey_ian.wav";
+	public static final String WHATSUP2 = "Audio/whatsup_ian.wav";
+	public static final String NO2 = "Audio/no_ian.wav";
+	public static final String NOTFORME2 = "Audio/notforme_ian.wav";
+	public static final String HELLO3 = "Audio/hello_sean.wav";
+	public static final String HOWDY3 = "Audio/howdy_sean.wav";
+	public static final String GREETINGS3 = "Audio/greetings_sean.wav";
+	public static final String NO3 = "Audio/no_sean.wav";
+	public static final String NOTFORME3 = "Audio/notforme_sean.wav";
+	public static final String HEY4 = "Audio/hey_karen.wav";
+	public static final String HEYA4 = "Audio/heya_karen.wav";
+	public static final String NO4 = "Audio/no_karen.wav";
+	public static final String NOTFORME4 = "Audio/notforme_karen.wav";
+	public static final String GREETINGS5 = "Audio/greetings_meghan.wav";
+	public static final String YO5 = "Audio/yo_meghan.wav";
+	public static final String NO5 = "Audio/no_meghan.wav";
+	public static final String NOTFORME5 = "Audio/notforme_meghan.wav";
+	public static final String MUSIC1 = "Audio/music1.wav";
+	public static final String MUSIC2 = "Audio/music2.wav";
+	public static final String APPLAUSE = "Audio/applause.wav";
+	public static final String BOO = "Audio/boo.wav";
+	
+	
 
 
 	public static void load() {
@@ -107,8 +137,36 @@ public class Assets {
 		manager.load(BUBBLE, Texture.class);
 		manager.load(BELL, Sound.class);
 		manager.load(FANFARE, Sound.class);
-		manager.load(HEY, Sound.class);
-
+		manager.load(PAY, Sound.class);
+		manager.load(HI1, Sound.class);
+		manager.load(YO1, Sound.class);
+		manager.load(GREETINGS1, Sound.class);
+		manager.load(NO1, Sound.class);
+		manager.load(NOTFORME1, Sound.class);
+		manager.load(HELLO2, Sound.class);
+		manager.load(HEY2, Sound.class);
+		manager.load(WHATSUP2, Sound.class);
+		manager.load(NO2, Sound.class);
+		manager.load(NOTFORME2, Sound.class);
+		manager.load(HELLO3, Sound.class);
+		manager.load(HOWDY3, Sound.class);
+		manager.load(GREETINGS3, Sound.class);
+		manager.load(NO3, Sound.class);
+		manager.load(NOTFORME3, Sound.class);
+		manager.load(HEYA4, Sound.class);
+		manager.load(HEY4, Sound.class);
+		manager.load(NO4, Sound.class);
+		manager.load(NOTFORME4, Sound.class);
+		manager.load(GREETINGS5, Sound.class);
+		manager.load(YO5, Sound.class);
+		manager.load(NO5, Sound.class);
+		manager.load(NOTFORME5, Sound.class);
+		manager.load(MUSIC1, Sound.class);
+		manager.load(MUSIC2, Sound.class);
+		manager.load(APPLAUSE, Sound.class);
+		manager.load(BOO, Sound.class);
+		
+		
 	}
 
 	public static void loadingScreen() {

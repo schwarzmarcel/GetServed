@@ -84,7 +84,7 @@ public class Counter {
 
 	public void setDish(Dish dish) {
 		this.dish = dish;
-		playBell();
+		//playBell();
 	}
 
 	public float getLastDishTime() {
