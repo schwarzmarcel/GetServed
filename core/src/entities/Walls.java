@@ -17,11 +17,11 @@ public class Walls {
 		body = world.createBody(bdef);
 		ChainShape shape = new ChainShape();
 		Vector2[] verts = new Vector2[5];
-		verts[0] = new Vector2((-1) / PIXELS_TO_METERS, (-1) / PIXELS_TO_METERS);
-		verts[1] = new Vector2((WORLD_WIDTH + 1)/ PIXELS_TO_METERS, (-1) / PIXELS_TO_METERS);
-		verts[2] = new Vector2((WORLD_WIDTH + 1) / PIXELS_TO_METERS, (WORLD_HEIGHT - 15) / PIXELS_TO_METERS);
-		verts[3] = new Vector2((-1) / PIXELS_TO_METERS, (WORLD_HEIGHT - 15) / PIXELS_TO_METERS);
-		verts[4] = new Vector2((-1) / PIXELS_TO_METERS, (-1) / PIXELS_TO_METERS);
+        verts[0] = new Vector2((1) / PIXELS_TO_METERS, (1) / PIXELS_TO_METERS);
+        verts[1] = new Vector2((WORLD_WIDTH - 20) / PIXELS_TO_METERS, (1) / PIXELS_TO_METERS);
+        verts[2] = new Vector2((WORLD_WIDTH - 20) / PIXELS_TO_METERS, (WORLD_HEIGHT - 15) / PIXELS_TO_METERS);
+        verts[3] = new Vector2((1) / PIXELS_TO_METERS, (WORLD_HEIGHT - 15) / PIXELS_TO_METERS);
+        verts[4] = new Vector2((1) / PIXELS_TO_METERS, (1) / PIXELS_TO_METERS);
 		shape.createChain(verts);
 		body.createFixture(shape, 1.0f);
 		shape.dispose();
