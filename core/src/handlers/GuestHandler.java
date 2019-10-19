@@ -68,12 +68,12 @@ public class GuestHandler {
 		}
 		if (guest.getPatience() == 0) {
 			guestsToRemove.add(guest);
-		}else if (guest.getPatience() <= 0.4 * guest.getMaxPatience() && guest.getHappiness() == 2) {
+		}else if (guest.getPatience() <= 0.4 * guest.getMaxPatience() && guest.getHappiness() == 2 && !guest.isServed()) {
 			guest.setHappiness(1);
 			guest.setOrderTime(time);
 			if(!(guest.getLastAnimationTime() + 1 >= time))
 				guest.setActiveAnimation("ordering", time);
-		}else if (guest.getPatience() <= 0.75 * guest.getMaxPatience() && guest.getHappiness() == 3) {
+		}else if (guest.getPatience() <= 0.75 * guest.getMaxPatience() && guest.getHappiness() == 3  && !guest.isServed()) {
 			guest.setHappiness(2);
 			guest.setOrderTime(time);
 			if(!(guest.getLastAnimationTime() + 1 >= time))

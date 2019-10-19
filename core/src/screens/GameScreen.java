@@ -111,7 +111,7 @@ public class GameScreen implements Screen {
         if ((lastTipTime + 2) >= levelHandler.getTime())
             showTip();
         batch.end();
-        if (true)
+        if (false)
             debugRenderer.render(levelHandler.getWorld(), debugMatrix);
         reactToCollision();
         serveDishChecker();
