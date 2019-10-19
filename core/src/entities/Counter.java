@@ -27,7 +27,11 @@ public class Counter {
 		this.positions[0] = positionX;
 		this.positions[1] = positionY;
 		this.rotation = rotation;
-		sprite = new Sprite(Assets.manager.get(Assets.COUNTER, Texture.class));
+        if (rotation != 3 && rotation != 2) {
+            sprite = new Sprite(Assets.manager.get(Assets.COUNTER_TURNED, Texture.class));
+        } else {
+            sprite = new Sprite(Assets.manager.get(Assets.COUNTER, Texture.class));
+        }
 		if(rotation == 0 || rotation == 1) {
 			sprite.setSize(WORLD_WIDTH / 24, WORLD_HEIGHT / 9);
 		}else {
