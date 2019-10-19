@@ -102,7 +102,7 @@ public class GuestHandler {
 			int tableID = rndm.nextInt(gameField.getFreeTables().size());
 			Table table = gameField.getFreeTables().get(tableID);
 			gameField.removeFreeTable(table);
-			guest.setPosition(table.getChairPosition()[0], table.getChairPosition()[1]);
+			guest.setPosition(table.getChairPosition()[0] - 0.5f, table.getChairPosition()[1] + 1);
 			guest.setTable(table);
 			table.setGuest(guest);
 			dishHandler.addToDishQueue(guest.getOrder());

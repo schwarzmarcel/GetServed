@@ -205,7 +205,7 @@ public class Guest {
         order = Foodtype.getRandomFoodType();
         dish = new Dish(order);
         bubble = new Sprite(Assets.manager.get(Assets.BUBBLE, Texture.class));
-        bubble.setSize(7, 7);
+        bubble.setSize(8, 8);
         this.spawnTime = spawnTime;
         this.orderTime = spawnTime + 1;
         this.type = type;
@@ -237,7 +237,7 @@ public class Guest {
     public void setPosition(float positionX, float positionY) {
         position[0] = positionX;
         position[1] = positionY;
-        float[] position = {(float) (positionX + dish.getSprite().getWidth() + 2), (float) (positionY + 3.7)};
+        float[] position = {(float) (positionX + dish.getSprite().getWidth() + 2.3), (float) (positionY + 4)};
         dish.setPosition(position);
         bubble.setPosition((float) (positionX + dish.getSprite().getWidth() + 0.3), (float) (positionY + 1.6));
     }

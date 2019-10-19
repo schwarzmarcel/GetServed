@@ -33,9 +33,9 @@ public class Counter {
             sprite = new Sprite(Assets.manager.get(Assets.COUNTER, Texture.class));
         }
 		if(rotation == 0 || rotation == 1) {
-			sprite.setSize(WORLD_WIDTH / 24, WORLD_HEIGHT / 9);
+			sprite.setSize(7.5f, 11);
 		}else {
-			sprite.setSize(WORLD_HEIGHT / 9, WORLD_WIDTH / 24);
+			sprite.setSize(11, 7.5f);
 		}
 		sprite.setPosition(positionX, positionY);
         Box box = new Box(world, sprite, false, true);
@@ -49,7 +49,7 @@ public class Counter {
 					positions[1] + (sprite.getHeight() - dish.getSprite().getHeight()) / 2 };
             cookingPosition = displpos;
 		} else if (rotation == 1) {
-			float[] displpos = { positions[0] + sprite.getWidth() + 1,
+			float[] displpos = { positions[0] + sprite.getWidth() + 2,
 					positions[1] + (sprite.getHeight() - dish.getSprite().getHeight()) / 2 };
             cookingPosition = displpos;
 		} else if (rotation == 2) {

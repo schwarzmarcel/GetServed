@@ -25,10 +25,10 @@ public class Table {
         this.chairPosition[1] = positionY + 5f;
         tableSprite = new Sprite(Assets.manager.get(Assets.TABLE, Texture.class));
         chairSprite = new Sprite(Assets.manager.get(Assets.CHAIR, Texture.class));
-        tableSprite.setSize(WORLD_WIDTH / 32, WORLD_HEIGHT / 18);
-        chairSprite.setSize(WORLD_WIDTH / 64, WORLD_HEIGHT / 36);
+        tableSprite.setSize(6, 6);
+        chairSprite.setSize(3, 3);
         tableSprite.setPosition(positionX, positionY);
-        chairSprite.setPosition(positionX + 2.5f, positionY + 5f);
+        chairSprite.setPosition(positionX + 3f, positionY + 6f);
         box = new Box(world, tableSprite, false, true);
         box.getBody().getFixtureList().first().setUserData(this);
         guest = null;
