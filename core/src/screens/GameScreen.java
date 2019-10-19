@@ -3,7 +3,6 @@ package screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -28,7 +27,6 @@ import handlers.LevelHandler;
 
 import static com.mygdx.game.MyGdxGame.*;
 
-//TODO: add commentary
 public class GameScreen implements Screen {
     public MyGdxGame game;
     private SpriteBatch batch;
