@@ -10,35 +10,51 @@ public class Assets {
 
 	public static final AssetManager manager = new AssetManager();
 
-	public static final String WAITERIDLE = "character_sprites/Waiter_Idle.atlas";
-	public static final String WAITERWALKING = "character_sprites/Waiter_Walking.atlas";
-    public static final String COUNTER = "./Map/desk 1.png";
+	// Waiter related resources
+	public static final String WAITER_IDLE = "character_sprites/Waiter_Idle.atlas";
+	public static final String WAITER_WALKING = "character_sprites/Waiter_Walking.atlas";
+	public static final String WAITER_DYING = "character_sprites/Waiter_Dying.atlas";
+
+	// Guest related resources
+	public static final String GUEST1 = "character_sprites/Guest1.atlas";
+	public static final String GUEST1_ANGRY = "character_sprites/Guest1_Kick.atlas";
+	public static final String GUEST1_ORDERING = "character_sprites/Guest1_Jump.atlas";
+	public static final String GUEST2 = "character_sprites/Guest2.atlas";
+	public static final String GUEST2_ORDERING = "character_sprites/Guest2_Jump.atlas";
+	public static final String GUEST2_ANGRY = "character_sprites/Guest2_Kick.atlas";
+	public static final String GUEST3 = "character_sprites/Guest3.atlas";
+	public static final String GUEST3_ANGRY = "character_sprites/Guest3_Kick.atlas";
+	public static final String GUEST3_ORDERING = "character_sprites/Guest3_Jump.atlas";
+	public static final String GUEST4 = "character_sprites/Guest4.atlas";
+	public static final String GUEST4_ANGRY = "character_sprites/Guest4_Kick.atlas";
+	public static final String GUEST4_ORDERING = "character_sprites/Guest4_Jump.atlas";
+	public static final String GUEST5 = "character_sprites/Guest5.atlas";
+	public static final String GUEST5_ANGRY = "character_sprites/Guest5_Kick.atlas";
+	public static final String GUEST5_ORDERING = "character_sprites/Guest5_Jump.atlas";
+	public static final String KING = "character_sprites/King.atlas";
+	public static final String KING_KICK = "character_sprites/King_Kick.atlas";
+	public static final String KING_JUMP = "character_sprites/King_Jump.atlas";
+
+
+	// dish related resources
 	public static final String PIZZA = "./Food/pizza.png";
 	public static final String BURGER = "./Food/burger.png";
 	public static final String POMMES = "./Food/pommes.png";
 	public static final String CHICKEN = "./Food/chicken.png";
 	public static final String FISH = "./Food/fish.png";
+    public static final String COUNTER = "./Map/desk 1.png";
+
+	// map related resources
     public static final String TABLE = "./Map/table 1.png";
 	public static final String CHAIR = "./Map/Chair 1.png";
-	public static final String GUEST1 = "character_sprites/Guest1.atlas";
-	public static final String GUEST2 = "character_sprites/Guest2.atlas";
-	public static final String GUEST3 = "character_sprites/Guest3.atlas";
-	public static final String GUEST4 = "character_sprites/Guest4.atlas";
-	public static final String GUEST5 = "character_sprites/Guest5.atlas";
-	public static final String KING = "character_sprites/King.atlas";
 	public static final String COIN = "coin.png";
 	public static final String BUBBLE = "bubble.png";
+
+	// font related resources
 	public static final String MONEYFONT = "goldfont.fnt";
     public static final String LEVELFONT = "levelfont.fnt";
-	public static final String NEXTACTIVE = "nextactive.png";
-	public static final String NEXTPASSIVE = "nextpassive.png";
-	public static final String EXITACTIVE = "exitactive.png";
-	public static final String EXITPASSIVE = "exitpassive.png";
-	public static final String LEVELCLEARED = "levelcleared.png";
-	public static final String LEVELFAILED = "levelfailed.png";
-	public static final String ENTER = "continue.png";
-	
 
+	// screen related resources
 	public static final String ARROWS = "arrowkeys.png";
 	public static final String SKEY = "Keyboard_White_S.png";
 	public static final String DKEY = "Keyboard_White_D.png";
@@ -47,20 +63,15 @@ public class Assets {
 	public static final String DISCARD = "discard.png";
 	public static final String LOADING = "loading.png";
 	public static final String DONTLOSE = "dontlose.png";
+	public static final String NEXTACTIVE = "nextactive.png";
+	public static final String NEXTPASSIVE = "nextpassive.png";
+	public static final String EXITACTIVE = "exitactive.png";
+	public static final String EXITPASSIVE = "exitpassive.png";
+	public static final String LEVELCLEARED = "levelcleared.png";
+	public static final String LEVELFAILED = "levelfailed.png";
+	public static final String ENTER = "continue.png";
 
-	public static final String GUEST1_ANGRY = "character_sprites/Guest1_Kick.atlas";
-	public static final String GUEST1_ORDERING = "character_sprites/Guest1_Jump.atlas";
-	public static final String GUEST2_ORDERING = "character_sprites/Guest2_Jump.atlas";
-	public static final String GUEST2_ANGRY = "character_sprites/Guest2_Kick.atlas";
-	public static final String GUEST3_ANGRY = "character_sprites/Guest3_Kick.atlas";
-	public static final String GUEST3_ORDERING = "character_sprites/Guest3_Jump.atlas";
-	public static final String GUEST4_ANGRY = "character_sprites/Guest4_Kick.atlas";
-	public static final String GUEST4_ORDERING = "character_sprites/Guest4_Jump.atlas";
-	public static final String GUEST5_ANGRY = "character_sprites/Guest5_Kick.atlas";
-	public static final String GUEST5_ORDERING = "character_sprites/Guest5_Jump.atlas";
-	public static final String KING_KICK = "character_sprites/King_Kick.atlas";
-	public static final String KING_JUMP = "character_sprites/King_Jump.atlas";
-	
+	// sound realted resources
 	public static final String BELL = "Audio/bell.wav";
 	public static final String FANFARE = "Audio/fanfare.wav";
 	public static final String HEY = "Audio/hey.wav";
@@ -75,8 +86,9 @@ public class Assets {
 		manager.load(BURGER, Texture.class);
 		manager.load(CHICKEN, Texture.class);
 		manager.load(TABLE, Texture.class);
-		manager.load(WAITERIDLE, TextureAtlas.class);
-		manager.load(WAITERWALKING, TextureAtlas.class);
+		manager.load(WAITER_IDLE, TextureAtlas.class);
+		manager.load(WAITER_WALKING, TextureAtlas.class);
+		manager.load(WAITER_DYING, TextureAtlas.class);
 		manager.load(GUEST1, TextureAtlas.class);
 		manager.load(GUEST2, TextureAtlas.class);
 		manager.load(GUEST3, TextureAtlas.class);
@@ -110,7 +122,6 @@ public class Assets {
 		manager.load(HEY, Sound.class);
 
 	}
-
 	public static void loadingScreen() {
 		manager.load(ARROWS, Texture.class);
 		manager.load(SKEY, Texture.class);

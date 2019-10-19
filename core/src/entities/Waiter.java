@@ -36,9 +36,9 @@ public class Waiter implements Moveable {
      * @param positionY the initial position of the waiter on the Y axis
      */
     public Waiter(World world, float positionX, float positionY) {
-        TextureAtlas textureAtlas = Assets.manager.get(Assets.WAITERWALKING, TextureAtlas.class);
+        TextureAtlas textureAtlas = Assets.manager.get(Assets.WAITER_WALKING, TextureAtlas.class);
         runningAnimation = new Animation<TextureRegion>(0.015f, textureAtlas.getRegions(), Animation.PlayMode.LOOP);
-        textureAtlas = Assets.manager.get(Assets.WAITERIDLE, TextureAtlas.class);
+        textureAtlas = Assets.manager.get(Assets.WAITER_IDLE, TextureAtlas.class);
         sprite = new Sprite(textureAtlas.findRegion("Idle"));
         sprite.setSize(WORLD_WIDTH / 32, WORLD_HEIGHT / 16);
         sprite.setPosition(positionX, positionY);
