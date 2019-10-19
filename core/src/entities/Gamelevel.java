@@ -1,8 +1,5 @@
 package entities;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.utils.Timer;
-
 import java.util.List;
 
 public class Gamelevel {
@@ -22,10 +19,6 @@ public class Gamelevel {
             }
         } else if (money < 0) {
             money = 0;
-        }
-        if (money == 0) {
-            Gdx.app.log("INFO: ", "The Game was lost because you ran out of money");
-            Timer.instance().clear();
         }
     }
 

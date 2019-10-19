@@ -25,6 +25,7 @@ public class LevelHandler {
     private GameField gameField;
     private Gamelevel level;
     private int levelOver = 0;
+    private int timeLevelOver = -1;
     private String levelName;
 
     /**
@@ -103,7 +104,15 @@ public class LevelHandler {
         guestHandler.manageGuests(time, dishHandler);
         dishHandler.updateDishes(time, guestHandler.getActiveGuests());
         dishHandler.trashBinHandler(waiter);
-        if (level.getMoney() == 0) {
+        if (level.getMoney() == 0 && timeLevelOver == -1) {
+            Gdx.app.log("INFO: ", "The Level was lost because the money ran out");
+            timeLevelOver = time;
+            waiter.setAllowedToMove(false);
+            waiter.activateDyingAnimation();
+
+        }
+        if (timeLevelOver + 1 == time) {
+            Timer.instance().clear();
             levelOver = 1;
         }
         if (guestHandler.getActiveGuests().isEmpty() && guestHandler.getGuestQueue().isEmpty()) {
