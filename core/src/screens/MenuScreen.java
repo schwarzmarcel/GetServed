@@ -21,6 +21,7 @@ public class MenuScreen implements Screen{
 	private Sprite nextpassive;
 	private Sprite exitactive;
 	private Sprite exitpassive;
+	private Sprite bonuslevel;
 	private boolean nextorexit;
 	
 	public MenuScreen(MyGdxGame game, SpriteBatch batch) {
@@ -39,6 +40,10 @@ public class MenuScreen implements Screen{
         exitpassive = new Sprite(Assets.manager.get(Assets.EXITPASSIVE, Texture.class));
 		exitpassive.setSize(WORLD_WIDTH / 7, WORLD_HEIGHT / 8);
 		exitpassive.setPosition(WORLD_WIDTH / 2 - (exitpassive.getWidth() / 2), WORLD_HEIGHT / 2 - (exitpassive.getHeight() / 2) - 15);
+		bonuslevel = new Sprite(Assets.manager.get(Assets.BONUSLEVEL, Texture.class));
+		bonuslevel.setSize(10, 2.5f);
+		bonuslevel.setPosition(2, 2);
+		
 	}
 	
 	@Override
@@ -58,6 +63,9 @@ public class MenuScreen implements Screen{
 			nextpassive.draw(batch);
 			exitactive.draw(batch);
 		}
+		if((game.getLevelCount() == 5) && (game.isFinished())) {
+			bonuslevel.draw(batch);
+		}
 		batch.end();
 		if(Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
 			if(nextorexit)
@@ -72,6 +80,11 @@ public class MenuScreen implements Screen{
 		if(Gdx.input.isKeyJustPressed(Input.Keys.DOWN)) {
 			if(nextorexit)
 				nextorexit = false;
+		}
+		if(Gdx.input.isKeyJustPressed(Input.Keys.X)) {
+			if((game.getLevelCount() == 5) && (game.isFinished())) {
+				game.setBonuslevel();
+			}
 		}
 	}
 

@@ -97,6 +97,10 @@ public class LevelHandler {
             case "level5":
                 levelDisplay = new Sprite(Assets.manager.get(Assets.Level5, Texture.class));
                 break;
+            case "level6":
+            	levelDisplay = new Sprite(Assets.manager.get(Assets.Level5, Texture.class));
+                break;
+            default: break;
         }
         Gdx.app.log("INFO: ", "Begin drawing field");
         gameField = new GameField();

@@ -53,56 +53,62 @@
 		}
 	],
 	"guests":[
-		{
-		"patience":70,
+    	{
+		"patience":64,
 		"wealth":8,
 		"spawntime": 2,
 		"type": "normal"
 		},
 		{
-		"patience":70,
+		"patience":64,
 		"wealth":8,
 		"spawntime": 4,
 		"type": "normal"
 		},
 		{
-		"patience":70,
+		"patience":64,
 		"wealth":8,
 		"spawntime": 5,
 		"type": "normal"
 		},
 		{
-		"patience":70,
+		"patience":64,
 		"wealth":8,
-		"spawntime": 9,
+		"spawntime": 8,
 		"type": "normal"
 		},
 		{
     		"patience":24,
     		"wealth":21,
-    		"spawntime": 11,
+    		"spawntime": 10,
     		"type": "king"
     	},
 		{
     		"patience":38,
     		"wealth":0,
-    		"spawntime": 13,
+    		"spawntime": 12,
     		"type": "skeleton"
     	}
 		{
-		"patience":70,
+		"patience":64,
 		"wealth":8,
-		"spawntime": 15,
+		"spawntime": 14,
 		"type": "normal"
 		},
 		{
-		"patience":70,
+		"patience":64,
 		"wealth":8,
-		"spawntime": 19,
+		"spawntime": 17,
 		"type": "normal"
 		},
 		{
-		"patience":70,
+		"patience":64,
+		"wealth":8,
+		"spawntime": 20,
+		"type": "normal"
+		}
+		{
+		"patience":64,
 		"wealth":8,
 		"spawntime": 23,
 		"type": "normal"
@@ -114,19 +120,13 @@
     		"type": "skeleton"
     	},
 		{
-    		"patience":38,
-    		"wealth":0,
-    		"spawntime": 26,
-    		"type": "skeleton"
-    	}
-		{
-		"patience":70,
+		"patience":64,
 		"wealth":8,
 		"spawntime": 28,
 		"type": "normal"
 		},
 		{
-		"patience":70,
+		"patience":64,
 		"wealth":8,
 		"spawntime": 31,
 		"type": "normal"
@@ -138,23 +138,23 @@
     		"type": "king"
     	},
 		{
-		"patience":70,
+		"patience":64,
 		"wealth":8,
 		"spawntime": 37,
 		"type": "normal"
 		},
 		{
-		"patience":70,
+		"patience":64,
 		"wealth":8,
 		"spawntime": 38,
 		"type": "normal"
 		},
 		{
-		"patience":70,
+		"patience":64,
 		"wealth":8,
 		"spawntime": 42,
 		"type": "normal"
-		}
+		},
 		{
     		"patience":40,
     		"wealth":0,
@@ -162,13 +162,13 @@
     		"type": "skeleton"
     	},
 		{
-		"patience":70,
+		"patience":64,
 		"wealth":8,
 		"spawntime": 44,
 		"type": "normal"
 		},
 		{
-		"patience":70,
+		"patience":64,
 		"wealth":8,
 		"spawntime": 49,
 		"type": "normal"
@@ -180,21 +180,57 @@
     		"type": "king"
     	},
 		{
-		"patience":70,
+    		"patience":40,
+    		"wealth":0,
+    		"spawntime": 51,
+    		"type": "skeleton"
+    	},
+		{
+		"patience":64,
 		"wealth":8,
-		"spawntime": 52,
+		"spawntime": 53,
 		"type": "normal"
 		},
 		{
-		"patience":70,
+		"patience":64,
 		"wealth":8,
-		"spawntime": 55,
+		"spawntime": 56,
 		"type": "normal"
 		},
 		{
-		"patience":70,
+		"patience":64,
 		"wealth":8,
 		"spawntime": 58,
+		"type": "normal"
+		},
+		{
+    		"patience":40,
+    		"wealth":0,
+    		"spawntime": 60,
+    		"type": "skeleton"
+    	},
+		{
+    		"patience":40,
+    		"wealth":0,
+    		"spawntime": 61,
+    		"type": "skeleton"
+    	},
+		{
+		"patience":64,
+		"wealth":8,
+		"spawntime": 63,
+		"type": "normal"
+		},
+		{
+		"patience":64,
+		"wealth":8,
+		"spawntime": 66,
+		"type": "normal"
+		},
+		{
+		"patience":64,
+		"wealth":8,
+		"spawntime": 68,
 		"type": "normal"
 		}
 	]

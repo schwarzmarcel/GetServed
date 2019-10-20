@@ -23,6 +23,7 @@ public class MyGdxGame extends Game {
     private MenuScreen menuScreen;
     private EndLevelScreen endLevelScreen;
     private int levelCount;
+    private boolean finished = false;
 
     @Override
     public void create() {
@@ -87,12 +88,24 @@ public class MyGdxGame extends Game {
             levelCount++;
     }
 
+    public void setBonuslevel() {
+       levelCount = 6;
+    }
+    
 	public int getLevelCount() {
 		return levelCount;
 	}
 	
 	public void initializeEndLevelScreen(){
 		endLevelScreen = new EndLevelScreen(this, batch);
+	}
+
+	public boolean isFinished() {
+		return finished;
+	}
+
+	public void setFinished(boolean finished) {
+		this.finished = finished;
 	}
 
 

@@ -132,6 +132,8 @@ public class GameScreen implements Screen {
 			game.showEndScreen(3, 0);
 		} else if (levelHandler.getLevelOver() == 1) {
 			game.increaseLevel();
+			if(game.getLevelCount() == 5)
+				game.setFinished(true);
 			game.showEndScreen(1, (int) levelHandler.getLevel().getMoney());
 		}
 	}

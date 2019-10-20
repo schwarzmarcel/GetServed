@@ -101,6 +101,7 @@ public class Assets {
 	public static final String SCORE = "score.png";
 	public static final String SKELETON = "skeleton.png";
 	public static final String NOMONEY = "nomoney.png";
+	public static final String BONUSLEVEL = "bonuslevel.png";
 	
 
 	// sound realted resources
@@ -195,6 +196,7 @@ public class Assets {
 		manager.load(LEVELCLEARED, Texture.class);
 		manager.load(LEVELFAILED, Texture.class);
 		manager.load(SCORE, Texture.class);
+		manager.load(BONUSLEVEL, Texture.class);
 		manager.load(SKELETON, Texture.class);
 		manager.load(NOMONEY, Texture.class);
 		manager.load(CHAIR, Texture.class);
