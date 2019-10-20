@@ -137,7 +137,8 @@ public class GuestHandler {
 	 */
 	public void removeActiveGuest(Guest guest, int time, DishHandler dishHandler) {
 		if (time >= guest.getDespawnTime()) {
-			gameField.addFreeTable(guest.getTable());
+			if(!gameField.getFreeTables().contains(guest.getTable()))
+				gameField.addFreeTable(guest.getTable());
 			dishHandler.removeActiveDish(guest.getDish());
 			activeGuests.remove(guest);
 			guest.getTable().removeGuest();
