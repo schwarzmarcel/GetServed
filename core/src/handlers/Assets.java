@@ -93,6 +93,10 @@ public class Assets {
 	public static final String LEVELCLEARED = "levelcleared.png";
 	public static final String LEVELFAILED = "levelfailed.png";
 	public static final String ENTER = "continue.png";
+	public static final String SCORE = "score.png";
+	public static final String SKELETON = "skeleton.png";
+	public static final String NOMONEY = "nomoney.png";
+	
 
 	// sound realted resources
 	public static final String BELL = "Audio/bell.wav";
@@ -185,6 +189,9 @@ public class Assets {
 		manager.load(EXITPASSIVE, Texture.class);
 		manager.load(LEVELCLEARED, Texture.class);
 		manager.load(LEVELFAILED, Texture.class);
+		manager.load(SCORE, Texture.class);
+		manager.load(SKELETON, Texture.class);
+		manager.load(NOMONEY, Texture.class);
 		manager.load(CHAIR, Texture.class);
 		manager.load(BUBBLE, Texture.class);
         manager.load(Level1, Texture.class);

@@ -71,10 +71,10 @@ public class MyGdxGame extends Game {
         this.setScreen(menuScreen);
     }
 
-    public void showEndScreen(boolean winOrLoss) {
+    public void showEndScreen(int state, int money) {
     	 if (gameScreen != null)
              gameScreen.dispose();
-    	endLevelScreen.setWin(winOrLoss);
+    	endLevelScreen.setEndScreen(state, money);
     	endLevelScreen.playEndSound();
     	this.setScreen(endLevelScreen);
     }

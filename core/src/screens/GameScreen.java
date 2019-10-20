@@ -127,12 +127,12 @@ public class GameScreen implements Screen {
 		 */
 
 		if (levelHandler.getLevelOver() == 2) {
-			game.showEndScreen(false);
+			game.showEndScreen(2, 0);
 		}else if (levelHandler.getLevelOver() == 3) {
-			game.showEndScreen(false);
+			game.showEndScreen(3, 0);
 		} else if (levelHandler.getLevelOver() == 1) {
 			game.increaseLevel();
-			game.showEndScreen(true);
+			game.showEndScreen(1, (int) levelHandler.getLevel().getMoney());
 		}
 	}
 
