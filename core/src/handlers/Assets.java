@@ -47,6 +47,9 @@ public class Assets {
 	public static final String COOK = "character_sprites/Cook_Idle.atlas";
 	public static final String KING_KICK = "character_sprites/King_Kick.atlas";
 	public static final String KING_JUMP = "character_sprites/King_Jump.atlas";
+    public static final String SKELETON_IDLE = "character_sprites/Skeleton_Idle.atlas";
+    public static final String SKELETON_KICKING = "character_sprites/Skeleton_Kicking.atlas";
+    public static final String SKELETON_JUMPING = "character_sprites/Skeleton_Jump.atlas";
 
 
 	// dish related resources
@@ -171,6 +174,9 @@ public class Assets {
 		manager.load(KING_JUMP, TextureAtlas.class);
 		manager.load(KING, TextureAtlas.class);
 		manager.load(COOK, TextureAtlas.class);
+        manager.load(SKELETON_IDLE, TextureAtlas.class);
+        manager.load(SKELETON_KICKING, TextureAtlas.class);
+        manager.load(SKELETON_JUMPING, TextureAtlas.class);
 		manager.load(MONEYFONT, BitmapFont.class);
         manager.load(LEVELFONT, BitmapFont.class);
 		manager.load(NEXTACTIVE, Texture.class);
