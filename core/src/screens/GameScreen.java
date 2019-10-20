@@ -74,7 +74,7 @@ public class GameScreen implements Screen {
 
 		debugRenderer = new Box2DDebugRenderer();
 
-		if (game.getLevelCount() <= 2)
+		if ((game.getLevelCount() == 1) || (game.getLevelCount() == 3) || (game.getLevelCount() == 5))
 			music = Assets.manager.get(Assets.MUSIC1, Sound.class);
 		else
 			music = Assets.manager.get(Assets.MUSIC2, Sound.class);

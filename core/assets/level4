@@ -1,0 +1,171 @@
+{
+	"name" : "level4",
+	"money" : 20,
+	"allowedDishes":["burger","chicken","fish","pommes","pizza"],
+	"positions": [
+	{
+		 "row": 5,
+		 "col": 11,
+		 "type": "table",
+		 "rotation": 0
+		},
+		{
+		 "row": 8,
+		 "col": 15,
+		 "type": "table",
+		 "rotation": 0
+		},
+		{
+		"row": 12,
+		 "col": 12,
+		 "type": "table",
+		 "rotation": 0
+		},
+		{
+		"row": 3,
+		 "col": 16,
+		 "type": "table",
+		 "rotation": 0
+		},
+		{
+		"row": 6,
+		 "col": 20,
+		 "type": "table",
+		 "rotation": 0
+		},
+		{
+		"row": 11,
+		 "col": 20,
+		 "type": "table",
+		 "rotation": 0
+		},
+		{
+		"row": 7,
+		 "col": 7,
+		 "type": "counter",
+		 "rotation": 0
+		},
+		{
+		"row": 7,
+		 "col": 24,
+		 "type": "counter",
+		 "rotation": 1
+		}
+	],
+	"guests":[
+		{
+		"patience":70,
+		"wealth":8,
+		"spawntime": 2,
+		"type": "normal"
+		},
+		{
+		"patience":70,
+		"wealth":8,
+		"spawntime": 4,
+		"type": "normal"
+		},
+		{
+		"patience":70,
+		"wealth":8,
+		"spawntime": 6,
+		"type": "normal"
+		},
+		{
+		"patience":70,
+		"wealth":8,
+		"spawntime": 9,
+		"type": "normal"
+		},
+		{
+    		"patience":27,
+    		"wealth":22,
+    		"spawntime": 12,
+    		"type": "king"
+    	},
+		{
+		"patience":70,
+		"wealth":8,
+		"spawntime": 14,
+		"type": "normal"
+		},
+		{
+		"patience":70,
+		"wealth":8,
+		"spawntime": 17,
+		"type": "normal"
+		},
+		{
+		"patience":70,
+		"wealth":8,
+		"spawntime": 22,
+		"type": "normal"
+		},
+		{
+    		"patience":40,
+    		"wealth":0,
+    		"spawntime": 24,
+    		"type": "skeleton"
+    	},
+		{
+		"patience":70,
+		"wealth":8,
+		"spawntime": 25,
+		"type": "normal"
+		},
+		{
+		"patience":70,
+		"wealth":8,
+		"spawntime": 28,
+		"type": "normal"
+		},
+		{
+		"patience":70,
+		"wealth":8,
+		"spawntime": 31,
+		"type": "normal"
+		}
+		{
+    		"patience":27,
+    		"wealth":22,
+    		"spawntime": 35,
+    		"type": "king"
+    	},
+		{
+		"patience":70,
+		"wealth":8,
+		"spawntime": 37,
+		"type": "normal"
+		},
+		{
+		"patience":70,
+		"wealth":8,
+		"spawntime": 40,
+		"type": "normal"
+		},
+		{
+    		"patience":40,
+    		"wealth":0,
+    		"spawntime": 42,
+    		"type": "skeleton"
+    	},
+		{
+		"patience":70,
+		"wealth":8,
+		"spawntime": 44,
+		"type": "normal"
+		},
+		{
+		"patience":70,
+		"wealth":8,
+		"spawntime": 46,
+		"type": "normal"
+		},
+		{
+		"patience":70,
+		"wealth":8,
+		"spawntime": 47,
+		"type": "normal"
+		}
+	]
+}
