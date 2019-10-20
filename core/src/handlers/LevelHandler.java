@@ -57,7 +57,7 @@ public class LevelHandler {
         initializeCooks();
         initializeTimer();
         guestHandler.initializeGuests(level.getGuests());
-        dishHandler.initializeDishManager(waiter, gameField.getCounters());
+        dishHandler.initializeDishManager(waiter, gameField.getCounters(), level.getPermittedDishes());
         dishHandler.initializeDishQueue(guestHandler.getGuestQueue().first().getOrder());
         Gdx.app.log("INFO: ", "Finished Level initializing");
     }

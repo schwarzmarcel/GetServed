@@ -1,5 +1,6 @@
 package entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Gamelevel {
@@ -7,6 +8,7 @@ public class Gamelevel {
     private List<Guest> guests;
     private String name;
     private long money;
+    private ArrayList<Foodtype> permittedDishes;
 
     /**
      * this method get called every second and decrements the money of the game
@@ -59,5 +61,12 @@ public class Gamelevel {
 		this.money = money;
 	}
 
+    public ArrayList<Foodtype> getPermittedDishes() {
+        return permittedDishes;
+    }
+
+    public void setPermittedDishes(ArrayList<Foodtype> permittedDishes) {
+        this.permittedDishes = permittedDishes;
+    }
 }
 

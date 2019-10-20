@@ -2,7 +2,6 @@ package handlers;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.utils.Queue;
 import entities.*;
 
@@ -21,12 +20,12 @@ public class DishHandler {
     private ArrayList<Dish> activeDishes;
     private List<Counter> counters;
     private Waiter waiter;
+    private ArrayList<Foodtype> permittedDishes;
    
 
     public DishHandler() {
         dishQueue = new Queue<Foodtype>();
         activeDishes = new ArrayList<Dish>();
-        
     }
 
     /**
@@ -35,13 +34,13 @@ public class DishHandler {
      * @param waiter   the waiter who carries the dishes
      * @param counters the counters where the dishes spawn on
      */
-    public void initializeDishManager(Waiter waiter, List<Counter> counters) {
+    public void initializeDishManager(Waiter waiter, List<Counter> counters, ArrayList<Foodtype> permittedDishes) {
         this.waiter = waiter;
         this.counters = counters;
+        this.permittedDishes = permittedDishes;
     }
 
     //TODO: REFACTOR THIS METHOD
-
     /**
      * this method updates the dishes location and decides on which dishes need to be spawned next
      *
