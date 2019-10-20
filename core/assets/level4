@@ -1,6 +1,6 @@
 {
 	"name" : "level4",
-	"money" : 20,
+	"money" : 26,
 	"allowedDishes":["burger","chicken","fish","pommes","pizza"],
 	"positions": [
 	{
@@ -55,7 +55,7 @@
 	"guests":[
 		{
 		"patience":70,
-		"wealth":8,
+		"wealth":9,
 		"spawntime": 2,
 		"type": "normal"
 		},
@@ -67,7 +67,7 @@
 		},
 		{
 		"patience":70,
-		"wealth":8,
+		"wealth":9,
 		"spawntime": 6,
 		"type": "normal"
 		},
@@ -86,75 +86,69 @@
 		{
 		"patience":70,
 		"wealth":8,
-		"spawntime": 14,
+		"spawntime": 15,
+		"type": "normal"
+		},
+		{
+		"patience":70,
+		"wealth":9,
+		"spawntime": 18,
 		"type": "normal"
 		},
 		{
 		"patience":70,
 		"wealth":8,
-		"spawntime": 17,
-		"type": "normal"
-		},
-		{
-		"patience":70,
-		"wealth":8,
-		"spawntime": 22,
+		"spawntime": 23,
 		"type": "normal"
 		},
 		{
     		"patience":40,
     		"wealth":0,
-    		"spawntime": 24,
+    		"spawntime": 25,
     		"type": "skeleton"
     	},
 		{
 		"patience":70,
 		"wealth":8,
-		"spawntime": 25,
+		"spawntime": 27,
+		"type": "normal"
+		},
+		{
+		"patience":70,
+		"wealth":9,
+		"spawntime": 30,
 		"type": "normal"
 		},
 		{
 		"patience":70,
 		"wealth":8,
-		"spawntime": 28,
-		"type": "normal"
-		},
-		{
-		"patience":70,
-		"wealth":8,
-		"spawntime": 31,
+		"spawntime": 32,
 		"type": "normal"
 		}
 		{
     		"patience":27,
     		"wealth":22,
-    		"spawntime": 35,
+    		"spawntime": 36,
     		"type": "king"
     	},
 		{
 		"patience":70,
 		"wealth":8,
-		"spawntime": 37,
+		"spawntime": 38,
 		"type": "normal"
 		},
 		{
 		"patience":70,
-		"wealth":8,
-		"spawntime": 40,
+		"wealth":9,
+		"spawntime": 41,
 		"type": "normal"
 		},
 		{
     		"patience":40,
     		"wealth":0,
-    		"spawntime": 42,
+    		"spawntime": 43,
     		"type": "skeleton"
     	},
-		{
-		"patience":70,
-		"wealth":8,
-		"spawntime": 44,
-		"type": "normal"
-		},
 		{
 		"patience":70,
 		"wealth":8,
@@ -163,8 +157,14 @@
 		},
 		{
 		"patience":70,
+		"wealth":9,
+		"spawntime": 49,
+		"type": "normal"
+		},
+		{
+		"patience":70,
 		"wealth":8,
-		"spawntime": 47,
+		"spawntime": 51,
 		"type": "normal"
 		}
 	]

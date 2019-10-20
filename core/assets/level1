@@ -1,6 +1,6 @@
 {
 	"name" : "level1",
-	"money" : 30,
+	"money" : 36,
 	"allowedDishes":["burger","chicken"],
 	"positions": [
 		{
@@ -86,7 +86,7 @@
 		{
 		"patience":90,
 		"wealth":14,
-		"spawntime": 33,
+		"spawntime": 34,
         "type": "normal"
 		}
 	]
