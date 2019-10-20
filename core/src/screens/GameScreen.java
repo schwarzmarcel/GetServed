@@ -397,7 +397,7 @@ public class GameScreen implements Screen {
 				levelHandler.getLevel().setMoney(levelHandler.getLevel().getMoney() + guest.getTip());
 				guest.setDespawnTime(levelHandler.getTime() + 2);
 				guest.setServed(true);
-				guest.playPaysound();
+			    guest.playPaysound();
 				Gdx.app.log("INFO: ", "Delivered correct Dish to Guest");
 			}
 		} else {
