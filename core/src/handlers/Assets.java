@@ -73,6 +73,11 @@ public class Assets {
     public static final String Level4 = "level4.png";
     public static final String Level5 = "level5.png";
 
+    //level files
+    public static final String LEVEL1JSON = "Map/level1.json";
+    public static final String LEVEL2JSON = "Map/level2.json";
+    public static final String LEVEL3JSON = "Map/level3.json";
+
 	// font related resources
 	public static final String MONEYFONT = "goldfont.fnt";
     public static final String LEVELFONT = "levelfont.fnt";
@@ -223,8 +228,8 @@ public class Assets {
 		manager.load(APPLAUSE, Sound.class);
 		manager.load(BOO, Sound.class);
 		manager.load(EVILLAUGH, Sound.class);
-		
-	}
+
+    }
 	public static void loadingScreen() {
 		manager.load(ARROWS, Texture.class);
 		manager.load(SKEY, Texture.class);
