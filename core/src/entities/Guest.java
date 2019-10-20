@@ -198,14 +198,14 @@ public class Guest {
             refusesound = Assets.manager.get(Assets.NO3, Sound.class);
          //TODO: sounds and sprites for skeleton
         } else if (type.equals("skeleton")) {
-            textureAtlasIdle = Assets.manager.get(Assets.KING, TextureAtlas.class);
-            textureAtlasAngry = Assets.manager.get(Assets.KING_KICK, TextureAtlas.class);
-            textureAtlasOrdering = Assets.manager.get(Assets.KING_JUMP, TextureAtlas.class);
-            spawnsound = Assets.manager.get(Assets.FANFARE, Sound.class);
+            textureAtlasIdle = Assets.manager.get(Assets.SKELETON_IDLE, TextureAtlas.class);
+            textureAtlasAngry = Assets.manager.get(Assets.SKELETON_KICKING, TextureAtlas.class);
+            textureAtlasOrdering = Assets.manager.get(Assets.SKELETON_JUMPING, TextureAtlas.class);
+            spawnsound = Assets.manager.get(Assets.EVILLAUGH, Sound.class);
             refusesound = Assets.manager.get(Assets.NO3, Sound.class);
         }
         if (type.equals("skeleton")) {
-        	paysound = Assets.manager.get(Assets.PAY, Sound.class);
+        	paysound = null;
         	order = null;
         	dish = new Dish();
         }
@@ -263,6 +263,8 @@ public class Guest {
         long soundId = spawnsound.play();
         if (type.equals("king"))
             spawnsound.setPitch(soundId, 1.2f);
+        else if(type.equals("skeleton"))
+        	spawnsound.setVolume(soundId, 2f);
         else
             spawnsound.setVolume(soundId, 0.3f);
     }
@@ -273,7 +275,8 @@ public class Guest {
     }
 
     public void playPaysound() {
-        paysound.play();
+    	if(!type.equals("skeleton"))
+    		paysound.play();
     }
 
     public long getSpawnTime() {

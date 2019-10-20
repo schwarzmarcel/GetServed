@@ -125,7 +125,7 @@ public class Assets {
 	public static final String MUSIC2 = "Audio/music2.wav";
 	public static final String APPLAUSE = "Audio/applause.wav";
 	public static final String BOO = "Audio/boo.wav";
-	
+	public static final String EVILLAUGH = "Audio/evillaugh.wav";
 	
 
 
@@ -222,7 +222,7 @@ public class Assets {
 		manager.load(MUSIC2, Sound.class);
 		manager.load(APPLAUSE, Sound.class);
 		manager.load(BOO, Sound.class);
-		
+		manager.load(EVILLAUGH, Sound.class);
 		
 	}
 	public static void loadingScreen() {
