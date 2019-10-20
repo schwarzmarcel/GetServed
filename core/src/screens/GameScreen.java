@@ -154,7 +154,7 @@ public class GameScreen implements Screen {
             float positionX = 0;
             TextureRegion currentFrame = c.getIdleAnimation().getKeyFrame(elapsedTime);
             if (c.getRotation() == 0) {
-                positionX = c.getPosition()[0] - 5;
+                positionX = c.getPosition()[0] - 6;
                 if (currentFrame.isFlipX()) {
                     currentFrame.flip(true, false);
                 }
