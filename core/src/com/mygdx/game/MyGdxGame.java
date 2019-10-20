@@ -83,7 +83,7 @@ public class MyGdxGame extends Game {
      * increases the level counter for the next level
      */
     public void increaseLevel() {
-        if (levelCount < 4)
+        if (levelCount < 5)
             levelCount++;
     }
 
