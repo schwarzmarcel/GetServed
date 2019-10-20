@@ -29,11 +29,15 @@ public class JsonLevelReader {
      */
     public Gamelevel readLevelConfiguration(String levelName) {
         JSONParser parser = new JSONParser();
-        //String filepath = "../../" + levelName;
         //String filepath = levelName;
-        String filepath = "\\Users\\evasc\\Desktop\\Uni\\Auslandssemester\\Game Design\\tddd23\\" + levelName;
-        //String filepath = "../../" + levelName;
-        try (Reader reader = new FileReader(filepath)) {
+        //String filepath = "\\Users\\evasc\\Desktop\\Uni\\Auslandssemester\\Game Design\\tddd23\\" + levelName;
+        //String filepath = levelName;
+        //TODO: for exporting the game to .jar the levelfiles have to be in the
+        // same folder as the jar file itself (so the path is only levelname):
+        // desktop/build/libs
+        // USE "gradlew desktop:dist" to export the game
+        // and "java -jar desktop-1.0.jar" to run the game from the folder where the jar is
+         try (Reader reader = new FileReader(levelName)) {
             Gdx.app.log("INFO: ", "Start reading JSON-Level-Config");
             JSONObject jsonObject = (JSONObject) parser.parse(reader);
             Gamelevel level = new Gamelevel();

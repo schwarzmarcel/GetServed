@@ -53,18 +53,18 @@ public class Assets {
 
 
 	// dish related resources
-	public static final String PIZZA = "./Food/pizza.png";
-	public static final String BURGER = "./Food/burger.png";
-	public static final String POMMES = "./Food/pommes.png";
-	public static final String CHICKEN = "./Food/chicken.png";
-	public static final String FISH = "./Food/fish.png";
-	public static final String COUNTER = "./Map/counter.png";
-    public static final String COUNTER_TURNED = "./Map/counterturned.png";
+    public static final String PIZZA = "Food/pizza.png";
+    public static final String BURGER = "Food/burger.png";
+    public static final String POMMES = "Food/pommes.png";
+    public static final String CHICKEN = "Food/chicken.png";
+    public static final String FISH = "Food/fish.png";
+    public static final String COUNTER = "Map/counter.png";
+    public static final String COUNTER_TURNED = "Map/counterturned.png";
     public static final String SKULL = "skull.png";
 
 	// map related resources
-    public static final String TABLE = "./Map/tablewithcandle.png";
-	public static final String CHAIR = "./Map/Chair 1.png";
+    public static final String TABLE = "Map/tablewithcandle.png";
+    public static final String CHAIR = "Map/chair1.png";
 	public static final String COIN = "coin.png";
 	public static final String BUBBLE = "bubble.png";
     public static final String Level1 = "level1.png";
@@ -72,6 +72,11 @@ public class Assets {
     public static final String Level3 = "level3.png";
     public static final String Level4 = "level4.png";
     public static final String Level5 = "level5.png";
+
+    //level files
+    public static final String LEVEL1JSON = "Map/level1.json";
+    public static final String LEVEL2JSON = "Map/level2.json";
+    public static final String LEVEL3JSON = "Map/level3.json";
 
 	// font related resources
 	public static final String MONEYFONT = "goldfont.fnt";
@@ -230,8 +235,8 @@ public class Assets {
 		manager.load(APPLAUSE, Sound.class);
 		manager.load(BOO, Sound.class);
 		manager.load(EVILLAUGH, Sound.class);
-		
-	}
+
+    }
 	public static void loadingScreen() {
 		manager.load(ARROWS, Texture.class);
 		manager.load(SKEY, Texture.class);
