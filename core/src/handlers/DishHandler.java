@@ -21,7 +21,7 @@ public class DishHandler {
     private List<Counter> counters;
     private Waiter waiter;
     private ArrayList<Foodtype> permittedDishes;
-   
+
 
     public DishHandler() {
         dishQueue = new Queue<Foodtype>();
@@ -39,6 +39,16 @@ public class DishHandler {
         this.counters = counters;
         this.permittedDishes = permittedDishes;
     }
+	/**
+	 * this method initializes the DishHandler
+	 *
+	 * @param waiter   the waiter who carries the dishes
+	 * @param counters the counters where the dishes spawn on
+	 */
+	public void initializeDishManager(Waiter waiter, List<Counter> counters) {
+		this.waiter = waiter;
+		this.counters = counters;
+	}
 
     //TODO: REFACTOR THIS METHOD
     /**
@@ -67,103 +77,106 @@ public class DishHandler {
                 initDish.setPosition(c.getCookingPosition());
             }
 
-            if (c.getDish() == null)
-                c.setCookSpeed(2);
+			if (c.getDish() == null)
+				c.setCookSpeed(2);
 
-            if ((time - c.getLastDishTime()) >= (float) (5 / c.getCookSpeed()) + 1) {
-                Dish nextDish = null;
-                if (dishQueue.isEmpty()) {
-                    for (Guest g : activeGuests) {
-                        boolean dishAvailable = false;
-                        for (Dish d : activeDishes) {
-                            if (d.type == g.getOrder()) {
-                                dishAvailable = true;
-                                break;
-                            }
-                        }
-                        if (!dishAvailable) {
-                            nextDish = new Dish(g.getOrder());
-                            break;
-                        }
-                    }
-                    if (nextDish == null)
-                        nextDish = new Dish(Foodtype.getRandomFoodType());
-                } else {
-                    nextDish = new Dish(dishQueue.removeFirst());
-                }
-                c.setLastDishTime(time);
-                if (c.getDish() != null) {
-                    activeDishes.remove(c.getDish());
-                }
-                activeDishes.add(nextDish);
-                nextDish.setPosition(c.getCookingPosition());
-                c.getNextDish().setPosition(c.getDishCounterPos());
-                c.setDish(c.getNextDish());
-                c.setNextDish(nextDish);
-                c.setCookSpeed(1);
-            }
-        }
+			if ((time - c.getLastDishTime()) >= (float) (5 / c.getCookSpeed()) + 1) {
+				Dish nextDish = null;
+				if (dishQueue.isEmpty()) {
+					for (Guest g : activeGuests) {
+						if (!g.getType().equals("skeleton")) {
+							boolean dishAvailable = false;
+							for (Dish d : activeDishes) {
+								if (d.type == g.getOrder()) {
+									dishAvailable = true;
+									break;
+								}
+							}
+							if (!dishAvailable) {
+								nextDish = new Dish(g.getOrder());
+								break;
+							}
+						}
+					}
+					if (nextDish == null)
+						nextDish = new Dish(Foodtype.getRandomFoodType());
+				} else {
+					nextDish = new Dish(dishQueue.removeFirst());
+				}
+				c.setLastDishTime(time);
+				if (c.getDish() != null) {
+					activeDishes.remove(c.getDish());
+				}
+				activeDishes.add(nextDish);
+				nextDish.setPosition(c.getCookingPosition());
+				c.getNextDish().setPosition(c.getDishCounterPos());
+				c.setDish(c.getNextDish());
+				c.setNextDish(nextDish);
+				c.setCookSpeed(1);
+			}
+		}
 
-    }
+	}
 
-    /**
-     * this method adds a new dish to the queue
-     *
-     * @param type the type of dish to be added next
-     */
-    public void addToDishQueue(Foodtype type) {
-        dishQueue.addLast(type);
-    }
+	/**
+	 * this method adds a new dish to the queue
+	 *
+	 * @param type the type of dish to be added next
+	 */
+	public void addToDishQueue(Foodtype type) {
+		dishQueue.addLast(type);
+	}
 
-    /**
-     * this method allows the waiter to drop dishes
-     *
-     * @param waiter the waiter object
-     */
-    public void trashBinHandler(Waiter waiter) {
-        if (Gdx.input.isKeyJustPressed(Input.Keys.D)) {
-            if (waiter.getDish() != null) {
-                activeDishes.remove(waiter.getDish());
-                Gdx.app.log("INFO: ", "Dish has been removed by Button Press");
-            }
-            waiter.removeDish();
-            Gdx.app.log("INFO: ", "Waiter no longer carries a dish");
-        }
-    }
+	/**
+	 * this method allows the waiter to drop dishes
+	 *
+	 * @param waiter the waiter object
+	 */
+	public void trashBinHandler(Waiter waiter) {
+		if (Gdx.input.isKeyJustPressed(Input.Keys.D)) {
+			if (waiter.getDish() != null) {
+				activeDishes.remove(waiter.getDish());
+				Gdx.app.log("INFO: ", "Dish has been removed by Button Press");
+			}
+			waiter.removeDish();
+			Gdx.app.log("INFO: ", "Waiter no longer carries a dish");
+		}
+	}
 
-    /**
-     * this method removes a Dish from the active dishes on the field when served to the guest
-     *
-     * @param dish the dish to be removed
-     */
-    public void removeActiveDish(Dish dish) {
-        Gdx.app.log("INFO: ", "Dish " + dish + " has been served and removed");
-        activeDishes.remove(dish);
-    }
+	/**
+	 * this method removes a Dish from the active dishes on the field when served to
+	 * the guest
+	 *
+	 * @param dish the dish to be removed
+	 */
+	public void removeActiveDish(Dish dish) {
+		Gdx.app.log("INFO: ", "Dish " + dish + " has been served and removed");
+		activeDishes.remove(dish);
+	}
 
-    /**
-     * this method initializes the queue for the dishes and ensures that for the first guest there will always
-     * be the correct dish available and spawns another random dish on other counters
-     *
-     * @param order the order of the first guest to be spawned
-     */
-    public void initializeDishQueue(Foodtype order) {
-        Foodtype random = Foodtype.getRandomFoodType();
-        int randomNum = ThreadLocalRandom.current().nextInt(1, 3);
-        if (randomNum == 1) {
-            addToDishQueue(order);
-            addToDishQueue(random);
-        } else {
-            addToDishQueue(random);
-            addToDishQueue(order);
-        }
-    }
+	/**
+	 * this method initializes the queue for the dishes and ensures that for the
+	 * first guest there will always be the correct dish available and spawns
+	 * another random dish on other counters
+	 *
+	 * @param order the order of the first guest to be spawned
+	 */
+	public void initializeDishQueue(Foodtype order) {
+		Foodtype random = Foodtype.getRandomFoodType();
+		int randomNum = ThreadLocalRandom.current().nextInt(1, 3);
+		if (randomNum == 1) {
+			addToDishQueue(order);
+			addToDishQueue(random);
+		} else {
+			addToDishQueue(random);
+			addToDishQueue(order);
+		}
+	}
 
-    /*
-     * -----------------
-     * Getter and Setter
-     */
-    public ArrayList<Dish> getActiveDishes() {
-        return activeDishes;
-    }
+	/*
+	 * ----------------- Getter and Setter
+	 */
+	public ArrayList<Dish> getActiveDishes() {
+		return activeDishes;
+	}
 }

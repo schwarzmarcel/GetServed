@@ -45,7 +45,7 @@
 		"patience":120,
 		"wealth":14,
 		"spawntime": 3,
-		"type": "normal"
+        "type": "normal"
 		},
 		{
 		"patience":120,
@@ -54,10 +54,10 @@
         "type": "normal"
 		},
 		{
-		"patience":120,
-		"wealth":14,
+		"patience":40,
+		"wealth":0,
 		"spawntime": 13,
-		"type": "normal"
+		"type": "skeleton"
 		},
 		{
 		"patience":120,

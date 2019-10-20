@@ -60,6 +60,7 @@ public class Assets {
 	public static final String FISH = "./Food/fish.png";
 	public static final String COUNTER = "./Map/counter.png";
     public static final String COUNTER_TURNED = "./Map/counterturned.png";
+    public static final String SKULL = "skull.png";
 
 	// map related resources
     public static final String TABLE = "./Map/tablewithcandle.png";
@@ -137,6 +138,7 @@ public class Assets {
 		manager.load(POMMES, Texture.class);
 		manager.load(BURGER, Texture.class);
 		manager.load(CHICKEN, Texture.class);
+		manager.load(SKULL, Texture.class);
 		manager.load(TABLE, Texture.class);
 		manager.load(WAITER_IDLE, TextureAtlas.class);
 		manager.load(WAITER_WALKING, TextureAtlas.class);

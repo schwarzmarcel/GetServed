@@ -34,6 +34,11 @@ public class Dish {
         }
         sprite.setSize(4, 4);
     }
+    public Dish() {
+    	this.type = null;
+    	sprite = new Sprite(Assets.manager.get(Assets.SKULL, Texture.class));
+    	sprite.setSize(4, 4);
+    }
     public void setPosition(float[] positions){
         position = positions;
         this.sprite.setPosition(position[0],position[1]);

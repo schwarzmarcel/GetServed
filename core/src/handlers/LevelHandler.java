@@ -133,21 +133,28 @@ public class LevelHandler {
         guestHandler.manageGuests(time, dishHandler);
         dishHandler.updateDishes(time, guestHandler.getActiveGuests());
         dishHandler.trashBinHandler(waiter);
-        if (level.getMoney() == 0 && timeLevelOver == -1) {
-            Gdx.app.log("INFO: ", "The Level was lost because the money ran out");
+        if ((level.getMoney() == 0 || guestHandler.IsDeadToSkeleton()) && timeLevelOver == -1) {
             timeLevelOver = time;
             waiter.setAllowedToMove(false);
             waiter.activateDyingAnimation();
-
         }
+ 
         if (timeLevelOver + 1 == time) {
+        	if(level.getMoney() == 0) {
+        		levelOver = 2;
+        		Gdx.app.log("INFO: ", "You ran out of money");
+        	} else if(guestHandler.IsDeadToSkeleton()) {
+        		levelOver = 3;
+        		Gdx.app.log("INFO: ", "You died to a skeleton");
+        	}
             Timer.instance().clear();
-            levelOver = 1;
+            
         }
-        if (guestHandler.getActiveGuests().isEmpty() && guestHandler.getGuestQueue().isEmpty()) {
+        
+        else if (guestHandler.getActiveGuests().isEmpty() && guestHandler.getGuestQueue().isEmpty()) {
             Gdx.app.log("INFO: ", "Level was successfully finished");
             Timer.instance().clear();
-            levelOver = 2;
+            levelOver = 1;
         }
     }
 

@@ -20,6 +20,7 @@ public class GuestHandler {
 	private ArrayList<Guest> activeGuests;
 	private ArrayList<Guest> guestsToRemove;
 	private GameField gameField;
+	private boolean deadToSkeleton = false;
 
 
 	GuestHandler() {
@@ -67,6 +68,9 @@ public class GuestHandler {
 			guestsToRemove.add(guest);
 		}
 		if (guest.getPatience() == 0) {
+			if((guest.getType().equals("skeleton")) && (!guest.isServed())) {
+				deadToSkeleton = true;
+			}
 			guestsToRemove.add(guest);
 		}else if (guest.getPatience() <= 0.4 * guest.getMaxPatience() && guest.getHappiness() == 2 && !guest.isServed()) {
 			guest.setHappiness(1);
@@ -101,8 +105,10 @@ public class GuestHandler {
 			guest.setPosition(table.getChairPosition()[0] - 0.5f, table.getChairPosition()[1] + 1);
 			guest.setTable(table);
 			table.setGuest(guest);
-			dishHandler.addToDishQueue(guest.getOrder());
-			Gdx.app.log("INFO: ", "Added " + guest.getOrder() + " to dishqueue");
+			if(!guest.getType().equals("skeleton")) {
+				dishHandler.addToDishQueue(guest.getOrder());
+				Gdx.app.log("INFO: ", "Added " + guest.getOrder() + " to dishqueue");
+			}
 			activeGuests.add(guest);
 			Gdx.app.log("INFO: ", "Spawned " + guest);
 			guestQueue.removeFirst();
@@ -154,6 +160,10 @@ public class GuestHandler {
 
 	public Queue<Guest> getGuestQueue() {
 		return guestQueue;
+	}
+	
+	public boolean IsDeadToSkeleton() {
+		return deadToSkeleton;
 	}
 
 
