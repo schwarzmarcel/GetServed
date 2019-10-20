@@ -1,6 +1,6 @@
 {
 	"name" : "level1",
-	"money" : 40,
+	"money" : 30,
 	"allowedDishes":["burger","chicken"],
 	"positions": [
 		{
@@ -42,40 +42,52 @@
 	],
 	"guests":[
 		{
-		"patience":120,
+		"patience":90,
 		"wealth":14,
 		"spawntime": 3,
         "type": "normal"
 		},
 		{
-		"patience":120,
+		"patience":90,
 		"wealth":14,
-		"spawntime": 8,
+		"spawntime": 7,
         "type": "normal"
 		},
 		{
-		"patience":40,
-		"wealth":0,
-		"spawntime": 13,
-		"type": "skeleton"
+		"patience":90,
+		"wealth":14
+		"spawntime": 11,
+        "type": "normal"
 		},
 		{
-		"patience":120,
+		"patience":90,
 		"wealth":14,
-		"spawntime": 19,
-		"type": "normal"
+		"spawntime": 15,
+        "type": "normal"
 		},
 		{
-		"patience":120,
+		"patience":90,
 		"wealth":14,
-		"spawntime": 24,
-		"type": "normal"
+		"spawntime": 20,
+        "type": "normal"
 		},
 		{
-		"patience":120,
+		"patience":90,
 		"wealth":14,
-		"spawntime": 29,
-		"type": "normal"
+		"spawntime": 23,
+        "type": "normal"
+		},
+		{
+		"patience":90,
+		"wealth":14,
+		"spawntime": 30,
+        "type": "normal"
+		},
+		{
+		"patience":90,
+		"wealth":14,
+		"spawntime": 33,
+        "type": "normal"
 		}
 	]
 }
