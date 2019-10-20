@@ -144,11 +144,21 @@ public class GameScreen implements Screen {
     }
 
     private void drawCooks() {
-        TextureRegion currentFrame;
-        for (Cook c : levelHandler.getCooks()
-        ) {
-            currentFrame = c.getIdleAnimation().getKeyFrame(elapsedTime, false);
-            batch.draw(currentFrame, c.getPosition()[0] - 5, c.getPosition()[1], WORLD_WIDTH / 28, WORLD_HEIGHT / 14);
+        for (Cook c : levelHandler.getCooks()) {
+            float positionX = 0;
+            TextureRegion currentFrame = c.getIdleAnimation().getKeyFrame(elapsedTime);
+            if (c.getRotation() == 0) {
+                positionX = c.getPosition()[0] - 5;
+                if (currentFrame.isFlipX()) {
+                    currentFrame.flip(true, false);
+                }
+            } else {
+                positionX = c.getPosition()[0] + 5;
+                if (!currentFrame.isFlipX()) {
+                    currentFrame.flip(true, false);
+                }
+            }
+            batch.draw(currentFrame, positionX, c.getPosition()[1], WORLD_WIDTH / 28, WORLD_HEIGHT / 14);
         }
     }
 

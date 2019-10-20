@@ -64,7 +64,7 @@ public class LevelHandler {
 
     private void initializeCooks() {
         for (Counter c : gameField.getCounters()) {
-            cooks.add(new Cook(world, c.getCookingPosition()));
+            cooks.add(new Cook(world, c.getCookingPosition(), c.getRotation()));
         }
     }
 
