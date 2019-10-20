@@ -119,13 +119,13 @@ public class GameScreen implements Screen {
 			music.setPitch(musicId, 1.05f);
 		else if (levelHandler.getTime() == 38)
 			music.setPitch(musicId, 1.1f);
-		
+
 		/**
 		 * levelOver = 2 -> ran out of money
 		 * levelOver = 3 -> died to skeleton
 		 * levelOver = 1 -> beat level
 		 */
-		
+
 		if (levelHandler.getLevelOver() == 2) {
 			game.showEndScreen(false);
 		}else if (levelHandler.getLevelOver() == 3) {
@@ -149,13 +149,24 @@ public class GameScreen implements Screen {
 				(float) (levelHandler.getLevelDisplay().getHeight() * 0.015));
 	}
 
-	private void drawCooks() {
-		TextureRegion currentFrame;
-		for (Cook c : levelHandler.getCooks()) {
-			currentFrame = c.getIdleAnimation().getKeyFrame(elapsedTime, false);
-			batch.draw(currentFrame, c.getPosition()[0] - 5, c.getPosition()[1], WORLD_WIDTH / 28, WORLD_HEIGHT / 14);
-		}
-	}
+    private void drawCooks() {
+        for (Cook c : levelHandler.getCooks()) {
+            float positionX = 0;
+            TextureRegion currentFrame = c.getIdleAnimation().getKeyFrame(elapsedTime);
+            if (c.getRotation() == 0) {
+                positionX = c.getPosition()[0] - 6;
+                if (currentFrame.isFlipX()) {
+                    currentFrame.flip(true, false);
+                }
+            } else {
+                positionX = c.getPosition()[0] + 5;
+                if (!currentFrame.isFlipX()) {
+                    currentFrame.flip(true, false);
+                }
+            }
+            batch.draw(currentFrame, positionX, c.getPosition()[1], WORLD_WIDTH / 28, WORLD_HEIGHT / 14);
+        }
+    }
 
 	private void initializeFonts() {
 		moneyFont = Assets.manager.get(Assets.MONEYFONT, BitmapFont.class);

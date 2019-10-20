@@ -2,7 +2,6 @@ package handlers;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.utils.Queue;
 import entities.*;
 
@@ -13,22 +12,33 @@ import java.util.concurrent.ThreadLocalRandom;
 import static com.mygdx.game.MyGdxGame.PIXELS_TO_METERS;
 
 public class DishHandler {
-	/**
-	 * dishQueue: contains the Dishes that will spawn next on the field
-	 * activeDishes: this list contains the dishes that are currently on the field
-	 * at any given time
-	 */
-	private Queue<Foodtype> dishQueue;
-	private ArrayList<Dish> activeDishes;
-	private List<Counter> counters;
-	private Waiter waiter;
+    /**
+     * dishQueue: contains the Dishes that will spawn next on the field
+     * activeDishes: this list contains the dishes that are currently on the field at any given time
+     */
+    private Queue<Foodtype> dishQueue;
+    private ArrayList<Dish> activeDishes;
+    private List<Counter> counters;
+    private Waiter waiter;
+    private ArrayList<Foodtype> permittedDishes;
 
-	public DishHandler() {
-		dishQueue = new Queue<Foodtype>();
-		activeDishes = new ArrayList<Dish>();
 
-	}
+    public DishHandler() {
+        dishQueue = new Queue<Foodtype>();
+        activeDishes = new ArrayList<Dish>();
+    }
 
+    /**
+     * this method initializes the DishHandler
+     *
+     * @param waiter   the waiter who carries the dishes
+     * @param counters the counters where the dishes spawn on
+     */
+    public void initializeDishManager(Waiter waiter, List<Counter> counters, ArrayList<Foodtype> permittedDishes) {
+        this.waiter = waiter;
+        this.counters = counters;
+        this.permittedDishes = permittedDishes;
+    }
 	/**
 	 * this method initializes the DishHandler
 	 *
@@ -40,34 +50,32 @@ public class DishHandler {
 		this.counters = counters;
 	}
 
-	// TODO: REFACTOR THIS METHOD
-
-	/**
-	 * this method updates the dishes location and decides on which dishes need to
-	 * be spawned next
-	 *
-	 * @param time         the current time since the level started
-	 * @param activeGuests the guests which are currently on the field
-	 */
-	public void updateDishes(int time, ArrayList<Guest> activeGuests) {
-		if (waiter.getDish() != null) {
-			waiter.getDish().getSprite().setPosition(
-					(waiter.getBody().getPosition().x * PIXELS_TO_METERS) - waiter.getSprite().getWidth() / 2,
-					(waiter.getBody().getPosition().y * PIXELS_TO_METERS) - waiter.getSprite().getHeight() / 2);
-		}
-		for (Counter c : counters) {
-			if (c.getNextDish() == null) {
-				Dish initDish;
-				if (dishQueue.notEmpty()) {
-					initDish = new Dish(dishQueue.removeFirst());
-				} else {
-					initDish = new Dish(Foodtype.getRandomFoodType());
-				}
-				c.setNextDish(initDish);
-				c.setLastDishTime(time);
-				activeDishes.add(initDish);
-				initDish.setPosition(c.getCookingPosition());
-			}
+    //TODO: REFACTOR THIS METHOD
+    /**
+     * this method updates the dishes location and decides on which dishes need to be spawned next
+     *
+     * @param time         the current time since the level started
+     * @param activeGuests the guests which are currently on the field
+     */
+    public void updateDishes(int time, ArrayList<Guest> activeGuests) {
+        if (waiter.getDish() != null) {
+            waiter.getDish().getSprite().setPosition(
+                    (waiter.getBody().getPosition().x * PIXELS_TO_METERS) - waiter.getSprite().getWidth() / 2,
+                    (waiter.getBody().getPosition().y * PIXELS_TO_METERS) - waiter.getSprite().getHeight() / 2);
+        }
+        for (Counter c : counters) {
+            if (c.getNextDish() == null) {
+                Dish initDish;
+                if (dishQueue.notEmpty()) {
+                    initDish = new Dish(dishQueue.removeFirst());
+                } else {
+                    initDish = new Dish(Foodtype.getRandomFoodType());
+                }
+                c.setNextDish(initDish);
+                c.setLastDishTime(time);
+                activeDishes.add(initDish);
+                initDish.setPosition(c.getCookingPosition());
+            }
 
 			if (c.getDish() == null)
 				c.setCookSpeed(2);

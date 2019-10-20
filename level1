@@ -1,6 +1,7 @@
 {
 	"name" : "level1",
 	"money" : 40,
+	"allowedDishes":["burger","chicken"],
 	"positions": [
 		{
 		 "row": 10,

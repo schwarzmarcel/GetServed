@@ -2,6 +2,7 @@ package handlers;
 
 import com.badlogic.gdx.Gdx;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import entities.Foodtype;
 import entities.Gamelevel;
 import entities.Gridposition;
 import entities.Guest;
@@ -28,9 +29,9 @@ public class JsonLevelReader {
      */
     public Gamelevel readLevelConfiguration(String levelName) {
         JSONParser parser = new JSONParser();
-        // String filepath = "../../" + levelName;
+        String filepath = "../../" + levelName;
         //String filepath = levelName;
-         String filepath = "\\Users\\evasc\\Desktop\\Uni\\Auslandssemester\\Game Design\\tddd23\\" + levelName;
+        //String filepath = "\\Users\\evasc\\Desktop\\Uni\\Auslandssemester\\Game Design\\tddd23\\" + levelName;
         //String filepath = "../../" + levelName;
         try (Reader reader = new FileReader(filepath)) {
             Gdx.app.log("INFO: ", "Start reading JSON-Level-Config");
@@ -40,8 +41,30 @@ public class JsonLevelReader {
             level.setName(name);
             long money = (long) jsonObject.get("money");
             level.setMoney(money);
+            JSONArray allowedDishes = (JSONArray) jsonObject.get("allowedDishes");
             JSONArray positions = (JSONArray) jsonObject.get("positions");
             JSONArray guests = (JSONArray) jsonObject.get("guests");
+            ArrayList<Foodtype> permittedDishes = new ArrayList<>();
+            for (Object o : allowedDishes) {
+                switch ((String) o) {
+                    case "burger":
+                        permittedDishes.add(Foodtype.BURGER);
+                        break;
+                    case "pizza":
+                        permittedDishes.add(Foodtype.PIZZA);
+                        break;
+                    case "chicken":
+                        permittedDishes.add(Foodtype.CHICKEN);
+                        break;
+                    case "fish":
+                        permittedDishes.add(Foodtype.FISH);
+                        break;
+                    case "pommes":
+                        permittedDishes.add(Foodtype.POMMES);
+                        break;
+                }
+            }
+            level.setPermittedDishes(permittedDishes);
             for (Object o : positions) {
                 Gridposition gridposition = convertJsonToGridPosition(o);
                 gridpositions.add(gridposition);

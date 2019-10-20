@@ -13,17 +13,20 @@ import static com.mygdx.game.MyGdxGame.WORLD_WIDTH;
 
 public class Cook {
     private Animation<TextureRegion> idleAnimation;
-    private float[] position = new float[2];
+    private float[] position;
     private Sprite sprite;
     private Box box;
+    private int rotation;
 
-    public Cook(World world, float[] positions) {
-        this.position = positions;
+    public Cook(World world, float[] position, int rotation) {
+        this.rotation = rotation;
+        this.position = position;
+        System.out.println(rotation);
         TextureAtlas textureAtlas = Assets.manager.get(Assets.COOK, TextureAtlas.class);
         idleAnimation = new Animation<TextureRegion>(0.045f, textureAtlas.getRegions(), Animation.PlayMode.LOOP);
         sprite = new Sprite(textureAtlas.findRegion("Idle"));
         sprite.setSize(WORLD_WIDTH / 30, WORLD_HEIGHT / 15);
-        sprite.setPosition(positions[0], positions[1]);
+        sprite.setPosition(position[0], position[1]);
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
         box = new Box(world, sprite, false, true);
@@ -34,15 +37,11 @@ public class Cook {
         return idleAnimation;
     }
 
-    public void setIdleAnimation(Animation<TextureRegion> idleAnimation) {
-        this.idleAnimation = idleAnimation;
-    }
-
     public float[] getPosition() {
         return position;
     }
 
-    public void setPosition(float[] position) {
-        this.position = position;
+    public int getRotation() {
+        return rotation;
     }
 }
