@@ -28,7 +28,7 @@ public class LevelHandler {
     private GameField gameField;
     private Gamelevel level;
     private int levelOver = 0;
-    private int timeLevelOver = -1;
+    private int timeLevelOver = -3;
     private String levelName;
     private Sprite levelDisplay;
 
@@ -133,24 +133,25 @@ public class LevelHandler {
         guestHandler.manageGuests(time, dishHandler);
         dishHandler.updateDishes(time, guestHandler.getActiveGuests());
         dishHandler.trashBinHandler(waiter);
-        if ((level.getMoney() == 0 || guestHandler.IsDeadToSkeleton()) && timeLevelOver == -1) {
+        if (guestHandler.IsDeadToSkeleton() && timeLevelOver == -3) {
             timeLevelOver = time;
             waiter.setAllowedToMove(false);
             waiter.activateDyingAnimation();
+        }else if(level.getMoney() == 0 && timeLevelOver == -3) {
+        	timeLevelOver = time;
+            waiter.setAllowedToMove(false);
+            waiter.activateDyingAnimation();
         }
- 
         if (timeLevelOver + 1 == time) {
-        	if(level.getMoney() == 0) {
-        		levelOver = 2;
-        		Gdx.app.log("INFO: ", "You ran out of money");
-        	} else if(guestHandler.IsDeadToSkeleton()) {
+        	if(guestHandler.IsDeadToSkeleton()) {
         		levelOver = 3;
         		Gdx.app.log("INFO: ", "You died to a skeleton");
+        	} else {
+        		levelOver = 2;
+        		Gdx.app.log("INFO: ", "You ran out of money"); 
         	}
-            Timer.instance().clear();
-            
+            Timer.instance().clear();  
         }
-        
         else if (guestHandler.getActiveGuests().isEmpty() && guestHandler.getGuestQueue().isEmpty()) {
             Gdx.app.log("INFO: ", "Level was successfully finished");
             Timer.instance().clear();
