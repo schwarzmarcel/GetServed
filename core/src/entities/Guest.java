@@ -196,17 +196,32 @@ public class Guest {
             textureAtlasOrdering = Assets.manager.get(Assets.KING_JUMP, TextureAtlas.class);
             spawnsound = Assets.manager.get(Assets.FANFARE, Sound.class);
             refusesound = Assets.manager.get(Assets.NO3, Sound.class);
+         //TODO: sounds and sprites for skeleton
+        } else if (type.equals("skeleton")) {
+            textureAtlasIdle = Assets.manager.get(Assets.KING, TextureAtlas.class);
+            textureAtlasAngry = Assets.manager.get(Assets.KING_KICK, TextureAtlas.class);
+            textureAtlasOrdering = Assets.manager.get(Assets.KING_JUMP, TextureAtlas.class);
+            spawnsound = Assets.manager.get(Assets.FANFARE, Sound.class);
+            refusesound = Assets.manager.get(Assets.NO3, Sound.class);
         }
+        if (type.equals("skeleton")) {
+        	paysound = Assets.manager.get(Assets.PAY, Sound.class);
+        	order = null;
+        	dish = new Dish();
+        }
+        else {
+        	paysound = Assets.manager.get(Assets.PAY, Sound.class);
+        	order = Foodtype.getRandomFoodType();
+        	dish = new Dish(order);
+        }
+        bubble = new Sprite(Assets.manager.get(Assets.BUBBLE, Texture.class));
+        bubble.setSize(8, 8);
         idleAnimation = new Animation<TextureRegion>(0.045f, textureAtlasIdle.getRegions(), Animation.PlayMode.LOOP);
         angryAnimation = new Animation<TextureRegion>(0.05f, textureAtlasAngry.getRegions(), Animation.PlayMode.LOOP);
         orderAnimation = new Animation<TextureRegion>(0.1f, textureAtlasOrdering.getRegions(), Animation.PlayMode.LOOP);
         this.activeAnimation = orderAnimation;
         this.currentAnimation = "ordering";
         this.lastAnimationTime = (int) spawnTime;
-        order = Foodtype.getRandomFoodType();
-        dish = new Dish(order);
-        bubble = new Sprite(Assets.manager.get(Assets.BUBBLE, Texture.class));
-        bubble.setSize(8, 8);
         this.spawnTime = spawnTime;
         this.orderTime = spawnTime + 1;
         this.type = type;
