@@ -4,9 +4,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import handlers.Assets;
 
-import static com.mygdx.game.MyGdxGame.WORLD_HEIGHT;
-import static com.mygdx.game.MyGdxGame.WORLD_WIDTH;
-
 public class Dish {
     private Sprite sprite;
     public Foodtype type;
@@ -18,8 +15,8 @@ public class Dish {
             case PIZZA:
                 sprite = new Sprite(Assets.manager.get(Assets.PIZZA, Texture.class));
                 break;
-            case BURGER:
-                sprite = new Sprite(Assets.manager.get(Assets.BURGER, Texture.class));
+            case BEER:
+                sprite = new Sprite(Assets.manager.get(Assets.BEER, Texture.class));
                 break;
             case CHICKEN:
                 sprite = new Sprite(Assets.manager.get(Assets.CHICKEN, Texture.class));

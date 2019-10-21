@@ -51,8 +51,8 @@ public class JsonLevelReader {
             ArrayList<Foodtype> permittedDishes = new ArrayList<>();
             for (Object o : allowedDishes) {
                 switch ((String) o) {
-                    case "burger":
-                        permittedDishes.add(Foodtype.BURGER);
+                    case "beer":
+                        permittedDishes.add(Foodtype.BEER);
                         break;
                     case "pizza":
                         permittedDishes.add(Foodtype.PIZZA);

@@ -54,7 +54,7 @@ public class Assets {
 
 	// dish related resources
     public static final String PIZZA = "Food/pizza.png";
-    public static final String BURGER = "Food/burger.png";
+	public static final String BEER = "Food/beer.png";
     public static final String POMMES = "Food/pommes.png";
     public static final String CHICKEN = "Food/chicken.png";
     public static final String FISH = "Food/fish.png";
@@ -144,10 +144,10 @@ public class Assets {
 		manager.load(COUNTER, Texture.class);
         manager.load(COUNTER_TURNED, Texture.class);
 		manager.load(PIZZA, Texture.class);
-		manager.load(BURGER, Texture.class);
+		manager.load(BEER, Texture.class);
 		manager.load(FISH, Texture.class);
 		manager.load(POMMES, Texture.class);
-		manager.load(BURGER, Texture.class);
+		manager.load(BEER, Texture.class);
 		manager.load(CHICKEN, Texture.class);
 		manager.load(SKULL, Texture.class);
 		manager.load(TABLE, Texture.class);

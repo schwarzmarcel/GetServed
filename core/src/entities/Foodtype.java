@@ -3,7 +3,7 @@ package entities;
 import java.util.Random;
 
 public enum Foodtype {
-    BURGER,
+    BEER,
     PIZZA,
     CHICKEN,
     POMMES,

@@ -196,7 +196,6 @@ public class Guest {
             textureAtlasOrdering = Assets.manager.get(Assets.KING_JUMP, TextureAtlas.class);
             spawnsound = Assets.manager.get(Assets.FANFARE, Sound.class);
             refusesound = Assets.manager.get(Assets.NO3, Sound.class);
-         //TODO: sounds and sprites for skeleton
         } else if (type.equals("skeleton")) {
             textureAtlasIdle = Assets.manager.get(Assets.SKELETON_IDLE, TextureAtlas.class);
             textureAtlasAngry = Assets.manager.get(Assets.SKELETON_KICKING, TextureAtlas.class);
@@ -256,7 +255,7 @@ public class Guest {
         position[1] = positionY;
         float[] position = {(float) (positionX + dish.getSprite().getWidth() + 2.3), (float) (positionY + 4)};
         dish.setPosition(position);
-        bubble.setPosition((float) (positionX + dish.getSprite().getWidth() + 0.3), (float) (positionY + 1.6));
+        bubble.setPosition((float) (positionX + dish.getSprite().getWidth() + 0.3), (float) (positionY + 1.4));
     }
 
     public void playSpawnsound() {
