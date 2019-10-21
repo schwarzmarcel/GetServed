@@ -72,7 +72,6 @@ public class Assets {
     public static final String Level3 = "level3.png";
     public static final String Level4 = "level4.png";
     public static final String Level5 = "level5.png";
-	public static final String BONUSLEVEL = "bonusLevel.png";
 
     //level files
     public static final String LEVEL1JSON = "Map/level1.json";
@@ -102,6 +101,9 @@ public class Assets {
 	public static final String SCORE = "score.png";
 	public static final String SKELETON = "skeleton.png";
 	public static final String NOMONEY = "nomoney.png";
+	public static final String BONUSLEVEL = "bonuslevel.png";
+	public static final String KINGINFO = "kinginfo.png";
+	public static final String SKELETONINFO = "skeletoninfo.png";
 	public static final String BONUSINSTRUCTIONS = "bonusinstruction.png";
 	
 
@@ -147,7 +149,6 @@ public class Assets {
 		manager.load(BEER, Texture.class);
 		manager.load(FISH, Texture.class);
 		manager.load(POMMES, Texture.class);
-		manager.load(BEER, Texture.class);
 		manager.load(CHICKEN, Texture.class);
 		manager.load(SKULL, Texture.class);
 		manager.load(TABLE, Texture.class);
@@ -239,6 +240,8 @@ public class Assets {
 		manager.load(APPLAUSE, Sound.class);
 		manager.load(BOO, Sound.class);
 		manager.load(EVILLAUGH, Sound.class);
+		manager.load(KINGINFO, Texture.class);
+		manager.load(SKELETONINFO, Texture.class);
 
     }
 	public static void loadingScreen() {

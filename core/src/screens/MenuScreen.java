@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.mygdx.game.MyGdxGame;
 
 import entities.Guest;
@@ -29,6 +30,7 @@ public class MenuScreen implements Screen{
 	private Sprite kingInfo;
 	private Sprite skeletonInfo;
 	private boolean nextorexit;
+	private float elapsedTime = 0;
 	
 	public MenuScreen(MyGdxGame game, SpriteBatch batch) {
 		this.game = game;
@@ -49,7 +51,19 @@ public class MenuScreen implements Screen{
 		bonuslevel = new Sprite(Assets.manager.get(Assets.BONUSINSTRUCTIONS, Texture.class));
 		bonuslevel.setSize(10, 2.5f);
 		bonuslevel.setPosition(2, 2);
-		
+		king = new Guest(0, 0, 0, "king");
+		king.setPosition(18, WORLD_HEIGHT / 2 + 4);
+		king.setActiveAnimation("idle", 0);
+		skeleton = new Guest(0, 0, 0, "skeleton");
+		skeleton.setPosition(WORLD_WIDTH - 33, WORLD_HEIGHT / 2 + 4);
+		skeleton.setActiveAnimation("idle", 0);
+		kingInfo = new Sprite(Assets.manager.get(Assets.KINGINFO, Texture.class));
+		kingInfo.setSize(30, 19);
+		kingInfo.setPosition(10, WORLD_HEIGHT / 2 - 24);
+		skeletonInfo = new Sprite(Assets.manager.get(Assets.SKELETONINFO, Texture.class));
+		skeletonInfo.setSize(33, 19);
+		skeletonInfo.setPosition(WORLD_WIDTH - 42, WORLD_HEIGHT / 2 - 24);
+				
 	}
 	
 	@Override
@@ -59,9 +73,22 @@ public class MenuScreen implements Screen{
 
 	@Override
 	public void render(float delta) {
+		elapsedTime += Gdx.graphics.getDeltaTime();
 		Gdx.gl.glClearColor(0, 0, 0, 0);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
+		
+		TextureRegion currentFrame;
+		if(game.getLevelCount() > 1) {
+			currentFrame = king.getActiveAnimation().getKeyFrame(elapsedTime, false);
+			batch.draw(currentFrame, king.getPosition()[0], king.getPosition()[1], 15, 17);
+			kingInfo.draw(batch);
+		}
+		if(game.getLevelCount() > 2) {
+			currentFrame = skeleton.getActiveAnimation().getKeyFrame(elapsedTime, false);
+			batch.draw(currentFrame, skeleton.getPosition()[0], skeleton.getPosition()[1], 15, 17);
+			skeletonInfo.draw(batch);
+		}
 		if(nextorexit) {
 			nextactive.draw(batch);
 			exitpassive.draw(batch);
