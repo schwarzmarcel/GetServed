@@ -102,6 +102,9 @@ public class Assets {
 	public static final String SKELETON = "skeleton.png";
 	public static final String NOMONEY = "nomoney.png";
 	public static final String BONUSLEVEL = "bonuslevel.png";
+	public static final String KINGINFO = "kinginfo.png";
+	public static final String SKELETONINFO = "skeletoninfo.png";
+	
 	
 
 	// sound realted resources
@@ -237,6 +240,8 @@ public class Assets {
 		manager.load(APPLAUSE, Sound.class);
 		manager.load(BOO, Sound.class);
 		manager.load(EVILLAUGH, Sound.class);
+		manager.load(KINGINFO, Texture.class);
+		manager.load(SKELETONINFO, Texture.class);
 
     }
 	public static void loadingScreen() {
