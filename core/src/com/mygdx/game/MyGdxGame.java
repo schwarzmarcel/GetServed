@@ -35,7 +35,7 @@ public class MyGdxGame extends Game {
         camera.update();
         batch.setProjectionMatrix(camera.combined);
         shapeRenderer.setProjectionMatrix(camera.combined);
-        levelCount = 1;
+        levelCount = 4;
         Assets.loadingScreen();
         Assets.manager.finishLoading();
         loadingScreen = new LoadingScreen(this, batch);
@@ -86,6 +86,8 @@ public class MyGdxGame extends Game {
     public void increaseLevel() {
         if (levelCount < 5)
             levelCount++;
+        else if(levelCount == 5)
+			finished = true;
     }
 
     public void setBonuslevel() {
