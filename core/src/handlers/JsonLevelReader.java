@@ -35,8 +35,8 @@ public class JsonLevelReader {
         // desktop/build/libs
         // USE "gradlew desktop:dist" to export the game
         // and "java -jar desktop-1.0.jar" to run the game from the folder where the jar is
-        String filepath = "C:\\Users\\evasc\\Desktop\\Uni\\Auslandssemester\\Game Design\\tddd23\\core\\assets\\" + levelName;
-         try (Reader reader = new FileReader(filepath)) {
+        //String filepath = "C:\\Users\\evasc\\Desktop\\Uni\\Auslandssemester\\Game Design\\tddd23\\core\\assets\\" + levelName;
+        try (Reader reader = new FileReader(levelName)) {
             Gdx.app.log("INFO: ", "Start reading JSON-Level-Config");
             JSONObject jsonObject = (JSONObject) parser.parse(reader);
             Gamelevel level = new Gamelevel();
