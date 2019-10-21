@@ -149,7 +149,6 @@ public class Assets {
 		manager.load(BEER, Texture.class);
 		manager.load(FISH, Texture.class);
 		manager.load(POMMES, Texture.class);
-		manager.load(BEER, Texture.class);
 		manager.load(CHICKEN, Texture.class);
 		manager.load(SKULL, Texture.class);
 		manager.load(TABLE, Texture.class);
