@@ -79,7 +79,7 @@ public class MenuScreen implements Screen{
 		batch.begin();
 		
 		TextureRegion currentFrame;
-		if(game.getLevelCount() > 1) {
+		if((game.getLevelCount() == 2) || (game.getLevelCount() > 3)) {
 			currentFrame = king.getActiveAnimation().getKeyFrame(elapsedTime, false);
 			batch.draw(currentFrame, king.getPosition()[0], king.getPosition()[1], 15, 17);
 			kingInfo.draw(batch);
