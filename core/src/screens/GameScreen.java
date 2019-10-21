@@ -80,7 +80,7 @@ public class GameScreen implements Screen {
 			music = Assets.manager.get(Assets.MUSIC2, Sound.class);
 		musicId = music.play();
 		music.setPitch(musicId, 1f);
-		music.setVolume(musicId, 0.4f);
+		music.setVolume(musicId, 0.33f);
 
 	}
 

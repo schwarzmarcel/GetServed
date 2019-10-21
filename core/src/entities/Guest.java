@@ -263,7 +263,7 @@ public class Guest {
         if (type.equals("king"))
             spawnsound.setPitch(soundId, 1.2f);
         else if(type.equals("skeleton"))
-        	spawnsound.setVolume(soundId, 2f);
+        	spawnsound.setVolume(soundId, 1.6f);
         else
             spawnsound.setVolume(soundId, 0.3f);
     }
@@ -274,8 +274,10 @@ public class Guest {
     }
 
     public void playPaysound() {
-    	if(!type.equals("skeleton"))
-    		paysound.play();
+    	if(!type.equals("skeleton")) {
+    	long soundId = paysound.play();
+    	paysound.setVolume(soundId, 0.7f);
+    	}
     }
 
     public long getSpawnTime() {
