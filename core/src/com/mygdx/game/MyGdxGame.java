@@ -86,6 +86,8 @@ public class MyGdxGame extends Game {
     public void increaseLevel() {
         if (levelCount < 5)
             levelCount++;
+        else if(levelCount == 5)
+			finished = true;
     }
 
     public void setBonuslevel() {

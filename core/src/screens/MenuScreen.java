@@ -8,6 +8,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.MyGdxGame;
+
+import entities.Guest;
 import handlers.Assets;
 
 import static com.mygdx.game.MyGdxGame.WORLD_HEIGHT;
@@ -22,6 +24,10 @@ public class MenuScreen implements Screen{
 	private Sprite exitactive;
 	private Sprite exitpassive;
 	private Sprite bonuslevel;
+	private Guest king;
+	private Guest skeleton;
+	private Sprite kingInfo;
+	private Sprite skeletonInfo;
 	private boolean nextorexit;
 	
 	public MenuScreen(MyGdxGame game, SpriteBatch batch) {
