@@ -109,7 +109,7 @@
 		},
 		{
 		"patience":80,
-		"wealth":10,
+		"wealth":11,
 		"spawntime": 35,
 		"type": "normal"
 		},
@@ -133,7 +133,7 @@
     	},
 		{
 		"patience":80,
-		"wealth":10,
+		"wealth":11,
 		"spawntime": 46,
 		"type": "normal"
 		},
@@ -145,7 +145,7 @@
 		},
 		{
 		"patience":80,
-		"wealth":10,
+		"wealth":11,
 		"spawntime": 54,
 		"type": "normal"
 		},

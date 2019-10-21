@@ -1,6 +1,6 @@
 {
 	"name" : "level4",
-	"money" : 30,
+	"money" : 27,
 	"allowedDishes":["beer","chicken","fish","pommes","pizza"],
 	"positions": [
 	{
@@ -61,7 +61,7 @@
 		},
 		{
 		"patience":70,
-		"wealth":8,
+		"wealth":9,
 		"spawntime": 4,
 		"type": "normal"
 		},
@@ -73,7 +73,7 @@
 		},
 		{
 		"patience":70,
-		"wealth":8,
+		"wealth":9,
 		"spawntime": 9,
 		"type": "normal"
 		},
@@ -85,7 +85,7 @@
     	},
 		{
 		"patience":70,
-		"wealth":8,
+		"wealth":9,
 		"spawntime": 15,
 		"type": "normal"
 		},
@@ -97,7 +97,7 @@
 		},
 		{
 		"patience":70,
-		"wealth":8,
+		"wealth":9,
 		"spawntime": 23,
 		"type": "normal"
 		},
@@ -109,7 +109,7 @@
     	},
 		{
 		"patience":70,
-		"wealth":8,
+		"wealth":9,
 		"spawntime": 27,
 		"type": "normal"
 		},
@@ -121,7 +121,7 @@
 		},
 		{
 		"patience":70,
-		"wealth":8,
+		"wealth":9,
 		"spawntime": 32,
 		"type": "normal"
 		}
@@ -133,7 +133,7 @@
     	},
 		{
 		"patience":70,
-		"wealth":8,
+		"wealth":9,
 		"spawntime": 38,
 		"type": "normal"
 		},
