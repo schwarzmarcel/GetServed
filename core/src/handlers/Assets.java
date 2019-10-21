@@ -54,7 +54,7 @@ public class Assets {
 
 	// dish related resources
     public static final String PIZZA = "Food/pizza.png";
-    public static final String BURGER = "Food/burger.png";
+	public static final String BEER = "Food/beer.png";
     public static final String POMMES = "Food/pommes.png";
     public static final String CHICKEN = "Food/chicken.png";
     public static final String FISH = "Food/fish.png";
@@ -104,7 +104,7 @@ public class Assets {
 	public static final String BONUSLEVEL = "bonuslevel.png";
 	public static final String KINGINFO = "kinginfo.png";
 	public static final String SKELETONINFO = "skeletoninfo.png";
-	
+	public static final String BONUSINSTRUCTIONS = "bonusinstruction.png";
 	
 
 	// sound realted resources
@@ -146,10 +146,10 @@ public class Assets {
 		manager.load(COUNTER, Texture.class);
         manager.load(COUNTER_TURNED, Texture.class);
 		manager.load(PIZZA, Texture.class);
-		manager.load(BURGER, Texture.class);
+		manager.load(BEER, Texture.class);
 		manager.load(FISH, Texture.class);
 		manager.load(POMMES, Texture.class);
-		manager.load(BURGER, Texture.class);
+		manager.load(BEER, Texture.class);
 		manager.load(CHICKEN, Texture.class);
 		manager.load(SKULL, Texture.class);
 		manager.load(TABLE, Texture.class);
@@ -199,6 +199,7 @@ public class Assets {
 		manager.load(LEVELCLEARED, Texture.class);
 		manager.load(LEVELFAILED, Texture.class);
 		manager.load(SCORE, Texture.class);
+		manager.load(BONUSINSTRUCTIONS, Texture.class);
 		manager.load(BONUSLEVEL, Texture.class);
 		manager.load(SKELETON, Texture.class);
 		manager.load(NOMONEY, Texture.class);

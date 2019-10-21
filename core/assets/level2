@@ -1,7 +1,7 @@
 {
 	"name" : "level2",
 	"money" : 32,
-	"allowedDishes":["burger","chicken","fish","pommes","pizza"],
+	"allowedDishes":["beer","chicken","fish","pommes","pizza"],
 	"positions": [
 			{
 		 "row": 10,

@@ -98,7 +98,7 @@ public class LevelHandler {
                 levelDisplay = new Sprite(Assets.manager.get(Assets.Level5, Texture.class));
                 break;
             case "level6":
-            	levelDisplay = new Sprite(Assets.manager.get(Assets.Level5, Texture.class));
+                levelDisplay = new Sprite(Assets.manager.get(Assets.BONUSLEVEL, Texture.class));
                 break;
             default: break;
         }
