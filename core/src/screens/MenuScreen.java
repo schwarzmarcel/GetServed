@@ -40,7 +40,7 @@ public class MenuScreen implements Screen{
         exitpassive = new Sprite(Assets.manager.get(Assets.EXITPASSIVE, Texture.class));
 		exitpassive.setSize(WORLD_WIDTH / 7, WORLD_HEIGHT / 8);
 		exitpassive.setPosition(WORLD_WIDTH / 2 - (exitpassive.getWidth() / 2), WORLD_HEIGHT / 2 - (exitpassive.getHeight() / 2) - 15);
-		bonuslevel = new Sprite(Assets.manager.get(Assets.BONUSLEVEL, Texture.class));
+		bonuslevel = new Sprite(Assets.manager.get(Assets.BONUSINSTRUCTIONS, Texture.class));
 		bonuslevel.setSize(10, 2.5f);
 		bonuslevel.setPosition(2, 2);
 		
