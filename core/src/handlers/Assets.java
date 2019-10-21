@@ -105,7 +105,7 @@ public class Assets {
 	public static final String KINGINFO = "kinginfo.png";
 	public static final String SKELETONINFO = "skeletoninfo.png";
 	public static final String BONUSINSTRUCTIONS = "bonusinstruction.png";
-	
+	public static final String LOGO = "getserved_logo.png";
 
 	// sound realted resources
 	public static final String BELL = "Audio/bell.wav";
@@ -255,6 +255,7 @@ public class Assets {
 		manager.load(COIN, Texture.class);
 		manager.load(DONTLOSE, Texture.class);
 		manager.load(ENTER, Texture.class);
+		manager.load(LOGO, Texture.class);
 	}
 
 	public static void dispose() {
